@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "MaJKLmAwCyE=",
+  "success": true,
+  "projectFilePath": "D:\\projects\\crm\\CRM_API\\CRM_API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\HR\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.10\\microsoft.aspnetcore.openapi.9.0.10.nupkg.sha512",
+    "C:\\Users\\HR\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
