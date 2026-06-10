@@ -1,0 +1,6 @@
+D:\projects\crm\Utility\bin\Debug\Utility.dll
+D:\projects\crm\Utility\bin\Debug\Utility.pdb
+D:\projects\crm\Utility\obj\Debug\Utility.csproj.AssemblyReference.cache
+D:\projects\crm\Utility\obj\Debug\Utility.csproj.CoreCompileInputs.cache
+D:\projects\crm\Utility\obj\Debug\Utility.dll
+D:\projects\crm\Utility\obj\Debug\Utility.pdb

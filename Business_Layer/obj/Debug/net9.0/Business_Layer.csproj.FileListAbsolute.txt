@@ -1,0 +1,11 @@
+D:\projects\crm\Business_Layer\bin\Debug\net9.0\Business_Layer.deps.json
+D:\projects\crm\Business_Layer\bin\Debug\net9.0\Business_Layer.dll
+D:\projects\crm\Business_Layer\bin\Debug\net9.0\Business_Layer.pdb
+D:\projects\crm\Business_Layer\obj\Debug\net9.0\Business_Layer.GeneratedMSBuildEditorConfig.editorconfig
+D:\projects\crm\Business_Layer\obj\Debug\net9.0\Business_Layer.AssemblyInfoInputs.cache
+D:\projects\crm\Business_Layer\obj\Debug\net9.0\Business_Layer.AssemblyInfo.cs
+D:\projects\crm\Business_Layer\obj\Debug\net9.0\Business_Layer.csproj.CoreCompileInputs.cache
+D:\projects\crm\Business_Layer\obj\Debug\net9.0\Business_Layer.dll
+D:\projects\crm\Business_Layer\obj\Debug\net9.0\refint\Business_Layer.dll
+D:\projects\crm\Business_Layer\obj\Debug\net9.0\Business_Layer.pdb
+D:\projects\crm\Business_Layer\obj\Debug\net9.0\ref\Business_Layer.dll

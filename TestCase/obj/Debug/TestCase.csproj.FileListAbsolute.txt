@@ -1,0 +1,15 @@
+D:\projects\crm\TestCase\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\projects\crm\TestCase\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\projects\crm\TestCase\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\projects\crm\TestCase\bin\Debug\Microsoft.TestPlatform.AdapterUtilities.dll
+D:\projects\crm\TestCase\bin\Debug\TestCase.dll
+D:\projects\crm\TestCase\bin\Debug\TestCase.pdb
+D:\projects\crm\TestCase\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+D:\projects\crm\TestCase\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+D:\projects\crm\TestCase\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+D:\projects\crm\TestCase\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+D:\projects\crm\TestCase\obj\Debug\TestCase.csproj.AssemblyReference.cache
+D:\projects\crm\TestCase\obj\Debug\TestCase.csproj.CoreCompileInputs.cache
+D:\projects\crm\TestCase\obj\Debug\TestCase.csproj.Up2Date
+D:\projects\crm\TestCase\obj\Debug\TestCase.dll
+D:\projects\crm\TestCase\obj\Debug\TestCase.pdb

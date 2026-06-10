@@ -33,6 +33,34 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "Business_Layer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Business_Layer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Business_Layer.dll": {}
+        }
+      },
+      "DataAccess_Layer/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/DataAccess_Layer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccess_Layer.dll": {}
+        }
+      },
+      "Utility/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/Utility.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Utility.dll": {}
+        }
       }
     }
   },
@@ -67,11 +95,29 @@
         "microsoft.openapi.1.6.17.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
+    },
+    "Business_Layer/1.0.0": {
+      "type": "project",
+      "path": "../Business_Layer/Business_Layer.csproj",
+      "msbuildProject": "../Business_Layer/Business_Layer.csproj"
+    },
+    "DataAccess_Layer/1.0.0": {
+      "type": "project",
+      "path": "../DataAccess_Layer/DataAccess_Layer.csproj",
+      "msbuildProject": "../DataAccess_Layer/DataAccess_Layer.csproj"
+    },
+    "Utility/1.0.0": {
+      "type": "project",
+      "path": "../Utility/Utility.csproj",
+      "msbuildProject": "../Utility/Utility.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Microsoft.AspNetCore.OpenApi >= 9.0.10"
+      "Business_Layer >= 1.0.0",
+      "DataAccess_Layer >= 1.0.0",
+      "Microsoft.AspNetCore.OpenApi >= 9.0.10",
+      "Utility >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -106,7 +152,17 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\projects\\crm\\Business_Layer\\Business_Layer.csproj": {
+              "projectPath": "D:\\projects\\crm\\Business_Layer\\Business_Layer.csproj"
+            },
+            "D:\\projects\\crm\\DataAccess_Layer\\DataAccess_Layer.csproj": {
+              "projectPath": "D:\\projects\\crm\\DataAccess_Layer\\DataAccess_Layer.csproj"
+            },
+            "D:\\projects\\crm\\Utility\\Utility.csproj": {
+              "projectPath": "D:\\projects\\crm\\Utility\\Utility.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
