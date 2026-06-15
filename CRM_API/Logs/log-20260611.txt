@@ -1,0 +1,35 @@
+2026-06-11 17:15:50.949 +05:30 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-06-11 17:15:52.056 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/ - null null
+2026-06-11 17:15:52.587 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-06-11 17:15:52.588 +05:30 [INF] Hosting environment: Development
+2026-06-11 17:15:52.589 +05:30 [INF] Content root path: C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API
+2026-06-11 17:15:53.466 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/index.html - null null
+2026-06-11 17:15:53.515 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/ - 301 null null 1477.1115ms
+2026-06-11 17:15:53.717 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/_vs/browserLink - null null
+2026-06-11 17:15:53.717 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/_framework/aspnetcore-browser-refresh.js - null null
+2026-06-11 17:15:53.718 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/index.html - 200 null text/html;charset=utf-8 253.5776ms
+2026-06-11 17:15:53.727 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/swagger-ui-standalone-preset.js - null null
+2026-06-11 17:15:53.768 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/swagger-ui-bundle.js - null null
+2026-06-11 17:15:53.831 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/swagger-ui.css - null null
+2026-06-11 17:15:53.870 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 152.4273ms
+2026-06-11 17:15:53.990 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-06-11 17:15:53.990 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-06-11 17:15:53.995 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/swagger-ui.css - 200 152034 text/css 164.0941ms
+2026-06-11 17:15:54.003 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/swagger-ui-standalone-preset.js - 200 230280 text/javascript 283.1495ms
+2026-06-11 17:15:54.023 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-06-11 17:15:54.072 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/swagger-ui-bundle.js - 200 1456926 text/javascript 304.2122ms
+2026-06-11 17:15:54.101 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/_vs/browserLink - 200 null text/javascript; charset=UTF-8 419.6884ms
+2026-06-11 17:15:54.289 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/swagger/v1/swagger.json - null null
+2026-06-11 17:15:54.311 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 21.3452ms
+2026-06-11 17:15:54.339 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/favicon-32x32.png - null null
+2026-06-11 17:15:54.340 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2026-06-11 17:15:54.341 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/favicon-32x32.png - 200 628 image/png 2.075ms
+2026-06-11 17:16:32.079 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/WeatherForecast - null null
+2026-06-11 17:16:32.086 +05:30 [INF] Request => GET /WeatherForecast
+2026-06-11 17:16:32.567 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.WeatherForecastController.Get (CRM_API)'
+2026-06-11 17:16:32.627 +05:30 [INF] Route matched with {action = "Get", controller = "WeatherForecast"}. Executing controller action with signature System.Collections.Generic.IEnumerable`1[CRM_API.WeatherForecast] Get() on controller CRM_API.Controllers.WeatherForecastController (CRM_API).
+2026-06-11 17:16:32.692 +05:30 [INF] Executing ObjectResult, writing value of type 'CRM_API.WeatherForecast[]'.
+2026-06-11 17:16:32.754 +05:30 [INF] Executed action CRM_API.Controllers.WeatherForecastController.Get (CRM_API) in 118.8369ms
+2026-06-11 17:16:32.754 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.WeatherForecastController.Get (CRM_API)'
+2026-06-11 17:16:32.756 +05:30 [INF] Response => 200
+2026-06-11 17:16:32.756 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/WeatherForecast - 200 null application/json; charset=utf-8 677.7827ms

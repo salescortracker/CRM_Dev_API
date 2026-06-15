@@ -4,3 +4,9 @@ D:\projects\crm\Utility\obj\Debug\Utility.csproj.AssemblyReference.cache
 D:\projects\crm\Utility\obj\Debug\Utility.csproj.CoreCompileInputs.cache
 D:\projects\crm\Utility\obj\Debug\Utility.dll
 D:\projects\crm\Utility\obj\Debug\Utility.pdb
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\Utility\bin\Debug\Utility.dll
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\Utility\bin\Debug\Utility.pdb
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\Utility\obj\Debug\Utility.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\Utility\obj\Debug\Utility.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\Utility\obj\Debug\Utility.dll
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\Utility\obj\Debug\Utility.pdb
