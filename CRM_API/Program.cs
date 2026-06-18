@@ -1,5 +1,11 @@
 using Business_Layer.Interfaces;
+using Business_Layer.Interfaces.AuditLog;
+using Business_Layer.Interfaces.CommonInterfaces;
+using Business_Layer.Interfaces.MasterIInterface;
+using Business_Layer.Services.AuditLog;
 using Business_Layer.Services.Auth;
+using Business_Layer.Services.CommonServices;
+using BusinessLayer.Services;
 using CRM_API.Middleware;
 using DataAccess_Layers.Data;
 using DataAccess_Layers.Repositories;
@@ -60,7 +66,20 @@ builder.Services.AddScoped<
 // ======================================================
 // AUTH SERVICE (ADD THIS HERE)
 // ======================================================
+
 builder.Services.AddScoped<IAuthService, AuthService>();
+
+
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IAuditService, AuditService>();
+
+// ======================================================
+// COMMON UserId  (ADD THIS HERE)
+// ======================================================
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<ICurrentUserService,CurrentUserService>();
 
 
 // ======================================================
@@ -85,24 +104,21 @@ builder.Services.AddAuthentication(
     JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {
-    options.TokenValidationParameters =
-        new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
 
-            ValidIssuer =
-                jwtSection["Issuer"],
+        ValidIssuer = jwtSection["Issuer"],
+        ValidAudience = jwtSection["Audience"],
 
-            ValidAudience =
-                jwtSection["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(secretKey)),
 
-            IssuerSigningKey =
-                new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(secretKey))
-        };
+        ClockSkew = TimeSpan.Zero
+    };
 });
 
 

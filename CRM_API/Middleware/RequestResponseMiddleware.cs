@@ -53,5 +53,5 @@ namespace CRM_API.Middleware
                 "Response => {StatusCode}",
                 context.Response.StatusCode);
         }
-    }
+    } 
 }

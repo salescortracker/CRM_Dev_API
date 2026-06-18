@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business_Layer.Interfaces;
 using Shared.Exceptions;
+using Shared.Constants;
 
 namespace Business_Layer.Services.Auth
 {
@@ -31,7 +32,7 @@ namespace Business_Layer.Services.Auth
                 x.UserName == request.UserName || x.Email == request.Email);
 
             if (existingUser.Any())
-                throw new CustomException("User already exists");
+                throw new CustomException(AppConstants.UserAlreadyExists, 401);
 
             var user = new UserLogin
             {
@@ -49,7 +50,7 @@ namespace Business_Layer.Services.Auth
             await repo.AddAsync(user);
             await _uow.CompleteAsync();
 
-            return "User created successfully";
+            return AppConstants.UserCreatedSuccessfully;
         }
 
         public async Task<AuthResponse> Login(LoginRequest request)
@@ -61,11 +62,11 @@ namespace Business_Layer.Services.Auth
                        .FirstOrDefault();
 
             if (user == null)
-                throw new CustomException("Invalid username");
+                throw new CustomException(AppConstants.InvalidUserName);
 
             // SAFE CHECK
             if (string.IsNullOrEmpty(user.PasswordHash))
-                throw new CustomException("Password missing in DB");
+                throw new CustomException(AppConstants.PasswordMissingInDB);
 
             if (!PasswordHelper.VerifyPassword(request.Password, user.PasswordHash))
             {
@@ -77,11 +78,11 @@ namespace Business_Layer.Services.Auth
                 repo.Update(user);
                 await _uow.CompleteAsync();
 
-                throw new CustomException("Invalid password");
+                throw new CustomException(AppConstants.InvalidPassword);
             }
 
             if (user.IsLocked)
-                throw new CustomException("Account locked");
+                throw new CustomException(AppConstants.AccountLocked, 403);
 
             user.LastLoginDate = DateTime.UtcNow;
             user.FailedLoginAttempts = 0;
@@ -90,8 +91,14 @@ namespace Business_Layer.Services.Auth
             await _uow.CompleteAsync();
 
             var token = JwtHelper.GenerateToken(
-                user.UserName,
-                _config["JwtSettings:SecretKey"]);
+               user.UserId,
+               user.UserName,
+               user.Role,
+               _config["JwtSettings:SecretKey"],
+               _config["JwtSettings:Issuer"],
+               _config["JwtSettings:Audience"],
+              int.Parse(_config["JwtSettings:ExpiryMinutes"])
+            );
 
             return new AuthResponse
             {
