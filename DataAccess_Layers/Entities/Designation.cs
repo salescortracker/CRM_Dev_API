@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace DataAccess_Layers.Entities;
+
+public partial class Designation
+{
+    public int DesignationId { get; set; }
+
+    public int CompanyId { get; set; }
+
+    public int RegionId { get; set; }
+
+    public string DesignationName { get; set; } = null!;
+
+    public string DesignationCode { get; set; } = null!;
+
+    public string? Description { get; set; }
+
+    public bool Status { get; set; }
+
+    public DateTime CreatedDate { get; set; }
+
+    public DateTime? UpdatedDate { get; set; }
+
+    public int? CreatedBy { get; set; }
+
+    public int? UpdatedBy { get; set; }
+}

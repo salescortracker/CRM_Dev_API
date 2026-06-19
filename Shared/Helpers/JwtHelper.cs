@@ -12,41 +12,38 @@ namespace Shared.Helpers
     public static class JwtHelper
     {
         public static string GenerateToken(
+            int userId,
             string userName,
-            string secretKey)
+            string role,
+            string secretKey,
+            string issuer,
+            string audience,
+            int expiryMinutes = 60)
         {
-            var tokenHandler =
-                new JwtSecurityTokenHandler();
+            var key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(secretKey));
 
-            var key =
-                Encoding.UTF8.GetBytes(secretKey);
+            var creds = new SigningCredentials(
+                key,
+                SecurityAlgorithms.HmacSha256);
 
-            var tokenDescriptor =
-                new SecurityTokenDescriptor
-                {
-                    Subject =
-                        new ClaimsIdentity(
-                            new[]
-                            {
-                            new Claim(
-                                ClaimTypes.Name,
-                                userName)
-                            }),
+            var claims = new[]
+            {
+                 new Claim("UserId", userId.ToString()),
+                 new Claim(ClaimTypes.Name, userName),
+                 new Claim(ClaimTypes.Role, role)
+            };
 
-                    Expires =
-                        DateTime.UtcNow.AddHours(1),
+            var token = new JwtSecurityToken(
+                issuer: issuer,
+                audience: audience,
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(expiryMinutes),
+                signingCredentials: creds
+            );
 
-                    SigningCredentials =
-                        new SigningCredentials(
-                            new SymmetricSecurityKey(key),
-                            SecurityAlgorithms.HmacSha256Signature)
-                };
-
-            var token =
-                tokenHandler.CreateToken(
-                    tokenDescriptor);
-
-            return tokenHandler.WriteToken(token);
+            return new JwtSecurityTokenHandler()
+                .WriteToken(token);
         }
     }
 }
