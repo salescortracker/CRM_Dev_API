@@ -1,0 +1,15 @@
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\bin\Debug\net9.0\DataAccess_Layers.deps.json
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\bin\Debug\net9.0\DataAccess_Layers.dll
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\bin\Debug\net9.0\DataAccess_Layers.pdb
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\obj\Debug\net9.0\DataAccess_Layers.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\obj\Debug\net9.0\DataAccess_Layers.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\obj\Debug\net9.0\DataAccess_Layers.AssemblyInfo.cs
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\obj\Debug\net9.0\DataAccess_Layers.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\obj\Debug\net9.0\DataAccess_Layers.sourcelink.json
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\obj\Debug\net9.0\DataAccess_Layers.dll
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\obj\Debug\net9.0\refint\DataAccess_Layers.dll
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\obj\Debug\net9.0\DataAccess_Layers.pdb
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\obj\Debug\net9.0\ref\DataAccess_Layers.dll
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\bin\Debug\net9.0\DataAccess_Layers.runtimeconfig.json
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\obj\Debug\net9.0\DataAccess_Layers.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\obj\Debug\net9.0\DataAccess_Layers.genruntimeconfig.cache
