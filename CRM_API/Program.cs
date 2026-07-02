@@ -42,6 +42,18 @@ builder.Host.UseSerilog();
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular",
+        policy =>
+        {
+            policy
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 
 // ======================================================
 // DATABASE CONTEXT
@@ -217,6 +229,8 @@ app.UseMiddleware<RequestResponseMiddleware>();
 // ======================================================
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAngular");
 
 
 // ======================================================

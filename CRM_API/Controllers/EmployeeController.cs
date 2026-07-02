@@ -25,13 +25,13 @@ namespace CRM_API.Controllers
             return Ok(await _service.CreateDepartment(dto));
         }
 
-        [HttpPut("update")]
+        [HttpPost("update")]
         public async Task<IActionResult> UpdateDepartment(DepartmentUpdateDto dto)
         {
             return Ok(await _service.UpdateDepartment(dto));
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpPost("delete/{id}")]
         public async Task<IActionResult> DeleteDepartment(int id)
         {
             return Ok(await _service.DeleteDepartment(id));

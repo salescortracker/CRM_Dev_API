@@ -100,7 +100,7 @@
       }
     },
     "/api/Department/update": {
-      "put": {
+      "post": {
         "tags": [
           "Department"
         ],
@@ -131,7 +131,7 @@
       }
     },
     "/api/Department/delete/{id}": {
-      "delete": {
+      "post": {
         "tags": [
           "Department"
         ],
@@ -233,6 +233,14 @@
       "DepartmentCreateDto": {
         "type": "object",
         "properties": {
+          "createdBy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
           "departmentName": {
             "type": "string",
             "nullable": true

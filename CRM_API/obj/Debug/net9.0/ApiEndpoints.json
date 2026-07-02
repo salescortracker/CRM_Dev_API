@@ -51,7 +51,7 @@
     "ContainingType": "CRM_API.Controllers.DepartmentController",
     "Method": "DeleteDepartment",
     "RelativePath": "api/Department/delete/{id}",
-    "HttpMethod": "DELETE",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -93,7 +93,7 @@
     "ContainingType": "CRM_API.Controllers.DepartmentController",
     "Method": "UpdateDepartment",
     "RelativePath": "api/Department/update",
-    "HttpMethod": "PUT",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
