@@ -31,6 +31,7 @@ namespace Business_Layer.Services.CommonServices
 
                 return string.IsNullOrEmpty(userId) ? 0 : Convert.ToInt32(userId);
             }
+            
         }
     }
 }

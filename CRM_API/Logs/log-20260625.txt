@@ -1,0 +1,107 @@
+2026-06-25 09:38:46.406 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - null null
+2026-06-25 09:38:46.531 +05:30 [INF] Request => OPTIONS /api/Auth/login
+2026-06-25 09:38:46.534 +05:30 [INF] CORS policy execution successful.
+2026-06-25 09:38:46.537 +05:30 [INF] Response => 204
+2026-06-25 09:38:46.538 +05:30 [INF] API /api/Auth/login Executed in 6 ms
+2026-06-25 09:38:46.540 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - 204 null null 146.3086ms
+2026-06-25 09:38:46.543 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/login - application/json 70
+2026-06-25 09:38:46.549 +05:30 [INF] Request => POST /api/Auth/login
+2026-06-25 09:38:46.549 +05:30 [INF] CORS policy execution successful.
+2026-06-25 09:38:46.738 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '24-06-2026 11:15:41', Current time (UTC): '25-06-2026 04:08:46'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-06-25 09:38:46.776 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '24-06-2026 11:15:41', Current time (UTC): '25-06-2026 04:08:46'.
+2026-06-25 09:38:46.777 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-06-25 09:38:46.780 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(DataAccess_Layers.Entities.LoginRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-06-25 09:38:50.419 +05:30 [INF] Executed DbCommand (137ms) [Parameters=[@__request_UserName_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[UserId], [u].[CreatedBy], [u].[CreatedDate], [u].[Email], [u].[FailedLoginAttempts], [u].[FullName], [u].[IsActive], [u].[IsLocked], [u].[LastLoginDate], [u].[MobileNumber], [u].[PasswordHash], [u].[PasswordResetExpiry], [u].[PasswordResetToken], [u].[PasswordSalt], [u].[Role], [u].[UpdatedBy], [u].[UpdatedDate], [u].[UserName]
+FROM [UserLogin] AS [u]
+WHERE [u].[UserName] = @__request_UserName_0
+2026-06-25 09:39:02.310 +05:30 [INF] Executed action CRM_API.Controllers.AuthController.Login (CRM_API) in 15527.2303ms
+2026-06-25 09:39:02.312 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-06-25 09:39:03.273 +05:30 [ERR] Unhandled Exception
+Shared.Exceptions.CustomException: Invalid username
+   at Business_Layer.Services.Auth.AuthService.Login(LoginRequest request) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\Business_Layer\Services\AuthService.cs:line 65
+   at CRM_API.Controllers.AuthController.Login(LoginRequest request) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Controllers\AuthController.cs:line 30
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at CRM_API.Middleware.RequestResponseMiddleware.Invoke(HttpContext context) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Middleware\RequestResponseMiddleware.cs:line 50
+   at CRM_API.Middleware.ExecutionTimeMiddleware.Invoke(HttpContext context) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Middleware\ExecutionTimeMiddleware.cs:line 25
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at CRM_API.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Middleware\ExceptionMiddleware.cs:line 54
+2026-06-25 09:39:03.488 +05:30 [INF] Request finished HTTP/2 POST https://localhost:44361/api/Auth/login - 500 null null 16942.3727ms
+2026-06-25 09:39:33.739 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - null null
+2026-06-25 09:39:33.740 +05:30 [INF] Request => OPTIONS /api/Auth/login
+2026-06-25 09:39:33.741 +05:30 [INF] CORS policy execution successful.
+2026-06-25 09:39:33.741 +05:30 [INF] Response => 204
+2026-06-25 09:39:33.742 +05:30 [INF] API /api/Auth/login Executed in 1 ms
+2026-06-25 09:39:33.743 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - 204 null null 4.5125ms
+2026-06-25 09:39:34.093 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/login - application/json 48
+2026-06-25 09:39:34.094 +05:30 [INF] Request => POST /api/Auth/login
+2026-06-25 09:39:34.095 +05:30 [INF] CORS policy execution successful.
+2026-06-25 09:39:34.113 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '24-06-2026 11:15:41', Current time (UTC): '25-06-2026 04:09:34'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-06-25 09:39:34.118 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '24-06-2026 11:15:41', Current time (UTC): '25-06-2026 04:09:34'.
+2026-06-25 09:39:34.119 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-06-25 09:39:34.119 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(DataAccess_Layers.Entities.LoginRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-06-25 09:39:36.656 +05:30 [INF] Executed DbCommand (46ms) [Parameters=[@__request_UserName_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[UserId], [u].[CreatedBy], [u].[CreatedDate], [u].[Email], [u].[FailedLoginAttempts], [u].[FullName], [u].[IsActive], [u].[IsLocked], [u].[LastLoginDate], [u].[MobileNumber], [u].[PasswordHash], [u].[PasswordResetExpiry], [u].[PasswordResetToken], [u].[PasswordSalt], [u].[Role], [u].[UpdatedBy], [u].[UpdatedDate], [u].[UserName]
+FROM [UserLogin] AS [u]
+WHERE [u].[UserName] = @__request_UserName_0
+2026-06-25 09:39:37.178 +05:30 [INF] Executed DbCommand (166ms) [Parameters=[@p17='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 150), @p3='?' (DbType = Int32), @p4='?' (Size = 150), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTime), @p8='?' (Size = 15), @p9='?' (Size = 500), @p10='?' (DbType = DateTime), @p11='?' (Size = 500), @p12='?' (Size = 500), @p13='?' (Size = 50), @p14='?' (DbType = Int32), @p15='?' (DbType = DateTime), @p16='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [UserLogin] SET [CreatedBy] = @p0, [CreatedDate] = @p1, [Email] = @p2, [FailedLoginAttempts] = @p3, [FullName] = @p4, [IsActive] = @p5, [IsLocked] = @p6, [LastLoginDate] = @p7, [MobileNumber] = @p8, [PasswordHash] = @p9, [PasswordResetExpiry] = @p10, [PasswordResetToken] = @p11, [PasswordSalt] = @p12, [Role] = @p13, [UpdatedBy] = @p14, [UpdatedDate] = @p15, [UserName] = @p16
+OUTPUT 1
+WHERE [UserId] = @p17;
+2026-06-25 09:39:37.213 +05:30 [INF] Executing OkObjectResult, writing value of type 'DataAccess_Layers.Entities.AuthResponse'.
+2026-06-25 09:39:37.218 +05:30 [INF] Executed action CRM_API.Controllers.AuthController.Login (CRM_API) in 3097.5582ms
+2026-06-25 09:39:37.218 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-06-25 09:39:37.218 +05:30 [INF] Response => 200
+2026-06-25 09:39:37.218 +05:30 [INF] API /api/Auth/login Executed in 3123 ms
+2026-06-25 09:39:37.219 +05:30 [INF] Request finished HTTP/2 POST https://localhost:44361/api/Auth/login - 200 null application/json; charset=utf-8 3125.3821ms
+2026-06-25 09:40:08.333 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - null null
+2026-06-25 09:40:08.333 +05:30 [INF] Request => OPTIONS /api/Auth/login
+2026-06-25 09:40:08.334 +05:30 [INF] CORS policy execution successful.
+2026-06-25 09:40:08.334 +05:30 [INF] Response => 204
+2026-06-25 09:40:08.334 +05:30 [INF] API /api/Auth/login Executed in 0 ms
+2026-06-25 09:40:08.356 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/login - application/json 48
+2026-06-25 09:40:08.356 +05:30 [INF] Request => POST /api/Auth/login
+2026-06-25 09:40:08.357 +05:30 [INF] CORS policy execution successful.
+2026-06-25 09:40:08.362 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - 204 null null 1.7955ms
+2026-06-25 09:40:08.381 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-06-25 09:40:08.381 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(DataAccess_Layers.Entities.LoginRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-06-25 09:40:10.819 +05:30 [INF] Executed DbCommand (42ms) [Parameters=[@__request_UserName_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[UserId], [u].[CreatedBy], [u].[CreatedDate], [u].[Email], [u].[FailedLoginAttempts], [u].[FullName], [u].[IsActive], [u].[IsLocked], [u].[LastLoginDate], [u].[MobileNumber], [u].[PasswordHash], [u].[PasswordResetExpiry], [u].[PasswordResetToken], [u].[PasswordSalt], [u].[Role], [u].[UpdatedBy], [u].[UpdatedDate], [u].[UserName]
+FROM [UserLogin] AS [u]
+WHERE [u].[UserName] = @__request_UserName_0
+2026-06-25 09:40:11.142 +05:30 [INF] Executed DbCommand (159ms) [Parameters=[@p17='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 150), @p3='?' (DbType = Int32), @p4='?' (Size = 150), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTime), @p8='?' (Size = 15), @p9='?' (Size = 500), @p10='?' (DbType = DateTime), @p11='?' (Size = 500), @p12='?' (Size = 500), @p13='?' (Size = 50), @p14='?' (DbType = Int32), @p15='?' (DbType = DateTime), @p16='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [UserLogin] SET [CreatedBy] = @p0, [CreatedDate] = @p1, [Email] = @p2, [FailedLoginAttempts] = @p3, [FullName] = @p4, [IsActive] = @p5, [IsLocked] = @p6, [LastLoginDate] = @p7, [MobileNumber] = @p8, [PasswordHash] = @p9, [PasswordResetExpiry] = @p10, [PasswordResetToken] = @p11, [PasswordSalt] = @p12, [Role] = @p13, [UpdatedBy] = @p14, [UpdatedDate] = @p15, [UserName] = @p16
+OUTPUT 1
+WHERE [UserId] = @p17;
+2026-06-25 09:40:11.146 +05:30 [INF] Executing OkObjectResult, writing value of type 'DataAccess_Layers.Entities.AuthResponse'.
+2026-06-25 09:40:11.148 +05:30 [INF] Executed action CRM_API.Controllers.AuthController.Login (CRM_API) in 2765.403ms
+2026-06-25 09:40:11.148 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-06-25 09:40:11.149 +05:30 [INF] Response => 200
+2026-06-25 09:40:11.150 +05:30 [INF] API /api/Auth/login Executed in 2793 ms
+2026-06-25 09:40:11.151 +05:30 [INF] Request finished HTTP/2 POST https://localhost:44361/api/Auth/login - 200 null application/json; charset=utf-8 2794.8166ms

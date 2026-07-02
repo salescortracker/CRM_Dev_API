@@ -77,9 +77,11 @@ namespace BusinessLayer.Services
 
                 department.UserId = _currentUserService.UserId;
 
+
                 department.CreatedDate = DateTime.Now;
 
                 department.Status = true;
+
 
                 await _unitOfWork.Repository<Department>().AddAsync(department);
 
