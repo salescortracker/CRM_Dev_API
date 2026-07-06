@@ -2,9 +2,11 @@ using Business_Layer.Interfaces;
 using Business_Layer.Interfaces.AuditLog;
 using Business_Layer.Interfaces.CommonInterfaces;
 using Business_Layer.Interfaces.MasterIInterface;
+using Business_Layer.Interfaces.Services;
 using Business_Layer.Services.AuditLog;
 using Business_Layer.Services.Auth;
 using Business_Layer.Services.CommonServices;
+using Business_Layer.Services.MenuServices;
 using BusinessLayer.Services;
 using CRM_API.Middleware;
 using DataAccess_Layers.Data;
@@ -80,8 +82,7 @@ builder.Services.AddScoped<
 // ======================================================
 
 builder.Services.AddScoped<IAuthService, AuthService>();
-
-
+builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IAuditService, AuditService>();
 
