@@ -40,4 +40,10 @@ public partial class UserLogin
     public string? PasswordResetToken { get; set; }
 
     public DateTime? PasswordResetExpiry { get; set; }
+
+    public string? OtpCode { get; set; }
+
+    public DateTime? OtpExpiry { get; set; }
+
+    public bool IsOtpVerified { get; set; }
 }
