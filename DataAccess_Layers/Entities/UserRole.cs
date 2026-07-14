@@ -17,6 +17,18 @@ public partial class UserRole
 
     public bool IsPrimaryRole { get; set; }
 
+    public int? CompanyId { get; set; }
+
+    public int? RegionId { get; set; }
+
+    public int? CreatedBy { get; set; }
+
+    public DateTime? CreatedAt { get; set; }
+
+    public int? ModifiedBy { get; set; }
+
+    public DateTime? ModifiedAt { get; set; }
+
     public virtual User? AssignedByNavigation { get; set; }
 
     public virtual Role1 Role { get; set; } = null!;

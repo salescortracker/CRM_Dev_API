@@ -37,5 +37,19 @@ public partial class OrganizationSetting
 
     public DateTime CreatedOn { get; set; }
 
+    public int? UserId { get; set; }
+
+    public int? CompanyId { get; set; }
+
+    public int? RegionId { get; set; }
+
+    public int? CreatedBy { get; set; }
+
+    public DateTime? CreatedAt { get; set; }
+
+    public int? ModifiedBy { get; set; }
+
+    public DateTime? ModifiedAt { get; set; }
+
     public virtual Organization Organization { get; set; } = null!;
 }

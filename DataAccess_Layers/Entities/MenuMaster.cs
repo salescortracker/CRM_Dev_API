@@ -38,4 +38,6 @@ public partial class MenuMaster
     public bool CanDelete { get; set; }
 
     public bool CanApprove { get; set; }
+
+    public int? UserId { get; set; }
 }

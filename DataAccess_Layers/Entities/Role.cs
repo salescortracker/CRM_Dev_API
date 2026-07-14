@@ -30,4 +30,6 @@ public partial class Role
     public int? CreatedBy { get; set; }
 
     public int? UpdatedBy { get; set; }
+
+    public int? UserId { get; set; }
 }

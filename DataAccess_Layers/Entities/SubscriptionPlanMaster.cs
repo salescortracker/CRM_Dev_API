@@ -22,4 +22,10 @@ public partial class SubscriptionPlanMaster
     public DateTime? UpdatedDate { get; set; }
 
     public int? UpdatedBy { get; set; }
+
+    public int? UserId { get; set; }
+
+    public int? CompanyId { get; set; }
+
+    public int? RegionId { get; set; }
 }

@@ -67,13 +67,39 @@ public partial class Lead
 
     public DateTime CreatedOn { get; set; }
 
+    public int? UserId { get; set; }
+
+    public int? CompanyId { get; set; }
+
+    public int? RegionId { get; set; }
+
+    public int? CreatedBy { get; set; }
+
+    public DateTime? CreatedAt { get; set; }
+
+    public int? ModifiedBy { get; set; }
+
+    public DateTime? ModifiedAt { get; set; }
+
     public virtual User? AssignedByUser { get; set; }
 
     public virtual User? AssignedToUser { get; set; }
+
+    public virtual ICollection<CallingCampaignLead> CallingCampaignLeads { get; set; } = new List<CallingCampaignLead>();
+
+    public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 
     public virtual ICollection<LeadActivity> LeadActivities { get; set; } = new List<LeadActivity>();
 
     public virtual ICollection<LeadAssignment> LeadAssignments { get; set; } = new List<LeadAssignment>();
 
     public virtual ICollection<LeadCall> LeadCalls { get; set; } = new List<LeadCall>();
+
+    public virtual ICollection<LeadFollowUp> LeadFollowUps { get; set; } = new List<LeadFollowUp>();
+
+    public virtual ICollection<LeadNote> LeadNotes { get; set; } = new List<LeadNote>();
+
+    public virtual ICollection<Opportunity> Opportunities { get; set; } = new List<Opportunity>();
+
+    public virtual ICollection<TwilioSmslog> TwilioSmslogs { get; set; } = new List<TwilioSmslog>();
 }

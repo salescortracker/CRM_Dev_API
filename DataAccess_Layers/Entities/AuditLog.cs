@@ -20,4 +20,14 @@ public partial class AuditLog
     public int? UserId { get; set; }
 
     public DateTime? CreatedDate { get; set; }
+
+    public int? CompanyId { get; set; }
+
+    public int? RegionId { get; set; }
+
+    public int? CreatedBy { get; set; }
+
+    public int? ModifiedBy { get; set; }
+
+    public DateTime? ModifiedAt { get; set; }
 }
