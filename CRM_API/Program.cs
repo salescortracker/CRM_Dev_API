@@ -6,6 +6,7 @@ using Business_Layer.Interfaces.Services;
 using Business_Layer.Services.AuditLog;
 using Business_Layer.Services.Auth;
 using Business_Layer.Services.CommonServices;
+using Business_Layer.Services.MasterServices;
 using Business_Layer.Services.MenuServices;
 using BusinessLayer.Services;
 using CRM_API.Middleware;
@@ -85,6 +86,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IAuditService, AuditService>();
+builder.Services.AddScoped<ICompanyAndRegionService, CompanyAndRegionService>();
 
 // ======================================================
 // COMMON UserId  (ADD THIS HERE)
