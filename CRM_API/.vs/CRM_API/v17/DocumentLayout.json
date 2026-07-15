@@ -3,141 +3,68 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\services\\masterservices\\departmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4132057E-546B-4062-A695-9A99D4214034}|..\\Shared\\Shared.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\shared\\helpers\\passwordhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\crm_api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4132057E-546B-4062-A695-9A99D4214034}|..\\Shared\\Shared.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\shared\\constants\\appconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\models\\forgotemailclasses\\changepasswordrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\services\\emailservice\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4132057E-546B-4062-A695-9A99D4214034}|..\\Shared\\Shared.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\shared\\settings\\smtpsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4132057E-546B-4062-A695-9A99D4214034}|..\\Shared\\Shared.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\shared\\helpers\\otphelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\services\\emailservice\\emailtemplateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\interfaces\\emailservice\\iemailtemplateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\interfaces\\emailservice\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\crm_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\crm_api\\controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|solutionrelative:controllers\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\dtos\\masterdto\u0027s\\departmentcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\crm_api\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|solutionrelative:controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\dtos\\commondto\\basedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\dtos\\masterdto\u0027s\\departmentresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\services\\commonservices\\currentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\dtos\\masterdto\u0027s\\departmentupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4132057E-546B-4062-A695-9A99D4214034}|..\\Shared\\Shared.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\shared\\settings\\jwtsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\interfaces\\masteriinterface\\idepartmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\repositories\\generalrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\repositories\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\data\\crmcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\entities\\auditlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\interfaces\\commoninterfaces\\icurrentuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4132057E-546B-4062-A695-9A99D4214034}|..\\Shared\\Shared.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\shared\\helpers\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\services\\auditlog\\auditservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\entities\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4132057E-546B-4062-A695-9A99D4214034}|..\\Shared\\Shared.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\shared\\constants\\appconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\crm_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\crm_api\\middleware\\jwtmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|solutionrelative:middleware\\jwtmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\interfaces\\auditlog\\iauditservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\repositories\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\repositories\\igeneralrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\crm_api\\logs\\log-20260616_001.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|solutionrelative:logs\\log-20260616_001.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4132057E-546B-4062-A695-9A99D4214034}|..\\Shared\\Shared.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\shared\\helpers\\encryptionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4132057E-546B-4062-A695-9A99D4214034}|..\\Shared\\Shared.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\shared\\exceptions\\customexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\crm_api\\middleware\\requestresponsemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|solutionrelative:middleware\\requestresponsemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\crm_api\\middleware\\executiontimemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|solutionrelative:middleware\\executiontimemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\crm_api\\middleware\\exceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|solutionrelative:middleware\\exceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\entities\\authresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\interfaces\\services\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4132057E-546B-4062-A695-9A99D4214034}|..\\Shared\\Shared.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\shared\\helpers\\passwordhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\models\\forgotemailclasses\\resetpasswordrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\models\\forgotemailclasses\\verifyotprequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0ED27330-E666-4477-920E-5AA2327A3A07}|..\\Business_Layer\\Business_Layer.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\business_layer\\models\\forgotemailclasses\\forgotpasswordrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\entities\\userlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\entities\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\entities\\signuprequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\repositories\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5697B5FC-63D2-4562-8EAD-6E49FC3E0F90}|..\\DataAccess_Layers\\DataAccess_Layers.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\dataaccess_layers\\data\\applicationcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|c:\\users\\admin\\desktop\\crm-dev-api\\crm_dev_api\\crm_api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1FE9B9A-2089-4F57-A9D8-40C506C25300}|CRM_API.csproj|solutionrelative:controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -147,8 +74,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PasswordHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Helpers\\PasswordHelper.cs",
+              "RelativeDocumentMoniker": "..\\Shared\\Helpers\\PasswordHelper.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Helpers\\PasswordHelper.cs",
+              "RelativeToolTip": "..\\Shared\\Helpers\\PasswordHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-14T09:01:00.016Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
@@ -159,549 +99,237 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DepartmentService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\MasterServices\\DepartmentService.cs",
-              "RelativeDocumentMoniker": "..\\Business_Layer\\Services\\MasterServices\\DepartmentService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\MasterServices\\DepartmentService.cs",
-              "RelativeToolTip": "..\\Business_Layer\\Services\\MasterServices\\DepartmentService.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAmwPQAAABbAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "ChangePasswordRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Models\\ForgotEmailClasses\\ChangePasswordRequest.cs",
+              "RelativeDocumentMoniker": "..\\Business_Layer\\Models\\ForgotEmailClasses\\ChangePasswordRequest.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Models\\ForgotEmailClasses\\ChangePasswordRequest.cs",
+              "RelativeToolTip": "..\\Business_Layer\\Models\\ForgotEmailClasses\\ChangePasswordRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T05:47:49.175Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MasterController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Controllers\\MasterController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MasterController.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Controllers\\MasterController.cs",
-              "RelativeToolTip": "Controllers\\MasterController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T05:48:55.826Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAwBwAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:54:05.67Z",
+              "WhenOpened": "2026-07-14T08:34:03.277Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "EmployeeController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Controllers\\EmployeeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\EmployeeController.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Controllers\\EmployeeController.cs",
-              "RelativeToolTip": "Controllers\\EmployeeController.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwCkAAAAIAAAAAAAAAA==",
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\EmailService\\EmailService.cs",
+              "RelativeDocumentMoniker": "..\\Business_Layer\\Services\\EmailService\\EmailService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\EmailService\\EmailService.cs",
+              "RelativeToolTip": "..\\Business_Layer\\Services\\EmailService\\EmailService.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAlwC4AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T11:47:46.632Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "BaseDto.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\DTOs\\CommonDto\\BaseDto.cs",
-              "RelativeDocumentMoniker": "..\\Business_Layer\\DTOs\\CommonDto\\BaseDto.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\DTOs\\CommonDto\\BaseDto.cs",
-              "RelativeToolTip": "..\\Business_Layer\\DTOs\\CommonDto\\BaseDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T09:06:42.165Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAANcAAAAAAAAAAAArwOgAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T11:12:08.834Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DepartmentResponseDto.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentResponseDto.cs",
-              "RelativeDocumentMoniker": "..\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentResponseDto.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentResponseDto.cs",
-              "RelativeToolTip": "..\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentResponseDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T05:38:44.973Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DepartmentCreateDto.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentCreateDto.cs",
-              "RelativeDocumentMoniker": "..\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentCreateDto.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentCreateDto.cs",
-              "RelativeToolTip": "..\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentCreateDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T05:37:43.096Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "..\\Business_Layer\\Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\AuthService.cs",
-              "RelativeToolTip": "..\\Business_Layer\\Services\\AuthService.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAYwEAAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:51:17.217Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "CurrentUserService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\CommonServices\\CurrentUserService.cs",
-              "RelativeDocumentMoniker": "..\\Business_Layer\\Services\\CommonServices\\CurrentUserService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\CommonServices\\CurrentUserService.cs",
-              "RelativeToolTip": "..\\Business_Layer\\Services\\CommonServices\\CurrentUserService.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACEAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T10:01:46.197Z",
+              "WhenOpened": "2026-07-13T10:46:01.252Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
+              "Title": "IEmailTemplateService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\EmailService\\IEmailTemplateService.cs",
+              "RelativeDocumentMoniker": "..\\Business_Layer\\Interfaces\\EmailService\\IEmailTemplateService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\EmailService\\IEmailTemplateService.cs",
+              "RelativeToolTip": "..\\Business_Layer\\Interfaces\\EmailService\\IEmailTemplateService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-13T10:36:51.272Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "..\\Business_Layer\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\AuthService.cs",
+              "RelativeToolTip": "..\\Business_Layer\\Services\\AuthService.cs",
+              "ViewState": "AgIAAL4AAAAAAAAAAIAwwOkAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-13T09:34:19.938Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "IAuthService.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\IAuthService.cs",
               "RelativeDocumentMoniker": "..\\Business_Layer\\Interfaces\\IAuthService.cs",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\IAuthService.cs",
               "RelativeToolTip": "..\\Business_Layer\\Interfaces\\IAuthService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAhwBoAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:59:27.823Z",
+              "WhenOpened": "2026-07-13T10:21:50.521Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "JwtSetting.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Settings\\JwtSetting.cs",
-              "RelativeDocumentMoniker": "..\\Shared\\Settings\\JwtSetting.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Settings\\JwtSetting.cs",
-              "RelativeToolTip": "..\\Shared\\Settings\\JwtSetting.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T11:25:12.342Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "DepartmentUpdateDto.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentUpdateDto.cs",
-              "RelativeDocumentMoniker": "..\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentUpdateDto.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentUpdateDto.cs",
-              "RelativeToolTip": "..\\Business_Layer\\DTOs\\MasterDTO\u0027s\\DepartmentUpdateDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T05:38:13.832Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "IDepartmentService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\MasterIInterface\\IDepartmentService.cs",
-              "RelativeDocumentMoniker": "..\\Business_Layer\\Interfaces\\MasterIInterface\\IDepartmentService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\MasterIInterface\\IDepartmentService.cs",
-              "RelativeToolTip": "..\\Business_Layer\\Interfaces\\MasterIInterface\\IDepartmentService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T05:39:47.882Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "GeneralRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Repositories\\GeneralRepository.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Repositories\\GeneralRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Repositories\\GeneralRepository.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Repositories\\GeneralRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T05:46:12.746Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "CRMContext.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Data\\CRMContext.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Data\\CRMContext.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Data\\CRMContext.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Data\\CRMContext.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAYwBoAAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T05:59:42.986Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "AuditLog.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\AuditLog.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Entities\\AuditLog.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\AuditLog.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Entities\\AuditLog.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAiwBcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T06:06:58.243Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "UnitOfWork.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Repositories\\UnitOfWork.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Repositories\\UnitOfWork.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Repositories\\UnitOfWork.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Repositories\\UnitOfWork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:11:20.303Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "AuditService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\AuditLog\\AuditService.cs",
-              "RelativeDocumentMoniker": "..\\Business_Layer\\Services\\AuditLog\\AuditService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\AuditLog\\AuditService.cs",
-              "RelativeToolTip": "..\\Business_Layer\\Services\\AuditLog\\AuditService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T05:44:15.61Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ICurrentUserService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\CommonInterfaces\\ICurrentUserService.cs",
-              "RelativeDocumentMoniker": "..\\Business_Layer\\Interfaces\\CommonInterfaces\\ICurrentUserService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\CommonInterfaces\\ICurrentUserService.cs",
-              "RelativeToolTip": "..\\Business_Layer\\Interfaces\\CommonInterfaces\\ICurrentUserService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T10:01:01.322Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "JwtHelper.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Helpers\\JwtHelper.cs",
-              "RelativeDocumentMoniker": "..\\Shared\\Helpers\\JwtHelper.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Helpers\\JwtHelper.cs",
-              "RelativeToolTip": "..\\Shared\\Helpers\\JwtHelper.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAgwCEAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T11:34:50.44Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "Department.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\Department.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Entities\\Department.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\Department.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Entities\\Department.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwB0AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T09:44:18.572Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 4,
               "Title": "AppConstants.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Constants\\AppConstants.cs",
               "RelativeDocumentMoniker": "..\\Shared\\Constants\\AppConstants.cs",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Constants\\AppConstants.cs",
               "RelativeToolTip": "..\\Shared\\Constants\\AppConstants.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAkwGYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:41:50.357Z",
+              "WhenOpened": "2026-07-13T10:18:55.59Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-06-11T10:49:11.406Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "JwtMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Middleware\\JwtMiddleware.cs",
-              "RelativeDocumentMoniker": "Middleware\\JwtMiddleware.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Middleware\\JwtMiddleware.cs",
-              "RelativeToolTip": "Middleware\\JwtMiddleware.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAxAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAWwF4AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:42:49.912Z",
+              "WhenOpened": "2026-07-13T09:33:44.328Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "IAuditService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\AuditLog\\IAuditService.cs",
-              "RelativeDocumentMoniker": "..\\Business_Layer\\Interfaces\\AuditLog\\IAuditService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\AuditLog\\IAuditService.cs",
-              "RelativeToolTip": "..\\Business_Layer\\Interfaces\\AuditLog\\IAuditService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "EmailTemplateService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\EmailService\\EmailTemplateService.cs",
+              "RelativeDocumentMoniker": "..\\Business_Layer\\Services\\EmailService\\EmailTemplateService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Services\\EmailService\\EmailTemplateService.cs",
+              "RelativeToolTip": "..\\Business_Layer\\Services\\EmailService\\EmailTemplateService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-18T05:43:33.533Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-13T10:37:39.035Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "log-20260616_001.txt",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Logs\\log-20260616_001.txt",
-              "RelativeDocumentMoniker": "Logs\\log-20260616_001.txt",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Logs\\log-20260616_001.txt",
-              "RelativeToolTip": "Logs\\log-20260616_001.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2026-06-18T04:44:28.228Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "CustomException.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Exceptions\\CustomException.cs",
-              "RelativeDocumentMoniker": "..\\Shared\\Exceptions\\CustomException.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Exceptions\\CustomException.cs",
-              "RelativeToolTip": "..\\Shared\\Exceptions\\CustomException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "SmtpSettings.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Settings\\SmtpSettings.cs",
+              "RelativeDocumentMoniker": "..\\Shared\\Settings\\SmtpSettings.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Settings\\SmtpSettings.cs",
+              "RelativeToolTip": "..\\Shared\\Settings\\SmtpSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T11:56:42.207Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-14T04:33:34.855Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "IGeneralRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Repositories\\IGeneralRepository.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Repositories\\IGeneralRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Repositories\\IGeneralRepository.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Repositories\\IGeneralRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "OtpHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Helpers\\OtpHelper.cs",
+              "RelativeDocumentMoniker": "..\\Shared\\Helpers\\OtpHelper.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Helpers\\OtpHelper.cs",
+              "RelativeToolTip": "..\\Shared\\Helpers\\OtpHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:09:24.509Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-13T10:19:57.074Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "IUnitOfWork.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Repositories\\IUnitOfWork.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Repositories\\IUnitOfWork.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Repositories\\IUnitOfWork.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Repositories\\IUnitOfWork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:10:43.444Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "RequestResponseMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Middleware\\RequestResponseMiddleware.cs",
-              "RelativeDocumentMoniker": "Middleware\\RequestResponseMiddleware.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Middleware\\RequestResponseMiddleware.cs",
-              "RelativeToolTip": "Middleware\\RequestResponseMiddleware.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAYwCsAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T11:30:24.153Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "ExecutionTimeMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Middleware\\ExecutionTimeMiddleware.cs",
-              "RelativeDocumentMoniker": "Middleware\\ExecutionTimeMiddleware.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Middleware\\ExecutionTimeMiddleware.cs",
-              "RelativeToolTip": "Middleware\\ExecutionTimeMiddleware.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T12:04:35.454Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 14,
               "Title": "ExceptionMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Middleware\\ExceptionMiddleware.cs",
               "RelativeDocumentMoniker": "Middleware\\ExceptionMiddleware.cs",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Middleware\\ExceptionMiddleware.cs",
               "RelativeToolTip": "Middleware\\ExceptionMiddleware.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAYwEQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAqwCoAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T11:33:34.551Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-13T10:50:53.876Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "EncryptionHelper.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Helpers\\EncryptionHelper.cs",
-              "RelativeDocumentMoniker": "..\\Shared\\Helpers\\EncryptionHelper.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Helpers\\EncryptionHelper.cs",
-              "RelativeToolTip": "..\\Shared\\Helpers\\EncryptionHelper.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAkwEoAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "IEmailService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\EmailService\\IEmailService.cs",
+              "RelativeDocumentMoniker": "..\\Business_Layer\\Interfaces\\EmailService\\IEmailService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\EmailService\\IEmailService.cs",
+              "RelativeToolTip": "..\\Business_Layer\\Interfaces\\EmailService\\IEmailService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T11:43:57.223Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-13T10:56:34.158Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "AuthResponse.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\AuthResponse.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Entities\\AuthResponse.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\AuthResponse.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Entities\\AuthResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA0AAAAFAAAAAAAAAA==",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAQwF0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:50:51.552Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-13T10:38:12.67Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "PasswordHelper.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Helpers\\PasswordHelper.cs",
-              "RelativeDocumentMoniker": "..\\Shared\\Helpers\\PasswordHelper.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Shared\\Helpers\\PasswordHelper.cs",
-              "RelativeToolTip": "..\\Shared\\Helpers\\PasswordHelper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T12:06:05.939Z",
-              "EditorCaption": ""
+              "DocumentIndex": 13,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAwAsAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-13T10:51:50.946Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 16,
+              "Title": "ResetPasswordRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Models\\ForgotEmailClasses\\ResetPasswordRequest.cs",
+              "RelativeDocumentMoniker": "..\\Business_Layer\\Models\\ForgotEmailClasses\\ResetPasswordRequest.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Models\\ForgotEmailClasses\\ResetPasswordRequest.cs",
+              "RelativeToolTip": "..\\Business_Layer\\Models\\ForgotEmailClasses\\ResetPasswordRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-13T10:18:25.978Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\Services\\IAuthService.cs",
+              "RelativeDocumentMoniker": "..\\Business_Layer\\Interfaces\\Services\\IAuthService.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Interfaces\\Services\\IAuthService.cs",
+              "RelativeToolTip": "..\\Business_Layer\\Interfaces\\Services\\IAuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-13T10:45:08.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "VerifyOtpRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Models\\ForgotEmailClasses\\VerifyOtpRequest.cs",
+              "RelativeDocumentMoniker": "..\\Business_Layer\\Models\\ForgotEmailClasses\\VerifyOtpRequest.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Models\\ForgotEmailClasses\\VerifyOtpRequest.cs",
+              "RelativeToolTip": "..\\Business_Layer\\Models\\ForgotEmailClasses\\VerifyOtpRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-13T10:18:04.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ForgotPasswordRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Models\\ForgotEmailClasses\\ForgotPasswordRequest.cs",
+              "RelativeDocumentMoniker": "..\\Business_Layer\\Models\\ForgotEmailClasses\\ForgotPasswordRequest.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\Business_Layer\\Models\\ForgotEmailClasses\\ForgotPasswordRequest.cs",
+              "RelativeToolTip": "..\\Business_Layer\\Models\\ForgotEmailClasses\\ForgotPasswordRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-13T10:17:45.082Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "UserLogin.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\UserLogin.cs",
               "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Entities\\UserLogin.cs",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\UserLogin.cs",
               "RelativeToolTip": "..\\DataAccess_Layers\\Entities\\UserLogin.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAA5wB0AAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAiwC8AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:48:53.326Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "SignupRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\SignupRequest.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Entities\\SignupRequest.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\SignupRequest.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Entities\\SignupRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:50:06.894Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "LoginRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\LoginRequest.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Entities\\LoginRequest.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Entities\\LoginRequest.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Entities\\LoginRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T06:50:25.574Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
-              "Title": "EmployeeRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Repositories\\EmployeeRepository.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Repositories\\EmployeeRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Repositories\\EmployeeRepository.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Repositories\\EmployeeRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T05:47:25Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "ApplicationContext.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Data\\ApplicationContext.cs",
-              "RelativeDocumentMoniker": "..\\DataAccess_Layers\\Data\\ApplicationContext.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\DataAccess_Layers\\Data\\ApplicationContext.cs",
-              "RelativeToolTip": "..\\DataAccess_Layers\\Data\\ApplicationContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T05:45:55.292Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 41,
-              "Title": "WeatherForecastController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Controllers\\WeatherForecastController.cs",
-              "RelativeDocumentMoniker": "Controllers\\WeatherForecastController.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\CRM-DEV-API\\CRM_Dev_API\\CRM_API\\Controllers\\WeatherForecastController.cs",
-              "RelativeToolTip": "Controllers\\WeatherForecastController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T11:47:54.095Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-13T10:15:39.481Z"
             }
           ]
         },

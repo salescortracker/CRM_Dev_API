@@ -1,0 +1,22 @@
+2026-07-06 11:06:07.604 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - null null
+2026-07-06 11:06:08.008 +05:30 [INF] Request => OPTIONS /api/Auth/login
+2026-07-06 11:06:08.034 +05:30 [INF] CORS policy execution successful.
+2026-07-06 11:06:08.037 +05:30 [INF] Response => 204
+2026-07-06 11:06:08.067 +05:30 [INF] API /api/Auth/login Executed in 30 ms
+2026-07-06 11:06:08.136 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - 204 null null 590.6065ms
+2026-07-06 11:06:08.146 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/login - application/json 70
+2026-07-06 11:06:08.167 +05:30 [INF] Request => POST /api/Auth/login
+2026-07-06 11:06:08.167 +05:30 [INF] CORS policy execution successful.
+2026-07-06 11:06:08.300 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '02-07-2026 07:13:34', Current time (UTC): '06-07-2026 05:36:08'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-07-06 11:06:08.353 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '02-07-2026 07:13:34', Current time (UTC): '06-07-2026 05:36:08'.
+2026-07-06 11:06:08.361 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-06 11:06:08.402 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(DataAccess_Layers.Entities.LoginRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-07-06 11:06:13.584 +05:30 [INF] Executed DbCommand (162ms) [Parameters=[@__request_UserName_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[UserId], [u].[CreatedBy], [u].[CreatedDate], [u].[Email], [u].[FailedLoginAttempts], [u].[FullName], [u].[IsActive], [u].[IsLocked], [u].[LastLoginDate], [u].[MobileNumber], [u].[PasswordHash], [u].[PasswordResetExpiry], [u].[PasswordResetToken], [u].[PasswordSalt], [u].[Role], [u].[UpdatedBy], [u].[UpdatedDate], [u].[UserName]
+FROM [UserLogin] AS [u]
+WHERE [u].[UserName] = @__request_UserName_0

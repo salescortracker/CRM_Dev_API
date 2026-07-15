@@ -13,13 +13,9 @@ namespace Shared.Helpers
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
 
-        public static bool VerifyPassword(
-            string password,
-            string hashPassword)
+        public static bool VerifyPassword( string password, string hashPassword)
         {
-            return BCrypt.Net.BCrypt.Verify(
-                password,
-                hashPassword);
+            return BCrypt.Net.BCrypt.Verify( password, hashPassword);
         }
     }
 }

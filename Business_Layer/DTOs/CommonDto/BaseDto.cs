@@ -12,3 +12,4 @@ namespace Business_Layer.DTOs.CommonDto
         public DateTime createdDate { get; set; }
     }
 }
+

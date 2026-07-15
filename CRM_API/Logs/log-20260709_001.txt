@@ -1,0 +1,372 @@
+2026-07-09 11:34:04.817 +05:30 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-07-09 11:34:06.092 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/index.html - null null
+2026-07-09 11:34:06.852 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-09 11:34:06.853 +05:30 [INF] Hosting environment: Development
+2026-07-09 11:34:06.853 +05:30 [INF] Content root path: C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API
+2026-07-09 11:34:07.042 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/_framework/aspnetcore-browser-refresh.js - null null
+2026-07-09 11:34:07.063 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/_vs/browserLink - null null
+2026-07-09 11:34:07.033 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/index.html - 200 null text/html;charset=utf-8 965.175ms
+2026-07-09 11:34:07.069 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 25.7089ms
+2026-07-09 11:34:07.187 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/_vs/browserLink - 200 null text/javascript; charset=UTF-8 124.0803ms
+2026-07-09 11:34:07.367 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/swagger/v1/swagger.json - null null
+2026-07-09 11:34:07.420 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 53.2056ms
+2026-07-09 11:34:07.426 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/favicon-32x32.png - null null
+2026-07-09 11:34:07.480 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2026-07-09 11:34:07.481 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/favicon-32x32.png - 200 628 image/png 54.8089ms
+2026-07-09 11:40:11.305 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - null null
+2026-07-09 11:40:11.426 +05:30 [INF] Request => OPTIONS /api/Auth/login
+2026-07-09 11:40:11.453 +05:30 [INF] CORS policy execution successful.
+2026-07-09 11:40:11.457 +05:30 [INF] Response => 204
+2026-07-09 11:40:11.458 +05:30 [INF] API /api/Auth/login Executed in 35 ms
+2026-07-09 11:40:11.460 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - 204 null null 155.4105ms
+2026-07-09 11:40:11.464 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/login - application/json 48
+2026-07-09 11:40:11.469 +05:30 [INF] Request => POST /api/Auth/login
+2026-07-09 11:40:11.470 +05:30 [INF] CORS policy execution successful.
+2026-07-09 11:40:12.148 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '02-07-2026 07:13:34', Current time (UTC): '09-07-2026 06:10:12'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-07-09 11:40:12.214 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '02-07-2026 07:13:34', Current time (UTC): '09-07-2026 06:10:12'.
+2026-07-09 11:40:12.222 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-09 11:40:12.322 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(DataAccess_Layers.Entities.LoginRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-07-09 11:40:40.119 +05:30 [ERR] An error occurred using the connection to database 'CRM_Dev' on server '192.168.29.53,50491'.
+2026-07-09 11:40:40.222 +05:30 [ERR] An exception occurred while iterating over the results of a query for context type 'DataAccess_Layers.Data.CRMContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 0 - An established connection was aborted by the software in your host machine.)
+ ---> System.ComponentModel.Win32Exception (10053): An established connection was aborted by the software in your host machine.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:10053,State:0,Class:20
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 0 - An established connection was aborted by the software in your host machine.)
+ ---> System.ComponentModel.Win32Exception (10053): An established connection was aborted by the software in your host machine.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:10053,State:0,Class:20
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-07-09 11:40:50.636 +05:30 [INF] Executed action CRM_API.Controllers.AuthController.Login (CRM_API) in 38306.7325ms
+2026-07-09 11:40:50.641 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-09 11:40:51.989 +05:30 [ERR] Unhandled Exception
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 0 - An established connection was aborted by the software in your host machine.)
+ ---> System.ComponentModel.Win32Exception (10053): An established connection was aborted by the software in your host machine.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:10053,State:0,Class:20
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at DataAccess_Layers.Repositories.GeneralRepository`1.FindAsync(Expression`1 predicate) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\Repositories\GeneralRepository.cs:line 44
+   at Business_Layer.Services.Auth.AuthService.Login(LoginRequest request) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\Business_Layer\Services\AuthService.cs:line 60
+   at CRM_API.Controllers.AuthController.Login(LoginRequest request) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Controllers\AuthController.cs:line 30
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at CRM_API.Middleware.RequestResponseMiddleware.Invoke(HttpContext context) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Middleware\RequestResponseMiddleware.cs:line 50
+   at CRM_API.Middleware.ExecutionTimeMiddleware.Invoke(HttpContext context) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Middleware\ExecutionTimeMiddleware.cs:line 25
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at CRM_API.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Middleware\ExceptionMiddleware.cs:line 54
+2026-07-09 11:40:52.177 +05:30 [INF] Request finished HTTP/2 POST https://localhost:44361/api/Auth/login - 500 null null 40713.12ms
+2026-07-09 11:43:05.772 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - null null
+2026-07-09 11:43:05.774 +05:30 [INF] Request => OPTIONS /api/Auth/login
+2026-07-09 11:43:05.775 +05:30 [INF] CORS policy execution successful.
+2026-07-09 11:43:05.776 +05:30 [INF] Response => 204
+2026-07-09 11:43:05.776 +05:30 [INF] API /api/Auth/login Executed in 2 ms
+2026-07-09 11:43:05.777 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - 204 null null 4.5795ms
+2026-07-09 11:43:05.791 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/login - application/json 48
+2026-07-09 11:43:05.792 +05:30 [INF] Request => POST /api/Auth/login
+2026-07-09 11:43:05.792 +05:30 [INF] CORS policy execution successful.
+2026-07-09 11:43:05.873 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '02-07-2026 07:13:34', Current time (UTC): '09-07-2026 06:13:05'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2026-07-09 11:43:05.883 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '02-07-2026 07:13:34', Current time (UTC): '09-07-2026 06:13:05'.
+2026-07-09 11:43:05.884 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-09 11:43:05.885 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(DataAccess_Layers.Entities.LoginRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-07-09 11:43:08.945 +05:30 [INF] Executed DbCommand (288ms) [Parameters=[@__request_UserName_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[UserId], [u].[CreatedBy], [u].[CreatedDate], [u].[Email], [u].[FailedLoginAttempts], [u].[FullName], [u].[IsActive], [u].[IsLocked], [u].[LastLoginDate], [u].[MobileNumber], [u].[PasswordHash], [u].[PasswordResetExpiry], [u].[PasswordResetToken], [u].[PasswordSalt], [u].[Role], [u].[UpdatedBy], [u].[UpdatedDate], [u].[UserName]
+FROM [UserLogin] AS [u]
+WHERE [u].[UserName] = @__request_UserName_0
+2026-07-09 11:43:10.970 +05:30 [INF] Executed DbCommand (268ms) [Parameters=[@p17='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 150), @p3='?' (DbType = Int32), @p4='?' (Size = 150), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTime), @p8='?' (Size = 15), @p9='?' (Size = 500), @p10='?' (DbType = DateTime), @p11='?' (Size = 500), @p12='?' (Size = 500), @p13='?' (Size = 50), @p14='?' (DbType = Int32), @p15='?' (DbType = DateTime), @p16='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [UserLogin] SET [CreatedBy] = @p0, [CreatedDate] = @p1, [Email] = @p2, [FailedLoginAttempts] = @p3, [FullName] = @p4, [IsActive] = @p5, [IsLocked] = @p6, [LastLoginDate] = @p7, [MobileNumber] = @p8, [PasswordHash] = @p9, [PasswordResetExpiry] = @p10, [PasswordResetToken] = @p11, [PasswordSalt] = @p12, [Role] = @p13, [UpdatedBy] = @p14, [UpdatedDate] = @p15, [UserName] = @p16
+OUTPUT 1
+WHERE [UserId] = @p17;
+2026-07-09 11:43:11.078 +05:30 [INF] Executing OkObjectResult, writing value of type 'DataAccess_Layers.Entities.AuthResponse'.
+2026-07-09 11:43:11.087 +05:30 [INF] Executed action CRM_API.Controllers.AuthController.Login (CRM_API) in 5201.6941ms
+2026-07-09 11:43:11.087 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-09 11:43:11.087 +05:30 [INF] Response => 200
+2026-07-09 11:43:11.088 +05:30 [INF] API /api/Auth/login Executed in 5296 ms
+2026-07-09 11:43:11.089 +05:30 [INF] Request finished HTTP/2 POST https://localhost:44361/api/Auth/login - 200 null application/json; charset=utf-8 5297.995ms
+2026-07-09 11:57:55.389 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - null null
+2026-07-09 11:57:55.390 +05:30 [INF] Request => OPTIONS /api/Auth/login
+2026-07-09 11:57:55.390 +05:30 [INF] CORS policy execution successful.
+2026-07-09 11:57:55.391 +05:30 [INF] Response => 204
+2026-07-09 11:57:55.391 +05:30 [INF] API /api/Auth/login Executed in 0 ms
+2026-07-09 11:57:55.392 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - 204 null null 3.2509ms
+2026-07-09 11:57:55.402 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/login - application/json 48
+2026-07-09 11:57:55.403 +05:30 [INF] Request => POST /api/Auth/login
+2026-07-09 11:57:55.403 +05:30 [INF] CORS policy execution successful.
+2026-07-09 11:57:55.446 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-09 11:57:55.446 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(DataAccess_Layers.Entities.LoginRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-07-09 11:58:18.234 +05:30 [ERR] An error occurred using the connection to database 'CRM_Dev' on server '192.168.29.53,50491'.
+2026-07-09 11:58:18.237 +05:30 [ERR] An exception occurred while iterating over the results of a query for context type 'DataAccess_Layers.Data.CRMContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 0 - A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.)
+ ---> System.ComponentModel.Win32Exception (10060): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:10060,State:0,Class:20
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 0 - A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.)
+ ---> System.ComponentModel.Win32Exception (10060): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:10060,State:0,Class:20
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-07-09 11:58:26.717 +05:30 [INF] Executed action CRM_API.Controllers.AuthController.Login (CRM_API) in 31270.875ms
+2026-07-09 11:58:26.765 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-09 11:58:27.685 +05:30 [ERR] Unhandled Exception
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 0 - A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.)
+ ---> System.ComponentModel.Win32Exception (10060): A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:10060,State:0,Class:20
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at DataAccess_Layers.Repositories.GeneralRepository`1.FindAsync(Expression`1 predicate) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\DataAccess_Layers\Repositories\GeneralRepository.cs:line 44
+   at Business_Layer.Services.Auth.AuthService.Login(LoginRequest request) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\Business_Layer\Services\AuthService.cs:line 60
+   at CRM_API.Controllers.AuthController.Login(LoginRequest request) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Controllers\AuthController.cs:line 30
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at CRM_API.Middleware.RequestResponseMiddleware.Invoke(HttpContext context) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Middleware\RequestResponseMiddleware.cs:line 50
+   at CRM_API.Middleware.ExecutionTimeMiddleware.Invoke(HttpContext context) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Middleware\ExecutionTimeMiddleware.cs:line 25
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at CRM_API.Middleware.ExceptionMiddleware.Invoke(HttpContext context) in C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API\Middleware\ExceptionMiddleware.cs:line 54
+2026-07-09 11:58:27.701 +05:30 [INF] Request finished HTTP/2 POST https://localhost:44361/api/Auth/login - 500 null null 32298.6223ms
+2026-07-09 12:02:39.802 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - null null
+2026-07-09 12:02:39.802 +05:30 [INF] Request => OPTIONS /api/Auth/login
+2026-07-09 12:02:39.803 +05:30 [INF] CORS policy execution successful.
+2026-07-09 12:02:39.803 +05:30 [INF] Response => 204
+2026-07-09 12:02:39.803 +05:30 [INF] API /api/Auth/login Executed in 0 ms
+2026-07-09 12:02:39.804 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - 204 null null 2.0266ms
+2026-07-09 12:02:39.809 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/login - application/json 70
+2026-07-09 12:02:39.809 +05:30 [INF] Request => POST /api/Auth/login
+2026-07-09 12:02:39.809 +05:30 [INF] CORS policy execution successful.
+2026-07-09 12:02:39.811 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-09 12:02:39.811 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(DataAccess_Layers.Entities.LoginRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-07-09 12:02:58.429 +05:30 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-07-09 12:02:59.229 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/index.html - null null
+2026-07-09 12:02:59.604 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-09 12:02:59.605 +05:30 [INF] Hosting environment: Development
+2026-07-09 12:02:59.605 +05:30 [INF] Content root path: C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API
+2026-07-09 12:03:00.243 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/index.html - 200 null text/html;charset=utf-8 1023.5562ms
+2026-07-09 12:03:00.322 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/_framework/aspnetcore-browser-refresh.js - null null
+2026-07-09 12:03:00.375 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 54.8112ms
+2026-07-09 12:03:00.378 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/_vs/browserLink - null null
+2026-07-09 12:03:00.579 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/_vs/browserLink - 200 null text/javascript; charset=UTF-8 201.1133ms
+2026-07-09 12:03:00.970 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/swagger/v1/swagger.json - null null
+2026-07-09 12:03:01.034 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 63.4366ms
+2026-07-09 12:03:23.323 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - null null
+2026-07-09 12:03:23.364 +05:30 [INF] Request => OPTIONS /api/Auth/login
+2026-07-09 12:03:23.373 +05:30 [INF] CORS policy execution successful.
+2026-07-09 12:03:23.376 +05:30 [INF] Response => 204
+2026-07-09 12:03:23.376 +05:30 [INF] API /api/Auth/login Executed in 13 ms
+2026-07-09 12:03:23.377 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - 204 null null 54.2768ms
+2026-07-09 12:03:23.384 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/login - application/json 48
+2026-07-09 12:03:23.386 +05:30 [INF] Request => POST /api/Auth/login
+2026-07-09 12:03:23.387 +05:30 [INF] CORS policy execution successful.
+2026-07-09 12:03:23.749 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-09 12:03:23.822 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(DataAccess_Layers.Entities.LoginRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-07-09 12:03:37.790 +05:30 [INF] Executed DbCommand (239ms) [Parameters=[@__request_UserName_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[UserId], [u].[CreatedBy], [u].[CreatedDate], [u].[Email], [u].[FailedLoginAttempts], [u].[FullName], [u].[IsActive], [u].[IsLocked], [u].[LastLoginDate], [u].[MobileNumber], [u].[PasswordHash], [u].[PasswordResetExpiry], [u].[PasswordResetToken], [u].[PasswordSalt], [u].[Role], [u].[UpdatedBy], [u].[UpdatedDate], [u].[UserName]
+FROM [UserLogin] AS [u]
+WHERE [u].[UserName] = @__request_UserName_0
+2026-07-09 12:03:39.632 +05:30 [INF] Executed DbCommand (176ms) [Parameters=[@p17='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 150), @p3='?' (DbType = Int32), @p4='?' (Size = 150), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTime), @p8='?' (Size = 15), @p9='?' (Size = 500), @p10='?' (DbType = DateTime), @p11='?' (Size = 500), @p12='?' (Size = 500), @p13='?' (Size = 50), @p14='?' (DbType = Int32), @p15='?' (DbType = DateTime), @p16='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [UserLogin] SET [CreatedBy] = @p0, [CreatedDate] = @p1, [Email] = @p2, [FailedLoginAttempts] = @p3, [FullName] = @p4, [IsActive] = @p5, [IsLocked] = @p6, [LastLoginDate] = @p7, [MobileNumber] = @p8, [PasswordHash] = @p9, [PasswordResetExpiry] = @p10, [PasswordResetToken] = @p11, [PasswordSalt] = @p12, [Role] = @p13, [UpdatedBy] = @p14, [UpdatedDate] = @p15, [UserName] = @p16
+OUTPUT 1
+WHERE [UserId] = @p17;
+2026-07-09 12:03:39.721 +05:30 [INF] Executing OkObjectResult, writing value of type 'DataAccess_Layers.Entities.AuthResponse'.
+2026-07-09 12:03:39.741 +05:30 [INF] Executed action CRM_API.Controllers.AuthController.Login (CRM_API) in 15908.7322ms
+2026-07-09 12:03:39.743 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-09 12:03:39.747 +05:30 [INF] Response => 200
+2026-07-09 12:03:39.747 +05:30 [INF] API /api/Auth/login Executed in 16360 ms
+2026-07-09 12:03:39.771 +05:30 [INF] Request finished HTTP/2 POST https://localhost:44361/api/Auth/login - 200 null application/json; charset=utf-8 16387.2805ms
+2026-07-09 12:03:41.496 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:44361/api/Menu/get-all - null null
+2026-07-09 12:03:41.498 +05:30 [INF] Request => OPTIONS /api/Menu/get-all
+2026-07-09 12:03:41.500 +05:30 [INF] CORS policy execution successful.
+2026-07-09 12:03:41.501 +05:30 [INF] Response => 204
+2026-07-09 12:03:41.501 +05:30 [INF] API /api/Menu/get-all Executed in 2 ms
+2026-07-09 12:03:41.503 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:44361/api/Menu/get-all - 204 null null 6.8967ms
+2026-07-09 12:03:41.507 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/api/Menu/get-all - null null
+2026-07-09 12:03:41.510 +05:30 [INF] Request => GET /api/Menu/get-all
+2026-07-09 12:03:41.511 +05:30 [INF] CORS policy execution successful.
+2026-07-09 12:03:41.514 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.MenuController.GetMenus (CRM_API)'
+2026-07-09 12:03:41.528 +05:30 [INF] Route matched with {action = "GetMenus", controller = "Menu"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMenus() on controller CRM_API.Controllers.MenuController (CRM_API).
+2026-07-09 12:03:41.822 +05:30 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [m].[MenuID], [m].[CanAdd], [m].[CanApprove], [m].[CanDelete], [m].[CanEdit], [m].[CanView], [m].[CreatedBy], [m].[CreatedDate], [m].[Icon], [m].[IsActive], [m].[MenuName], [m].[MenuType], [m].[ModifiedAt], [m].[ModifiedBy], [m].[OrderNo], [m].[ParentMenuID], [m].[Url]
+FROM [Masters].[MenuMaster] AS [m]
+2026-07-09 12:03:41.912 +05:30 [INF] Executing OkObjectResult, writing value of type 'Shared.CommonModels.ApiResponse`1[[System.Collections.Generic.List`1[[Business_Layer.DTOs.Menus.MenuDto, Business_Layer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-07-09 12:03:41.928 +05:30 [INF] Executed action CRM_API.Controllers.MenuController.GetMenus (CRM_API) in 400.0412ms
+2026-07-09 12:03:41.928 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.MenuController.GetMenus (CRM_API)'
+2026-07-09 12:03:41.929 +05:30 [INF] Response => 200
+2026-07-09 12:03:41.929 +05:30 [INF] API /api/Menu/get-all Executed in 418 ms
+2026-07-09 12:03:41.929 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/api/Menu/get-all - 200 null application/json; charset=utf-8 422.9098ms
