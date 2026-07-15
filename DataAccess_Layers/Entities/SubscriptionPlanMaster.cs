@@ -28,4 +28,14 @@ public partial class SubscriptionPlanMaster
     public int? CompanyId { get; set; }
 
     public int? RegionId { get; set; }
+
+    public string? Description { get; set; }
+
+    public int StorageLimit { get; set; }
+
+    public int ApiLimit { get; set; }
+
+    public string Accent { get; set; } = null!;
+
+    public string? Features { get; set; }
 }

@@ -10,10 +10,14 @@ namespace CRM_API.Controllers
     public class MasterController : ControllerBase
     {
         private readonly ICompanyAndRegionService _service;
+        private readonly ICountryService _countryService;
+        private readonly Istateservices _stateservices;
 
-        public MasterController(ICompanyAndRegionService service)
+        public MasterController(ICompanyAndRegionService service, ICountryService countryService, Istateservices stateservices)
         {
             _service = service;
+            _countryService = countryService;
+            _stateservices = stateservices;
         }
 
         [HttpPost("createcompany")]
@@ -78,5 +82,74 @@ namespace CRM_API.Controllers
         }
 
         #endregion
+
+        #region COUNTRY
+
+        [HttpPost("createcountry")]
+        public async Task<IActionResult> CreateCountry(CountryDto dto)
+        {
+            return Ok(await _countryService.CreateCountry(dto));
+        }
+
+        [HttpPost("updatecountry")]
+        public async Task<IActionResult> UpdateCountry(CountryDto dto)
+        {
+            return Ok(await _countryService.UpdateCountry(dto));
+        }
+
+        [HttpPost("deletecountry/{id}")]
+        public async Task<IActionResult> DeleteCountry(int id)
+        {
+            return Ok(await _countryService.DeleteCountry(id));
+        }
+
+        [HttpGet("getallcountry")]
+        public async Task<IActionResult> GetCountries()
+        {
+            return Ok(await _countryService.GetCountries());
+        }
+
+        [HttpGet("getbyidcountry/{id}")]
+        public async Task<IActionResult> GetCountryById(int id)
+        {
+            return Ok(await _countryService.GetCountryById(id));
+        }
+
+        #endregion
+        #region STATE
+
+        [HttpPost("createstate")]
+        public async Task<IActionResult> CreateState(StateDto dto)
+        {
+            return Ok(await _stateservices.CreateState(dto));
+        }
+
+        [HttpPost("updatestate")]
+        public async Task<IActionResult> UpdateState(StateDto dto)
+        {
+            return Ok(await _stateservices.UpdateState(dto));
+        }
+
+        [HttpPost("deletestate/{id}")]
+        public async Task<IActionResult> DeleteState(int id)
+        {
+            return Ok(await _stateservices.DeleteState(id));
+        }
+
+        [HttpGet("getallstate")]
+        public async Task<IActionResult> GetStates()
+        {
+            return Ok(await _stateservices.GetStates());
+        }
+
+        [HttpGet("getbyidstate/{id}")]
+        public async Task<IActionResult> GetStateById(int id)
+        {
+            return Ok(await _stateservices.GetStateById(id));
+        }
+
+        #endregion
     }
 }
+
+

@@ -36,6 +36,8 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<CompanyStatusMaster> CompanyStatusMasters { get; set; }
 
+    public virtual DbSet<Country> Countries { get; set; }
+
     public virtual DbSet<CreditNote> CreditNotes { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
@@ -143,6 +145,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<Slasetting> Slasettings { get; set; }
 
     public virtual DbSet<Smstemplate> Smstemplates { get; set; }
+
+    public virtual DbSet<StateMaster> StateMasters { get; set; }
 
     public virtual DbSet<Subscription> Subscriptions { get; set; }
 
@@ -526,6 +530,24 @@ public partial class CRMContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<Country>(entity =>
+        {
+            entity.HasKey(e => e.CountryId).HasName("PK__Country__10D160BFCB7B834C");
+
+            entity.ToTable("Country", "Masters");
+
+            entity.Property(e => e.CountryId).HasColumnName("CountryID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CountryCode).HasMaxLength(150);
+            entity.Property(e => e.CountryName).HasMaxLength(150);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
         });
 
         modelBuilder.Entity<CreditNote>(entity =>
@@ -3094,6 +3116,25 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_CRM_SMSTemplates_User");
         });
 
+        modelBuilder.Entity<StateMaster>(entity =>
+        {
+            entity.HasKey(e => e.StateId);
+
+            entity.ToTable("StateMaster", "Masters");
+
+            entity.Property(e => e.StateId).HasColumnName("StateID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CountryId).HasColumnName("CountryID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.StateCode).HasMaxLength(150);
+            entity.Property(e => e.StateName).HasMaxLength(150);
+        });
+
         modelBuilder.Entity<Subscription>(entity =>
         {
             entity.HasKey(e => e.SubscriptionId).HasName("PK_CRM_Subscriptions");
@@ -3365,14 +3406,23 @@ public partial class CRMContext : DbContext
             entity.ToTable("SubscriptionPlanMaster", "plans");
 
             entity.Property(e => e.PlanId).HasColumnName("PlanID");
+            entity.Property(e => e.Accent)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasDefaultValue("blue");
+            entity.Property(e => e.ApiLimit).HasDefaultValue(10000);
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Description)
+                .HasMaxLength(500)
+                .IsUnicode(false);
             entity.Property(e => e.PlanName)
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.StorageLimit).HasDefaultValue(10);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
