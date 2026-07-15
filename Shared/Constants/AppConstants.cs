@@ -65,5 +65,38 @@ namespace Shared.Constants
         public const string ErrorWhileDeleting =
            "Error while Deleting department";
 
+        // Forgot password messages 
+
+        public const string EmailNotFound =
+    "Email does not exist.";
+
+        public const string OtpSentSuccessfully =
+            "OTP sent successfully.";
+
+        public const string InvalidOtp =
+            "Invalid OTP.";
+
+        public const string OtpExpired =
+            "OTP has expired.";
+
+        public const string OtpVerified =
+            "OTP verified successfully.";
+
+        public const string PasswordResetSuccessful =
+            "Password changed successfully.";
+
+        public const string VerifyOtpFirst =
+            "Please verify OTP first.";
+
+        // Change Password Messages 
+
+        public const string CurrentPasswordIncorrect =
+            "Current password is incorrect.";
+
+        public const string PasswordChangedSuccessfully =
+            "Password changed successfully.";
+
+        public const string NewPasswordCannotBeSame =
+            "New password cannot be the same as the current password.";
     }
 }

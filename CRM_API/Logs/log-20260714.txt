@@ -1,0 +1,94 @@
+2026-07-14 14:21:22.221 +05:30 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-07-14 14:21:23.945 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/ - null null
+2026-07-14 14:21:24.422 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-14 14:21:24.423 +05:30 [INF] Hosting environment: Development
+2026-07-14 14:21:24.423 +05:30 [INF] Content root path: C:\Users\Admin\Desktop\CRM-DEV-API\CRM_Dev_API\CRM_API
+2026-07-14 14:21:25.642 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/index.html - null null
+2026-07-14 14:21:25.653 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/ - 301 null null 1722.5561ms
+2026-07-14 14:21:25.922 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/index.html - 200 null text/html;charset=utf-8 280.6739ms
+2026-07-14 14:21:25.923 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/swagger-ui-bundle.js - null null
+2026-07-14 14:21:25.923 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/swagger-ui.css - null null
+2026-07-14 14:21:25.923 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/swagger-ui-standalone-preset.js - null null
+2026-07-14 14:21:26.043 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-07-14 14:21:26.044 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-07-14 14:21:26.048 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/swagger-ui.css - 200 152034 text/css 124.6268ms
+2026-07-14 14:21:26.051 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/swagger-ui-standalone-preset.js - 200 230280 text/javascript 128.0348ms
+2026-07-14 14:21:26.055 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/_framework/aspnetcore-browser-refresh.js - null null
+2026-07-14 14:21:26.060 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 4.8021ms
+2026-07-14 14:21:26.068 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/_vs/browserLink - null null
+2026-07-14 14:21:26.298 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/_vs/browserLink - 200 null text/javascript; charset=UTF-8 229.7039ms
+2026-07-14 14:21:26.299 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-07-14 14:21:26.369 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/swagger-ui-bundle.js - 200 1456926 text/javascript 446.311ms
+2026-07-14 14:21:26.831 +05:30 [INF] Request starting HTTP/2 GET https://localhost:44361/swagger/v1/swagger.json - null null
+2026-07-14 14:21:26.971 +05:30 [INF] Request finished HTTP/2 GET https://localhost:44361/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 140.1473ms
+2026-07-14 14:21:51.331 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/login - application/json 57
+2026-07-14 14:21:51.367 +05:30 [INF] Request => POST /api/Auth/login
+2026-07-14 14:21:51.378 +05:30 [INF] CORS policy execution failed.
+2026-07-14 14:21:51.379 +05:30 [INF] Request origin https://localhost:44361 does not have permission to access the resource.
+2026-07-14 14:21:51.562 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-14 14:21:51.661 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(DataAccess_Layers.Entities.LoginRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-07-14 14:21:57.089 +05:30 [INF] Executed DbCommand (227ms) [Parameters=[@__request_UserName_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[UserId], [u].[CreatedBy], [u].[CreatedDate], [u].[Email], [u].[FailedLoginAttempts], [u].[FullName], [u].[IsActive], [u].[IsLocked], [u].[IsOtpVerified], [u].[LastLoginDate], [u].[MobileNumber], [u].[OtpCode], [u].[OtpExpiry], [u].[PasswordHash], [u].[PasswordResetExpiry], [u].[PasswordResetToken], [u].[PasswordSalt], [u].[Role], [u].[UpdatedBy], [u].[UpdatedDate], [u].[UserName]
+FROM [UserLogin] AS [u]
+WHERE [u].[UserName] = @__request_UserName_0
+2026-07-14 14:21:58.510 +05:30 [INF] Executed DbCommand (191ms) [Parameters=[@p20='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 150), @p3='?' (DbType = Int32), @p4='?' (Size = 150), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime), @p9='?' (Size = 15), @p10='?' (Size = 4000), @p11='?' (DbType = DateTime2), @p12='?' (Size = 500), @p13='?' (DbType = DateTime), @p14='?' (Size = 500), @p15='?' (Size = 500), @p16='?' (Size = 50), @p17='?' (DbType = Int32), @p18='?' (DbType = DateTime), @p19='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [UserLogin] SET [CreatedBy] = @p0, [CreatedDate] = @p1, [Email] = @p2, [FailedLoginAttempts] = @p3, [FullName] = @p4, [IsActive] = @p5, [IsLocked] = @p6, [IsOtpVerified] = @p7, [LastLoginDate] = @p8, [MobileNumber] = @p9, [OtpCode] = @p10, [OtpExpiry] = @p11, [PasswordHash] = @p12, [PasswordResetExpiry] = @p13, [PasswordResetToken] = @p14, [PasswordSalt] = @p15, [Role] = @p16, [UpdatedBy] = @p17, [UpdatedDate] = @p18, [UserName] = @p19
+OUTPUT 1
+WHERE [UserId] = @p20;
+2026-07-14 14:21:58.608 +05:30 [INF] Executing OkObjectResult, writing value of type 'DataAccess_Layers.Entities.AuthResponse'.
+2026-07-14 14:21:58.618 +05:30 [INF] Executed action CRM_API.Controllers.AuthController.Login (CRM_API) in 6950.5651ms
+2026-07-14 14:21:58.619 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-14 14:21:58.621 +05:30 [INF] Response => 200
+2026-07-14 14:21:58.621 +05:30 [INF] API /api/Auth/login Executed in 7257 ms
+2026-07-14 14:21:58.631 +05:30 [INF] Request finished HTTP/2 POST https://localhost:44361/api/Auth/login - 200 null application/json; charset=utf-8 7300.2927ms
+2026-07-14 14:22:56.961 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/change-password - application/json 109
+2026-07-14 14:22:56.964 +05:30 [INF] Request => POST /api/Auth/change-password
+2026-07-14 14:22:56.965 +05:30 [INF] CORS policy execution failed.
+2026-07-14 14:22:56.965 +05:30 [INF] Request origin https://localhost:44361 does not have permission to access the resource.
+2026-07-14 14:22:57.059 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.ChangePassword (CRM_API)'
+2026-07-14 14:22:57.062 +05:30 [INF] Route matched with {action = "ChangePassword", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ChangePassword(Business_Layer.Models.ForgotEmailClasses.ChangePasswordRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-07-14 14:23:15.529 +05:30 [INF] Executed DbCommand (47ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreatedBy], [u].[CreatedDate], [u].[Email], [u].[FailedLoginAttempts], [u].[FullName], [u].[IsActive], [u].[IsLocked], [u].[IsOtpVerified], [u].[LastLoginDate], [u].[MobileNumber], [u].[OtpCode], [u].[OtpExpiry], [u].[PasswordHash], [u].[PasswordResetExpiry], [u].[PasswordResetToken], [u].[PasswordSalt], [u].[Role], [u].[UpdatedBy], [u].[UpdatedDate], [u].[UserName]
+FROM [UserLogin] AS [u]
+WHERE [u].[UserId] = @__p_0
+2026-07-14 14:23:16.384 +05:30 [INF] Executed DbCommand (169ms) [Parameters=[@p20='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 150), @p3='?' (DbType = Int32), @p4='?' (Size = 150), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime), @p9='?' (Size = 15), @p10='?' (Size = 4000), @p11='?' (DbType = DateTime2), @p12='?' (Size = 500), @p13='?' (DbType = DateTime), @p14='?' (Size = 500), @p15='?' (Size = 500), @p16='?' (Size = 50), @p17='?' (DbType = Int32), @p18='?' (DbType = DateTime), @p19='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [UserLogin] SET [CreatedBy] = @p0, [CreatedDate] = @p1, [Email] = @p2, [FailedLoginAttempts] = @p3, [FullName] = @p4, [IsActive] = @p5, [IsLocked] = @p6, [IsOtpVerified] = @p7, [LastLoginDate] = @p8, [MobileNumber] = @p9, [OtpCode] = @p10, [OtpExpiry] = @p11, [PasswordHash] = @p12, [PasswordResetExpiry] = @p13, [PasswordResetToken] = @p14, [PasswordSalt] = @p15, [Role] = @p16, [UpdatedBy] = @p17, [UpdatedDate] = @p18, [UserName] = @p19
+OUTPUT 1
+WHERE [UserId] = @p20;
+2026-07-14 14:23:23.134 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2026-07-14 14:23:23.135 +05:30 [INF] Executed action CRM_API.Controllers.AuthController.ChangePassword (CRM_API) in 26072.6748ms
+2026-07-14 14:23:23.135 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.AuthController.ChangePassword (CRM_API)'
+2026-07-14 14:23:23.135 +05:30 [INF] Response => 200
+2026-07-14 14:23:23.135 +05:30 [INF] API /api/Auth/change-password Executed in 26171 ms
+2026-07-14 14:23:23.136 +05:30 [INF] Request finished HTTP/2 POST https://localhost:44361/api/Auth/change-password - 200 null text/plain; charset=utf-8 26175.0531ms
+2026-07-14 14:26:48.591 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - null null
+2026-07-14 14:26:48.592 +05:30 [INF] Request => OPTIONS /api/Auth/login
+2026-07-14 14:26:48.593 +05:30 [INF] CORS policy execution successful.
+2026-07-14 14:26:48.595 +05:30 [INF] Response => 204
+2026-07-14 14:26:48.596 +05:30 [INF] API /api/Auth/login Executed in 3 ms
+2026-07-14 14:26:48.596 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:44361/api/Auth/login - 204 null null 4.8819ms
+2026-07-14 14:26:48.598 +05:30 [INF] Request starting HTTP/2 POST https://localhost:44361/api/Auth/login - application/json 48
+2026-07-14 14:26:48.599 +05:30 [INF] Request => POST /api/Auth/login
+2026-07-14 14:26:48.599 +05:30 [INF] CORS policy execution successful.
+2026-07-14 14:26:48.602 +05:30 [INF] Executing endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-14 14:26:48.602 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(DataAccess_Layers.Entities.LoginRequest) on controller CRM_API.Controllers.AuthController (CRM_API).
+2026-07-14 14:26:48.694 +05:30 [INF] Executed DbCommand (44ms) [Parameters=[@__request_UserName_0='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[UserId], [u].[CreatedBy], [u].[CreatedDate], [u].[Email], [u].[FailedLoginAttempts], [u].[FullName], [u].[IsActive], [u].[IsLocked], [u].[IsOtpVerified], [u].[LastLoginDate], [u].[MobileNumber], [u].[OtpCode], [u].[OtpExpiry], [u].[PasswordHash], [u].[PasswordResetExpiry], [u].[PasswordResetToken], [u].[PasswordSalt], [u].[Role], [u].[UpdatedBy], [u].[UpdatedDate], [u].[UserName]
+FROM [UserLogin] AS [u]
+WHERE [u].[UserName] = @__request_UserName_0
+2026-07-14 14:26:49.072 +05:30 [INF] Executed DbCommand (180ms) [Parameters=[@p20='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (Size = 150), @p3='?' (DbType = Int32), @p4='?' (Size = 150), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime), @p9='?' (Size = 15), @p10='?' (Size = 4000), @p11='?' (DbType = DateTime2), @p12='?' (Size = 500), @p13='?' (DbType = DateTime), @p14='?' (Size = 500), @p15='?' (Size = 500), @p16='?' (Size = 50), @p17='?' (DbType = Int32), @p18='?' (DbType = DateTime), @p19='?' (Size = 100)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [UserLogin] SET [CreatedBy] = @p0, [CreatedDate] = @p1, [Email] = @p2, [FailedLoginAttempts] = @p3, [FullName] = @p4, [IsActive] = @p5, [IsLocked] = @p6, [IsOtpVerified] = @p7, [LastLoginDate] = @p8, [MobileNumber] = @p9, [OtpCode] = @p10, [OtpExpiry] = @p11, [PasswordHash] = @p12, [PasswordResetExpiry] = @p13, [PasswordResetToken] = @p14, [PasswordSalt] = @p15, [Role] = @p16, [UpdatedBy] = @p17, [UpdatedDate] = @p18, [UserName] = @p19
+OUTPUT 1
+WHERE [UserId] = @p20;
+2026-07-14 14:26:49.073 +05:30 [INF] Executing OkObjectResult, writing value of type 'DataAccess_Layers.Entities.AuthResponse'.
+2026-07-14 14:26:49.074 +05:30 [INF] Executed action CRM_API.Controllers.AuthController.Login (CRM_API) in 471.4962ms
+2026-07-14 14:26:49.074 +05:30 [INF] Executed endpoint 'CRM_API.Controllers.AuthController.Login (CRM_API)'
+2026-07-14 14:26:49.074 +05:30 [INF] Response => 200
+2026-07-14 14:26:49.074 +05:30 [INF] API /api/Auth/login Executed in 475 ms
+2026-07-14 14:26:49.074 +05:30 [INF] Request finished HTTP/2 POST https://localhost:44361/api/Auth/login - 200 null application/json; charset=utf-8 476.164ms

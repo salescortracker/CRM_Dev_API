@@ -1,12 +1,12 @@
 using Business_Layer.Interfaces;
 using Business_Layer.Interfaces.AuditLog;
 using Business_Layer.Interfaces.CommonInterfaces;
+using Business_Layer.Interfaces.EmailService;
 using Business_Layer.Interfaces.MasterIInterface;
-using Business_Layer.Interfaces.Services;
 using Business_Layer.Services.AuditLog;
 using Business_Layer.Services.Auth;
 using Business_Layer.Services.CommonServices;
-using Business_Layer.Services.MenuServices;
+using Business_Layer.Services.EmailService;
 using BusinessLayer.Services;
 using CRM_API.Middleware;
 using DataAccess_Layers.Data;
@@ -68,6 +68,16 @@ builder.Services.AddDbContext<CRMContext>(options =>
         .GetConnectionString("DefaultConnection"));
 });
 
+// ======================================================
+// SMTP CONFIGURATION
+// ======================================================
+
+builder.Services.Configure<SmtpSettings>(
+    builder.Configuration.GetSection("Smtp"));
+
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.AddScoped<IEmailTemplateService, EmailTemplateService>();
 
 // ======================================================
 // UNIT OF WORK
@@ -82,7 +92,8 @@ builder.Services.AddScoped<
 // ======================================================
 
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IMenuService, MenuService>();
+
+
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IAuditService, AuditService>();
 
@@ -93,7 +104,6 @@ builder.Services.AddScoped<IAuditService, AuditService>();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<ICurrentUserService,CurrentUserService>();
-
 
 // ======================================================
 // JWT CONFIGURATION
