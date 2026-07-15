@@ -3,12 +3,14 @@ using Business_Layer.Interfaces.AuditLog;
 using Business_Layer.Interfaces.CommonInterfaces;
 using Business_Layer.Interfaces.EmailService;
 using Business_Layer.Interfaces.MasterIInterface;
+using Business_Layer.Interfaces.SuperAdminInterface;
 using Business_Layer.Services.AuditLog;
 using Business_Layer.Services.Auth;
 using Business_Layer.Services.CommonServices;
 using Business_Layer.Services.EmailService;
 using Business_Layer.Services.MasterServices;
 using Business_Layer.Services.MenuServices;
+using Business_Layer.Services.SuperAdminServices;
 using BusinessLayer.Services;
 using CRM_API.Middleware;
 using DataAccess_Layers.Data;
@@ -101,6 +103,7 @@ builder.Services.AddScoped<IAuditService, AuditService>();
 builder.Services.AddScoped<ICompanyAndRegionService, CompanyAndRegionService>();
 builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<Istateservices, Stateservice>();
+builder.Services.AddScoped<IPlanService, PlanService>();
 
 // ======================================================
 // COMMON UserId  (ADD THIS HERE)
