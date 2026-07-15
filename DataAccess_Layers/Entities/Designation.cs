@@ -26,4 +26,6 @@ public partial class Designation
     public int? CreatedBy { get; set; }
 
     public int? UpdatedBy { get; set; }
+
+    public int? UserId { get; set; }
 }

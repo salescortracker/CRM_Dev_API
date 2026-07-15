@@ -47,9 +47,27 @@ public partial class LeadCall
 
     public DateTime CreatedOn { get; set; }
 
+    public int? UserId { get; set; }
+
+    public int? CompanyId { get; set; }
+
+    public int? RegionId { get; set; }
+
+    public int? CreatedBy { get; set; }
+
+    public DateTime? CreatedAt { get; set; }
+
+    public int? ModifiedBy { get; set; }
+
+    public DateTime? ModifiedAt { get; set; }
+
+    public virtual ICollection<CallRecording> CallRecordings { get; set; } = new List<CallRecording>();
+
     public virtual Lead Lead { get; set; } = null!;
 
     public virtual Organization Organization { get; set; } = null!;
 
     public virtual User SalesUser { get; set; } = null!;
+
+    public virtual ICollection<TwilioCallLog> TwilioCallLogs { get; set; } = new List<TwilioCallLog>();
 }
