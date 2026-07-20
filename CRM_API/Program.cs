@@ -4,6 +4,7 @@ using Business_Layer.Interfaces.CommonInterfaces;
 using Business_Layer.Interfaces.EmailService;
 using Business_Layer.Interfaces.MasterIInterface;
 using Business_Layer.Interfaces.SuperAdminInterface;
+
 using Business_Layer.Services.AuditLog;
 using Business_Layer.Services.Auth;
 using Business_Layer.Services.CommonServices;
@@ -104,6 +105,7 @@ builder.Services.AddScoped<ICompanyAndRegionService, CompanyAndRegionService>();
 builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<Istateservices, Stateservice>();
 builder.Services.AddScoped<IPlanService, PlanService>();
+builder.Services.AddScoped<IOrganizationService, OrganizationService>();
 
 // ======================================================
 // COMMON UserId  (ADD THIS HERE)
@@ -248,6 +250,8 @@ app.UseMiddleware<RequestResponseMiddleware>();
 // ======================================================
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
 
 app.UseCors("AllowAngular");
 

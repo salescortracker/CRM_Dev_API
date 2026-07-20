@@ -88,6 +88,8 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<Notification> Notifications { get; set; }
 
+    public virtual DbSet<NotificationMaster> NotificationMasters { get; set; }
+
     public virtual DbSet<OnboardingProject> OnboardingProjects { get; set; }
 
     public virtual DbSet<OnboardingTask> OnboardingTasks { get; set; }
@@ -101,6 +103,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<OpportunityStage> OpportunityStages { get; set; }
 
     public virtual DbSet<Organization> Organizations { get; set; }
+
+    public virtual DbSet<OrganizationDatum> OrganizationData { get; set; }
 
     public virtual DbSet<OrganizationSetting> OrganizationSettings { get; set; }
 
@@ -137,6 +141,10 @@ public partial class CRMContext : DbContext
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<Role1> Roles1 { get; set; }
+
+    public virtual DbSet<RolePermission> RolePermissions { get; set; }
+
+    public virtual DbSet<RolesPermission> RolesPermissions { get; set; }
 
     public virtual DbSet<SalesOrder> SalesOrders { get; set; }
 
@@ -1713,6 +1721,23 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_CRM_Notifications_User");
         });
 
+        modelBuilder.Entity<NotificationMaster>(entity =>
+        {
+            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E1261619AD3");
+
+            entity.ToTable("NotificationMaster", "Master");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.NotificationType).HasMaxLength(50);
+            entity.Property(e => e.ReadAt).HasColumnType("datetime");
+            entity.Property(e => e.RedirectUrl).HasMaxLength(500);
+            entity.Property(e => e.Title).HasMaxLength(200);
+        });
+
         modelBuilder.Entity<OnboardingProject>(entity =>
         {
             entity.HasKey(e => e.OnboardingProjectId).HasName("PK_CRM_OnboardingProjects");
@@ -1745,11 +1770,6 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("(sysdatetime())");
             entity.Property(e => e.ProjectName).HasMaxLength(250);
             entity.Property(e => e.ProjectNumber).HasMaxLength(50);
-
-            entity.HasOne(d => d.Company).WithMany(p => p.OnboardingProjects)
-                .HasForeignKey(d => d.CompanyId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_CRM_OnboardingProjects_Company");
 
             entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.OnboardingProjectCreatedByNavigations)
                 .HasForeignKey(d => d.CreatedBy)
@@ -2031,17 +2051,28 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.OrganizationId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.AddressLine1).HasMaxLength(250);
             entity.Property(e => e.AddressLine2).HasMaxLength(250);
+            entity.Property(e => e.BrandColor).HasMaxLength(20);
             entity.Property(e => e.City).HasMaxLength(100);
+            entity.Property(e => e.ContactEmail).HasMaxLength(150);
+            entity.Property(e => e.ContactMobile).HasMaxLength(30);
+            entity.Property(e => e.ContactPerson).HasMaxLength(150);
             entity.Property(e => e.Country).HasMaxLength(100);
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.CreatedOn).HasDefaultValueSql("(sysdatetime())");
+            entity.Property(e => e.CurrencyCode).HasMaxLength(10);
+            entity.Property(e => e.Domain).HasMaxLength(200);
             entity.Property(e => e.Email).HasMaxLength(150);
             entity.Property(e => e.Gstnumber)
                 .HasMaxLength(30)
                 .HasColumnName("GSTNumber");
+            entity.Property(e => e.Industry).HasMaxLength(100);
             entity.Property(e => e.LegalName).HasMaxLength(250);
             entity.Property(e => e.LogoUrl).HasMaxLength(500);
+            entity.Property(e => e.MaxStorageGb).HasColumnName("MaxStorageGB");
             entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.MonthlyRevenue)
+                .HasDefaultValue(0m)
+                .HasColumnType("decimal(18, 2)");
             entity.Property(e => e.OrganizationCode).HasMaxLength(50);
             entity.Property(e => e.OrganizationName).HasMaxLength(200);
             entity.Property(e => e.Pannumber)
@@ -2051,7 +2082,60 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.PostalCode).HasMaxLength(20);
             entity.Property(e => e.State).HasMaxLength(100);
             entity.Property(e => e.Status).HasDefaultValue((byte)1);
+            entity.Property(e => e.StorageUsedGb).HasColumnName("StorageUsedGB");
+            entity.Property(e => e.TimeZone).HasMaxLength(100);
             entity.Property(e => e.Website).HasMaxLength(250);
+        });
+
+        modelBuilder.Entity<OrganizationDatum>(entity =>
+        {
+            entity.HasKey(e => e.OrganizationId).HasName("PK_CRM_Organization");
+
+            entity.ToTable("OrganizationData", "CRM");
+
+            entity.HasIndex(e => e.OrganizationCode, "UQ_CRM_Organization_Code").IsUnique();
+
+            entity.Property(e => e.AddressLine1).HasMaxLength(250);
+            entity.Property(e => e.AddressLine2).HasMaxLength(250);
+            entity.Property(e => e.BrandColor).HasMaxLength(20);
+            entity.Property(e => e.City).HasMaxLength(100);
+            entity.Property(e => e.ContactEmail).HasMaxLength(150);
+            entity.Property(e => e.ContactMobile).HasMaxLength(30);
+            entity.Property(e => e.ContactPerson).HasMaxLength(150);
+            entity.Property(e => e.Country).HasMaxLength(100);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.CurrencyCode).HasMaxLength(10);
+            entity.Property(e => e.Domain).HasMaxLength(200);
+            entity.Property(e => e.Email).HasMaxLength(150);
+            entity.Property(e => e.Gstnumber)
+                .HasMaxLength(30)
+                .HasColumnName("GSTNumber");
+            entity.Property(e => e.Industry).HasMaxLength(100);
+            entity.Property(e => e.LegalName).HasMaxLength(250);
+            entity.Property(e => e.LogoUrl).HasMaxLength(500);
+            entity.Property(e => e.MaxStorageGb).HasColumnName("MaxStorageGB");
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.MonthlyRevenue)
+                .HasDefaultValue(0m)
+                .HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.OrganizationCode).HasMaxLength(50);
+            entity.Property(e => e.OrganizationName).HasMaxLength(200);
+            entity.Property(e => e.Pannumber)
+                .HasMaxLength(30)
+                .HasColumnName("PANNumber");
+            entity.Property(e => e.Phone).HasMaxLength(30);
+            entity.Property(e => e.PostalCode).HasMaxLength(20);
+            entity.Property(e => e.State).HasMaxLength(100);
+            entity.Property(e => e.Status).HasDefaultValue((byte)1);
+            entity.Property(e => e.StorageUsedGb).HasColumnName("StorageUsedGB");
+            entity.Property(e => e.TimeZone).HasMaxLength(100);
+            entity.Property(e => e.Website).HasMaxLength(250);
+
+            entity.HasOne(d => d.Plan).WithMany(p => p.OrganizationData)
+                .HasForeignKey(d => d.PlanId)
+                .HasConstraintName("FK_CRM_Organization_Plan");
         });
 
         modelBuilder.Entity<OrganizationSetting>(entity =>
@@ -2879,6 +2963,40 @@ public partial class CRMContext : DbContext
             entity.HasOne(d => d.Organization).WithMany(p => p.Role1s)
                 .HasForeignKey(d => d.OrganizationId)
                 .HasConstraintName("FK_Security_Roles_Organizations");
+        });
+
+        modelBuilder.Entity<RolePermission>(entity =>
+        {
+            entity.HasKey(e => e.RolePermissionId).HasName("PK__RolePerm__120F46BA60B808D7");
+
+            entity.ToTable("RolePermissions", "Security");
+
+            entity.HasIndex(e => new { e.RoleId, e.PermissionId }, "UQ_RolePermission").IsUnique();
+
+            entity.Property(e => e.CanAdd).HasDefaultValue(false);
+            entity.Property(e => e.CanApprove).HasDefaultValue(false);
+            entity.Property(e => e.CanDelete).HasDefaultValue(false);
+            entity.Property(e => e.CanEdit).HasDefaultValue(false);
+            entity.Property(e => e.CanExport).HasDefaultValue(false);
+            entity.Property(e => e.CanView).HasDefaultValue(false);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.Status).HasDefaultValue(true);
+        });
+
+        modelBuilder.Entity<RolesPermission>(entity =>
+        {
+            entity.HasKey(e => e.RolePermissionId).HasName("PK__RolesPer__120F46BAE916B589");
+
+            entity.ToTable("RolesPermissions", "Security");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.Status).HasDefaultValue(true);
         });
 
         modelBuilder.Entity<SalesOrder>(entity =>
