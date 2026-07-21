@@ -106,6 +106,7 @@ builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<Istateservices, Stateservice>();
 builder.Services.AddScoped<IPlanService, PlanService>();
 builder.Services.AddScoped<IOrganizationService, OrganizationService>();
+builder.Services.AddScoped<IAuditLogService, AuditLogService>();
 
 // ======================================================
 // COMMON UserId  (ADD THIS HERE)

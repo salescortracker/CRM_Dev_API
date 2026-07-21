@@ -55,6 +55,38 @@ public partial class Organization
 
     public DateTime? ModifiedAt { get; set; }
 
+    public string? Domain { get; set; }
+
+    public string? ContactPerson { get; set; }
+
+    public string? ContactEmail { get; set; }
+
+    public string? ContactMobile { get; set; }
+
+    public string? TimeZone { get; set; }
+
+    public string? CurrencyCode { get; set; }
+
+    public DateOnly? SubscriptionStartDate { get; set; }
+
+    public DateOnly? RenewalDate { get; set; }
+
+    public int MaxUsers { get; set; }
+
+    public int MaxStorageGb { get; set; }
+
+    public string? BrandColor { get; set; }
+
+    public string? Industry { get; set; }
+
+    public int StorageUsedGb { get; set; }
+
+    public decimal? MonthlyRevenue { get; set; }
+
+    public string? Features { get; set; }
+
+    public int? PlanId { get; set; }
+
     public virtual ICollection<Branch> Branches { get; set; } = new List<Branch>();
 
     public virtual ICollection<CallRecording> CallRecordings { get; set; } = new List<CallRecording>();
@@ -84,8 +116,6 @@ public partial class Organization
     public virtual ICollection<LeadCall> LeadCalls { get; set; } = new List<LeadCall>();
 
     public virtual ICollection<LeadSource> LeadSources { get; set; } = new List<LeadSource>();
-
-    public virtual ICollection<OnboardingProject> OnboardingProjects { get; set; } = new List<OnboardingProject>();
 
     public virtual ICollection<OnboardingTask> OnboardingTasks { get; set; } = new List<OnboardingTask>();
 

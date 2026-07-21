@@ -38,4 +38,6 @@ public partial class SubscriptionPlanMaster
     public string Accent { get; set; } = null!;
 
     public string? Features { get; set; }
+
+    public virtual ICollection<OrganizationDatum> OrganizationData { get; set; } = new List<OrganizationDatum>();
 }
