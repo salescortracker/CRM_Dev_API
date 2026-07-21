@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Business_Layer.Models.ForgotEmailClasses;
 using Business_Layer.Models;
 using Microsoft.AspNetCore.Authorization;
+using Business_Layer.Interfaces.SuperAdminInterface;
 
 namespace CRM_API.Controllers
 {
@@ -14,10 +15,12 @@ namespace CRM_API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IAuditLogService _service;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IAuditLogService service)
         {
             _authService = authService;
+            _service = service;
         }
 
         /// <summary>
@@ -95,6 +98,12 @@ namespace CRM_API.Controllers
             var result = await _authService.ChangePassword(request);
 
             return Ok(result);
+        }
+
+        [HttpGet("getallauditlogs")]
+        public async Task<IActionResult> GetAuditLogs()
+        {
+            return Ok(await _service.GetAuditLogs());
         }
     }
 }

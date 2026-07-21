@@ -43,8 +43,6 @@ public partial class OnboardingProject
 
     public Guid? ModifiedBy { get; set; }
 
-    public virtual Organization Company { get; set; } = null!;
-
     public virtual User CreatedByNavigation { get; set; } = null!;
 
     public virtual Customer Customer { get; set; } = null!;
