@@ -1,4 +1,4 @@
-﻿using Business_Layer.DTOs.MasterDTO_s;
+using Business_Layer.DTOs.MasterDTO_s;
 using Business_Layer.Interfaces.MasterIInterface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +12,23 @@ namespace CRM_API.Controllers
         private readonly ICompanyAndRegionService _service;
         private readonly ICountryService _countryService;
         private readonly Istateservices _stateservices;
+         private readonly ICurrencyService _currencyService;
+        private readonly IPriorityService _priorityService;
+        private readonly ILeadStatusService _leadStatusService;
+    private readonly ILeadSourceService _leadSourceService;
+    private readonly IBillingCycleService _billingCycleService;
 
-        public MasterController(ICompanyAndRegionService service, ICountryService countryService, Istateservices stateservices)
+    public MasterController(ICompanyAndRegionService service, ICountryService countryService, Istateservices stateservices, ICurrencyService currencyService, IPriorityService priorityService, ILeadStatusService leadStatusService, ILeadSourceService leadSourceService, IBillingCycleService billingCycleService)
         {
             _service = service;
             _countryService = countryService;
             _stateservices = stateservices;
-        }
+          _currencyService = currencyService;
+      _priorityService = priorityService;
+      _leadStatusService = leadStatusService;
+      _leadSourceService = leadSourceService;
+      _billingCycleService = billingCycleService;
+    }
 
         [HttpPost("createcompany")]
         public async Task<IActionResult> CreateCompany(CompanyDto dto)
@@ -148,8 +158,184 @@ namespace CRM_API.Controllers
             return Ok(await _stateservices.GetStateById(id));
         }
 
-        #endregion
+    #endregion
+
+    #region CURRENCY
+
+    [HttpPost("createcurrency")]
+    public async Task<IActionResult> CreateCurrency(CurrencyDto dto)
+    {
+      return Ok(await _currencyService.CreateCurrency(dto));
     }
+
+    [HttpPost("updatecurrency")]
+    public async Task<IActionResult> UpdateCurrency(CurrencyDto dto)
+    {
+      return Ok(await _currencyService.UpdateCurrency(dto));
+    }
+
+    [HttpPost("deletecurrency/{id}")]
+    public async Task<IActionResult> DeleteCurrency(int id)
+    {
+      return Ok(await _currencyService.DeleteCurrency(id));
+    }
+
+    [HttpGet("getallcurrency")]
+    public async Task<IActionResult> GetCurrencies()
+    {
+      return Ok(await _currencyService.GetCurrencies());
+    }
+
+    [HttpGet("getbyidcurrency/{id}")]
+    public async Task<IActionResult> GetCurrencyById(int id)
+    {
+      return Ok(await _currencyService.GetCurrencyById(id));
+    }
+
+    #endregion
+
+    #region PRIORITY
+
+    [HttpPost("createpriority")]
+    public async Task<IActionResult> CreatePriority(PriorityDto dto)
+    {
+      return Ok(await _priorityService.CreatePriority(dto));
+    }
+
+    [HttpPost("updatepriority")]
+    public async Task<IActionResult> UpdatePriority(PriorityDto dto)
+    {
+      return Ok(await _priorityService.UpdatePriority(dto));
+    }
+
+    [HttpPost("deletepriority/{id}")]
+    public async Task<IActionResult> DeletePriority(int id)
+    {
+      return Ok(await _priorityService.DeletePriority(id));
+    }
+
+    [HttpGet("getallpriority")]
+    public async Task<IActionResult> GetPriorities()
+    {
+      return Ok(await _priorityService.GetPriorities());
+    }
+
+    [HttpGet("getbyidpriority/{id}")]
+    public async Task<IActionResult> GetPriorityById(int id)
+    {
+      return Ok(await _priorityService.GetPriorityById(id));
+    }
+
+    #endregion
+
+
+    #region LEAD STATUS
+
+    [HttpPost("createleadstatus")]
+    public async Task<IActionResult> CreateLeadStatus(LeadStatusDto dto)
+    {
+      return Ok(await _leadStatusService.CreateLeadStatus(dto));
+    }
+
+    [HttpPost("updateleadstatus")]
+    public async Task<IActionResult> UpdateLeadStatus(LeadStatusDto dto)
+    {
+      return Ok(await _leadStatusService.UpdateLeadStatus(dto));
+    }
+
+    [HttpPost("deleteleadstatus/{id}")]
+    public async Task<IActionResult> DeleteLeadStatus(int id)
+    {
+      return Ok(await _leadStatusService.DeleteLeadStatus(id));
+    }
+
+    [HttpGet("getallleadstatus")]
+    public async Task<IActionResult> GetLeadStatuses()
+    {
+      return Ok(await _leadStatusService.GetLeadStatuses());
+    }
+
+    [HttpGet("getbyleadstatus/{id}")]
+    public async Task<IActionResult> GetLeadStatusById(int id)
+    {
+      return Ok(await _leadStatusService.GetLeadStatusById(id));
+    }
+
+    #endregion
+
+
+    #region LEAD SOURCE
+
+    [HttpPost("createleadsource")]
+    public async Task<IActionResult> CreateLeadSource(LeadSourceDto dto)
+    {
+      return Ok(await _leadSourceService.CreateLeadSource(dto));
+    }
+
+    [HttpPost("updateleadsource")]
+    public async Task<IActionResult> UpdateLeadSource(LeadSourceDto dto)
+    {
+      return Ok(await _leadSourceService.UpdateLeadSource(dto));
+    }
+
+    [HttpPost("deleteleadsource/{id}")]
+    public async Task<IActionResult> DeleteLeadSource(int id)
+    {
+      return Ok(await _leadSourceService.DeleteLeadSource(id));
+    }
+
+    [HttpGet("getallleadsource")]
+    public async Task<IActionResult> GetLeadSources()
+    {
+      return Ok(await _leadSourceService.GetLeadSources());
+    }
+
+    [HttpGet("getbyleadsource/{id}")]
+    public async Task<IActionResult> GetLeadSourceById(int id)
+    {
+      return Ok(await _leadSourceService.GetLeadSourceById(id));
+    }
+
+    #endregion
+
+
+    #region BILLING CYCLE
+
+    [HttpPost("createbillingcycle")]
+    public async Task<IActionResult> CreateBillingCycle(BillingCycleDto dto)
+    {
+      return Ok(await _billingCycleService.CreateBillingCycle(dto));
+    }
+
+    [HttpPost("updatebillingcycle")]
+    public async Task<IActionResult> UpdateBillingCycle(BillingCycleDto dto)
+    {
+      return Ok(await _billingCycleService.UpdateBillingCycle(dto));
+    }
+
+    [HttpPost("deletebillingcycle/{id}")]
+    public async Task<IActionResult> DeleteBillingCycle(int id)
+    {
+      return Ok(await _billingCycleService.DeleteBillingCycle(id));
+    }
+
+    [HttpGet("getallbillingcycle")]
+    public async Task<IActionResult> GetBillingCycles()
+    {
+      return Ok(await _billingCycleService.GetBillingCycles());
+    }
+
+    [HttpGet("getbybillingcycle/{id}")]
+    public async Task<IActionResult> GetBillingCycleById(int id)
+    {
+      return Ok(await _billingCycleService.GetBillingCycleById(id));
+    }
+
+    #endregion
+
+  }
 }
+
+
 
 
