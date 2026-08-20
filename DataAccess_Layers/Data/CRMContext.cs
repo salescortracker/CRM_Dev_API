@@ -30,7 +30,13 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<Branch> Branches { get; set; }
 
+    public virtual DbSet<CallOutcome> CallOutcomes { get; set; }
+
+    public virtual DbSet<CallPurpose> CallPurposes { get; set; }
+
     public virtual DbSet<CallRecording> CallRecordings { get; set; }
+
+    public virtual DbSet<CallType> CallTypes { get; set; }
 
     public virtual DbSet<CallingCampaign> CallingCampaigns { get; set; }
 
@@ -70,6 +76,10 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
 
+    public virtual DbSet<EmailType> EmailTypes { get; set; }
+
+    public virtual DbSet<EmailsTemplate> EmailsTemplates { get; set; }
+
     public virtual DbSet<FiscalType> FiscalTypes { get; set; }
 
     public virtual DbSet<GoLiveChecklist> GoLiveChecklists { get; set; }
@@ -99,6 +109,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<LeadStatus> LeadStatuses { get; set; }
 
     public virtual DbSet<LeadStatusDatum> LeadStatusData { get; set; }
+
+    public virtual DbSet<LeadType> LeadTypes { get; set; }
 
     public virtual DbSet<License> Licenses { get; set; }
 
@@ -401,6 +413,44 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_Masters_Branches_Organizations");
         });
 
+        modelBuilder.Entity<CallOutcome>(entity =>
+        {
+            entity.HasKey(e => e.CallOutcomesId).HasName("PK__CallOutc__542E7D8D3C89AF37");
+
+            entity.ToTable("CallOutcomes", "Masters");
+
+            entity.Property(e => e.CallOutcomesId).HasColumnName("CallOutcomesID");
+            entity.Property(e => e.CallOutcomesCode).HasMaxLength(150);
+            entity.Property(e => e.CallOutcomesName).HasMaxLength(150);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+        });
+
+        modelBuilder.Entity<CallPurpose>(entity =>
+        {
+            entity.HasKey(e => e.CallPurposesId).HasName("PK__CallPurp__6EB41391F090860B");
+
+            entity.ToTable("CallPurposes", "Masters");
+
+            entity.Property(e => e.CallPurposesId).HasColumnName("CallPurposesID");
+            entity.Property(e => e.CallPurposesCode).HasMaxLength(150);
+            entity.Property(e => e.CallPurposesName).HasMaxLength(150);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+        });
+
         modelBuilder.Entity<CallRecording>(entity =>
         {
             entity.HasKey(e => e.CallRecordingId).HasName("PK_CRM_CallRecordings");
@@ -446,6 +496,25 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CRM_CallRecordings_User");
+        });
+
+        modelBuilder.Entity<CallType>(entity =>
+        {
+            entity.HasKey(e => e.CallTypesId).HasName("PK__CallType__9A26F3845B00609E");
+
+            entity.ToTable("CallTypes", "Masters");
+
+            entity.Property(e => e.CallTypesId).HasColumnName("CallTypesID");
+            entity.Property(e => e.CallTypesCode).HasMaxLength(150);
+            entity.Property(e => e.CallTypesName).HasMaxLength(150);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
         });
 
         modelBuilder.Entity<CallingCampaign>(entity =>
@@ -1216,6 +1285,44 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_CRM_EmailTemplates_User");
         });
 
+        modelBuilder.Entity<EmailType>(entity =>
+        {
+            entity.HasKey(e => e.EmailTypesId).HasName("PK__EmailTyp__0F92B0B12024020B");
+
+            entity.ToTable("EmailTypes", "Masters");
+
+            entity.Property(e => e.EmailTypesId).HasColumnName("EmailTypesID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.EmailTypesCode).HasMaxLength(150);
+            entity.Property(e => e.EmailTypesName).HasMaxLength(150);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+        });
+
+        modelBuilder.Entity<EmailsTemplate>(entity =>
+        {
+            entity.HasKey(e => e.EmailsTemplatesId).HasName("PK__EmailsTe__5E83C46163F020A4");
+
+            entity.ToTable("EmailsTemplates", "Masters");
+
+            entity.Property(e => e.EmailsTemplatesId).HasColumnName("EmailsTemplatesID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.EmailsTemplatesCode).HasMaxLength(150);
+            entity.Property(e => e.EmailsTemplatesName).HasMaxLength(150);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+        });
+
         modelBuilder.Entity<FiscalType>(entity =>
         {
             entity.HasKey(e => e.FiscalTypeId).HasName("PK__FiscalTy__2D1E582082E8A219");
@@ -1825,6 +1932,25 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.LeadStatusCode).HasMaxLength(150);
             entity.Property(e => e.LeadStatusName).HasMaxLength(150);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+        });
+
+        modelBuilder.Entity<LeadType>(entity =>
+        {
+            entity.HasKey(e => e.LeadTypeId).HasName("PK__LeadType__0236086877582BA5");
+
+            entity.ToTable("LeadType", "Masters");
+
+            entity.Property(e => e.LeadTypeId).HasColumnName("LeadTypeID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LeadTypeCode).HasMaxLength(150);
+            entity.Property(e => e.LeadTypeName).HasMaxLength(150);
             entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
             entity.Property(e => e.RegionId).HasColumnName("RegionID");
         });

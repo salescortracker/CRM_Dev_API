@@ -25,8 +25,13 @@ namespace CRM_API.Controllers
     private readonly IFiscalTypeService _fiscalTypeService;
     private readonly IDiscountTypeService _discountTypeService;
     private readonly IIndustryService _industryService;
+        private readonly ILeadTypeService _leadTypeService;
+        private readonly IEmailTypeService _emailTypeService;
+        private readonly IEmailDataService _emailDataService;
 
-    public MasterController(ICompanyAndRegionService service, ICountryService countryService, Istateservices stateservices, ICurrencyService currencyService, IPriorityService priorityService, ILeadStatusService leadStatusService, ILeadSourceService leadSourceService, IBillingCycleService billingCycleService, ILicenseService licenseService, IBackupFrequencyService backupFrequencyService, IRetentionPeriodService retentionPeriodService, IPaymentMethodService paymentMethodService, IFiscalTypeService fiscalTypeService, IDiscountTypeService discountTypeService, IIndustryService industryService)
+
+        public MasterController(ICompanyAndRegionService service, ICountryService countryService, Istateservices stateservices, ICurrencyService currencyService, IPriorityService priorityService, ILeadStatusService leadStatusService, ILeadSourceService leadSourceService, IBillingCycleService billingCycleService, ILicenseService licenseService, IBackupFrequencyService backupFrequencyService, IRetentionPeriodService retentionPeriodService, IPaymentMethodService paymentMethodService, IFiscalTypeService fiscalTypeService, IDiscountTypeService discountTypeService, IIndustryService industryService
+            ,IEmailDataService emailDataService, ILeadTypeService leadTypeService, IEmailTypeService emailTypeService)
         {
             _service = service;
             _countryService = countryService;
@@ -43,6 +48,9 @@ namespace CRM_API.Controllers
       _fiscalTypeService = fiscalTypeService;
       _discountTypeService = discountTypeService;
       _industryService = industryService;
+            _leadTypeService = leadTypeService;
+            _emailTypeService = emailTypeService;
+            _emailDataService = emailDataService;
     }
 
         [HttpPost("createcompany")]
@@ -587,9 +595,112 @@ namespace CRM_API.Controllers
       return Ok(await _industryService.GetIndustryById(id));
     }
 
-    #endregion
+        #endregion
 
-  }
+        #region LEAD TYPE
+
+        [HttpPost("createleadtype")]
+        public async Task<IActionResult> CreateLeadType(LeadTypeDto dto)
+        {
+            return Ok(await _leadTypeService.CreateLeadType(dto));
+        }
+
+        [HttpPost("updateleadtype")]
+        public async Task<IActionResult> UpdateLeadType(LeadTypeDto dto)
+        {
+            return Ok(await _leadTypeService.UpdateLeadType(dto));
+        }
+
+        [HttpPost("deleteleadtype/{id}")]
+        public async Task<IActionResult> DeleteLeadType(int id)
+        {
+            return Ok(await _leadTypeService.DeleteLeadType(id));
+        }
+
+        [HttpGet("getallleadtype")]
+        public async Task<IActionResult> GetLeadTypes()
+        {
+            return Ok(await _leadTypeService.GetLeadTypes());
+        }
+
+        [HttpGet("getbyleadtype/{id}")]
+        public async Task<IActionResult> GetLeadTypeById(int id)
+        {
+            return Ok(await _leadTypeService.GetLeadTypeById(id));
+        }
+
+        #endregion
+
+
+ #region EMAIL TYPE
+
+        [HttpPost("createemailtype")]
+        public async Task<IActionResult> CreateEmailType(EmailTypeDto dto)
+        {
+            return Ok(await _emailTypeService.CreateEmailType(dto));
+        }
+
+        [HttpPost("updateemailtype")]
+        public async Task<IActionResult> UpdateEmailType(EmailTypeDto dto)
+        {
+            return Ok(await _emailTypeService.UpdateEmailType(dto));
+        }
+
+        [HttpPost("deleteemailtype/{id}")]
+        public async Task<IActionResult> DeleteEmailType(int id)
+        {
+            return Ok(await _emailTypeService.DeleteEmailType(id));
+        }
+
+        [HttpGet("getallemailtype")]
+        public async Task<IActionResult> GetEmailTypes()
+        {
+            return Ok(await _emailTypeService.GetEmailTypes());
+        }
+
+        [HttpGet("getbyemailtype/{id}")]
+        public async Task<IActionResult> GetEmailTypeById(int id)
+        {
+            return Ok(await _emailTypeService.GetEmailTypeById(id));
+        }
+
+        #endregion
+        #region EMAIL TEMPLATE
+
+        [HttpPost("createemailtemplate")]
+        public async Task<IActionResult> CreateEmailsTemplate(EmailsTemplateDto dto)
+        {
+            return Ok(await _emailDataService.CreateEmailsTemplate(dto));
+        }
+
+        [HttpPost("updateemailtemplate")]
+        public async Task<IActionResult> UpdateEmailsTemplate(EmailsTemplateDto dto)
+        {
+            return Ok(await _emailDataService.UpdateEmailsTemplate(dto));
+        }
+
+        [HttpPost("deleteemailtemplate/{id}")]
+        public async Task<IActionResult> DeleteEmailsTemplate(int id)
+        {
+            return Ok(await _emailDataService.DeleteEmailsTemplate(id));
+        }
+
+        [HttpGet("getallemailtemplate")]
+        public async Task<IActionResult> GetEmailsTemplates()
+        {
+            return Ok(await _emailDataService.GetEmailsTemplates());
+        }
+
+        [HttpGet("getbyemailtemplate/{id}")]
+        public async Task<IActionResult> GetEmailsTemplateById(int id)
+        {
+            return Ok(await _emailDataService.GetEmailsTemplateById(id));
+        }
+
+        #endregion
+
+
+    }
 }
 
 
