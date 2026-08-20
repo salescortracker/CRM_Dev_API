@@ -119,6 +119,9 @@ builder.Services.AddScoped<IIndustryService, IndustryService>();
 builder.Services.AddScoped<IPlanService, PlanService>();
 builder.Services.AddScoped<IOrganizationService, OrganizationService>();
 builder.Services.AddScoped<IAuditLogService, AuditLogService>();
+builder.Services.AddScoped<ILeadTypeService, LeadTypeService>();
+builder.Services.AddScoped<IEmailTypeService, EmailTypeService>();
+builder.Services.AddScoped<IEmailDataService, EmailDataService>();
 
 // ======================================================
 // COMMON UserId  (ADD THIS HERE)
