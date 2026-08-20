@@ -24,6 +24,8 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<AuditLog> AuditLogs { get; set; }
 
+    public virtual DbSet<BackupFrequency> BackupFrequencies { get; set; }
+
     public virtual DbSet<BillingCycle> BillingCycles { get; set; }
 
     public virtual DbSet<Branch> Branches { get; set; }
@@ -64,9 +66,15 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<Designation> Designations { get; set; }
 
+    public virtual DbSet<DiscountType> DiscountTypes { get; set; }
+
     public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
 
+    public virtual DbSet<FiscalType> FiscalTypes { get; set; }
+
     public virtual DbSet<GoLiveChecklist> GoLiveChecklists { get; set; }
+
+    public virtual DbSet<Industry> Industries { get; set; }
 
     public virtual DbSet<Invoice> Invoices { get; set; }
 
@@ -91,6 +99,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<LeadStatus> LeadStatuses { get; set; }
 
     public virtual DbSet<LeadStatusDatum> LeadStatusData { get; set; }
+
+    public virtual DbSet<License> Licenses { get; set; }
 
     public virtual DbSet<MenuMaster> MenuMasters { get; set; }
 
@@ -117,6 +127,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<OrganizationSetting> OrganizationSettings { get; set; }
 
     public virtual DbSet<Payment> Payments { get; set; }
+
+    public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
 
     public virtual DbSet<PaymentTransaction> PaymentTransactions { get; set; }
 
@@ -147,6 +159,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<Refund> Refunds { get; set; }
 
     public virtual DbSet<Region> Regions { get; set; }
+
+    public virtual DbSet<RetentionPeriod> RetentionPeriods { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
 
@@ -318,6 +332,25 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
             entity.Property(e => e.TableName).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<BackupFrequency>(entity =>
+        {
+            entity.HasKey(e => e.BackupFrequencyId).HasName("PK__BackupFr__059CA931A8CC62CE");
+
+            entity.ToTable("BackupFrequency", "Masters");
+
+            entity.Property(e => e.BackupFrequencyId).HasColumnName("BackupFrequencyID");
+            entity.Property(e => e.BackupFrequencyCode).HasMaxLength(150);
+            entity.Property(e => e.BackupFrequencyName).HasMaxLength(150);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
         });
 
         modelBuilder.Entity<BillingCycle>(entity =>
@@ -1121,6 +1154,25 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
+        modelBuilder.Entity<DiscountType>(entity =>
+        {
+            entity.HasKey(e => e.DiscountTypeId).HasName("PK__Discount__6CCE1DD6C62D2DCE");
+
+            entity.ToTable("DiscountType", "Masters");
+
+            entity.Property(e => e.DiscountTypeId).HasColumnName("DiscountTypeID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.DiscountTypeCode).HasMaxLength(150);
+            entity.Property(e => e.DiscountTypeName).HasMaxLength(150);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+        });
+
         modelBuilder.Entity<EmailTemplate>(entity =>
         {
             entity.HasKey(e => e.EmailTemplateId).HasName("PK_CRM_EmailTemplates");
@@ -1162,6 +1214,25 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CRM_EmailTemplates_User");
+        });
+
+        modelBuilder.Entity<FiscalType>(entity =>
+        {
+            entity.HasKey(e => e.FiscalTypeId).HasName("PK__FiscalTy__2D1E582082E8A219");
+
+            entity.ToTable("FiscalType", "Masters");
+
+            entity.Property(e => e.FiscalTypeId).HasColumnName("FiscalTypeID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.FiscalTypeCode).HasMaxLength(150);
+            entity.Property(e => e.FiscalTypeName).HasMaxLength(150);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
         });
 
         modelBuilder.Entity<GoLiveChecklist>(entity =>
@@ -1220,6 +1291,25 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CRM_GoLiveChecklists_User");
+        });
+
+        modelBuilder.Entity<Industry>(entity =>
+        {
+            entity.HasKey(e => e.IndustryId).HasName("PK__Industry__808DEC2CA66AB5E3");
+
+            entity.ToTable("Industry", "Masters");
+
+            entity.Property(e => e.IndustryId).HasColumnName("IndustryID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.IndustryCode).HasMaxLength(150);
+            entity.Property(e => e.IndustryName).HasMaxLength(150);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
         });
 
         modelBuilder.Entity<Invoice>(entity =>
@@ -1735,6 +1825,25 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.LeadStatusCode).HasMaxLength(150);
             entity.Property(e => e.LeadStatusName).HasMaxLength(150);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+        });
+
+        modelBuilder.Entity<License>(entity =>
+        {
+            entity.HasKey(e => e.LicenseId).HasName("PK__License__72D600A2E7DA0099");
+
+            entity.ToTable("License", "Masters");
+
+            entity.Property(e => e.LicenseId).HasColumnName("LicenseID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LicenseCode).HasMaxLength(150);
+            entity.Property(e => e.LicenseName).HasMaxLength(150);
             entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
             entity.Property(e => e.RegionId).HasColumnName("RegionID");
         });
@@ -2336,6 +2445,25 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CRM_Payments_User");
+        });
+
+        modelBuilder.Entity<PaymentMethod>(entity =>
+        {
+            entity.HasKey(e => e.PaymentMethodId).HasName("PK__PaymentM__DC31C1F3649AB0DC");
+
+            entity.ToTable("PaymentMethod", "Masters");
+
+            entity.Property(e => e.PaymentMethodId).HasColumnName("PaymentMethodID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.PaymentMethodCode).HasMaxLength(150);
+            entity.Property(e => e.PaymentMethodName).HasMaxLength(150);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
         });
 
         modelBuilder.Entity<PaymentTransaction>(entity =>
@@ -3004,6 +3132,25 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.CompanyId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Region__CompanyI__11BF94B6");
+        });
+
+        modelBuilder.Entity<RetentionPeriod>(entity =>
+        {
+            entity.HasKey(e => e.RetentionPeriodId).HasName("PK__Retentio__E3A25FA9F04C8197");
+
+            entity.ToTable("RetentionPeriod", "Masters");
+
+            entity.Property(e => e.RetentionPeriodId).HasColumnName("RetentionPeriodID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.RetentionPeriodCode).HasMaxLength(150);
+            entity.Property(e => e.RetentionPeriodName).HasMaxLength(150);
         });
 
         modelBuilder.Entity<Role>(entity =>
