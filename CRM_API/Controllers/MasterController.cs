@@ -1,5 +1,6 @@
 using Business_Layer.DTOs.MasterDTO_s;
 using Business_Layer.Interfaces.MasterIInterface;
+using Business_Layer.Services.MasterServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,8 +18,15 @@ namespace CRM_API.Controllers
         private readonly ILeadStatusService _leadStatusService;
     private readonly ILeadSourceService _leadSourceService;
     private readonly IBillingCycleService _billingCycleService;
+    private readonly ILicenseService _licenseService;
+    private readonly IBackupFrequencyService _backupFrequencyService;
+    private readonly IRetentionPeriodService _retentionPeriodService;
+    private readonly IPaymentMethodService _paymentMethodService;
+    private readonly IFiscalTypeService _fiscalTypeService;
+    private readonly IDiscountTypeService _discountTypeService;
+    private readonly IIndustryService _industryService;
 
-    public MasterController(ICompanyAndRegionService service, ICountryService countryService, Istateservices stateservices, ICurrencyService currencyService, IPriorityService priorityService, ILeadStatusService leadStatusService, ILeadSourceService leadSourceService, IBillingCycleService billingCycleService)
+    public MasterController(ICompanyAndRegionService service, ICountryService countryService, Istateservices stateservices, ICurrencyService currencyService, IPriorityService priorityService, ILeadStatusService leadStatusService, ILeadSourceService leadSourceService, IBillingCycleService billingCycleService, ILicenseService licenseService, IBackupFrequencyService backupFrequencyService, IRetentionPeriodService retentionPeriodService, IPaymentMethodService paymentMethodService, IFiscalTypeService fiscalTypeService, IDiscountTypeService discountTypeService, IIndustryService industryService)
         {
             _service = service;
             _countryService = countryService;
@@ -28,6 +36,13 @@ namespace CRM_API.Controllers
       _leadStatusService = leadStatusService;
       _leadSourceService = leadSourceService;
       _billingCycleService = billingCycleService;
+      _licenseService = licenseService;
+      _backupFrequencyService = backupFrequencyService;
+      _retentionPeriodService = retentionPeriodService;
+      _paymentMethodService = paymentMethodService;
+      _fiscalTypeService = fiscalTypeService;
+      _discountTypeService = discountTypeService;
+      _industryService = industryService;
     }
 
         [HttpPost("createcompany")]
@@ -329,6 +344,247 @@ namespace CRM_API.Controllers
     public async Task<IActionResult> GetBillingCycleById(int id)
     {
       return Ok(await _billingCycleService.GetBillingCycleById(id));
+    }
+
+    #endregion
+
+    #region LICENSE
+
+    [HttpPost("createlicense")]
+    public async Task<IActionResult> CreateLicense(LicenseDto dto)
+    {
+      return Ok(await _licenseService.CreateLicense(dto));
+    }
+
+    [HttpPost("updatelicense")]
+    public async Task<IActionResult> UpdateLicense(LicenseDto dto)
+    {
+      return Ok(await _licenseService.UpdateLicense(dto));
+    }
+
+    [HttpPost("deletelicense/{id}")]
+    public async Task<IActionResult> DeleteLicense(int id)
+    {
+      return Ok(await _licenseService.DeleteLicense(id));
+    }
+
+    [HttpGet("getalllicense")]
+    public async Task<IActionResult> GetLicenses()
+    {
+      return Ok(await _licenseService.GetLicenses());
+    }
+
+    [HttpGet("getbylicense/{id}")]
+    public async Task<IActionResult> GetLicenseById(int id)
+    {
+      return Ok(await _licenseService.GetLicenseById(id));
+    }
+
+    #endregion
+
+
+    #region BACKUP FREQUENCY
+
+    [HttpPost("createbackupfrequency")]
+    public async Task<IActionResult> CreateBackupFrequency(BackupFrequencyDto dto)
+    {
+      return Ok(await _backupFrequencyService.CreateBackupFrequency(dto));
+    }
+
+    [HttpPost("updatebackupfrequency")]
+    public async Task<IActionResult> UpdateBackupFrequency(BackupFrequencyDto dto)
+    {
+      return Ok(await _backupFrequencyService.UpdateBackupFrequency(dto));
+    }
+
+    [HttpPost("deletebackupfrequency/{id}")]
+    public async Task<IActionResult> DeleteBackupFrequency(int id)
+    {
+      return Ok(await _backupFrequencyService.DeleteBackupFrequency(id));
+    }
+
+    [HttpGet("getallbackupfrequency")]
+    public async Task<IActionResult> GetBackupFrequencies()
+    {
+      return Ok(await _backupFrequencyService.GetBackupFrequencies());
+    }
+
+    [HttpGet("getbybackupfrequency/{id}")]
+    public async Task<IActionResult> GetBackupFrequencyById(int id)
+    {
+      return Ok(await _backupFrequencyService.GetBackupFrequencyById(id));
+    }
+
+    #endregion
+
+
+    #region RETENTION PERIOD
+
+    [HttpPost("createretentionperiod")]
+    public async Task<IActionResult> CreateRetentionPeriod(RetentionPeriodDto dto)
+    {
+      return Ok(await _retentionPeriodService.CreateRetentionPeriod(dto));
+    }
+
+    [HttpPost("updateretentionperiod")]
+    public async Task<IActionResult> UpdateRetentionPeriod(RetentionPeriodDto dto)
+    {
+      return Ok(await _retentionPeriodService.UpdateRetentionPeriod(dto));
+    }
+
+    [HttpPost("deleteretentionperiod/{id}")]
+    public async Task<IActionResult> DeleteRetentionPeriod(int id)
+    {
+      return Ok(await _retentionPeriodService.DeleteRetentionPeriod(id));
+    }
+
+    [HttpGet("getallretentionperiod")]
+    public async Task<IActionResult> GetRetentionPeriods()
+    {
+      return Ok(await _retentionPeriodService.GetRetentionPeriods());
+    }
+
+    [HttpGet("getbyretentionperiod/{id}")]
+    public async Task<IActionResult> GetRetentionPeriodById(int id)
+    {
+      return Ok(await _retentionPeriodService.GetRetentionPeriodById(id));
+    }
+
+    #endregion
+
+
+    #region PAYMENT METHOD
+
+    [HttpPost("createpaymentmethod")]
+    public async Task<IActionResult> CreatePaymentMethod(PaymentMethodDto dto)
+    {
+      return Ok(await _paymentMethodService.CreatePaymentMethod(dto));
+    }
+
+    [HttpPost("updatepaymentmethod")]
+    public async Task<IActionResult> UpdatePaymentMethod(PaymentMethodDto dto)
+    {
+      return Ok(await _paymentMethodService.UpdatePaymentMethod(dto));
+    }
+
+    [HttpPost("deletepaymentmethod/{id}")]
+    public async Task<IActionResult> DeletePaymentMethod(int id)
+    {
+      return Ok(await _paymentMethodService.DeletePaymentMethod(id));
+    }
+
+    [HttpGet("getallpaymentmethod")]
+    public async Task<IActionResult> GetPaymentMethods()
+    {
+      return Ok(await _paymentMethodService.GetPaymentMethods());
+    }
+
+    [HttpGet("getbypaymentmethod/{id}")]
+    public async Task<IActionResult> GetPaymentMethodById(int id)
+    {
+      return Ok(await _paymentMethodService.GetPaymentMethodById(id));
+    }
+
+    #endregion
+
+    #region FISCAL TYPE
+
+    [HttpPost("createfiscaltype")]
+    public async Task<IActionResult> CreateFiscalType(FiscalTypeDto dto)
+    {
+      return Ok(await _fiscalTypeService.CreateFiscalType(dto));
+    }
+
+    [HttpPost("updatefiscaltype")]
+    public async Task<IActionResult> UpdateFiscalType(FiscalTypeDto dto)
+    {
+      return Ok(await _fiscalTypeService.UpdateFiscalType(dto));
+    }
+
+    [HttpPost("deletefiscaltype/{id}")]
+    public async Task<IActionResult> DeleteFiscalType(int id)
+    {
+      return Ok(await _fiscalTypeService.DeleteFiscalType(id));
+    }
+
+    [HttpGet("getallfiscaltype")]
+    public async Task<IActionResult> GetFiscalTypes()
+    {
+      return Ok(await _fiscalTypeService.GetFiscalTypes());
+    }
+
+    [HttpGet("getbyfiscaltype/{id}")]
+    public async Task<IActionResult> GetFiscalTypeById(int id)
+    {
+      return Ok(await _fiscalTypeService.GetFiscalTypeById(id));
+    }
+
+    #endregion
+
+    #region DISCOUNT TYPE
+
+    [HttpPost("creatediscounttype")]
+    public async Task<IActionResult> CreateDiscountType(DiscountTypeDto dto)
+    {
+      return Ok(await _discountTypeService.CreateDiscountType(dto));
+    }
+
+    [HttpPost("updatediscounttype")]
+    public async Task<IActionResult> UpdateDiscountType(DiscountTypeDto dto)
+    {
+      return Ok(await _discountTypeService.UpdateDiscountType(dto));
+    }
+
+    [HttpPost("deletediscounttype/{id}")]
+    public async Task<IActionResult> DeleteDiscountType(int id)
+    {
+      return Ok(await _discountTypeService.DeleteDiscountType(id));
+    }
+
+    [HttpGet("getalldiscounttype")]
+    public async Task<IActionResult> GetDiscountTypes()
+    {
+      return Ok(await _discountTypeService.GetDiscountTypes());
+    }
+
+    [HttpGet("getbydiscounttype/{id}")]
+    public async Task<IActionResult> GetDiscountTypeById(int id)
+    {
+      return Ok(await _discountTypeService.GetDiscountTypeById(id));
+    }
+
+    #endregion
+
+    #region INDUSTRY
+
+    [HttpPost("createindustry")]
+    public async Task<IActionResult> CreateIndustry(IndustryDto dto)
+    {
+      return Ok(await _industryService.CreateIndustry(dto));
+    }
+
+    [HttpPost("updateindustry")]
+    public async Task<IActionResult> UpdateIndustry(IndustryDto dto)
+    {
+      return Ok(await _industryService.UpdateIndustry(dto));
+    }
+
+    [HttpPost("deleteindustry/{id}")]
+    public async Task<IActionResult> DeleteIndustry(int id)
+    {
+      return Ok(await _industryService.DeleteIndustry(id));
+    }
+
+    [HttpGet("getallindustry")]
+    public async Task<IActionResult> GetIndustries()
+    {
+      return Ok(await _industryService.GetIndustries());
+    }
+
+    [HttpGet("getbyindustry/{id}")]
+    public async Task<IActionResult> GetIndustryById(int id)
+    {
+      return Ok(await _industryService.GetIndustryById(id));
     }
 
     #endregion
