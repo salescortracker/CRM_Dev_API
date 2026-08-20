@@ -122,6 +122,9 @@ builder.Services.AddScoped<IAuditLogService, AuditLogService>();
 builder.Services.AddScoped<ILeadTypeService, LeadTypeService>();
 builder.Services.AddScoped<IEmailTypeService, EmailTypeService>();
 builder.Services.AddScoped<IEmailDataService, EmailDataService>();
+builder.Services.AddScoped<ICallTypeService, CallTypeService>();
+builder.Services.AddScoped<ICallPurposeService, CallPurposeService>();
+builder.Services.AddScoped<ICallOutcomeService, CallOutcomeService>();
 
 // ======================================================
 // COMMON UserId  (ADD THIS HERE)
