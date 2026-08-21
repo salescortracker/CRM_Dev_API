@@ -28,10 +28,17 @@ namespace CRM_API.Controllers
         private readonly ILeadTypeService _leadTypeService;
         private readonly IEmailTypeService _emailTypeService;
         private readonly IEmailDataService _emailDataService;
+        private readonly ICompanyTypeService _companyTypeService;
+        private readonly IContactTypeService _contactTypeService;
+        private readonly IRelationshipService _relationshipService;
+        private readonly IActivityTypeService _activityTypeService;
+        private readonly IEmailCategoryService _emailCategoryService;
+        private readonly IMeetingPurposeService _meetingPurposeService;
+
 
 
         public MasterController(ICompanyAndRegionService service, ICountryService countryService, Istateservices stateservices, ICurrencyService currencyService, IPriorityService priorityService, ILeadStatusService leadStatusService, ILeadSourceService leadSourceService, IBillingCycleService billingCycleService, ILicenseService licenseService, IBackupFrequencyService backupFrequencyService, IRetentionPeriodService retentionPeriodService, IPaymentMethodService paymentMethodService, IFiscalTypeService fiscalTypeService, IDiscountTypeService discountTypeService, IIndustryService industryService
-            ,IEmailDataService emailDataService, ILeadTypeService leadTypeService, IEmailTypeService emailTypeService)
+            ,IEmailDataService emailDataService, ILeadTypeService leadTypeService, IEmailTypeService emailTypeService, ICompanyTypeService companyTypeService, IContactTypeService contactTypeService, IRelationshipService relationshipService, IActivityTypeService activityTypeService, IEmailCategoryService emailCategoryService, IMeetingPurposeService meetingPurposeService)
         {
             _service = service;
             _countryService = countryService;
@@ -51,7 +58,14 @@ namespace CRM_API.Controllers
             _leadTypeService = leadTypeService;
             _emailTypeService = emailTypeService;
             _emailDataService = emailDataService;
-    }
+            _companyTypeService = companyTypeService;
+            _contactTypeService = contactTypeService;
+            _relationshipService = relationshipService;
+            _activityTypeService = activityTypeService;
+            _emailCategoryService = emailCategoryService;
+            _meetingPurposeService = meetingPurposeService;
+
+        }
 
         [HttpPost("createcompany")]
         public async Task<IActionResult> CreateCompany(CompanyDto dto)
@@ -698,8 +712,208 @@ namespace CRM_API.Controllers
         }
 
         #endregion
+        #region COMPANY TYPE
 
+        [HttpPost("createcompanytype")]
+        public async Task<IActionResult> CreateCompanyType(CompanyTypeDto dto)
+        {
+            return Ok(await _companyTypeService.CreateCompanyType(dto));
+        }
 
+        [HttpPost("updatecompanytype")]
+        public async Task<IActionResult> UpdateCompanyType(CompanyTypeDto dto)
+        {
+            return Ok(await _companyTypeService.UpdateCompanyType(dto));
+        }
+
+        [HttpPost("deletecompanytype/{id}")]
+        public async Task<IActionResult> DeleteCompanyType(int id)
+        {
+            return Ok(await _companyTypeService.DeleteCompanyType(id));
+        }
+
+        [HttpGet("getallcompanytype")]
+        public async Task<IActionResult> GetCompanyTypes()
+        {
+            return Ok(await _companyTypeService.GetCompanyTypes());
+        }
+
+        [HttpGet("getbycompanytype/{id}")]
+        public async Task<IActionResult> GetCompanyTypeById(int id)
+        {
+            return Ok(await _companyTypeService.GetCompanyTypeById(id));
+        }
+
+        #endregion
+
+        #region CONTACT TYPE
+
+        [HttpPost("createcontacttype")]
+        public async Task<IActionResult> CreateContactType(ContactTypeDto dto)
+        {
+            return Ok(await _contactTypeService.CreateContactType(dto));
+        }
+
+        [HttpPost("updatecontacttype")]
+        public async Task<IActionResult> UpdateContactType(ContactTypeDto dto)
+        {
+            return Ok(await _contactTypeService.UpdateContactType(dto));
+        }
+
+        [HttpPost("deletecontacttype/{id}")]
+        public async Task<IActionResult> DeleteContactType(int id)
+        {
+            return Ok(await _contactTypeService.DeleteContactType(id));
+        }
+
+        [HttpGet("getallcontacttype")]
+        public async Task<IActionResult> GetContactTypes()
+        {
+            return Ok(await _contactTypeService.GetContactTypes());
+        }
+
+        [HttpGet("getbycontacttype/{id}")]
+        public async Task<IActionResult> GetContactTypeById(int id)
+        {
+            return Ok(await _contactTypeService.GetContactTypeById(id));
+        }
+
+        #endregion
+
+        #region RELATIONSHIP
+
+        [HttpPost("createrelationship")]
+        public async Task<IActionResult> CreateRelationship(RelationshipDto dto)
+        {
+            return Ok(await _relationshipService.CreateRelationship(dto));
+        }
+
+        [HttpPost("updaterelationship")]
+        public async Task<IActionResult> UpdateRelationship(RelationshipDto dto)
+        {
+            return Ok(await _relationshipService.UpdateRelationship(dto));
+        }
+
+        [HttpPost("deleterelationship/{id}")]
+        public async Task<IActionResult> DeleteRelationship(int id)
+        {
+            return Ok(await _relationshipService.DeleteRelationship(id));
+        }
+
+        [HttpGet("getallrelationship")]
+        public async Task<IActionResult> GetRelationships()
+        {
+            return Ok(await _relationshipService.GetRelationships());
+        }
+
+        [HttpGet("getbyrelationship/{id}")]
+        public async Task<IActionResult> GetRelationshipById(int id)
+        {
+            return Ok(await _relationshipService.GetRelationshipById(id));
+        }
+
+        #endregion
+
+        #region ACTIVITY TYPE
+
+        [HttpPost("createactivitytype")]
+        public async Task<IActionResult> CreateActivityType(ActivityTypeDto dto)
+        {
+            return Ok(await _activityTypeService.CreateActivityType(dto));
+        }
+
+        [HttpPost("updateactivitytype")]
+        public async Task<IActionResult> UpdateActivityType(ActivityTypeDto dto)
+        {
+            return Ok(await _activityTypeService.UpdateActivityType(dto));
+        }
+
+        [HttpPost("deleteactivitytype/{id}")]
+        public async Task<IActionResult> DeleteActivityType(int id)
+        {
+            return Ok(await _activityTypeService.DeleteActivityType(id));
+        }
+
+        [HttpGet("getallactivitytype")]
+        public async Task<IActionResult> GetActivityTypes()
+        {
+            return Ok(await _activityTypeService.GetActivityTypes());
+        }
+
+        [HttpGet("getbyactivitytype/{id}")]
+        public async Task<IActionResult> GetActivityTypeById(int id)
+        {
+            return Ok(await _activityTypeService.GetActivityTypeById(id));
+        }
+
+        #endregion
+
+        #region EMAIL CATEGORY
+
+        [HttpPost("createemailcategory")]
+        public async Task<IActionResult> CreateEmailCategory(EmailCategoryDto dto)
+        {
+            return Ok(await _emailCategoryService.CreateEmailCategory(dto));
+        }
+
+        [HttpPost("updateemailcategory")]
+        public async Task<IActionResult> UpdateEmailCategory(EmailCategoryDto dto)
+        {
+            return Ok(await _emailCategoryService.UpdateEmailCategory(dto));
+        }
+
+        [HttpPost("deleteemailcategory/{id}")]
+        public async Task<IActionResult> DeleteEmailCategory(int id)
+        {
+            return Ok(await _emailCategoryService.DeleteEmailCategory(id));
+        }
+
+        [HttpGet("getallemailcategory")]
+        public async Task<IActionResult> GetEmailCategories()
+        {
+            return Ok(await _emailCategoryService.GetEmailCategories());
+        }
+
+        [HttpGet("getbyemailcategory/{id}")]
+        public async Task<IActionResult> GetEmailCategoryById(int id)
+        {
+            return Ok(await _emailCategoryService.GetEmailCategoryById(id));
+        }
+
+        #endregion
+        #region MEETING PURPOSE
+
+        [HttpPost("createmeetingpurpose")]
+        public async Task<IActionResult> CreateMeetingPurpose(MeetingPurposeDto dto)
+        {
+            return Ok(await _meetingPurposeService.CreateMeetingPurpose(dto));
+        }
+
+        [HttpPost("updatemeetingpurpose")]
+        public async Task<IActionResult> UpdateMeetingPurpose(MeetingPurposeDto dto)
+        {
+            return Ok(await _meetingPurposeService.UpdateMeetingPurpose(dto));
+        }
+
+        [HttpPost("deletemeetingpurpose/{id}")]
+        public async Task<IActionResult> DeleteMeetingPurpose(int id)
+        {
+            return Ok(await _meetingPurposeService.DeleteMeetingPurpose(id));
+        }
+
+        [HttpGet("getallmeetingpurpose")]
+        public async Task<IActionResult> GetMeetingPurposes()
+        {
+            return Ok(await _meetingPurposeService.GetMeetingPurposes());
+        }
+
+        [HttpGet("getbymeetingpurpose/{id}")]
+        public async Task<IActionResult> GetMeetingPurposeById(int id)
+        {
+            return Ok(await _meetingPurposeService.GetMeetingPurposeById(id));
+        }
+
+        #endregion
     }
 }
 
