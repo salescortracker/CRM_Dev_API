@@ -4,7 +4,7 @@ using Business_Layer.Interfaces.CommonInterfaces;
 using Business_Layer.Interfaces.EmailService;
 using Business_Layer.Interfaces.MasterIInterface;
 using Business_Layer.Interfaces.SuperAdminInterface;
-
+using Business_Layer.Interfaces.User;
 using Business_Layer.Services.AuditLog;
 using Business_Layer.Services.Auth;
 using Business_Layer.Services.CommonServices;
@@ -12,6 +12,7 @@ using Business_Layer.Services.EmailService;
 using Business_Layer.Services.MasterServices;
 using Business_Layer.Services.MenuServices;
 using Business_Layer.Services.SuperAdminServices;
+using Business_Layer.Services.User;
 using BusinessLayer.Services;
 using CRM_API.Middleware;
 using DataAccess_Layers.Data;
@@ -131,6 +132,8 @@ builder.Services.AddScoped<IMeetingPurposeService, MeetingPurposeService>();
 builder.Services.AddScoped<ICallTypeService, CallTypeService>();
 builder.Services.AddScoped<ICallPurposeService, CallPurposeService>();
 builder.Services.AddScoped<ICallOutcomeService, CallOutcomeService>();
+builder.Services.AddScoped<ILeadService, LeadService>();
+builder.Services.AddScoped<ICompanyInformationService, CompanyInformationService>();
 
 // ======================================================
 // COMMON UserId  (ADD THIS HERE)

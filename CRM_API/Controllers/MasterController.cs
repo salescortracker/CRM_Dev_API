@@ -34,11 +34,15 @@ namespace CRM_API.Controllers
         private readonly IActivityTypeService _activityTypeService;
         private readonly IEmailCategoryService _emailCategoryService;
         private readonly IMeetingPurposeService _meetingPurposeService;
+        private readonly ICallTypeService _callTypeService;
+        private readonly ICallPurposeService _callPurposeService;
+        private readonly ICallOutcomeService _callOutcomeService;
+
 
 
 
         public MasterController(ICompanyAndRegionService service, ICountryService countryService, Istateservices stateservices, ICurrencyService currencyService, IPriorityService priorityService, ILeadStatusService leadStatusService, ILeadSourceService leadSourceService, IBillingCycleService billingCycleService, ILicenseService licenseService, IBackupFrequencyService backupFrequencyService, IRetentionPeriodService retentionPeriodService, IPaymentMethodService paymentMethodService, IFiscalTypeService fiscalTypeService, IDiscountTypeService discountTypeService, IIndustryService industryService
-            ,IEmailDataService emailDataService, ILeadTypeService leadTypeService, IEmailTypeService emailTypeService, ICompanyTypeService companyTypeService, IContactTypeService contactTypeService, IRelationshipService relationshipService, IActivityTypeService activityTypeService, IEmailCategoryService emailCategoryService, IMeetingPurposeService meetingPurposeService)
+            ,IEmailDataService emailDataService, ILeadTypeService leadTypeService, IEmailTypeService emailTypeService, ICompanyTypeService companyTypeService, IContactTypeService contactTypeService, IRelationshipService relationshipService, IActivityTypeService activityTypeService, IEmailCategoryService emailCategoryService, IMeetingPurposeService meetingPurposeService, ICallTypeService callTypeService, ICallPurposeService callPurposeService, ICallOutcomeService callOutcomeService)
         {
             _service = service;
             _countryService = countryService;
@@ -64,6 +68,9 @@ namespace CRM_API.Controllers
             _activityTypeService = activityTypeService;
             _emailCategoryService = emailCategoryService;
             _meetingPurposeService = meetingPurposeService;
+            _callTypeService = callTypeService;
+            _callPurposeService = callPurposeService;
+            _callOutcomeService = callOutcomeService;
 
         }
 
@@ -911,6 +918,105 @@ namespace CRM_API.Controllers
         public async Task<IActionResult> GetMeetingPurposeById(int id)
         {
             return Ok(await _meetingPurposeService.GetMeetingPurposeById(id));
+        }
+
+        #endregion
+        #region CALL TYPE
+
+        [HttpPost("createcalltype")]
+        public async Task<IActionResult> CreateCallType(CallTypeDto dto)
+        {
+            return Ok(await _callTypeService.CreateCallType(dto));
+        }
+
+        [HttpPost("updatecalltype")]
+        public async Task<IActionResult> UpdateCallType(CallTypeDto dto)
+        {
+            return Ok(await _callTypeService.UpdateCallType(dto));
+        }
+
+        [HttpPost("deletecalltype/{id}")]
+        public async Task<IActionResult> DeleteCallType(int id)
+        {
+            return Ok(await _callTypeService.DeleteCallType(id));
+        }
+
+        [HttpGet("getallcalltype")]
+        public async Task<IActionResult> GetCallTypes()
+        {
+            return Ok(await _callTypeService.GetCallTypes());
+        }
+
+        [HttpGet("getbyidcalltype/{id}")]
+        public async Task<IActionResult> GetCallTypeById(int id)
+        {
+            return Ok(await _callTypeService.GetCallTypeById(id));
+        }
+
+        #endregion
+ #region CALL PURPOSE
+
+        [HttpPost("createcallpurpose")]
+        public async Task<IActionResult> CreateCallPurpose(CallPurposeDto dto)
+        {
+            return Ok(await _callPurposeService.CreateCallPurpose(dto));
+        }
+
+        [HttpPost("updatecallpurpose")]
+        public async Task<IActionResult> UpdateCallPurpose(CallPurposeDto dto)
+        {
+            return Ok(await _callPurposeService.UpdateCallPurpose(dto));
+        }
+
+        [HttpPost("deletecallpurpose/{id}")]
+        public async Task<IActionResult> DeleteCallPurpose(int id)
+        {
+            return Ok(await _callPurposeService.DeleteCallPurpose(id));
+        }
+
+        [HttpGet("getallcallpurpose")]
+        public async Task<IActionResult> GetCallPurposes()
+        {
+            return Ok(await _callPurposeService.GetCallPurposes());
+        }
+
+        [HttpGet("getbyidcallpurpose/{id}")]
+        public async Task<IActionResult> GetCallPurposeById(int id)
+        {
+            return Ok(await _callPurposeService.GetCallPurposeById(id));
+        }
+
+        #endregion
+        #region CALL OUTCOME
+
+        [HttpPost("createcalloutcome")]
+        public async Task<IActionResult> CreateCallOutcome(CallOutcomeDto dto)
+        {
+            return Ok(await _callOutcomeService.CreateCallOutcome(dto));
+        }
+
+        [HttpPost("updatecalloutcome")]
+        public async Task<IActionResult> UpdateCallOutcome(CallOutcomeDto dto)
+        {
+            return Ok(await _callOutcomeService.UpdateCallOutcome(dto));
+        }
+
+        [HttpPost("deletecalloutcome/{id}")]
+        public async Task<IActionResult> DeleteCallOutcome(int id)
+        {
+            return Ok(await _callOutcomeService.DeleteCallOutcome(id));
+        }
+
+        [HttpGet("getallcalloutcome")]
+        public async Task<IActionResult> GetCallOutcomes()
+        {
+            return Ok(await _callOutcomeService.GetCallOutcomes());
+        }
+
+        [HttpGet("getbyidcalloutcome/{id}")]
+        public async Task<IActionResult> GetCallOutcomeById(int id)
+        {
+            return Ok(await _callOutcomeService.GetCallOutcomeById(id));
         }
 
         #endregion

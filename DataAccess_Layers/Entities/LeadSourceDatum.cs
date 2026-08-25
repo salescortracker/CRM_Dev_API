@@ -28,4 +28,6 @@ public partial class LeadSourceDatum
     public int? ModifiedBy { get; set; }
 
     public DateTime? ModifiedAt { get; set; }
+
+    public virtual ICollection<LeadInformation> LeadInformations { get; set; } = new List<LeadInformation>();
 }

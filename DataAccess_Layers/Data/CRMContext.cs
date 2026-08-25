@@ -46,6 +46,8 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<Company> Companies { get; set; }
 
+    public virtual DbSet<CompanyInformation> CompanyInformations { get; set; }
+
     public virtual DbSet<CompanyStatusMaster> CompanyStatusMasters { get; set; }
 
     public virtual DbSet<CompanyType> CompanyTypes { get; set; }
@@ -107,6 +109,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<LeadCall> LeadCalls { get; set; }
 
     public virtual DbSet<LeadFollowUp> LeadFollowUps { get; set; }
+
+    public virtual DbSet<LeadInformation> LeadInformations { get; set; }
 
     public virtual DbSet<LeadNote> LeadNotes { get; set; }
 
@@ -680,6 +684,75 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
             entity.Property(e => e.PlanStartDate).HasColumnType("datetime");
             entity.Property(e => e.UserId).HasColumnName("userId");
+        });
+
+        modelBuilder.Entity<CompanyInformation>(entity =>
+        {
+            entity.ToTable("CompanyInformation", "CRM");
+
+            entity.Property(e => e.CompanyInformationId).HasColumnName("CompanyInformationID");
+            entity.Property(e => e.AddressLine1).HasMaxLength(300);
+            entity.Property(e => e.AddressLine2).HasMaxLength(300);
+            entity.Property(e => e.AnnualRevenue).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.CinregistrationNumber)
+                .HasMaxLength(100)
+                .HasColumnName("CINRegistrationNumber");
+            entity.Property(e => e.City).HasMaxLength(150);
+            entity.Property(e => e.CompanyEmail).HasMaxLength(255);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CompanyName).HasMaxLength(200);
+            entity.Property(e => e.CompanyOwner).HasMaxLength(150);
+            entity.Property(e => e.CompanyPhone).HasMaxLength(30);
+            entity.Property(e => e.CompanyStatus)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
+            entity.Property(e => e.CompanyTypeId).HasColumnName("CompanyTypeID");
+            entity.Property(e => e.CountryId).HasColumnName("CountryID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Gstnumber)
+                .HasMaxLength(50)
+                .HasColumnName("GSTNumber");
+            entity.Property(e => e.IndustryId).HasColumnName("IndustryID");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LegalCompanyName).HasMaxLength(250);
+            entity.Property(e => e.LinkedInCompanyUrl)
+                .HasMaxLength(500)
+                .HasColumnName("LinkedInCompanyURL");
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.NumberOfEmployees).HasMaxLength(50);
+            entity.Property(e => e.Pannumber)
+                .HasMaxLength(50)
+                .HasColumnName("PANNumber");
+            entity.Property(e => e.PostalCode).HasMaxLength(20);
+            entity.Property(e => e.PrimaryContactDesignation).HasMaxLength(150);
+            entity.Property(e => e.PrimaryContactEmail).HasMaxLength(255);
+            entity.Property(e => e.PrimaryContactName).HasMaxLength(150);
+            entity.Property(e => e.PrimaryContactPhone).HasMaxLength(30);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.StateId).HasColumnName("StateID");
+            entity.Property(e => e.Website).HasMaxLength(500);
+
+            entity.HasOne(d => d.CompanyType).WithMany(p => p.CompanyInformations)
+                .HasForeignKey(d => d.CompanyTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CompanyInformation_CompanyType");
+
+            entity.HasOne(d => d.Country).WithMany(p => p.CompanyInformations)
+                .HasForeignKey(d => d.CountryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CompanyInformation_Country");
+
+            entity.HasOne(d => d.Industry).WithMany(p => p.CompanyInformations)
+                .HasForeignKey(d => d.IndustryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CompanyInformation_Industry");
+
+            entity.HasOne(d => d.State).WithMany(p => p.CompanyInformations)
+                .HasForeignKey(d => d.StateId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CompanyInformation_State");
         });
 
         modelBuilder.Entity<CompanyStatusMaster>(entity =>
@@ -1885,6 +1958,73 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.LeadId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CRM_LeadFollowUps_Leads");
+        });
+
+        modelBuilder.Entity<LeadInformation>(entity =>
+        {
+            entity.HasKey(e => e.LeadId);
+
+            entity.ToTable("LeadInformation", "CRM");
+
+            entity.HasIndex(e => e.LeadNumber, "UQ_LeadInformation_LeadNumber").IsUnique();
+
+            entity.Property(e => e.LeadId).HasColumnName("LeadID");
+            entity.Property(e => e.AnnualRevenue).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.City).HasMaxLength(150);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CompanyName).HasMaxLength(200);
+            entity.Property(e => e.CompanySize).HasMaxLength(50);
+            entity.Property(e => e.CountryId).HasColumnName("CountryID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.CrmcompanyId).HasColumnName("CRMCompanyID");
+            entity.Property(e => e.Email).HasMaxLength(255);
+            entity.Property(e => e.EstimatedDealValue).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.FirstName).HasMaxLength(100);
+            entity.Property(e => e.IndustryId).HasColumnName("IndustryID");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.JobTitle).HasMaxLength(150);
+            entity.Property(e => e.LastName).HasMaxLength(100);
+            entity.Property(e => e.LeadNumber).HasMaxLength(50);
+            entity.Property(e => e.LeadOwnerId).HasColumnName("LeadOwnerID");
+            entity.Property(e => e.LeadRating).HasMaxLength(30);
+            entity.Property(e => e.LeadSourceId).HasColumnName("LeadSourceID");
+            entity.Property(e => e.LeadStatus).HasMaxLength(50);
+            entity.Property(e => e.LeadTypeId).HasColumnName("LeadTypeID");
+            entity.Property(e => e.Mobile).HasMaxLength(30);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.Phone).HasMaxLength(30);
+            entity.Property(e => e.PostalCode).HasMaxLength(20);
+            entity.Property(e => e.PreferredContactMethod).HasMaxLength(50);
+            entity.Property(e => e.PrimaryContactId).HasColumnName("PrimaryContactID");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.Salutation).HasMaxLength(20);
+            entity.Property(e => e.StateId).HasColumnName("StateID");
+            entity.Property(e => e.StreetAddress).HasMaxLength(300);
+            entity.Property(e => e.Website).HasMaxLength(500);
+
+            entity.HasOne(d => d.Country).WithMany(p => p.LeadInformations)
+                .HasForeignKey(d => d.CountryId)
+                .HasConstraintName("FK_LeadInformation_Country");
+
+            entity.HasOne(d => d.Industry).WithMany(p => p.LeadInformations)
+                .HasForeignKey(d => d.IndustryId)
+                .HasConstraintName("FK_LeadInformation_Industry");
+
+            entity.HasOne(d => d.LeadSource).WithMany(p => p.LeadInformations)
+                .HasForeignKey(d => d.LeadSourceId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_LeadInformation_LeadSource");
+
+            entity.HasOne(d => d.LeadType).WithMany(p => p.LeadInformations)
+                .HasForeignKey(d => d.LeadTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_LeadInformation_LeadType");
+
+            entity.HasOne(d => d.State).WithMany(p => p.LeadInformations)
+                .HasForeignKey(d => d.StateId)
+                .HasConstraintName("FK_LeadInformation_State");
         });
 
         modelBuilder.Entity<LeadNote>(entity =>

@@ -28,4 +28,6 @@ public partial class CompanyType
     public int? ModifiedBy { get; set; }
 
     public DateTime? ModifiedAt { get; set; }
+
+    public virtual ICollection<CompanyInformation> CompanyInformations { get; set; } = new List<CompanyInformation>();
 }
