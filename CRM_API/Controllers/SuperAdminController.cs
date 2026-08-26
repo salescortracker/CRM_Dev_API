@@ -13,14 +13,15 @@ namespace CRM_API.Controllers
         private readonly IPlanService _planService;
         private readonly IOrganizationService _organizationService;
         private readonly IWebHostEnvironment _env;
-        private readonly IModuleConfigurationService _moduleConfigurationService;
+        private readonly IWorkflowAndAutomation _workflowAndAutomation;
+        //private readonly IModuleConfigurationService _moduleConfigurationService;
 
-        public SuperAdminController(IPlanService planService, IOrganizationService organizationService, IWebHostEnvironment env, IModuleConfigurationService moduleConfigurationService)
+        public SuperAdminController(IPlanService planService, IOrganizationService organizationService, IWebHostEnvironment env, IWorkflowAndAutomation workflowAndAutomation)
         {
             _planService = planService;
             _organizationService = organizationService;
             _env = env;
-            _moduleConfigurationService = moduleConfigurationService;
+            _workflowAndAutomation = workflowAndAutomation;
         }
 
         #region SUBSCRIPTION PLAN
@@ -134,7 +135,7 @@ namespace CRM_API.Controllers
             WorkflowRuleDto dto)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .CreateWorkflowRule(dto));
         }
 
@@ -144,7 +145,7 @@ namespace CRM_API.Controllers
             WorkflowRuleDto dto)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .UpdateWorkflowRule(dto));
         }
 
@@ -154,7 +155,7 @@ namespace CRM_API.Controllers
             int id)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .DeleteWorkflowRule(id));
         }
 
@@ -163,7 +164,7 @@ namespace CRM_API.Controllers
         public async Task<IActionResult> GetWorkflowRules()
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .GetWorkflowRules());
         }
 
@@ -173,7 +174,7 @@ namespace CRM_API.Controllers
             int id)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .GetWorkflowRuleById(id));
         }
 
@@ -185,7 +186,7 @@ namespace CRM_API.Controllers
             WorkflowRuleConditionDto dto)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .CreateWorkflowRuleCondition(dto));
         }
 
@@ -195,7 +196,7 @@ namespace CRM_API.Controllers
             WorkflowRuleConditionDto dto)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .UpdateWorkflowRuleCondition(dto));
         }
 
@@ -205,7 +206,7 @@ namespace CRM_API.Controllers
             int id)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .DeleteWorkflowRuleCondition(id));
         }
 
@@ -214,7 +215,7 @@ namespace CRM_API.Controllers
         public async Task<IActionResult> GetWorkflowRuleConditions()
         {
             return Ok(
-                await _moduleConfigurationService   
+                await _workflowAndAutomation   
                     .GetWorkflowRuleConditions());
         }
 
@@ -224,7 +225,7 @@ namespace CRM_API.Controllers
             int id)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .GetWorkflowRuleConditionById(id));
         }
 
@@ -234,7 +235,7 @@ namespace CRM_API.Controllers
             int workflowRuleId)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .GetConditionsByWorkflowRuleId(workflowRuleId));
         }
 
@@ -246,7 +247,7 @@ namespace CRM_API.Controllers
             WorkflowRuleActionDto dto)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .CreateWorkflowRuleAction(dto));
         }
 
@@ -256,7 +257,7 @@ namespace CRM_API.Controllers
             WorkflowRuleActionDto dto)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .UpdateWorkflowRuleAction(dto));
         }
 
@@ -266,7 +267,7 @@ namespace CRM_API.Controllers
             int id)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .DeleteWorkflowRuleAction(id));
         }
 
@@ -275,7 +276,7 @@ namespace CRM_API.Controllers
         public async Task<IActionResult> GetWorkflowRuleActions()
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .GetWorkflowRuleActions());
         }
 
@@ -285,7 +286,7 @@ namespace CRM_API.Controllers
             int id)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .GetWorkflowRuleActionById(id));
         }
         #endregion
@@ -296,7 +297,7 @@ namespace CRM_API.Controllers
             ApprovalWorkflowDto dto)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .CreateApprovalWorkflow(dto));
         }
 
@@ -306,7 +307,7 @@ namespace CRM_API.Controllers
             ApprovalWorkflowDto dto)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .UpdateApprovalWorkflow(dto));
         }
 
@@ -316,7 +317,7 @@ namespace CRM_API.Controllers
             int id)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .DeleteApprovalWorkflow(id));
         }
 
@@ -325,7 +326,7 @@ namespace CRM_API.Controllers
         public async Task<IActionResult> GetApprovalWorkflows()
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .GetApprovalWorkflows());
         }
 
@@ -335,7 +336,7 @@ namespace CRM_API.Controllers
             int id)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .GetApprovalWorkflowById(id));
         }
 
@@ -347,7 +348,7 @@ namespace CRM_API.Controllers
             ApprovalWorkflowLevelDto dto)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .CreateApprovalWorkflowLevel(dto));
         }
 
@@ -357,7 +358,7 @@ namespace CRM_API.Controllers
             ApprovalWorkflowLevelDto dto)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .UpdateApprovalWorkflowLevel(dto));
         }
 
@@ -367,7 +368,7 @@ namespace CRM_API.Controllers
             int id)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .DeleteApprovalWorkflowLevel(id));
         }
 
@@ -376,7 +377,7 @@ namespace CRM_API.Controllers
         public async Task<IActionResult> GetApprovalWorkflowLevels()
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .GetApprovalWorkflowLevels());
         }
 
@@ -386,7 +387,7 @@ namespace CRM_API.Controllers
             int id)
         {
             return Ok(
-                await _moduleConfigurationService
+                await _workflowAndAutomation
                     .GetApprovalWorkflowLevelById(id));
         }
         #endregion

@@ -16,13 +16,13 @@ using System.Threading.Tasks;
 
 namespace Business_Layer.Services.SuperAdminServices
 {
-    public class ModuleConfigurationService : IModuleConfigurationService
+    public class WorkflowAndAutomation : IWorkflowAndAutomation
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAuditService _auditService;
         private readonly ICurrentUserService _currentUserService;
 
-        public ModuleConfigurationService(
+        public WorkflowAndAutomation(
             IUnitOfWork unitOfWork,
             IAuditService auditService,
             ICurrentUserService currentUserService)

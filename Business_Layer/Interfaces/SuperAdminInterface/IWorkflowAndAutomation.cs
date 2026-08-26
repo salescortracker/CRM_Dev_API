@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business_Layer.Interfaces.SuperAdminInterface
 {
-    public interface IModuleConfigurationService
+    public interface IWorkflowAndAutomation
     {
         #region WORKFLOW RULE CRUD
         // =====================================================
