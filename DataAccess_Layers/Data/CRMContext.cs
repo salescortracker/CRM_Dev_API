@@ -24,7 +24,15 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<ApplicationLog> ApplicationLogs { get; set; }
 
+    public virtual DbSet<ApprovalWorkflow> ApprovalWorkflows { get; set; }
+
+    public virtual DbSet<ApprovalWorkflowLevel> ApprovalWorkflowLevels { get; set; }
+
     public virtual DbSet<AuditLog> AuditLogs { get; set; }
+
+    public virtual DbSet<AutoAssignmentCondition> AutoAssignmentConditions { get; set; }
+
+    public virtual DbSet<AutoAssignmentRule> AutoAssignmentRules { get; set; }
 
     public virtual DbSet<BackupFrequency> BackupFrequencies { get; set; }
 
@@ -51,6 +59,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<CompanyStatusMaster> CompanyStatusMasters { get; set; }
 
     public virtual DbSet<CompanyType> CompanyTypes { get; set; }
+
+    public virtual DbSet<ContactInformation> ContactInformations { get; set; }
 
     public virtual DbSet<ContactType> ContactTypes { get; set; }
 
@@ -82,6 +92,10 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<DiscountType> DiscountTypes { get; set; }
 
+    public virtual DbSet<EmailAutomation> EmailAutomations { get; set; }
+
+    public virtual DbSet<EmailAutomationRecipient> EmailAutomationRecipients { get; set; }
+
     public virtual DbSet<EmailCategory> EmailCategories { get; set; }
 
     public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
@@ -89,6 +103,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<EmailType> EmailTypes { get; set; }
 
     public virtual DbSet<EmailsTemplate> EmailsTemplates { get; set; }
+
+    public virtual DbSet<EscalationRule> EscalationRules { get; set; }
 
     public virtual DbSet<FiscalType> FiscalTypes { get; set; }
 
@@ -202,6 +218,10 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<SalesOrderItem> SalesOrderItems { get; set; }
 
+    public virtual DbSet<ScheduledJob> ScheduledJobs { get; set; }
+
+    public virtual DbSet<Slarule> Slarules { get; set; }
+
     public virtual DbSet<Slasetting> Slasettings { get; set; }
 
     public virtual DbSet<Smstemplate> Smstemplates { get; set; }
@@ -259,6 +279,12 @@ public partial class CRMContext : DbContext
     public virtual DbSet<UserRole> UserRoles { get; set; }
 
     public virtual DbSet<WhatsAppTemplate> WhatsAppTemplates { get; set; }
+
+    public virtual DbSet<WorkflowRule> WorkflowRules { get; set; }
+
+    public virtual DbSet<WorkflowRuleAction> WorkflowRuleActions { get; set; }
+
+    public virtual DbSet<WorkflowRuleCondition> WorkflowRuleConditions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -369,6 +395,53 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.Source).HasMaxLength(500);
         });
 
+        modelBuilder.Entity<ApprovalWorkflow>(entity =>
+        {
+            entity.ToTable("ApprovalWorkflows", "Superadmin");
+
+            entity.Property(e => e.ApprovalWorkflowId).HasColumnName("ApprovalWorkflowID");
+            entity.Property(e => e.ApprovalLevels).HasDefaultValue(1);
+            entity.Property(e => e.ApprovalType).HasMaxLength(50);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.FinalApprovalAction).HasMaxLength(100);
+            entity.Property(e => e.FinalRejectionAction).HasMaxLength(100);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.ModuleName).HasMaxLength(100);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.WorkflowName).HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<ApprovalWorkflowLevel>(entity =>
+        {
+            entity.ToTable("ApprovalWorkflowLevels", "Superadmin");
+
+            entity.Property(e => e.ApprovalWorkflowLevelId).HasColumnName("ApprovalWorkflowLevelID");
+            entity.Property(e => e.ApprovalCondition).HasMaxLength(500);
+            entity.Property(e => e.ApprovalWorkflowId).HasColumnName("ApprovalWorkflowID");
+            entity.Property(e => e.ApproverRoleId).HasColumnName("ApproverRoleID");
+            entity.Property(e => e.ApproverType).HasMaxLength(50);
+            entity.Property(e => e.ApproverUserId).HasColumnName("ApproverUserID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.OnApprovalAction).HasMaxLength(100);
+            entity.Property(e => e.OnRejectionAction).HasMaxLength(100);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+
+            entity.HasOne(d => d.ApprovalWorkflow).WithMany(p => p.ApprovalWorkflowLevels)
+                .HasForeignKey(d => d.ApprovalWorkflowId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ApprovalWorkflowLevels_ApprovalWorkflows");
+        });
+
         modelBuilder.Entity<AuditLog>(entity =>
         {
             entity.HasKey(e => e.AuditId);
@@ -379,6 +452,50 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
             entity.Property(e => e.TableName).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<AutoAssignmentCondition>(entity =>
+        {
+            entity.ToTable("AutoAssignmentConditions", "Superadmin");
+
+            entity.Property(e => e.AutoAssignmentConditionId).HasColumnName("AutoAssignmentConditionID");
+            entity.Property(e => e.AutoAssignmentRuleId).HasColumnName("AutoAssignmentRuleID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.FieldName).HasMaxLength(150);
+            entity.Property(e => e.FieldValue).HasMaxLength(500);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LogicalOperator).HasMaxLength(10);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.Operator).HasMaxLength(50);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+
+            entity.HasOne(d => d.AutoAssignmentRule).WithMany(p => p.AutoAssignmentConditions)
+                .HasForeignKey(d => d.AutoAssignmentRuleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AutoAssignmentConditions_AutoAssignmentRules");
+        });
+
+        modelBuilder.Entity<AutoAssignmentRule>(entity =>
+        {
+            entity.ToTable("AutoAssignmentRules", "Superadmin");
+
+            entity.Property(e => e.AutoAssignmentRuleId).HasColumnName("AutoAssignmentRuleID");
+            entity.Property(e => e.AssignmentMethod).HasMaxLength(50);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.ModuleName).HasMaxLength(100);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.RuleName).HasMaxLength(200);
+            entity.Property(e => e.TeamId).HasColumnName("TeamID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
         });
 
         modelBuilder.Entity<BackupFrequency>(entity =>
@@ -792,6 +909,60 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
             entity.Property(e => e.RegionId).HasColumnName("RegionID");
+        });
+
+        modelBuilder.Entity<ContactInformation>(entity =>
+        {
+            entity.ToTable("ContactInformation", "CRM");
+
+            entity.Property(e => e.ContactInformationId).HasColumnName("ContactInformationID");
+            entity.Property(e => e.AddressLine1).HasMaxLength(300);
+            entity.Property(e => e.AddressLine2).HasMaxLength(300);
+            entity.Property(e => e.AlternatePhone).HasMaxLength(30);
+            entity.Property(e => e.BusinessEmail).HasMaxLength(255);
+            entity.Property(e => e.City).HasMaxLength(150);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CompanyInformationId).HasColumnName("CompanyInformationID");
+            entity.Property(e => e.ContactNumber).HasMaxLength(50);
+            entity.Property(e => e.ContactTypeId).HasColumnName("ContactTypeID");
+            entity.Property(e => e.CountryId).HasColumnName("CountryID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Department).HasMaxLength(150);
+            entity.Property(e => e.Designation).HasMaxLength(150);
+            entity.Property(e => e.FirstName).HasMaxLength(100);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LastName).HasMaxLength(100);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.Phone).HasMaxLength(30);
+            entity.Property(e => e.PostalCode).HasMaxLength(20);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.RelationshipId).HasColumnName("RelationshipID");
+            entity.Property(e => e.Salutation).HasMaxLength(100);
+            entity.Property(e => e.StateId).HasColumnName("StateID");
+            entity.Property(e => e.Website).HasMaxLength(500);
+
+            entity.HasOne(d => d.CompanyInformation).WithMany(p => p.ContactInformations)
+                .HasForeignKey(d => d.CompanyInformationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ContactInformation_CompanyInformation");
+
+            entity.HasOne(d => d.ContactType).WithMany(p => p.ContactInformations)
+                .HasForeignKey(d => d.ContactTypeId)
+                .HasConstraintName("FK_ContactInformation_ContactType");
+
+            entity.HasOne(d => d.Country).WithMany(p => p.ContactInformations)
+                .HasForeignKey(d => d.CountryId)
+                .HasConstraintName("FK_ContactInformation_Country");
+
+            entity.HasOne(d => d.Relationship).WithMany(p => p.ContactInformations)
+                .HasForeignKey(d => d.RelationshipId)
+                .HasConstraintName("FK_ContactInformation_Relationship");
+
+            entity.HasOne(d => d.State).WithMany(p => p.ContactInformations)
+                .HasForeignKey(d => d.StateId)
+                .HasConstraintName("FK_ContactInformation_State");
         });
 
         modelBuilder.Entity<ContactType>(entity =>
@@ -1384,6 +1555,50 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.RegionId).HasColumnName("RegionID");
         });
 
+        modelBuilder.Entity<EmailAutomation>(entity =>
+        {
+            entity.ToTable("EmailAutomations", "Superadmin");
+
+            entity.Property(e => e.EmailAutomationId).HasColumnName("EmailAutomationID");
+            entity.Property(e => e.AutomationName).HasMaxLength(200);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.EmailTemplateId).HasColumnName("EmailTemplateID");
+            entity.Property(e => e.FromEmail).HasMaxLength(255);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.ModuleName).HasMaxLength(100);
+            entity.Property(e => e.RecipientType).HasMaxLength(100);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.ScheduleType).HasMaxLength(50);
+            entity.Property(e => e.TriggerEvent).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<EmailAutomationRecipient>(entity =>
+        {
+            entity.ToTable("EmailAutomationRecipients", "Superadmin");
+
+            entity.Property(e => e.EmailAutomationRecipientId).HasColumnName("EmailAutomationRecipientID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.EmailAutomationId).HasColumnName("EmailAutomationID");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RecipientType).HasMaxLength(10);
+            entity.Property(e => e.RecipientValue).HasMaxLength(500);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+
+            entity.HasOne(d => d.EmailAutomation).WithMany(p => p.EmailAutomationRecipients)
+                .HasForeignKey(d => d.EmailAutomationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EmailAutomationRecipients_EmailAutomations");
+        });
+
         modelBuilder.Entity<EmailCategory>(entity =>
         {
             entity.HasKey(e => e.EmailCategoryId).HasName("PK__EmailCat__7DD10E15B6CAC68A");
@@ -1482,6 +1697,26 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
             entity.Property(e => e.RegionId).HasColumnName("RegionID");
+        });
+
+        modelBuilder.Entity<EscalationRule>(entity =>
+        {
+            entity.ToTable("EscalationRules", "Superadmin");
+
+            entity.Property(e => e.EscalationRuleId).HasColumnName("EscalationRuleID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.EscalateToType).HasMaxLength(50);
+            entity.Property(e => e.EscalateToUserId).HasColumnName("EscalateToUserID");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.ModuleName).HasMaxLength(100);
+            entity.Property(e => e.NotificationMethod).HasMaxLength(50);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.RuleName).HasMaxLength(200);
         });
 
         modelBuilder.Entity<FiscalType>(entity =>
@@ -3783,6 +4018,57 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_CRM_SalesOrderItems_User");
         });
 
+        modelBuilder.Entity<ScheduledJob>(entity =>
+        {
+            entity.ToTable("ScheduledJobs", "Superadmin");
+
+            entity.Property(e => e.ScheduledJobId).HasColumnName("ScheduledJobID");
+            entity.Property(e => e.ActionType).HasMaxLength(100);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.Frequency).HasMaxLength(50);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.JobName).HasMaxLength(200);
+            entity.Property(e => e.JobType).HasMaxLength(100);
+            entity.Property(e => e.LastRunAt).HasColumnType("datetime");
+            entity.Property(e => e.LastRunStatus).HasMaxLength(50);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.NextRunAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.RetryCount).HasDefaultValue(0);
+            entity.Property(e => e.TimeoutMinutes).HasDefaultValue(30);
+        });
+
+        modelBuilder.Entity<Slarule>(entity =>
+        {
+            entity.ToTable("SLARules", "Superadmin");
+
+            entity.Property(e => e.SlaruleId).HasColumnName("SLARuleID");
+            entity.Property(e => e.BusinessHoursId).HasColumnName("BusinessHoursID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.EscalationRuleId).HasColumnName("EscalationRuleID");
+            entity.Property(e => e.HolidayCalendarId).HasColumnName("HolidayCalendarID");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.ModuleName).HasMaxLength(100);
+            entity.Property(e => e.Priority).HasMaxLength(50);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.Slaname)
+                .HasMaxLength(200)
+                .HasColumnName("SLAName");
+
+            entity.HasOne(d => d.EscalationRule).WithMany(p => p.Slarules)
+                .HasForeignKey(d => d.EscalationRuleId)
+                .HasConstraintName("FK_SLARules_EscalationRules");
+        });
+
         modelBuilder.Entity<Slasetting>(entity =>
         {
             entity.HasKey(e => e.SlasettingId).HasName("PK_CRM_SLASettings");
@@ -5369,6 +5655,77 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CRM_WhatsAppTemplates_User");
+        });
+
+        modelBuilder.Entity<WorkflowRule>(entity =>
+        {
+            entity.ToTable("WorkflowRules", "Superadmin");
+
+            entity.Property(e => e.WorkflowRuleId).HasColumnName("WorkflowRuleID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.ExecutionType)
+                .HasMaxLength(50)
+                .HasDefaultValue("Immediate");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.ModuleName).HasMaxLength(100);
+            entity.Property(e => e.Priority)
+                .HasMaxLength(50)
+                .HasDefaultValue("Medium");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.TriggerEvent).HasMaxLength(100);
+            entity.Property(e => e.WorkflowRuleCode).HasMaxLength(100);
+            entity.Property(e => e.WorkflowRuleName).HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<WorkflowRuleAction>(entity =>
+        {
+            entity.ToTable("WorkflowRuleActions", "Superadmin");
+
+            entity.Property(e => e.WorkflowRuleActionId).HasColumnName("WorkflowRuleActionID");
+            entity.Property(e => e.ActionName).HasMaxLength(200);
+            entity.Property(e => e.ActionType).HasMaxLength(100);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.WorkflowRuleId).HasColumnName("WorkflowRuleID");
+
+            entity.HasOne(d => d.WorkflowRule).WithMany(p => p.WorkflowRuleActions)
+                .HasForeignKey(d => d.WorkflowRuleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_WorkflowRuleActions_WorkflowRules");
+        });
+
+        modelBuilder.Entity<WorkflowRuleCondition>(entity =>
+        {
+            entity.ToTable("WorkflowRuleConditions", "Superadmin");
+
+            entity.Property(e => e.WorkflowRuleConditionId).HasColumnName("WorkflowRuleConditionID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.FieldName).HasMaxLength(150);
+            entity.Property(e => e.FieldValue).HasMaxLength(500);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LogicalOperator).HasMaxLength(10);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.Operator).HasMaxLength(50);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.WorkflowRuleId).HasColumnName("WorkflowRuleID");
+
+            entity.HasOne(d => d.WorkflowRule).WithMany(p => p.WorkflowRuleConditions)
+                .HasForeignKey(d => d.WorkflowRuleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_WorkflowRuleConditions_WorkflowRules");
         });
 
         OnModelCreatingPartial(modelBuilder);

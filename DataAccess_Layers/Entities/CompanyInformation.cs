@@ -77,6 +77,8 @@ public partial class CompanyInformation
 
     public virtual CompanyType CompanyType { get; set; } = null!;
 
+    public virtual ICollection<ContactInformation> ContactInformations { get; set; } = new List<ContactInformation>();
+
     public virtual Country Country { get; set; } = null!;
 
     public virtual Industry Industry { get; set; } = null!;

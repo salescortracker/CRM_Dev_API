@@ -1,5 +1,6 @@
 ﻿using Business_Layer.DTOs.User;
 using Business_Layer.Interfaces.User;
+using Business_Layer.Services.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,12 +12,14 @@ namespace CRM_API.Controllers
     {
         private readonly ILeadService _leadService;
         private readonly ICompanyInformationService _companyInformationService;
+        private readonly IContactService _contactService;
 
         public UserManagementController(
-            ILeadService leadService, ICompanyInformationService companyInformationService)
+            ILeadService leadService, ICompanyInformationService companyInformationService, IContactService contactService)
         {
             _leadService = leadService;
             _companyInformationService = companyInformationService;
+            _contactService = contactService;
         }
 
         #region LEAD
@@ -99,6 +102,45 @@ namespace CRM_API.Controllers
                 await _companyInformationService.GetCompanyById(id));
         }
         #endregion
+
+        #region CONTACT
+
+        [HttpPost("createcontact")]
+        public async Task<IActionResult> CreateContact(ContactDto dto)
+        {
+            return Ok(await _contactService.CreateContact(dto));
+        }
+
+
+        [HttpPost("updatecontact")]
+        public async Task<IActionResult> UpdateContact(ContactDto dto)
+        {
+            return Ok(await _contactService.UpdateContact(dto));
+        }
+
+
+        [HttpPost("deletecontact/{id}")]
+        public async Task<IActionResult> DeleteContact(int id)
+        {
+            return Ok(await _contactService.DeleteContact(id));
+        }
+
+
+        [HttpGet("getallcontacts")]
+        public async Task<IActionResult> GetContacts()
+        {
+            return Ok(await _contactService.GetContacts());
+        }
+
+
+        [HttpGet("getbycontactid/{id}")]
+        public async Task<IActionResult> GetContactById(int id)
+        {
+            return Ok(await _contactService.GetContactById(id));
+        }
+        #endregion
+
+
 
         #region DropDowns
         // =====================================================

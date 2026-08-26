@@ -28,4 +28,6 @@ public partial class Relationship
     public int? ModifiedBy { get; set; }
 
     public DateTime? ModifiedAt { get; set; }
+
+    public virtual ICollection<ContactInformation> ContactInformations { get; set; } = new List<ContactInformation>();
 }

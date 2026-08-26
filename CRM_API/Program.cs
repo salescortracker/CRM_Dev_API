@@ -134,6 +134,8 @@ builder.Services.AddScoped<ICallPurposeService, CallPurposeService>();
 builder.Services.AddScoped<ICallOutcomeService, CallOutcomeService>();
 builder.Services.AddScoped<ILeadService, LeadService>();
 builder.Services.AddScoped<ICompanyInformationService, CompanyInformationService>();
+builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IModuleConfigurationService, ModuleConfigurationService>();
 
 // ======================================================
 // COMMON UserId  (ADD THIS HERE)

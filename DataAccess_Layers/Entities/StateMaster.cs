@@ -31,5 +31,7 @@ public partial class StateMaster
 
     public virtual ICollection<CompanyInformation> CompanyInformations { get; set; } = new List<CompanyInformation>();
 
+    public virtual ICollection<ContactInformation> ContactInformations { get; set; } = new List<ContactInformation>();
+
     public virtual ICollection<LeadInformation> LeadInformations { get; set; } = new List<LeadInformation>();
 }
