@@ -52,6 +52,22 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<CallingCampaignLead> CallingCampaignLeads { get; set; }
 
+    public virtual DbSet<CommunicationEmail> CommunicationEmails { get; set; }
+
+    public virtual DbSet<CommunicationEmailTemplate> CommunicationEmailTemplates { get; set; }
+
+    public virtual DbSet<CommunicationNotificationTemplate> CommunicationNotificationTemplates { get; set; }
+
+    public virtual DbSet<CommunicationSm> CommunicationSms { get; set; }
+
+    public virtual DbSet<CommunicationSmstemplate> CommunicationSmstemplates { get; set; }
+
+    public virtual DbSet<CommunicationVoice> CommunicationVoices { get; set; }
+
+    public virtual DbSet<CommunicationWhatsApp> CommunicationWhatsApps { get; set; }
+
+    public virtual DbSet<CommunicationWhatsAppTemplate> CommunicationWhatsAppTemplates { get; set; }
+
     public virtual DbSet<Company> Companies { get; set; }
 
     public virtual DbSet<CompanyInformation> CompanyInformations { get; set; }
@@ -760,6 +776,220 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.LeadId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CRM_CallingCampaignLeads_Leads");
+        });
+
+        modelBuilder.Entity<CommunicationEmail>(entity =>
+        {
+            entity.ToTable("CommunicationEmail", "Superadmin");
+
+            entity.Property(e => e.CommunicationEmailId).HasColumnName("CommunicationEmailID");
+            entity.Property(e => e.ConfigurationName).HasMaxLength(150);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.EnableAuthentication).HasDefaultValue(true);
+            entity.Property(e => e.EncryptionType).HasMaxLength(50);
+            entity.Property(e => e.FromEmail).HasMaxLength(255);
+            entity.Property(e => e.FromName).HasMaxLength(150);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ProviderName).HasMaxLength(100);
+            entity.Property(e => e.Smtphost)
+                .HasMaxLength(255)
+                .HasColumnName("SMTPHost");
+            entity.Property(e => e.Smtppassword)
+                .HasMaxLength(500)
+                .HasColumnName("SMTPPassword");
+            entity.Property(e => e.Smtpport).HasColumnName("SMTPPort");
+            entity.Property(e => e.Smtpusername)
+                .HasMaxLength(255)
+                .HasColumnName("SMTPUsername");
+        });
+
+        modelBuilder.Entity<CommunicationEmailTemplate>(entity =>
+        {
+            entity.HasKey(e => e.EmailTemplateId).HasName("PK_EmailTemplates");
+
+            entity.ToTable("CommunicationEmailTemplates", "Superadmin");
+
+            entity.HasIndex(e => e.TemplateCode, "UQ_EmailTemplates_TemplateCode").IsUnique();
+
+            entity.Property(e => e.EmailTemplateId).HasColumnName("EmailTemplateID");
+            entity.Property(e => e.Category).HasMaxLength(100);
+            entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LanguageCode).HasMaxLength(20);
+            entity.Property(e => e.ProviderName).HasMaxLength(100);
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Draft");
+            entity.Property(e => e.Subject).HasMaxLength(500);
+            entity.Property(e => e.TemplateCode).HasMaxLength(100);
+            entity.Property(e => e.TemplateName).HasMaxLength(200);
+            entity.Property(e => e.Version).HasDefaultValue(1);
+        });
+
+        modelBuilder.Entity<CommunicationNotificationTemplate>(entity =>
+        {
+            entity.HasKey(e => e.NotificationTemplateId).HasName("PK_NotificationTemplates");
+
+            entity.ToTable("CommunicationNotificationTemplates", "Superadmin");
+
+            entity.HasIndex(e => e.TemplateCode, "UQ_NotificationTemplates_TemplateCode").IsUnique();
+
+            entity.Property(e => e.NotificationTemplateId).HasColumnName("NotificationTemplateID");
+            entity.Property(e => e.Category).HasMaxLength(100);
+            entity.Property(e => e.Channel).HasMaxLength(100);
+            entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LanguageCode).HasMaxLength(20);
+            entity.Property(e => e.NotificationType).HasMaxLength(100);
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Draft");
+            entity.Property(e => e.TemplateCode).HasMaxLength(100);
+            entity.Property(e => e.TemplateName).HasMaxLength(200);
+            entity.Property(e => e.Title).HasMaxLength(500);
+            entity.Property(e => e.Version).HasDefaultValue(1);
+        });
+
+        modelBuilder.Entity<CommunicationSm>(entity =>
+        {
+            entity.HasKey(e => e.CommunicationSmsid);
+
+            entity.ToTable("CommunicationSMS", "Superadmin");
+
+            entity.Property(e => e.CommunicationSmsid).HasColumnName("CommunicationSMSID");
+            entity.Property(e => e.AccountSid)
+                .HasMaxLength(255)
+                .HasColumnName("AccountSID");
+            entity.Property(e => e.AuthToken).HasMaxLength(500);
+            entity.Property(e => e.ConfigurationName).HasMaxLength(150);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.FromNumber).HasMaxLength(50);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.MessagingServiceSid)
+                .HasMaxLength(255)
+                .HasColumnName("MessagingServiceSID");
+            entity.Property(e => e.ProviderName)
+                .HasMaxLength(100)
+                .HasDefaultValue("Twilio");
+            entity.Property(e => e.WebhookUrl)
+                .HasMaxLength(500)
+                .HasColumnName("WebhookURL");
+        });
+
+        modelBuilder.Entity<CommunicationSmstemplate>(entity =>
+        {
+            entity.HasKey(e => e.SmstemplateId).HasName("PK_SMSTemplates");
+
+            entity.ToTable("CommunicationSMSTemplates", "Superadmin");
+
+            entity.HasIndex(e => e.TemplateCode, "UQ_SMSTemplates_TemplateCode").IsUnique();
+
+            entity.Property(e => e.SmstemplateId).HasColumnName("SMSTemplateID");
+            entity.Property(e => e.Category).HasMaxLength(100);
+            entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LanguageCode).HasMaxLength(20);
+            entity.Property(e => e.ProviderName).HasMaxLength(100);
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Draft");
+            entity.Property(e => e.TemplateCode).HasMaxLength(100);
+            entity.Property(e => e.TemplateName).HasMaxLength(200);
+            entity.Property(e => e.Version).HasDefaultValue(1);
+        });
+
+        modelBuilder.Entity<CommunicationVoice>(entity =>
+        {
+            entity.ToTable("CommunicationVoice", "Superadmin");
+
+            entity.Property(e => e.CommunicationVoiceId).HasColumnName("CommunicationVoiceID");
+            entity.Property(e => e.AccountSid)
+                .HasMaxLength(255)
+                .HasColumnName("AccountSID");
+            entity.Property(e => e.AuthToken).HasMaxLength(500);
+            entity.Property(e => e.ConfigurationName).HasMaxLength(150);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.FromNumber).HasMaxLength(50);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ProviderName)
+                .HasMaxLength(100)
+                .HasDefaultValue("Twilio");
+            entity.Property(e => e.TwiMlappSid)
+                .HasMaxLength(255)
+                .HasColumnName("TwiMLAppSID");
+            entity.Property(e => e.TwiMlurl)
+                .HasMaxLength(500)
+                .HasColumnName("TwiMLURL");
+            entity.Property(e => e.VoiceApplicationSid)
+                .HasMaxLength(255)
+                .HasColumnName("VoiceApplicationSID");
+            entity.Property(e => e.WebhookUrl)
+                .HasMaxLength(500)
+                .HasColumnName("WebhookURL");
+        });
+
+        modelBuilder.Entity<CommunicationWhatsApp>(entity =>
+        {
+            entity.ToTable("CommunicationWhatsApp", "Superadmin");
+
+            entity.Property(e => e.CommunicationWhatsAppId).HasColumnName("CommunicationWhatsAppID");
+            entity.Property(e => e.AccountSid)
+                .HasMaxLength(255)
+                .HasColumnName("AccountSID");
+            entity.Property(e => e.AuthToken).HasMaxLength(500);
+            entity.Property(e => e.BusinessAccountId)
+                .HasMaxLength(255)
+                .HasColumnName("BusinessAccountID");
+            entity.Property(e => e.ConfigurationName).HasMaxLength(150);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.MessagingServiceSid)
+                .HasMaxLength(255)
+                .HasColumnName("MessagingServiceSID");
+            entity.Property(e => e.ProviderName)
+                .HasMaxLength(100)
+                .HasDefaultValue("Twilio");
+            entity.Property(e => e.WebhookUrl)
+                .HasMaxLength(500)
+                .HasColumnName("WebhookURL");
+            entity.Property(e => e.WhatsAppNumber).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<CommunicationWhatsAppTemplate>(entity =>
+        {
+            entity.HasKey(e => e.WhatsAppTemplateId).HasName("PK_WhatsAppTemplates");
+
+            entity.ToTable("CommunicationWhatsAppTemplates", "Superadmin");
+
+            entity.HasIndex(e => e.TemplateCode, "UQ_WhatsAppTemplates_TemplateCode").IsUnique();
+
+            entity.Property(e => e.WhatsAppTemplateId).HasColumnName("WhatsAppTemplateID");
+            entity.Property(e => e.ApprovalStatus)
+                .HasMaxLength(50)
+                .HasDefaultValue("Pending");
+            entity.Property(e => e.Category).HasMaxLength(100);
+            entity.Property(e => e.CreatedOn).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.FooterText).HasMaxLength(500);
+            entity.Property(e => e.HeaderText).HasMaxLength(1000);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LanguageCode).HasMaxLength(20);
+            entity.Property(e => e.ProviderName)
+                .HasMaxLength(100)
+                .HasDefaultValue("Twilio");
+            entity.Property(e => e.RejectionReason).HasMaxLength(1000);
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Draft");
+            entity.Property(e => e.TemplateCode).HasMaxLength(100);
+            entity.Property(e => e.TemplateName).HasMaxLength(200);
+            entity.Property(e => e.TemplateSid)
+                .HasMaxLength(255)
+                .HasColumnName("TemplateSID");
+            entity.Property(e => e.Version).HasDefaultValue(1);
         });
 
         modelBuilder.Entity<Company>(entity =>

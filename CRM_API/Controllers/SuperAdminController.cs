@@ -14,14 +14,16 @@ namespace CRM_API.Controllers
         private readonly IOrganizationService _organizationService;
         private readonly IWebHostEnvironment _env;
         private readonly IWorkflowAndAutomation _workflowAndAutomation;
+        private readonly ICommunicationService _communicationService;
         //private readonly IModuleConfigurationService _moduleConfigurationService;
 
-        public SuperAdminController(IPlanService planService, IOrganizationService organizationService, IWebHostEnvironment env, IWorkflowAndAutomation workflowAndAutomation)
+        public SuperAdminController(IPlanService planService, IOrganizationService organizationService, IWebHostEnvironment env, IWorkflowAndAutomation workflowAndAutomation, ICommunicationService communicationService)
         {
             _planService = planService;
             _organizationService = organizationService;
             _env = env;
             _workflowAndAutomation = workflowAndAutomation;
+            _communicationService = communicationService;
         }
 
         #region SUBSCRIPTION PLAN
@@ -391,6 +393,382 @@ namespace CRM_API.Controllers
                     .GetApprovalWorkflowLevelById(id));
         }
         #endregion
+        #region Communication Module
+        #region COMMUNICATION EMAIL
+
+        [HttpPost("createcommunicationemail")]
+        public async Task<IActionResult> CreateCommunicationEmail(
+            CommunicationEmailDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .CreateCommunicationEmail(dto));
+        }
+
+        [HttpPost("updatecommunicationemail")]
+        public async Task<IActionResult> UpdateCommunicationEmail(
+            CommunicationEmailDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .UpdateCommunicationEmail(dto));
+        }
+
+        [HttpPost("deletecommunicationemail/{id}")]
+        public async Task<IActionResult> DeleteCommunicationEmail(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .DeleteCommunicationEmail(id));
+        }
+
+        [HttpGet("getallcommunicationemail")]
+        public async Task<IActionResult> GetCommunicationEmails()
+        {
+            return Ok(
+                await _communicationService
+                    .GetCommunicationEmails());
+        }
+
+        [HttpGet("getbyidcommunicationemail/{id}")]
+        public async Task<IActionResult> GetCommunicationEmailById(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .GetCommunicationEmailById(id));
+        }
+
+        #endregion
+
+        #region COMMUNICATION SMS
+
+        [HttpPost("createcommunicationsms")]
+        public async Task<IActionResult> CreateCommunicationSMS(
+            CommunicationSMSDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .CreateCommunicationSMS(dto));
+        }
+
+        [HttpPost("updatecommunicationsms")]
+        public async Task<IActionResult> UpdateCommunicationSMS(
+            CommunicationSMSDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .UpdateCommunicationSMS(dto));
+        }
+
+        [HttpPost("deletecommunicationsms/{id}")]
+        public async Task<IActionResult> DeleteCommunicationSMS(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .DeleteCommunicationSMS(id));
+        }
+
+        [HttpGet("getallcommunicationsms")]
+        public async Task<IActionResult> GetCommunicationSMS()
+        {
+            return Ok(
+                await _communicationService
+                    .GetCommunicationSMS());
+        }
+
+        [HttpGet("getbyidcommunicationsms/{id}")]
+        public async Task<IActionResult> GetCommunicationSMSById(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .GetCommunicationSMSById(id));
+        }
+
+        #endregion
+        #region COMMUNICATION WHATSAPP
+
+        [HttpPost("createcommunicationwhatsapp")]
+        public async Task<IActionResult> CreateCommunicationWhatsApp(
+            CommunicationWhatsAppDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .CreateCommunicationWhatsApp(dto));
+        }
+
+        [HttpPost("updatecommunicationwhatsapp")]
+        public async Task<IActionResult> UpdateCommunicationWhatsApp(
+            CommunicationWhatsAppDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .UpdateCommunicationWhatsApp(dto));
+        }
+
+        [HttpPost("deletecommunicationwhatsapp/{id}")]
+        public async Task<IActionResult> DeleteCommunicationWhatsApp(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .DeleteCommunicationWhatsApp(id));
+        }
+
+        [HttpGet("getallcommunicationwhatsapp")]
+        public async Task<IActionResult> GetCommunicationWhatsApps()
+        {
+            return Ok(
+                await _communicationService
+                    .GetCommunicationWhatsApps());
+        }
+
+        [HttpGet("getbyidcommunicationwhatsapp/{id}")]
+        public async Task<IActionResult> GetCommunicationWhatsAppById(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .GetCommunicationWhatsAppById(id));
+        }
+
+        #endregion
+        #region COMMUNICATION VOICE
+
+        [HttpPost("createcommunicationvoice")]
+        public async Task<IActionResult> CreateCommunicationVoice(
+            CommunicationVoiceDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .CreateCommunicationVoice(dto));
+        }
+
+        [HttpPost("updatecommunicationvoice")]
+        public async Task<IActionResult> UpdateCommunicationVoice(
+            CommunicationVoiceDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .UpdateCommunicationVoice(dto));
+        }
+
+        [HttpPost("deletecommunicationvoice/{id}")]
+        public async Task<IActionResult> DeleteCommunicationVoice(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .DeleteCommunicationVoice(id));
+        }
+
+        [HttpGet("getallcommunicationvoice")]
+        public async Task<IActionResult> GetCommunicationVoices()
+        {
+            return Ok(
+                await _communicationService
+                    .GetCommunicationVoices());
+        }
+
+        [HttpGet("getbyidcommunicationvoice/{id}")]
+        public async Task<IActionResult> GetCommunicationVoiceById(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .GetCommunicationVoiceById(id));
+        }
+
+        #endregion
+        #region EMAIL TEMPLATE
+
+        [HttpPost("createemailtemplate")]
+        public async Task<IActionResult> CreateEmailTemplate(
+            CommunicationEmailTemplateDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .CreateEmailTemplate(dto));
+        }
+
+        [HttpPost("updateemailtemplate")]
+        public async Task<IActionResult> UpdateEmailTemplate(
+            CommunicationEmailTemplateDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .UpdateEmailTemplate(dto));
+        }
+
+        [HttpPost("deleteemailtemplate/{id}")]
+        public async Task<IActionResult> DeleteEmailTemplate(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .DeleteEmailTemplate(id));
+        }
+
+        [HttpGet("getallemailtemplate")]
+        public async Task<IActionResult> GetEmailTemplates()
+        {
+            return Ok(
+                await _communicationService
+                    .GetEmailTemplates());
+        }
+
+        [HttpGet("getbyidemailtemplate/{id}")]
+        public async Task<IActionResult> GetEmailTemplateById(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .GetEmailTemplateById(id));
+        }
+
+        #endregion
+        #region SMS TEMPLATE
+
+        [HttpPost("createsmstemplate")]
+        public async Task<IActionResult> CreateSMSTemplate(
+            CommunicationSMSTemplateDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .CreateSMSTemplate(dto));
+        }
+
+
+        [HttpPost("updatesmstemplate")]
+        public async Task<IActionResult> UpdateSMSTemplate(
+            CommunicationSMSTemplateDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .UpdateSMSTemplate(dto));
+        }
+
+
+        [HttpPost("deletesmstemplate/{id}")]
+        public async Task<IActionResult> DeleteSMSTemplate(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .DeleteSMSTemplate(id));
+        }
+
+
+        [HttpGet("getallsmsTemplate")]
+        public async Task<IActionResult> GetSMSTemplates()
+        {
+            return Ok(
+                await _communicationService
+                    .GetSMSTemplates());
+        }
+
+
+        [HttpGet("getbysmstemplate/{id}")]
+        public async Task<IActionResult> GetSMSTemplateById(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .GetSMSTemplateById(id));
+        }
+
+        #endregion
+        #region WHATSAPP TEMPLATE
+
+        [HttpPost("createwhatsapptemplate")]
+        public async Task<IActionResult> CreateWhatsAppTemplate(
+            CommunicationWhatsAppTemplateDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .CreateWhatsAppTemplate(dto));
+        }
+
+
+        [HttpPost("updatewhatsapptemplate")]
+        public async Task<IActionResult> UpdateWhatsAppTemplate(
+            CommunicationWhatsAppTemplateDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .UpdateWhatsAppTemplate(dto));
+        }
+
+
+        [HttpPost("deletewhatsapptemplate/{id}")]
+        public async Task<IActionResult> DeleteWhatsAppTemplate(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .DeleteWhatsAppTemplate(id));
+        }
+
+
+        [HttpGet("getallwhatsapptemplate")]
+        public async Task<IActionResult> GetWhatsAppTemplates()
+        {
+            return Ok(
+                await _communicationService
+                    .GetWhatsAppTemplates());
+        }
+
+
+        [HttpGet("getbywhatsapptemplate/{id}")]
+        public async Task<IActionResult> GetWhatsAppTemplateById(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .GetWhatsAppTemplateById(id));
+        }
+
+        #endregion
+        #region NOTIFICATION TEMPLATE
+
+        [HttpPost("createnotificationtemplate")]
+        public async Task<IActionResult> CreateNotificationTemplate(
+            CommunicationNotificationTemplateDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .CreateNotificationTemplate(dto));
+        }
+
+
+        [HttpPost("updatenotificationtemplate")]
+        public async Task<IActionResult> UpdateNotificationTemplate(
+            CommunicationNotificationTemplateDto dto)
+        {
+            return Ok(
+                await _communicationService
+                    .UpdateNotificationTemplate(dto));
+        }
+
+
+        [HttpPost("deletenotificationtemplate/{id}")]
+        public async Task<IActionResult> DeleteNotificationTemplate(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .DeleteNotificationTemplate(id));
+        }
+
+
+        [HttpGet("getallnotificationtemplate")]
+        public async Task<IActionResult> GetNotificationTemplates()
+        {
+            return Ok(
+                await _communicationService
+                    .GetNotificationTemplates());
+        }
+
+
+        [HttpGet("getbynotificationtemplate/{id}")]
+        public async Task<IActionResult> GetNotificationTemplateById(int id)
+        {
+            return Ok(
+                await _communicationService
+                    .GetNotificationTemplateById(id));
+        }
+
+        #endregion
+        #endregion
+
 
     }
 }
