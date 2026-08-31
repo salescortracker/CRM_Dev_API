@@ -393,6 +393,489 @@ namespace CRM_API.Controllers
                     .GetApprovalWorkflowLevelById(id));
         }
         #endregion
+        #region AUTO ASSIGNMENT RULE
+
+        [HttpPost("createautoassignmentrule")]
+        public async Task<IActionResult> CreateAutoAssignmentRule(
+            AutoAssignmentRuleDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .CreateAutoAssignmentRule(dto));
+        }
+
+
+        [HttpPost("updateautoassignmentrule")]
+        public async Task<IActionResult> UpdateAutoAssignmentRule(
+            AutoAssignmentRuleDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .UpdateAutoAssignmentRule(dto));
+        }
+
+
+        [HttpPost("deleteautoassignmentrule/{id}")]
+        public async Task<IActionResult> DeleteAutoAssignmentRule(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .DeleteAutoAssignmentRule(id));
+        }
+
+
+        [HttpGet("getallautoassignmentrules")]
+        public async Task<IActionResult> GetAutoAssignmentRules()
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetAutoAssignmentRules());
+        }
+
+
+        [HttpGet("getautoassignmentrulebyid/{id}")]
+        public async Task<IActionResult> GetAutoAssignmentRuleById(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetAutoAssignmentRuleById(id));
+        }
+
+        #endregion
+
+        #region AUTO ASSIGNMENT CONDITION
+
+
+
+        // =====================================================
+        // CREATE AUTO ASSIGNMENT CONDITION
+        // =====================================================
+
+        [HttpPost("createautoassignmentcondition")]
+        public async Task<IActionResult> CreateAutoAssignmentCondition(
+            AutoAssignmentConditionDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .CreateAutoAssignmentCondition(dto));
+        }
+
+
+        // =====================================================
+        // UPDATE AUTO ASSIGNMENT CONDITION
+        // =====================================================
+
+        [HttpPost("updateautoassignmentcondition")]
+        public async Task<IActionResult> UpdateAutoAssignmentCondition(
+            AutoAssignmentConditionDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .UpdateAutoAssignmentCondition(dto));
+        }
+
+
+        // =====================================================
+        // DELETE AUTO ASSIGNMENT CONDITION
+        // =====================================================
+
+        [HttpPost("deleteautoassignmentcondition/{id}")]
+        public async Task<IActionResult> DeleteAutoAssignmentCondition(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .DeleteAutoAssignmentCondition(id));
+        }
+
+
+        // =====================================================
+        // GET ALL AUTO ASSIGNMENT CONDITIONS
+        // =====================================================
+
+        [HttpGet("getallautoassignmentconditions")]
+        public async Task<IActionResult> GetAutoAssignmentConditions()
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetAutoAssignmentConditions());
+        }
+
+
+        // =====================================================
+        // GET AUTO ASSIGNMENT CONDITION BY ID
+        // =====================================================
+
+        [HttpGet("getautoassignmentconditionbyid/{id}")]
+        public async Task<IActionResult> GetAutoAssignmentConditionById(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetAutoAssignmentConditionById(id));
+        }
+
+        #endregion
+        #region ESCALATION RULE
+
+        // =====================================================
+        // CREATE ESCALATION RULE
+        // =====================================================
+
+        [HttpPost("createescalationrule")]
+        public async Task<IActionResult> CreateEscalationRule(
+            EscalationRuleDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .CreateEscalationRule(dto));
+        }
+
+
+        // =====================================================
+        // UPDATE ESCALATION RULE
+        // =====================================================
+
+        [HttpPost("updateescalationrule")]
+        public async Task<IActionResult> UpdateEscalationRule(
+            EscalationRuleDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .UpdateEscalationRule(dto));
+        }
+
+
+        // =====================================================
+        // DELETE ESCALATION RULE
+        // =====================================================
+
+        [HttpPost("deleteescalationrule/{id}")]
+        public async Task<IActionResult> DeleteEscalationRule(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .DeleteEscalationRule(id));
+        }
+
+
+        // =====================================================
+        // GET ALL ESCALATION RULES
+        // =====================================================
+
+        [HttpGet("getallescalationrules")]
+        public async Task<IActionResult> GetEscalationRules()
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetEscalationRules());
+        }
+
+
+        // =====================================================
+        // GET ESCALATION RULE BY ID
+        // =====================================================
+
+        [HttpGet("getescalationrulebyid/{id}")]
+        public async Task<IActionResult> GetEscalationRuleById(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetEscalationRuleById(id));
+        }
+
+        #endregion
+        #region SLA RULE
+
+        // =====================================================
+        // CREATE SLA RULE
+        // =====================================================
+
+        [HttpPost("createslarule")]
+        public async Task<IActionResult> CreateSlarule(
+            SlaruleDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .CreateSlarule(dto));
+        }
+
+
+        // =====================================================
+        // UPDATE SLA RULE
+        // =====================================================
+
+        [HttpPost("updateslarule")]
+        public async Task<IActionResult> UpdateSlarule(
+            SlaruleDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .UpdateSlarule(dto));
+        }
+
+
+        // =====================================================
+        // DELETE SLA RULE
+        // =====================================================
+
+        [HttpPost("deleteslarule/{id}")]
+        public async Task<IActionResult> DeleteSlarule(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .DeleteSlarule(id));
+        }
+
+
+        // =====================================================
+        // GET ALL SLA RULES
+        // =====================================================
+
+        [HttpGet("getslarules")]
+        public async Task<IActionResult> GetSlarules()
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetSlarules());
+        }
+
+
+        // =====================================================
+        // GET SLA RULE BY ID
+        // =====================================================
+
+        [HttpGet("getslarulebyid/{id}")]
+        public async Task<IActionResult> GetSlaruleById(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetSlaruleById(id));
+        }
+
+        #endregion
+
+        #region EMAIL AUTOMATION
+
+        // =====================================================
+        // CREATE EMAIL AUTOMATION
+        // =====================================================
+
+        [HttpPost("createemailautomation")]
+        public async Task<IActionResult> CreateEmailAutomation(
+            EmailAutomationDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .CreateEmailAutomation(dto));
+        }
+
+
+        // =====================================================
+        // UPDATE EMAIL AUTOMATION
+        // =====================================================
+
+        [HttpPost("updateemailautomation")]
+        public async Task<IActionResult> UpdateEmailAutomation(
+            EmailAutomationDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .UpdateEmailAutomation(dto));
+        }
+
+
+        // =====================================================
+        // DELETE EMAIL AUTOMATION
+        // =====================================================
+
+        [HttpPost("deleteemailautomation/{id}")]
+        public async Task<IActionResult> DeleteEmailAutomation(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .DeleteEmailAutomation(id));
+        }
+
+
+        // =====================================================
+        // GET ALL EMAIL AUTOMATIONS
+        // =====================================================
+
+        [HttpGet("getallemailautomations")]
+        public async Task<IActionResult> GetEmailAutomations()
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetEmailAutomations());
+        }
+
+
+        // =====================================================
+        // GET EMAIL AUTOMATION BY ID
+        // =====================================================
+
+        [HttpGet("getemailautomationbyid/{id}")]
+        public async Task<IActionResult> GetEmailAutomationById(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetEmailAutomationById(id));
+        }
+
+        #endregion
+
+        #region EMAIL AUTOMATION RECIPIENT
+
+        // =====================================================
+        // CREATE EMAIL AUTOMATION RECIPIENT
+        // =====================================================
+
+        [HttpPost("createemailautomationrecipient")]
+        public async Task<IActionResult> CreateEmailAutomationRecipient(
+            EmailAutomationRecipientDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .CreateEmailAutomationRecipient(dto));
+        }
+
+
+        // =====================================================
+        // UPDATE EMAIL AUTOMATION RECIPIENT
+        // =====================================================
+
+        [HttpPost("updateemailautomationrecipient")]
+        public async Task<IActionResult> UpdateEmailAutomationRecipient(
+            EmailAutomationRecipientDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .UpdateEmailAutomationRecipient(dto));
+        }
+
+
+        // =====================================================
+        // DELETE EMAIL AUTOMATION RECIPIENT
+        // =====================================================
+
+        [HttpPost("deleteemailautomationrecipient/{id}")]
+        public async Task<IActionResult> DeleteEmailAutomationRecipient(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .DeleteEmailAutomationRecipient(id));
+        }
+
+
+        // =====================================================
+        // GET ALL EMAIL AUTOMATION RECIPIENTS
+        // =====================================================
+
+        [HttpGet("getallemailautomationrecipients")]
+        public async Task<IActionResult> GetEmailAutomationRecipients()
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetEmailAutomationRecipients());
+        }
+
+
+        // =====================================================
+        // GET EMAIL AUTOMATION RECIPIENT BY ID
+        // =====================================================
+
+        [HttpGet("getemailautomationrecipientbyid/{id}")]
+        public async Task<IActionResult> GetEmailAutomationRecipientById(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetEmailAutomationRecipientById(id));
+        }
+
+        #endregion
+
+        #region SCHEDULED JOB
+
+        // =====================================================
+        // CREATE SCHEDULED JOB
+        // =====================================================
+
+        [HttpPost("createscheduledjob")]
+        public async Task<IActionResult> CreateScheduledJob(
+            ScheduledJobDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .CreateScheduledJob(dto));
+        }
+
+
+        // =====================================================
+        // UPDATE SCHEDULED JOB
+        // =====================================================
+
+        [HttpPost("updatescheduledjob")]
+        public async Task<IActionResult> UpdateScheduledJob(
+            ScheduledJobDto dto)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .UpdateScheduledJob(dto));
+        }
+
+
+        // =====================================================
+        // DELETE SCHEDULED JOB
+        // =====================================================
+
+        [HttpPost("deletescheduledjob/{id}")]
+        public async Task<IActionResult> DeleteScheduledJob(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .DeleteScheduledJob(id));
+        }
+
+
+        // =====================================================
+        // GET ALL SCHEDULED JOBS
+        // =====================================================
+
+        [HttpGet("getallscheduledjobs")]
+        public async Task<IActionResult> GetScheduledJobs()
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetScheduledJobs());
+        }
+
+
+        // =====================================================
+        // GET SCHEDULED JOB BY ID
+        // =====================================================
+
+        [HttpGet("getscheduledjobbyid/{id}")]
+        public async Task<IActionResult> GetScheduledJobById(
+            int id)
+        {
+            return Ok(
+                await _workflowAndAutomation
+                    .GetScheduledJobById(id));
+        }
+
+        #endregion
         #region Communication Module
         #region COMMUNICATION EMAIL
 

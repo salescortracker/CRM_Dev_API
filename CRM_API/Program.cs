@@ -136,6 +136,7 @@ builder.Services.AddScoped<ILeadService, LeadService>();
 builder.Services.AddScoped<ICompanyInformationService, CompanyInformationService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IWorkflowAndAutomation, WorkflowAndAutomation>();
+builder.Services.AddScoped<ICommunicationService, CommunicationService>();
 
 // ======================================================
 // COMMON UserId  (ADD THIS HERE)
