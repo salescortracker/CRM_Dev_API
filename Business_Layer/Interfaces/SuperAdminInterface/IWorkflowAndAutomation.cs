@@ -114,5 +114,169 @@ namespace Business_Layer.Interfaces.SuperAdminInterface
         Task<ApiResponse<ApprovalWorkflowLevelDto>>
             GetApprovalWorkflowLevelById(int id);
         #endregion
+
+        #region AUTO ASSIGNMENT RULE CRUD
+
+        // =====================================================
+        // AUTO ASSIGNMENT RULE CRUD
+        // =====================================================
+
+        Task<ApiResponse<string>> CreateAutoAssignmentRule(
+            AutoAssignmentRuleDto dto);
+
+        Task<ApiResponse<string>> UpdateAutoAssignmentRule(
+            AutoAssignmentRuleDto dto);
+
+        Task<ApiResponse<string>> DeleteAutoAssignmentRule(
+            int id);
+
+        Task<ApiResponse<List<AutoAssignmentRuleDto>>>
+            GetAutoAssignmentRules();
+
+        Task<ApiResponse<AutoAssignmentRuleDto>>
+            GetAutoAssignmentRuleById(int id);
+
+        #endregion
+
+
+        #region AUTO ASSIGNMENT CONDITION CRUD
+
+        // =====================================================
+        // AUTO ASSIGNMENT CONDITION CRUD
+        // =====================================================
+
+        Task<ApiResponse<string>> CreateAutoAssignmentCondition(
+            AutoAssignmentConditionDto dto);
+
+        Task<ApiResponse<string>> UpdateAutoAssignmentCondition(
+            AutoAssignmentConditionDto dto);
+
+        Task<ApiResponse<string>> DeleteAutoAssignmentCondition(
+            int id);
+
+        Task<ApiResponse<List<AutoAssignmentConditionDto>>>
+            GetAutoAssignmentConditions();
+
+        Task<ApiResponse<AutoAssignmentConditionDto>>
+            GetAutoAssignmentConditionById(int id);
+
+        #endregion
+
+        #region ESCALATION RULE CRUD
+
+        // =====================================================
+        // ESCALATION RULE CRUD
+        // =====================================================
+
+        Task<ApiResponse<string>> CreateEscalationRule(
+            EscalationRuleDto dto);
+
+        Task<ApiResponse<string>> UpdateEscalationRule(
+            EscalationRuleDto dto);
+
+        Task<ApiResponse<string>> DeleteEscalationRule(
+            int id);
+
+        Task<ApiResponse<List<EscalationRuleDto>>>
+            GetEscalationRules();
+
+        Task<ApiResponse<EscalationRuleDto>>
+            GetEscalationRuleById(int id);
+
+        #endregion
+
+        #region SLA RULE CRUD
+
+        // =====================================================
+        // SLA RULE CRUD
+        // =====================================================
+
+        Task<ApiResponse<string>> CreateSlarule(
+            SlaruleDto dto);
+
+        Task<ApiResponse<string>> UpdateSlarule(
+            SlaruleDto dto);
+
+        Task<ApiResponse<string>> DeleteSlarule(
+            int id);
+
+        Task<ApiResponse<List<SlaruleDto>>>
+            GetSlarules();
+
+        Task<ApiResponse<SlaruleDto>>
+            GetSlaruleById(int id);
+
+        #endregion
+
+        #region EMAIL AUTOMATION CRUD
+
+        // =====================================================
+        // EMAIL AUTOMATION CRUD
+        // =====================================================
+
+        Task<ApiResponse<string>> CreateEmailAutomation(
+            EmailAutomationDto dto);
+
+        Task<ApiResponse<string>> UpdateEmailAutomation(
+            EmailAutomationDto dto);
+
+        Task<ApiResponse<string>> DeleteEmailAutomation(
+            int id);
+
+        Task<ApiResponse<List<EmailAutomationDto>>>
+            GetEmailAutomations();
+
+        Task<ApiResponse<EmailAutomationDto>>
+            GetEmailAutomationById(int id);
+
+        #endregion
+
+        #region EMAIL AUTOMATION RECIPIENT CRUD
+
+        // =====================================================
+        // EMAIL AUTOMATION RECIPIENT CRUD
+        // =====================================================
+
+        Task<ApiResponse<string>> CreateEmailAutomationRecipient(
+            EmailAutomationRecipientDto dto);
+
+        Task<ApiResponse<string>> UpdateEmailAutomationRecipient(
+            EmailAutomationRecipientDto dto);
+
+        Task<ApiResponse<string>> DeleteEmailAutomationRecipient(
+            int id);
+
+        Task<ApiResponse<List<EmailAutomationRecipientDto>>>
+            GetEmailAutomationRecipients();
+
+        Task<ApiResponse<EmailAutomationRecipientDto>>
+            GetEmailAutomationRecipientById(int id);
+
+        #endregion
+
+        #region SCHEDULED JOB CRUD
+
+        // =====================================================
+        // SCHEDULED JOB CRUD
+        // =====================================================
+
+        Task<ApiResponse<string>> CreateScheduledJob(
+            ScheduledJobDto dto);
+
+        Task<ApiResponse<string>> UpdateScheduledJob(
+            ScheduledJobDto dto);
+
+        Task<ApiResponse<string>> DeleteScheduledJob(
+            int id);
+
+        Task<ApiResponse<List<ScheduledJobDto>>>
+            GetScheduledJobs();
+
+        Task<ApiResponse<ScheduledJobDto>>
+            GetScheduledJobById(int id);
+
+        #endregion
+
     }
 }
+
