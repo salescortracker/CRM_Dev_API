@@ -34,6 +34,7 @@ namespace CRM_API.Controllers
         private readonly IActivityTypeService _activityTypeService;
         private readonly IEmailCategoryService _emailCategoryService;
         private readonly IMeetingPurposeService _meetingPurposeService;
+        private readonly ICampaignTypeService _campaignTypeService;
         private readonly ICallTypeService _callTypeService;
         private readonly ICallPurposeService _callPurposeService;
         private readonly ICallOutcomeService _callOutcomeService;
@@ -42,7 +43,7 @@ namespace CRM_API.Controllers
 
 
         public MasterController(ICompanyAndRegionService service, ICountryService countryService, Istateservices stateservices, ICurrencyService currencyService, IPriorityService priorityService, ILeadStatusService leadStatusService, ILeadSourceService leadSourceService, IBillingCycleService billingCycleService, ILicenseService licenseService, IBackupFrequencyService backupFrequencyService, IRetentionPeriodService retentionPeriodService, IPaymentMethodService paymentMethodService, IFiscalTypeService fiscalTypeService, IDiscountTypeService discountTypeService, IIndustryService industryService
-            ,IEmailDataService emailDataService, ILeadTypeService leadTypeService, IEmailTypeService emailTypeService, ICompanyTypeService companyTypeService, IContactTypeService contactTypeService, IRelationshipService relationshipService, IActivityTypeService activityTypeService, IEmailCategoryService emailCategoryService, IMeetingPurposeService meetingPurposeService, ICallTypeService callTypeService, ICallPurposeService callPurposeService, ICallOutcomeService callOutcomeService)
+            ,IEmailDataService emailDataService, ILeadTypeService leadTypeService, IEmailTypeService emailTypeService, ICompanyTypeService companyTypeService, IContactTypeService contactTypeService, IRelationshipService relationshipService, IActivityTypeService activityTypeService, IEmailCategoryService emailCategoryService, IMeetingPurposeService meetingPurposeService, ICallTypeService callTypeService, ICallPurposeService callPurposeService, ICallOutcomeService callOutcomeService, ICampaignTypeService campaignTypeService)
         {
             _service = service;
             _countryService = countryService;
@@ -68,6 +69,7 @@ namespace CRM_API.Controllers
             _activityTypeService = activityTypeService;
             _emailCategoryService = emailCategoryService;
             _meetingPurposeService = meetingPurposeService;
+            _campaignTypeService = campaignTypeService;
             _callTypeService = callTypeService;
             _callPurposeService = callPurposeService;
             _callOutcomeService = callOutcomeService;
@@ -1017,6 +1019,41 @@ namespace CRM_API.Controllers
         public async Task<IActionResult> GetCallOutcomeById(int id)
         {
             return Ok(await _callOutcomeService.GetCallOutcomeById(id));
+        }
+
+        #endregion
+
+
+        #region CAMPAIGN TYPE
+
+        [HttpPost("createcampaigntype")]
+        public async Task<IActionResult> CreateCampaignType(CampaignTypeDto dto)
+        {
+            return Ok(await _campaignTypeService.CreateCampaignType(dto));
+        }
+
+        [HttpPost("updatecampaigntype")]
+        public async Task<IActionResult> UpdateCampaignType(CampaignTypeDto dto)
+        {
+            return Ok(await _campaignTypeService.UpdateCampaignType(dto));
+        }
+
+        [HttpPost("deletecampaigntype/{id}")]
+        public async Task<IActionResult> DeleteCampaignType(int id)
+        {
+            return Ok(await _campaignTypeService.DeleteCampaignType(id));
+        }
+
+        [HttpGet("getallcampaigntype")]
+        public async Task<IActionResult> GetCampaignTypes()
+        {
+            return Ok(await _campaignTypeService.GetCampaignTypes());
+        }
+
+        [HttpGet("getbycampaigntype/{id}")]
+        public async Task<IActionResult> GetCampaignTypeById(int id)
+        {
+            return Ok(await _campaignTypeService.GetCampaignTypeById(id));
         }
 
         #endregion

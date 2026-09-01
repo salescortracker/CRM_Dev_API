@@ -1,10 +1,12 @@
 using Business_Layer.Interfaces;
+using Business_Layer.Interfaces.Adminsevices;
 using Business_Layer.Interfaces.AuditLog;
 using Business_Layer.Interfaces.CommonInterfaces;
 using Business_Layer.Interfaces.EmailService;
 using Business_Layer.Interfaces.MasterIInterface;
 using Business_Layer.Interfaces.SuperAdminInterface;
 using Business_Layer.Interfaces.User;
+using Business_Layer.Services.Adminservices;
 using Business_Layer.Services.AuditLog;
 using Business_Layer.Services.Auth;
 using Business_Layer.Services.CommonServices;
@@ -129,6 +131,7 @@ builder.Services.AddScoped<IActivityTypeService, ActivityTypeService>();
 builder.Services.AddScoped<IEmailCategoryService, EmailCategoryService>();
 builder.Services.AddScoped<IEmailDataService, EmailDataService>();
 builder.Services.AddScoped<IMeetingPurposeService, MeetingPurposeService>();
+builder.Services.AddScoped<ICampaignTypeService, CampaignTypeService>();
 builder.Services.AddScoped<ICallTypeService, CallTypeService>();
 builder.Services.AddScoped<ICallPurposeService, CallPurposeService>();
 builder.Services.AddScoped<ICallOutcomeService, CallOutcomeService>();
@@ -137,6 +140,7 @@ builder.Services.AddScoped<ICompanyInformationService, CompanyInformationService
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IWorkflowAndAutomation, WorkflowAndAutomation>();
 builder.Services.AddScoped<ICommunicationService, CommunicationService>();
+builder.Services.AddScoped<IMarketingService, MarketingService>();
 
 // ======================================================
 // COMMON UserId  (ADD THIS HERE)

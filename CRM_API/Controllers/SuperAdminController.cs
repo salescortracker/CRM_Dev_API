@@ -1,4 +1,6 @@
-﻿using Business_Layer.DTOs.SuperAdmin;
+﻿using Business_Layer.DTOs.Admin;
+using Business_Layer.DTOs.SuperAdmin;
+using Business_Layer.Interfaces.Adminsevices;
 using Business_Layer.Interfaces.SuperAdminInterface;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,15 +17,18 @@ namespace CRM_API.Controllers
         private readonly IWebHostEnvironment _env;
         private readonly IWorkflowAndAutomation _workflowAndAutomation;
         private readonly ICommunicationService _communicationService;
+        private readonly IMarketingService _marketingService;
         //private readonly IModuleConfigurationService _moduleConfigurationService;
 
-        public SuperAdminController(IPlanService planService, IOrganizationService organizationService, IWebHostEnvironment env, IWorkflowAndAutomation workflowAndAutomation, ICommunicationService communicationService)
+        public SuperAdminController(IPlanService planService, IOrganizationService organizationService, IWebHostEnvironment env, IWorkflowAndAutomation workflowAndAutomation, ICommunicationService communicationService
+            ,IMarketingService marketingService)
         {
             _planService = planService;
             _organizationService = organizationService;
             _env = env;
             _workflowAndAutomation = workflowAndAutomation;
             _communicationService = communicationService;
+            _marketingService = marketingService;
         }
 
         #region SUBSCRIPTION PLAN
@@ -1252,6 +1257,177 @@ namespace CRM_API.Controllers
         #endregion
         #endregion
 
+        #region CAMPAIGN
+
+        [HttpPost("createcampaign")]
+        public async Task<IActionResult> CreateCampaign(CampaignDto dto)
+        {
+            return Ok(await _marketingService.CreateCampaign(dto));
+        }
+
+        [HttpPost("updatecampaign")]
+        public async Task<IActionResult> UpdateCampaign(CampaignDto dto)
+        {
+            return Ok(await _marketingService.UpdateCampaign(dto));
+        }
+
+        [HttpPost("deletecampaign/{id}")]
+        public async Task<IActionResult> DeleteCampaign(int id)
+        {
+            return Ok(await _marketingService.DeleteCampaign(id));
+        }
+
+        [HttpGet("getallcampaign")]
+        public async Task<IActionResult> GetCampaigns()
+        {
+            return Ok(await _marketingService.GetCampaigns());
+        }
+
+        [HttpGet("getbycampaign/{id}")]
+        public async Task<IActionResult> GetCampaignById(int id)
+        {
+            return Ok(await _marketingService.GetCampaignById(id));
+        }
+
+        #endregion
+
+
+        #region EMAIL CAMPAIGN
+
+        [HttpPost("createemailcampaign")]
+        public async Task<IActionResult> CreateEmailCampaign(EmailCampaignDto dto)
+        {
+            return Ok(await _marketingService.CreateEmailCampaign(dto));
+        }
+
+        [HttpPost("updateemailcampaign")]
+        public async Task<IActionResult> UpdateEmailCampaign(EmailCampaignDto dto)
+        {
+            return Ok(await _marketingService.UpdateEmailCampaign(dto));
+        }
+
+        [HttpPost("deleteemailcampaign/{id}")]
+        public async Task<IActionResult> DeleteEmailCampaign(int id)
+        {
+            return Ok(await _marketingService.DeleteEmailCampaign(id));
+        }
+
+        [HttpGet("getallemailcampaign")]
+        public async Task<IActionResult> GetEmailCampaigns()
+        {
+            return Ok(await _marketingService.GetEmailCampaigns());
+        }
+
+        [HttpGet("getbyemailcampaign/{id}")]
+        public async Task<IActionResult> GetEmailCampaignById(int id)
+        {
+            return Ok(await _marketingService.GetEmailCampaignById(id));
+        }
+
+        #endregion
+
+        #region SMS CAMPAIGN
+
+        [HttpPost("createsmsCampaign")]
+        public async Task<IActionResult> CreateSmsCampaign(SmsCampaignDto dto)
+        {
+            return Ok(await _marketingService.CreateSmsCampaign(dto));
+        }
+
+        [HttpPost("updatesmsCampaign")]
+        public async Task<IActionResult> UpdateSmsCampaign(SmsCampaignDto dto)
+        {
+            return Ok(await _marketingService.UpdateSmsCampaign(dto));
+        }
+
+        [HttpPost("deletesmsCampaign/{id}")]
+        public async Task<IActionResult> DeleteSmsCampaign(int id)
+        {
+            return Ok(await _marketingService.DeleteSmsCampaign(id));
+        }
+
+        [HttpGet("getallsmsCampaign")]
+        public async Task<IActionResult> GetSmsCampaigns()
+        {
+            return Ok(await _marketingService.GetSmsCampaigns());
+        }
+
+        [HttpGet("getbysmsCampaign/{id}")]
+        public async Task<IActionResult> GetSmsCampaignById(int id)
+        {
+            return Ok(await _marketingService.GetSmsCampaignById(id));
+        }
+
+        #endregion
+
+
+        #region WHATSAPP CAMPAIGN
+
+        [HttpPost("createwhatsappcampaign")]
+        public async Task<IActionResult> CreateWhatsAppCampaign(WhatsAppCampaignDto dto)
+        {
+            return Ok(await _marketingService.CreateWhatsAppCampaign(dto));
+        }
+
+        [HttpPost("updatewhatsappcampaign")]
+        public async Task<IActionResult> UpdateWhatsAppCampaign(WhatsAppCampaignDto dto)
+        {
+            return Ok(await _marketingService.UpdateWhatsAppCampaign(dto));
+        }
+
+        [HttpPost("deletewhatsappcampaign/{id}")]
+        public async Task<IActionResult> DeleteWhatsAppCampaign(int id)
+        {
+            return Ok(await _marketingService.DeleteWhatsAppCampaign(id));
+        }
+
+        [HttpGet("getallwhatsappcampaign")]
+        public async Task<IActionResult> GetWhatsAppCampaigns()
+        {
+            return Ok(await _marketingService.GetWhatsAppCampaigns());
+        }
+
+        [HttpGet("getbywhatsappcampaign/{id}")]
+        public async Task<IActionResult> GetWhatsAppCampaignById(int id)
+        {
+            return Ok(await _marketingService.GetWhatsAppCampaignById(id));
+        }
+
+        #endregion
+
+        #region MARKETING LIST
+
+        [HttpPost("createmarketinglist")]
+        public async Task<IActionResult> CreateMarketingList(MarketingListDto dto)
+        {
+            return Ok(await _marketingService.CreateMarketingList(dto));
+        }
+
+        [HttpPost("updatemarketinglist")]
+        public async Task<IActionResult> UpdateMarketingList(MarketingListDto dto)
+        {
+            return Ok(await _marketingService.UpdateMarketingList(dto));
+        }
+
+        [HttpPost("deletemarketinglist/{id}")]
+        public async Task<IActionResult> DeleteMarketingList(int id)
+        {
+            return Ok(await _marketingService.DeleteMarketingList(id));
+        }
+
+        [HttpGet("getallmarketinglist")]
+        public async Task<IActionResult> GetMarketingLists()
+        {
+            return Ok(await _marketingService.GetMarketingLists());
+        }
+
+        [HttpGet("getbymarketinglist/{id}")]
+        public async Task<IActionResult> GetMarketingListById(int id)
+        {
+            return Ok(await _marketingService.GetMarketingListById(id));
+        }
+
+        #endregion
 
     }
 }

@@ -52,6 +52,10 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<CallingCampaignLead> CallingCampaignLeads { get; set; }
 
+    public virtual DbSet<Campaign> Campaigns { get; set; }
+
+    public virtual DbSet<CampaignType> CampaignTypes { get; set; }
+
     public virtual DbSet<CommunicationEmail> CommunicationEmails { get; set; }
 
     public virtual DbSet<CommunicationEmailTemplate> CommunicationEmailTemplates { get; set; }
@@ -112,6 +116,8 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<EmailAutomationRecipient> EmailAutomationRecipients { get; set; }
 
+    public virtual DbSet<EmailCampaign> EmailCampaigns { get; set; }
+
     public virtual DbSet<EmailCategory> EmailCategories { get; set; }
 
     public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
@@ -127,6 +133,24 @@ public partial class CRMContext : DbContext
     public virtual DbSet<GoLiveChecklist> GoLiveChecklists { get; set; }
 
     public virtual DbSet<Industry> Industries { get; set; }
+
+    public virtual DbSet<IntegrationApi> IntegrationApis { get; set; }
+
+    public virtual DbSet<IntegrationApiKey> IntegrationApiKeys { get; set; }
+
+    public virtual DbSet<IntegrationBankingBilling> IntegrationBankingBillings { get; set; }
+
+    public virtual DbSet<IntegrationEmail> IntegrationEmails { get; set; }
+
+    public virtual DbSet<IntegrationPaymentGateway> IntegrationPaymentGateways { get; set; }
+
+    public virtual DbSet<IntegrationThirdParty> IntegrationThirdParties { get; set; }
+
+    public virtual DbSet<IntegrationTwilio> IntegrationTwilios { get; set; }
+
+    public virtual DbSet<IntegrationWebhook> IntegrationWebhooks { get; set; }
+
+    public virtual DbSet<IntegrationWhatsApp> IntegrationWhatsApps { get; set; }
 
     public virtual DbSet<Invoice> Invoices { get; set; }
 
@@ -157,6 +181,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<LeadType> LeadTypes { get; set; }
 
     public virtual DbSet<License> Licenses { get; set; }
+
+    public virtual DbSet<MarketingList> MarketingLists { get; set; }
 
     public virtual DbSet<MeetingPurpose> MeetingPurposes { get; set; }
 
@@ -240,6 +266,8 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<Slasetting> Slasettings { get; set; }
 
+    public virtual DbSet<Smscampaign> Smscampaigns { get; set; }
+
     public virtual DbSet<Smstemplate> Smstemplates { get; set; }
 
     public virtual DbSet<StateMaster> StateMasters { get; set; }
@@ -293,6 +321,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<UserLogin> UserLogins { get; set; }
 
     public virtual DbSet<UserRole> UserRoles { get; set; }
+
+    public virtual DbSet<WhatsAppCampaign> WhatsAppCampaigns { get; set; }
 
     public virtual DbSet<WhatsAppTemplate> WhatsAppTemplates { get; set; }
 
@@ -776,6 +806,42 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.LeadId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CRM_CallingCampaignLeads_Leads");
+        });
+
+        modelBuilder.Entity<Campaign>(entity =>
+        {
+            entity.ToTable("Campaign", "Marketing");
+
+            entity.Property(e => e.CampaignName).HasMaxLength(200);
+            entity.Property(e => e.CampaignType).HasMaxLength(50);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.EndDate).HasColumnType("datetime");
+            entity.Property(e => e.StartDate).HasColumnType("datetime");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Draft");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<CampaignType>(entity =>
+        {
+            entity.HasKey(e => e.CampaignTypeId).HasName("PK__Campaign__68FE27902797902E");
+
+            entity.ToTable("CampaignType", "Masters");
+
+            entity.Property(e => e.CampaignTypeId).HasColumnName("CampaignTypeID");
+            entity.Property(e => e.CampaignTypeCode).HasMaxLength(150);
+            entity.Property(e => e.CampaignTypeName).HasMaxLength(150);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
         });
 
         modelBuilder.Entity<CommunicationEmail>(entity =>
@@ -1829,6 +1895,25 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_EmailAutomationRecipients_EmailAutomations");
         });
 
+        modelBuilder.Entity<EmailCampaign>(entity =>
+        {
+            entity.ToTable("EmailCampaign", "Marketing");
+
+            entity.Property(e => e.CampaignName).HasMaxLength(200);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.FromEmail).HasMaxLength(250);
+            entity.Property(e => e.FromName).HasMaxLength(200);
+            entity.Property(e => e.ReplyToEmail).HasMaxLength(250);
+            entity.Property(e => e.ScheduledDate).HasColumnType("datetime");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Draft");
+            entity.Property(e => e.Subject).HasMaxLength(500);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+        });
+
         modelBuilder.Entity<EmailCategory>(entity =>
         {
             entity.HasKey(e => e.EmailCategoryId).HasName("PK__EmailCat__7DD10E15B6CAC68A");
@@ -2043,6 +2128,221 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
             entity.Property(e => e.RegionId).HasColumnName("RegionID");
+        });
+
+        modelBuilder.Entity<IntegrationApi>(entity =>
+        {
+            entity.ToTable("IntegrationApi", "Superadmin");
+
+            entity.Property(e => e.ApiCode).HasMaxLength(100);
+            entity.Property(e => e.ApiKey).HasMaxLength(500);
+            entity.Property(e => e.ApiName).HasMaxLength(150);
+            entity.Property(e => e.ApiVersion).HasMaxLength(50);
+            entity.Property(e => e.AuthenticationType).HasMaxLength(50);
+            entity.Property(e => e.BaseUrl).HasMaxLength(500);
+            entity.Property(e => e.BearerToken).HasMaxLength(1000);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.Environment)
+                .HasMaxLength(50)
+                .HasDefaultValue("Production");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LastTestedOn).HasColumnType("datetime");
+            entity.Property(e => e.Password).HasMaxLength(500);
+            entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+            entity.Property(e => e.Username).HasMaxLength(250);
+        });
+
+        modelBuilder.Entity<IntegrationApiKey>(entity =>
+        {
+            entity.ToTable("IntegrationApiKey", "Superadmin");
+
+            entity.Property(e => e.ApiKey).HasMaxLength(1000);
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.Environment)
+                .HasMaxLength(50)
+                .HasDefaultValue("Production");
+            entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.KeyCode).HasMaxLength(100);
+            entity.Property(e => e.KeyName).HasMaxLength(150);
+            entity.Property(e => e.LastUsedOn).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<IntegrationBankingBilling>(entity =>
+        {
+            entity.ToTable("IntegrationBankingBilling", "Superadmin");
+
+            entity.Property(e => e.AccountNumber).HasMaxLength(100);
+            entity.Property(e => e.ApiBaseUrl).HasMaxLength(500);
+            entity.Property(e => e.ApiKey).HasMaxLength(500);
+            entity.Property(e => e.ApiSecret).HasMaxLength(500);
+            entity.Property(e => e.ConfigurationName).HasMaxLength(150);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Environment)
+                .HasMaxLength(50)
+                .HasDefaultValue("Sandbox");
+            entity.Property(e => e.IntegrationType).HasMaxLength(100);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LastTestedOn).HasColumnType("datetime");
+            entity.Property(e => e.MerchantId).HasMaxLength(200);
+            entity.Property(e => e.ProviderName).HasMaxLength(100);
+            entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+            entity.Property(e => e.WebhookUrl).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<IntegrationEmail>(entity =>
+        {
+            entity.ToTable("IntegrationEmail", "Superadmin");
+
+            entity.Property(e => e.ConfigurationName).HasMaxLength(150);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.EnableAuthentication).HasDefaultValue(true);
+            entity.Property(e => e.EncryptionType).HasMaxLength(50);
+            entity.Property(e => e.FromEmail).HasMaxLength(250);
+            entity.Property(e => e.FromName).HasMaxLength(150);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LastTestedOn).HasColumnType("datetime");
+            entity.Property(e => e.Password).HasMaxLength(500);
+            entity.Property(e => e.ProviderName).HasMaxLength(100);
+            entity.Property(e => e.SmtpHost).HasMaxLength(250);
+            entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+            entity.Property(e => e.Username).HasMaxLength(250);
+        });
+
+        modelBuilder.Entity<IntegrationPaymentGateway>(entity =>
+        {
+            entity.ToTable("IntegrationPaymentGateway", "Superadmin");
+
+            entity.Property(e => e.ApiKey).HasMaxLength(500);
+            entity.Property(e => e.ApiSecret).HasMaxLength(500);
+            entity.Property(e => e.ClientId).HasMaxLength(500);
+            entity.Property(e => e.ClientSecret).HasMaxLength(500);
+            entity.Property(e => e.ConfigurationName).HasMaxLength(150);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.CurrencyCode).HasMaxLength(10);
+            entity.Property(e => e.Environment)
+                .HasMaxLength(50)
+                .HasDefaultValue("Sandbox");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LastTestedOn).HasColumnType("datetime");
+            entity.Property(e => e.MerchantId).HasMaxLength(200);
+            entity.Property(e => e.ProviderName).HasMaxLength(100);
+            entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+            entity.Property(e => e.WebhookUrl).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<IntegrationThirdParty>(entity =>
+        {
+            entity.ToTable("IntegrationThirdParty", "Superadmin");
+
+            entity.Property(e => e.ApiBaseUrl).HasMaxLength(1000);
+            entity.Property(e => e.ApiKey).HasMaxLength(1000);
+            entity.Property(e => e.AuthorizationUrl).HasMaxLength(1000);
+            entity.Property(e => e.ClientId).HasMaxLength(500);
+            entity.Property(e => e.ClientSecret).HasMaxLength(1000);
+            entity.Property(e => e.ConfigurationName).HasMaxLength(150);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Environment)
+                .HasMaxLength(50)
+                .HasDefaultValue("Production");
+            entity.Property(e => e.IntegrationType).HasMaxLength(100);
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LastTestedOn).HasColumnType("datetime");
+            entity.Property(e => e.ProviderName).HasMaxLength(150);
+            entity.Property(e => e.RedirectUrl).HasMaxLength(1000);
+            entity.Property(e => e.TokenUrl).HasMaxLength(1000);
+            entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<IntegrationTwilio>(entity =>
+        {
+            entity.ToTable("IntegrationTwilio", "Superadmin");
+
+            entity.Property(e => e.AccountSid).HasMaxLength(100);
+            entity.Property(e => e.AuthToken).HasMaxLength(500);
+            entity.Property(e => e.ConfigurationName).HasMaxLength(150);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.IsSmsEnabled).HasDefaultValue(true);
+            entity.Property(e => e.IsVoiceEnabled).HasDefaultValue(true);
+            entity.Property(e => e.IsWhatsAppEnabled).HasDefaultValue(true);
+            entity.Property(e => e.LastTestedOn).HasColumnType("datetime");
+            entity.Property(e => e.MessagingServiceSid).HasMaxLength(100);
+            entity.Property(e => e.SmsFromNumber).HasMaxLength(50);
+            entity.Property(e => e.TwimlAppSid).HasMaxLength(100);
+            entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+            entity.Property(e => e.VoiceApplicationSid).HasMaxLength(100);
+            entity.Property(e => e.VoiceFromNumber).HasMaxLength(50);
+            entity.Property(e => e.WebhookUrl).HasMaxLength(500);
+            entity.Property(e => e.WhatsAppFromNumber).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<IntegrationWebhook>(entity =>
+        {
+            entity.ToTable("IntegrationWebhook", "Superadmin");
+
+            entity.Property(e => e.AuthenticationToken).HasMaxLength(1000);
+            entity.Property(e => e.AuthenticationType).HasMaxLength(50);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.EndpointUrl).HasMaxLength(1000);
+            entity.Property(e => e.HttpMethod)
+                .HasMaxLength(20)
+                .HasDefaultValue("POST");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LastTestedOn).HasColumnType("datetime");
+            entity.Property(e => e.SecretKey).HasMaxLength(500);
+            entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+            entity.Property(e => e.WebhookCode).HasMaxLength(100);
+            entity.Property(e => e.WebhookName).HasMaxLength(150);
+        });
+
+        modelBuilder.Entity<IntegrationWhatsApp>(entity =>
+        {
+            entity.ToTable("IntegrationWhatsApp", "Superadmin");
+
+            entity.Property(e => e.AccountId).HasMaxLength(150);
+            entity.Property(e => e.ApiBaseUrl).HasMaxLength(500);
+            entity.Property(e => e.ApiKey).HasMaxLength(500);
+            entity.Property(e => e.ApiSecret).HasMaxLength(500);
+            entity.Property(e => e.BusinessAccountId).HasMaxLength(150);
+            entity.Property(e => e.ConfigurationName).HasMaxLength(150);
+            entity.Property(e => e.ConnectionStatus).HasMaxLength(50);
+            entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.LastTestedOn).HasColumnType("datetime");
+            entity.Property(e => e.PhoneNumber).HasMaxLength(100);
+            entity.Property(e => e.ProviderName).HasMaxLength(100);
+            entity.Property(e => e.UpdatedOn).HasColumnType("datetime");
+            entity.Property(e => e.WebhookUrl).HasMaxLength(500);
         });
 
         modelBuilder.Entity<Invoice>(entity =>
@@ -2665,6 +2965,25 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.LicenseName).HasMaxLength(150);
             entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
             entity.Property(e => e.RegionId).HasColumnName("RegionID");
+        });
+
+        modelBuilder.Entity<MarketingList>(entity =>
+        {
+            entity.ToTable("MarketingList", "Marketing");
+
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.ListName).HasMaxLength(200);
+            entity.Property(e => e.ListType)
+                .HasMaxLength(50)
+                .HasDefaultValue("Static");
+            entity.Property(e => e.Source).HasMaxLength(50);
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Active");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<MeetingPurpose>(entity =>
@@ -4348,6 +4667,24 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_CRM_SLASettings_User");
         });
 
+        modelBuilder.Entity<Smscampaign>(entity =>
+        {
+            entity.ToTable("SMSCampaign", "Marketing");
+
+            entity.Property(e => e.SmscampaignId).HasColumnName("SMSCampaignId");
+            entity.Property(e => e.CampaignName).HasMaxLength(200);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ScheduledDate).HasColumnType("datetime");
+            entity.Property(e => e.Sender).HasMaxLength(100);
+            entity.Property(e => e.SmstemplateId).HasColumnName("SMSTemplateId");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Draft");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+        });
+
         modelBuilder.Entity<Smstemplate>(entity =>
         {
             entity.HasKey(e => e.SmstemplateId).HasName("PK_CRM_SMSTemplates");
@@ -5839,6 +6176,24 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Security_UserRoles_Users");
+        });
+
+        modelBuilder.Entity<WhatsAppCampaign>(entity =>
+        {
+            entity.ToTable("WhatsAppCampaign", "Marketing");
+
+            entity.Property(e => e.CampaignName).HasMaxLength(200);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Language).HasMaxLength(50);
+            entity.Property(e => e.MediaType).HasMaxLength(50);
+            entity.Property(e => e.MediaUrl).HasMaxLength(1000);
+            entity.Property(e => e.ScheduledDate).HasColumnType("datetime");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Draft");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<WhatsAppTemplate>(entity =>
