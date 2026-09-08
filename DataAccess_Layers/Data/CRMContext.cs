@@ -88,6 +88,20 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<CreditNote> CreditNotes { get; set; }
 
+    public virtual DbSet<CrmmoduleConfigurationActivityType> CrmmoduleConfigurationActivityTypes { get; set; }
+
+    public virtual DbSet<CrmmoduleConfigurationCustomField> CrmmoduleConfigurationCustomFields { get; set; }
+
+    public virtual DbSet<CrmmoduleConfigurationIndustry> CrmmoduleConfigurationIndustries { get; set; }
+
+    public virtual DbSet<CrmmoduleConfigurationNumberSeries> CrmmoduleConfigurationNumberSeries { get; set; }
+
+    public virtual DbSet<CrmmoduleConfigurationSalesTarget> CrmmoduleConfigurationSalesTargets { get; set; }
+
+    public virtual DbSet<CrmmoduleConfigurationSource> CrmmoduleConfigurationSources { get; set; }
+
+    public virtual DbSet<CrmmoduleConfigurationTerritory> CrmmoduleConfigurationTerritories { get; set; }
+
     public virtual DbSet<Currency> Currencies { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
@@ -170,6 +184,8 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<LeadNote> LeadNotes { get; set; }
 
+    public virtual DbSet<LeadSetting> LeadSettings { get; set; }
+
     public virtual DbSet<LeadSource> LeadSources { get; set; }
 
     public virtual DbSet<LeadSourceDatum> LeadSourceData { get; set; }
@@ -204,6 +220,8 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<OpportunityStage> OpportunityStages { get; set; }
 
+    public virtual DbSet<OpportunityStage1> OpportunityStages1 { get; set; }
+
     public virtual DbSet<Organization> Organizations { get; set; }
 
     public virtual DbSet<OrganizationDatum> OrganizationData { get; set; }
@@ -217,6 +235,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<PaymentTransaction> PaymentTransactions { get; set; }
 
     public virtual DbSet<Permission> Permissions { get; set; }
+
+    public virtual DbSet<PipelineSetting> PipelineSettings { get; set; }
 
     public virtual DbSet<PlanFeature> PlanFeatures { get; set; }
 
@@ -1372,6 +1392,134 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CRM_CreditNotes_User");
+        });
+
+        modelBuilder.Entity<CrmmoduleConfigurationActivityType>(entity =>
+        {
+            entity.HasKey(e => e.ActivityTypeId).HasName("PK__CRMModul__95CEDE0E903DC95F");
+
+            entity.ToTable("CRMModuleConfigurationActivityTypes", "Superadmin");
+
+            entity.Property(e => e.ActivityCode).HasMaxLength(50);
+            entity.Property(e => e.ActivityName).HasMaxLength(150);
+            entity.Property(e => e.Category).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
+        });
+
+        modelBuilder.Entity<CrmmoduleConfigurationCustomField>(entity =>
+        {
+            entity.HasKey(e => e.CustomFieldId).HasName("PK__CRMModul__403326B40E726B40");
+
+            entity.ToTable("CRMModuleConfigurationCustomFields", "Superadmin");
+
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.DefaultValue).HasMaxLength(500);
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.DisplayLabel).HasMaxLength(150);
+            entity.Property(e => e.FieldName).HasMaxLength(150);
+            entity.Property(e => e.FieldOrder).HasDefaultValue(1);
+            entity.Property(e => e.FieldType).HasMaxLength(50);
+            entity.Property(e => e.ModuleName).HasMaxLength(100);
+            entity.Property(e => e.Placeholder).HasMaxLength(250);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
+        });
+
+        modelBuilder.Entity<CrmmoduleConfigurationIndustry>(entity =>
+        {
+            entity.HasKey(e => e.IndustryId).HasName("PK__CRMModul__808DEDCCF62EE6CC");
+
+            entity.ToTable("CRMModuleConfigurationIndustries", "Superadmin");
+
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.IndustryCategory).HasMaxLength(100);
+            entity.Property(e => e.IndustryCode).HasMaxLength(50);
+            entity.Property(e => e.IndustryName).HasMaxLength(150);
+            entity.Property(e => e.Priority).HasMaxLength(20);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
+        });
+
+        modelBuilder.Entity<CrmmoduleConfigurationNumberSeries>(entity =>
+        {
+            entity.HasKey(e => e.NumberSeriesId).HasName("PK__CRMModul__89F27242EE273938");
+
+            entity.ToTable("CRMModuleConfigurationNumberSeries", "Superadmin");
+
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.CurrentNumber).HasDefaultValue(1L);
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.ModuleName).HasMaxLength(100);
+            entity.Property(e => e.NumberFormat).HasMaxLength(100);
+            entity.Property(e => e.Prefix).HasMaxLength(50);
+            entity.Property(e => e.SeriesName).HasMaxLength(150);
+            entity.Property(e => e.StartingNumber).HasDefaultValue(1L);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
+        });
+
+        modelBuilder.Entity<CrmmoduleConfigurationSalesTarget>(entity =>
+        {
+            entity.HasKey(e => e.SalesTargetId).HasName("PK__CRMModul__8964FAA9DFBEC19A");
+
+            entity.ToTable("CRMModuleConfigurationSalesTargets", "Superadmin");
+
+            entity.Property(e => e.AchievedAmount).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.Department).HasMaxLength(100);
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.EmployeeName).HasMaxLength(150);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
+            entity.Property(e => e.TargetAmount).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.TargetCode).HasMaxLength(50);
+            entity.Property(e => e.TargetName).HasMaxLength(150);
+            entity.Property(e => e.TargetPeriod).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<CrmmoduleConfigurationSource>(entity =>
+        {
+            entity.HasKey(e => e.SourceId).HasName("PK__CRMModul__16E0191923E420E8");
+
+            entity.ToTable("CRMModuleConfigurationSources", "Superadmin");
+
+            entity.Property(e => e.Category).HasMaxLength(100);
+            entity.Property(e => e.ConversionRate).HasColumnType("decimal(5, 2)");
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.Priority).HasMaxLength(20);
+            entity.Property(e => e.SourceCode).HasMaxLength(50);
+            entity.Property(e => e.SourceName).HasMaxLength(150);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
+        });
+
+        modelBuilder.Entity<CrmmoduleConfigurationTerritory>(entity =>
+        {
+            entity.HasKey(e => e.TerritoryId).HasName("PK__CRMModul__2BECD2C4C7D3DD4E");
+
+            entity.ToTable("CRMModuleConfigurationTerritories", "Superadmin");
+
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.Priority).HasMaxLength(20);
+            entity.Property(e => e.Region).HasMaxLength(100);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
+            entity.Property(e => e.TerritoryCode).HasMaxLength(50);
+            entity.Property(e => e.TerritoryManager).HasMaxLength(150);
+            entity.Property(e => e.TerritoryName).HasMaxLength(150);
         });
 
         modelBuilder.Entity<Currency>(entity =>
@@ -2822,6 +2970,24 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_CRM_LeadNotes_Leads");
         });
 
+        modelBuilder.Entity<LeadSetting>(entity =>
+        {
+            entity.HasKey(e => e.LeadSettingId).HasName("PK__LeadSett__BEA728B045289AC3");
+
+            entity.ToTable("LeadSettings", "Superadmin");
+
+            entity.Property(e => e.AssignmentRule).HasMaxLength(50);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.LeadPriority).HasMaxLength(20);
+            entity.Property(e => e.LeadStatus).HasMaxLength(50);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.SettingName).HasMaxLength(150);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
+        });
+
         modelBuilder.Entity<LeadSource>(entity =>
         {
             entity.HasKey(e => e.LeadSourceId).HasName("PK_CRM_LeadSources");
@@ -3386,6 +3552,23 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_CRM_OpportunityStages_Organizations");
         });
 
+        modelBuilder.Entity<OpportunityStage1>(entity =>
+        {
+            entity.HasKey(e => e.OpportunityStageId).HasName("PK__Opportun__786803BC9FEABC4B");
+
+            entity.ToTable("OpportunityStages", "Superadmin");
+
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.ForecastCategory).HasMaxLength(50);
+            entity.Property(e => e.StageCode).HasMaxLength(50);
+            entity.Property(e => e.StageName).HasMaxLength(150);
+            entity.Property(e => e.StageOrder).HasDefaultValue(1);
+            entity.Property(e => e.StageType).HasMaxLength(50);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
+        });
+
         modelBuilder.Entity<Organization>(entity =>
         {
             entity.HasKey(e => e.OrganizationId).HasName("PK_Masters_Organizations");
@@ -3704,6 +3887,24 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.PermissionCode).HasMaxLength(150);
             entity.Property(e => e.ScreenName).HasMaxLength(150);
             entity.Property(e => e.Status).HasDefaultValue((byte)1);
+        });
+
+        modelBuilder.Entity<PipelineSetting>(entity =>
+        {
+            entity.HasKey(e => e.PipelineSettingId).HasName("PK__Pipeline__6859A64698DDD2A7");
+
+            entity.ToTable("PipelineSettings", "Superadmin");
+
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.PipelineCode).HasMaxLength(50);
+            entity.Property(e => e.PipelineName).HasMaxLength(150);
+            entity.Property(e => e.PipelineType).HasMaxLength(50);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
         });
 
         modelBuilder.Entity<PlanFeature>(entity =>

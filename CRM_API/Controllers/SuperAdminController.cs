@@ -2,9 +2,14 @@
 using Business_Layer.DTOs.SuperAdmin;
 using Business_Layer.Interfaces.Adminsevices;
 using Business_Layer.Interfaces.SuperAdminInterface;
+using DataAccess_Layers.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Serilog;
+using Shared.CommonModels;
+using Shared.Exceptions;
 
 namespace CRM_API.Controllers
 {
@@ -18,10 +23,10 @@ namespace CRM_API.Controllers
         private readonly IWorkflowAndAutomation _workflowAndAutomation;
         private readonly ICommunicationService _communicationService;
         private readonly IMarketingService _marketingService;
-        //private readonly IModuleConfigurationService _moduleConfigurationService;
+        private readonly IModuleConfigurationService _moduleConfigurationService;
 
         public SuperAdminController(IPlanService planService, IOrganizationService organizationService, IWebHostEnvironment env, IWorkflowAndAutomation workflowAndAutomation, ICommunicationService communicationService
-            ,IMarketingService marketingService)
+            ,IMarketingService marketingService, IModuleConfigurationService moduleConfigurationService)
         {
             _planService = planService;
             _organizationService = organizationService;
@@ -29,6 +34,7 @@ namespace CRM_API.Controllers
             _workflowAndAutomation = workflowAndAutomation;
             _communicationService = communicationService;
             _marketingService = marketingService;
+            _moduleConfigurationService = moduleConfigurationService;
         }
 
         #region SUBSCRIPTION PLAN
@@ -1427,6 +1433,501 @@ namespace CRM_API.Controllers
             return Ok(await _marketingService.GetMarketingListById(id));
         }
 
+        #endregion
+
+        #region CRM Module Configuration
+        #region Lead Setting CRUD
+
+        [HttpPost("createleadsetting")]
+        public async Task<IActionResult> CreateLeadSetting(
+            LeadSettingDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService.CreateLeadSetting(dto)
+            );
+        }
+
+
+        [HttpPost("updateleadsetting")]
+        public async Task<IActionResult> UpdateLeadSetting(
+            LeadSettingDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService.UpdateLeadSetting(dto)
+            );
+        }
+
+
+        [HttpPost("deleteleadsetting/{id}")]
+        public async Task<IActionResult> DeleteLeadSetting(
+            int id)
+        {
+            return Ok(
+                await _moduleConfigurationService.DeleteLeadSetting(id)
+            );
+        }
+
+
+        [HttpGet("getallleadsetting")]
+        public async Task<IActionResult> GetLeadSettings()
+        {
+            return Ok(
+                await _moduleConfigurationService.GetLeadSettings()
+            );
+        }
+
+
+        [HttpGet("getbyleadsetting/{id}")]
+        public async Task<IActionResult> GetLeadSettingById(
+            int id)
+        {
+            return Ok(
+                await _moduleConfigurationService.GetLeadSettingById(id)
+            );
+        }
+
+        #endregion
+        #region Pipeline Setting CRUD
+
+        [HttpPost("createpipelinesetting")]
+        public async Task<IActionResult> CreatePipelineSetting(
+            PipelineSettingDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .CreatePipelineSetting(dto)
+            );
+        }
+
+
+        [HttpPost("updatepipelinesetting")]
+        public async Task<IActionResult> UpdatePipelineSetting(
+            PipelineSettingDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .UpdatePipelineSetting(dto)
+            );
+        }
+
+
+        [HttpPost("deletepipelinesetting/{id}")]
+        public async Task<IActionResult> DeletePipelineSetting(
+            int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .DeletePipelineSetting(id)
+            );
+        }
+
+
+        [HttpGet("getallpipelinesetting")]
+        public async Task<IActionResult> GetPipelineSettings()
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetPipelineSettings()
+            );
+        }
+
+
+        [HttpGet("getbypipelinesetting/{id}")]
+        public async Task<IActionResult> GetPipelineSettingById(
+            int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetPipelineSettingById(id)
+            );
+        }
+
+        #endregion
+        #region Opportunity Stage CRUD
+
+        [HttpPost("createopportunitystage")]
+        public async Task<IActionResult> CreateOpportunityStage(
+            OpportunityStageDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .CreateOpportunityStage(dto)
+            );
+        }
+
+
+        [HttpPost("updateopportunitystage")]
+        public async Task<IActionResult> UpdateOpportunityStage(
+            OpportunityStageDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .UpdateOpportunityStage(dto)
+            );
+        }
+
+
+        [HttpPost("deleteopportunitystage/{id}")]
+        public async Task<IActionResult> DeleteOpportunityStage(
+            int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .DeleteOpportunityStage(id)
+            );
+        }
+
+
+        [HttpGet("getallopportunitystage")]
+        public async Task<IActionResult> GetOpportunityStages()
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetOpportunityStages()
+            );
+        }
+
+
+        [HttpGet("getbyopportunitystage/{id}")]
+        public async Task<IActionResult> GetOpportunityStageById(
+            int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetOpportunityStageById(id)
+            );
+        }
+
+        #endregion
+        #region Activity Type CRUD
+        [HttpPost("createactivitytype")]
+        public async Task<IActionResult> CreateActivityType(
+    CrmActivityTypeDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .CreateActivityType(dto));
+        }
+
+
+        [HttpPost("updateactivitytype")]
+        public async Task<IActionResult> UpdateActivityType(
+            CrmActivityTypeDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .UpdateActivityType(dto));
+        }
+
+
+        [HttpPost("deleteactivitytype/{id}")]
+        public async Task<IActionResult> DeleteActivityType(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .DeleteActivityType(id));
+        }
+
+
+        [HttpGet("getallactivitytype")]
+        public async Task<IActionResult> GetActivityTypes()
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetActivityTypes());
+        }
+
+
+        [HttpGet("getbyidactivitytype/{id}")]
+        public async Task<IActionResult> GetActivityTypeById(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetActivityTypeById(id));
+        }
+        #endregion
+        #region Source CRUD
+        [HttpPost("createsource")]
+        public async Task<IActionResult> CreateSource(
+    CrmSourceDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .CreateSource(dto));
+        }
+
+
+        [HttpPost("updatesource")]
+        public async Task<IActionResult> UpdateSource(
+            CrmSourceDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .UpdateSource(dto));
+        }
+
+
+        [HttpPost("deletesource/{id}")]
+        public async Task<IActionResult> DeleteSource(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .DeleteSource(id));
+        }
+
+
+        [HttpGet("getallsources")]
+        public async Task<IActionResult> GetSources()
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetSources());
+        }
+
+
+        [HttpGet("getbysource/{id}")]
+        public async Task<IActionResult> GetSourceById(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetSourceById(id));
+        }
+        #endregion
+        #region Industry CRUD
+        [HttpPost("createindustry")]
+        public async Task<IActionResult> CreateIndustry(
+    CrmIndustryDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .CreateIndustry(dto));
+        }
+
+
+        [HttpPost("updateindustry")]
+        public async Task<IActionResult> UpdateIndustry(
+            CrmIndustryDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .UpdateIndustry(dto));
+        }
+
+
+        [HttpPost("deleteindustry/{id}")]
+        public async Task<IActionResult> DeleteIndustry(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .DeleteIndustry(id));
+        }
+
+
+        [HttpGet("getallindustries")]
+        public async Task<IActionResult> GetIndustries()
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetIndustries());
+        }
+
+
+        [HttpGet("getbyindustry/{id}")]
+        public async Task<IActionResult> GetIndustryById(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetIndustryById(id));
+        }
+        #endregion
+        #region Territory CRUD
+        [HttpPost("createterritory")]
+        public async Task<IActionResult> CreateTerritory(
+    CrmTerritoryDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .CreateTerritory(dto));
+        }
+
+
+        [HttpPost("updateterritory")]
+        public async Task<IActionResult> UpdateTerritory(
+            CrmTerritoryDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .UpdateTerritory(dto));
+        }
+
+
+        [HttpPost("deleteterritory/{id}")]
+        public async Task<IActionResult> DeleteTerritory(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .DeleteTerritory(id));
+        }
+
+
+        [HttpGet("getallterritories")]
+        public async Task<IActionResult> GetTerritories()
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetTerritories());
+        }
+
+
+        [HttpGet("getbyterritory/{id}")]
+        public async Task<IActionResult> GetTerritoryById(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetTerritoryById(id));
+        }
+        #endregion
+        #region Sales Target CRUD
+        [HttpPost("createsalestarget")]
+        public async Task<IActionResult> CreateSalesTarget(
+    CrmSalesTargetDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .CreateSalesTarget(dto));
+        }
+
+
+        [HttpPost("updatesalestarget")]
+        public async Task<IActionResult> UpdateSalesTarget(
+            CrmSalesTargetDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .UpdateSalesTarget(dto));
+        }
+
+
+        [HttpPost("deletesalestarget/{id}")]
+        public async Task<IActionResult> DeleteSalesTarget(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .DeleteSalesTarget(id));
+        }
+
+
+        [HttpGet("getallsalestargets")]
+        public async Task<IActionResult> GetSalesTargets()
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetSalesTargets());
+        }
+
+
+        [HttpGet("getbysalestarget/{id}")]
+        public async Task<IActionResult> GetSalesTargetById(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetSalesTargetById(id));
+        }
+        #endregion
+        #region Number Series CRUD
+        [HttpPost("createnumberseries")]
+        public async Task<IActionResult> CreateNumberSeries(
+    CrmNumberSeriesDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .CreateNumberSeries(dto));
+        }
+
+
+        [HttpPost("updatenumberseries")]
+        public async Task<IActionResult> UpdateNumberSeries(
+            CrmNumberSeriesDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .UpdateNumberSeries(dto));
+        }
+
+
+        [HttpPost("deletenumberseries/{id}")]
+        public async Task<IActionResult> DeleteNumberSeries(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .DeleteNumberSeries(id));
+        }
+
+
+        [HttpGet("getallnumberseries")]
+        public async Task<IActionResult> GetNumberSeries()
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetNumberSeries());
+        }
+
+
+        [HttpGet("getbynumberseries/{id}")]
+        public async Task<IActionResult> GetNumberSeriesById(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetNumberSeriesById(id));
+        }
+        #endregion
+        #region Custom Field CRUD
+        [HttpPost("createcustomfield")]
+        public async Task<IActionResult> CreateCustomField(
+    CrmCustomFieldDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .CreateCustomField(dto));
+        }
+
+
+        [HttpPost("updatecustomfield")]
+        public async Task<IActionResult> UpdateCustomField(
+            CrmCustomFieldDto dto)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .UpdateCustomField(dto));
+        }
+
+
+        [HttpPost("deletecustomfield/{id}")]
+        public async Task<IActionResult> DeleteCustomField(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .DeleteCustomField(id));
+        }
+
+
+        [HttpGet("getallcustomfields")]
+        public async Task<IActionResult> GetCustomFields()
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetCustomFields());
+        }
+
+
+        [HttpGet("getbycustomfield/{id}")]
+        public async Task<IActionResult> GetCustomFieldById(int id)
+        {
+            return Ok(
+                await _moduleConfigurationService
+                    .GetCustomFieldById(id));
+        }
+        #endregion
         #endregion
 
     }
