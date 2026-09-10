@@ -10,9 +10,9 @@ namespace Business_Layer.DTOs.SuperAdmin
     {
         public int LeadSettingId { get; set; }
 
-        public int CompanyId { get; set; }
+        //public int CompanyId { get; set; }
 
-        public int RegionId { get; set; }
+        //public int RegionId { get; set; }
 
         public string SettingName { get; set; } = string.Empty;
 

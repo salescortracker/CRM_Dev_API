@@ -42,24 +42,24 @@ namespace Business_Layer.Services.SuperAdminServices
                 if (string.IsNullOrWhiteSpace(dto.SettingName))
                     throw new CustomException("Setting Name is required.");
 
-                // Validate Company
-                var company = (await _unitOfWork.Repository<Company>()
-                    .FindAsync(x => x.CompanyId == dto.CompanyId))
-                    .FirstOrDefault();
+                //// Validate Company
+                //var company = (await _unitOfWork.Repository<Company>()
+                //    .FindAsync(x => x.CompanyId == dto.CompanyId))
+                //    .FirstOrDefault();
 
-                if (company == null)
-                    throw new CustomException("Company not found.");
+                //if (company == null)
+                //    throw new CustomException("Company not found.");
 
-                // Validate Region
-                var region = (await _unitOfWork.Repository<Region>()
-                    .FindAsync(x =>
-                        x.RegionId == dto.RegionId &&
-                        x.CompanyId == dto.CompanyId))
-                    .FirstOrDefault();
+                //// Validate Region
+                //var region = (await _unitOfWork.Repository<Region>()
+                //    .FindAsync(x =>
+                //        x.RegionId == dto.RegionId &&
+                //        x.CompanyId == dto.CompanyId))
+                //    .FirstOrDefault();
 
-                if (region == null)
-                    throw new CustomException(
-                        "Region not found for the selected company.");
+                //if (region == null)
+                //    throw new CustomException(
+                //        "Region not found for the selected company.");
 
                 // Validate Follow-Up Days
                 if (dto.FollowUpDays < 0)
@@ -69,21 +69,21 @@ namespace Business_Layer.Services.SuperAdminServices
                 // Duplicate Setting Name
                 var duplicate = await _unitOfWork.Repository<LeadSetting>()
                     .FindAsync(x =>
-                        x.CompanyId == dto.CompanyId &&
-                        x.RegionId == dto.RegionId &&
+                        //x.CompanyId == dto.CompanyId &&
+                        //x.RegionId == dto.RegionId &&
                         !x.IsDeleted &&
                         x.SettingName.ToLower() ==
                         dto.SettingName.ToLower());
 
                 if (duplicate.Any())
                     throw new CustomException(
-                        "Lead Setting already exists for this company and region.");
+                        "Lead Setting already exists .");
 
                 // Create Entity
                 LeadSetting leadSetting = new LeadSetting
                 {
-                    CompanyId = dto.CompanyId,
-                    RegionId = dto.RegionId,
+                    //CompanyId = dto.CompanyId,
+                    //RegionId = dto.RegionId,
                     SettingName = dto.SettingName.Trim(),
                     LeadStatus = dto.LeadStatus,
                     LeadPriority = dto.LeadPriority,
@@ -150,24 +150,24 @@ namespace Business_Layer.Services.SuperAdminServices
                 if (leadSetting == null)
                     throw new CustomException("Lead Setting not found.");
 
-                // Validate Company
-                var company = (await _unitOfWork.Repository<Company>()
-                    .FindAsync(x => x.CompanyId == dto.CompanyId))
-                    .FirstOrDefault();
+                //// Validate Company
+                //var company = (await _unitOfWork.Repository<Company>()
+                //    .FindAsync(x => x.CompanyId == dto.CompanyId))
+                //    .FirstOrDefault();
 
-                if (company == null)
-                    throw new CustomException("Company not found.");
+                //if (company == null)
+                //    throw new CustomException("Company not found.");
 
-                // Validate Region
-                var region = (await _unitOfWork.Repository<Region>()
-                    .FindAsync(x =>
-                        x.RegionId == dto.RegionId &&
-                        x.CompanyId == dto.CompanyId))
-                    .FirstOrDefault();
+                //// Validate Region
+                //var region = (await _unitOfWork.Repository<Region>()
+                //    .FindAsync(x =>
+                //        x.RegionId == dto.RegionId &&
+                //        x.CompanyId == dto.CompanyId))
+                //    .FirstOrDefault();
 
-                if (region == null)
-                    throw new CustomException(
-                        "Region not found for the selected company.");
+                //if (region == null)
+                //    throw new CustomException(
+                //        "Region not found for the selected company.");
 
                 // Validate Follow-Up Days
                 if (dto.FollowUpDays < 0)
@@ -179,23 +179,23 @@ namespace Business_Layer.Services.SuperAdminServices
                     await _unitOfWork.Repository<LeadSetting>()
                         .FindAsync(x =>
                             x.LeadSettingId != dto.LeadSettingId &&
-                            x.CompanyId == dto.CompanyId &&
-                            x.RegionId == dto.RegionId &&
+                            //x.CompanyId == dto.CompanyId &&
+                            //x.RegionId == dto.RegionId &&
                             !x.IsDeleted &&
                             x.SettingName.ToLower() ==
                             dto.SettingName.ToLower());
 
                 if (duplicate.Any())
                     throw new CustomException(
-                        "Lead Setting already exists for this company and region.");
+                        "Lead Setting already exists .");
 
                 // Old Values for Audit
                 string oldValues =
                     JsonConvert.SerializeObject(leadSetting);
 
                 // Update
-                leadSetting.CompanyId = dto.CompanyId;
-                leadSetting.RegionId = dto.RegionId;
+                //leadSetting.CompanyId = dto.CompanyId;
+                //leadSetting.RegionId = dto.RegionId;
                 leadSetting.SettingName = dto.SettingName.Trim();
                 leadSetting.LeadStatus = dto.LeadStatus;
                 leadSetting.LeadPriority = dto.LeadPriority;
@@ -320,8 +320,8 @@ namespace Business_Layer.Services.SuperAdminServices
                     new LeadSettingDto
                     {
                         LeadSettingId = x.LeadSettingId,
-                        CompanyId = x.CompanyId,
-                        RegionId = x.RegionId,
+                        //CompanyId = x.CompanyId,
+                        //RegionId = x.RegionId,
                         SettingName = x.SettingName,
                         LeadStatus = x.LeadStatus,
                         LeadPriority = x.LeadPriority,
@@ -373,8 +373,8 @@ namespace Business_Layer.Services.SuperAdminServices
                 var result = new LeadSettingDto
                 {
                     LeadSettingId = leadSetting.LeadSettingId,
-                    CompanyId = leadSetting.CompanyId,
-                    RegionId = leadSetting.RegionId,
+                    //CompanyId = leadSetting.CompanyId,
+                    //RegionId = leadSetting.RegionId,
                     SettingName = leadSetting.SettingName,
                     LeadStatus = leadSetting.LeadStatus,
                     LeadPriority = leadSetting.LeadPriority,
@@ -433,48 +433,48 @@ namespace Business_Layer.Services.SuperAdminServices
                         "Total Stages cannot be negative.");
 
                 // Company validation
-                var company =
-                    (await _unitOfWork.Repository<Company>()
-                        .FindAsync(x =>
-                            x.CompanyId == dto.CompanyId))
-                    .FirstOrDefault();
+                //var company =
+                //    (await _unitOfWork.Repository<Company>()
+                //        .FindAsync(x =>
+                //            x.CompanyId == dto.CompanyId))
+                //    .FirstOrDefault();
 
-                if (company == null)
-                    throw new CustomException(
-                        "Company not found.");
+                //if (company == null)
+                //    throw new CustomException(
+                //        "Company not found.");
 
                 // Region validation
-                var region =
-                    (await _unitOfWork.Repository<Region>()
-                        .FindAsync(x =>
-                            x.RegionId == dto.RegionId &&
-                            x.CompanyId == dto.CompanyId))
-                    .FirstOrDefault();
+                //var region =
+                //    (await _unitOfWork.Repository<Region>()
+                //        .FindAsync(x =>
+                //            x.RegionId == dto.RegionId &&
+                //            x.CompanyId == dto.CompanyId))
+                //    .FirstOrDefault();
 
-                if (region == null)
-                    throw new CustomException(
-                        "Region not found for the selected company.");
+                //if (region == null)
+                //    throw new CustomException(
+                //        "Region not found for the selected company.");
 
                 // Duplicate Pipeline Name
                 var duplicateName =
                     await _unitOfWork.Repository<PipelineSetting>()
                         .FindAsync(x =>
-                            x.CompanyId == dto.CompanyId &&
-                            x.RegionId == dto.RegionId &&
+                            //x.CompanyId == dto.CompanyId &&
+                            //x.RegionId == dto.RegionId &&
                             !x.IsDeleted &&
                             x.PipelineName.ToLower() ==
                             dto.PipelineName.Trim().ToLower());
 
                 if (duplicateName.Any())
                     throw new CustomException(
-                        "Pipeline Name already exists for this company and region.");
+                        "Pipeline Name already exists.");
 
                 // Duplicate Pipeline Code
                 var duplicateCode =
                     await _unitOfWork.Repository<PipelineSetting>()
                         .FindAsync(x =>
-                            x.CompanyId == dto.CompanyId &&
-                            x.RegionId == dto.RegionId &&
+                            //x.CompanyId == dto.CompanyId &&
+                            //x.RegionId == dto.RegionId &&
                             !x.IsDeleted &&
                             x.PipelineCode.ToLower() ==
                             dto.PipelineCode.Trim().ToLower());
@@ -487,8 +487,8 @@ namespace Business_Layer.Services.SuperAdminServices
                 PipelineSetting pipelineSetting =
                     new PipelineSetting
                     {
-                        CompanyId = dto.CompanyId,
-                        RegionId = dto.RegionId,
+                        //CompanyId = dto.CompanyId,
+                        //RegionId = dto.RegionId,
 
                         PipelineName = dto.PipelineName.Trim(),
 
@@ -587,27 +587,27 @@ namespace Business_Layer.Services.SuperAdminServices
                         "Pipeline Setting not found.");
 
                 // Company validation
-                var company =
-                    (await _unitOfWork.Repository<Company>()
-                        .FindAsync(x =>
-                            x.CompanyId == dto.CompanyId))
-                    .FirstOrDefault();
+                //var company =
+                //    (await _unitOfWork.Repository<Company>()
+                //        .FindAsync(x =>
+                //            x.CompanyId == dto.CompanyId))
+                //    .FirstOrDefault();
 
-                if (company == null)
-                    throw new CustomException(
-                        "Company not found.");
+                //if (company == null)
+                //    throw new CustomException(
+                //        "Company not found.");
 
                 // Region validation
-                var region =
-                    (await _unitOfWork.Repository<Region>()
-                        .FindAsync(x =>
-                            x.RegionId == dto.RegionId &&
-                            x.CompanyId == dto.CompanyId))
-                    .FirstOrDefault();
+                //var region =
+                //    (await _unitOfWork.Repository<Region>()
+                //        .FindAsync(x =>
+                //            x.RegionId == dto.RegionId &&
+                //            x.CompanyId == dto.CompanyId))
+                //    .FirstOrDefault();
 
-                if (region == null)
-                    throw new CustomException(
-                        "Region not found for the selected company.");
+                //if (region == null)
+                //    throw new CustomException(
+                //        "Region not found for the selected company.");
 
                 // Duplicate Name
                 var duplicateName =
@@ -616,11 +616,11 @@ namespace Business_Layer.Services.SuperAdminServices
                             x.PipelineSettingId !=
                             dto.PipelineSettingId &&
 
-                            x.CompanyId ==
-                            dto.CompanyId &&
+                            //x.CompanyId ==
+                            //dto.CompanyId &&
 
-                            x.RegionId ==
-                            dto.RegionId &&
+                            //x.RegionId ==
+                            //dto.RegionId &&
 
                             !x.IsDeleted &&
 
@@ -638,11 +638,11 @@ namespace Business_Layer.Services.SuperAdminServices
                             x.PipelineSettingId !=
                             dto.PipelineSettingId &&
 
-                            x.CompanyId ==
-                            dto.CompanyId &&
+                            //x.CompanyId ==
+                            //dto.CompanyId &&
 
-                            x.RegionId ==
-                            dto.RegionId &&
+                            //x.RegionId ==
+                            //dto.RegionId &&
 
                             !x.IsDeleted &&
 
@@ -659,11 +659,11 @@ namespace Business_Layer.Services.SuperAdminServices
                         pipelineSetting);
 
                 // Update entity
-                pipelineSetting.CompanyId =
-                    dto.CompanyId;
+                //pipelineSetting.CompanyId =
+                //    dto.CompanyId;
 
-                pipelineSetting.RegionId =
-                    dto.RegionId;
+                //pipelineSetting.RegionId =
+                //    dto.RegionId;
 
                 pipelineSetting.PipelineName =
                     dto.PipelineName.Trim();
@@ -815,11 +815,11 @@ namespace Business_Layer.Services.SuperAdminServices
                         PipelineSettingId =
                             x.PipelineSettingId,
 
-                        CompanyId =
-                            x.CompanyId,
+                        //CompanyId =
+                        //    x.CompanyId,
 
-                        RegionId =
-                            x.RegionId,
+                        //RegionId =
+                        //    x.RegionId,
 
                         PipelineName =
                             x.PipelineName,
@@ -884,11 +884,11 @@ namespace Business_Layer.Services.SuperAdminServices
                     PipelineSettingId =
                         pipelineSetting.PipelineSettingId,
 
-                    CompanyId =
-                        pipelineSetting.CompanyId,
+                    //CompanyId =
+                    //    pipelineSetting.CompanyId,
 
-                    RegionId =
-                        pipelineSetting.RegionId,
+                    //RegionId =
+                    //    pipelineSetting.RegionId,
 
                     PipelineName =
                         pipelineSetting.PipelineName,
@@ -936,6 +936,13 @@ namespace Business_Layer.Services.SuperAdminServices
         {
             try
             {
+                //var currentUserId = _currentUserService.UserId;
+
+                //if (currentUserId <= 0)
+                //{
+                //    throw new CustomException(
+                //        "Unable to identify the logged-in user. Please login again.");
+                //}
                 // Stage Name validation
                 if (string.IsNullOrWhiteSpace(dto.StageName))
                     throw new CustomException(
