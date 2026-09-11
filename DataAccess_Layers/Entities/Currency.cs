@@ -28,4 +28,6 @@ public partial class Currency
     public int? ModifiedBy { get; set; }
 
     public DateTime? ModifiedAt { get; set; }
+
+    public virtual ICollection<CompanyProfile> CompanyProfiles { get; set; } = new List<CompanyProfile>();
 }

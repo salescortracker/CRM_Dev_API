@@ -28,4 +28,10 @@ public partial class Department
     public int RegionId { get; set; }
 
     public int? UserId { get; set; }
+
+    public virtual ICollection<CompanyAdministrator> CompanyAdministrators { get; set; } = new List<CompanyAdministrator>();
+
+    public virtual ICollection<Designation> Designations { get; set; } = new List<Designation>();
+
+    public virtual ICollection<HolidayCalendar> HolidayCalendars { get; set; } = new List<HolidayCalendar>();
 }

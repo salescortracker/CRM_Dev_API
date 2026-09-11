@@ -1,6 +1,8 @@
 ﻿using Business_Layer.DTOs.Admin;
+using Business_Layer.DTOs.MasterDTO_s;
 using Business_Layer.DTOs.SuperAdmin;
 using Business_Layer.Interfaces.Adminsevices;
+using Business_Layer.Interfaces.MasterIInterface;
 using Business_Layer.Interfaces.SuperAdminInterface;
 using DataAccess_Layers.Entities;
 using Microsoft.AspNetCore.Hosting;
@@ -24,9 +26,10 @@ namespace CRM_API.Controllers
         private readonly ICommunicationService _communicationService;
         private readonly IMarketingService _marketingService;
         private readonly IModuleConfigurationService _moduleConfigurationService;
+        private readonly ICompanyAndRegionService _companyAndRegionService;
 
         public SuperAdminController(IPlanService planService, IOrganizationService organizationService, IWebHostEnvironment env, IWorkflowAndAutomation workflowAndAutomation, ICommunicationService communicationService
-            ,IMarketingService marketingService, IModuleConfigurationService moduleConfigurationService)
+            , IMarketingService marketingService, IModuleConfigurationService moduleConfigurationService, ICompanyAndRegionService companyAndRegionService)
         {
             _planService = planService;
             _organizationService = organizationService;
@@ -35,6 +38,7 @@ namespace CRM_API.Controllers
             _communicationService = communicationService;
             _marketingService = marketingService;
             _moduleConfigurationService = moduleConfigurationService;
+            _companyAndRegionService = companyAndRegionService;
         }
 
         #region SUBSCRIPTION PLAN
@@ -228,7 +232,7 @@ namespace CRM_API.Controllers
         public async Task<IActionResult> GetWorkflowRuleConditions()
         {
             return Ok(
-                await _workflowAndAutomation   
+                await _workflowAndAutomation
                     .GetWorkflowRuleConditions());
         }
 
@@ -1928,6 +1932,172 @@ namespace CRM_API.Controllers
                     .GetCustomFieldById(id));
         }
         #endregion
+        #endregion
+        #region Branch CRUD
+
+        [HttpPost("createbranch")]
+        public async Task<IActionResult> CreateBranch(
+            BranchDto dto)
+        {
+            return Ok(
+                await _companyAndRegionService.CreateBranch(dto)
+            );
+        }
+
+
+        [HttpPost("updatebranch")]
+        public async Task<IActionResult> UpdateBranch(
+            BranchDto dto)
+        {
+            return Ok(
+                await _companyAndRegionService.UpdateBranch(dto)
+            );
+        }
+
+
+        [HttpPost("deletebranch/{id}")]
+        public async Task<IActionResult> DeleteBranch(
+            int id)
+        {
+            return Ok(
+                await _companyAndRegionService.DeleteBranch(id)
+            );
+        }
+
+
+        [HttpGet("getallbranch")]
+        public async Task<IActionResult> GetBranches()
+        {
+            return Ok(
+                await _companyAndRegionService.GetBranches()
+            );
+        }
+
+
+        [HttpGet("getbybranch/{id}")]
+        public async Task<IActionResult> GetBranchById(
+            int id)
+        {
+            return Ok(
+                await _companyAndRegionService.GetBranchById(id)
+            );
+        }
+
+        #endregion
+        #region Company Administrator CRUD
+
+        [HttpPost("createcompanyadministrator")]
+        public async Task<IActionResult> CreateCompanyAdministrator(
+            CompanyAdministratorDto dto)
+        {
+            return Ok(
+                await _companyAndRegionService
+                    .CreateCompanyAdministrator(dto)
+            );
+        }
+
+
+        [HttpPost("updatecompanyadministrator")]
+        public async Task<IActionResult> UpdateCompanyAdministrator(
+            CompanyAdministratorDto dto)
+        {
+            return Ok(
+                await _companyAndRegionService
+                    .UpdateCompanyAdministrator(dto)
+            );
+        }
+
+
+        [HttpPost("deletecompanyadministrator/{id}")]
+        public async Task<IActionResult> DeleteCompanyAdministrator(
+            int id)
+        {
+            return Ok(
+                await _companyAndRegionService
+                    .DeleteCompanyAdministrator(id)
+            );
+        }
+
+
+        [HttpGet("getallcompanyadministrator")]
+        public async Task<IActionResult>
+            GetCompanyAdministrators()
+        {
+            return Ok(
+                await _companyAndRegionService
+                    .GetCompanyAdministrators()
+            );
+        }
+
+
+        [HttpGet("getbycompanyadministrator/{id}")]
+        public async Task<IActionResult>
+            GetCompanyAdministratorById(int id)
+        {
+            return Ok(
+                await _companyAndRegionService
+                    .GetCompanyAdministratorById(id)
+            );
+        }
+
+        #endregion
+
+        #region Business Unit CRUD
+
+        [HttpPost("createbusinessunit")]
+        public async Task<IActionResult> CreateBusinessUnit(
+            BusinessUnitDto dto)
+        {
+            return Ok(
+                await _companyAndRegionService
+                    .CreateBusinessUnit(dto)
+            );
+        }
+
+
+        [HttpPost("updatebusinessunit")]
+        public async Task<IActionResult> UpdateBusinessUnit(
+            BusinessUnitDto dto)
+        {
+            return Ok(
+                await _companyAndRegionService
+                    .UpdateBusinessUnit(dto)
+            );
+        }
+
+
+        [HttpPost("deletebusinessunit/{id}")]
+        public async Task<IActionResult> DeleteBusinessUnit(
+            int id)
+        {
+            return Ok(
+                await _companyAndRegionService
+                    .DeleteBusinessUnit(id)
+            );
+        }
+
+
+        [HttpGet("getallbusinessunit")]
+        public async Task<IActionResult>
+            GetBusinessUnits()
+        {
+            return Ok(
+                await _companyAndRegionService
+                    .GetBusinessUnits()
+            );
+        }
+
+
+        [HttpGet("getbybusinessunit/{id}")]
+        public async Task<IActionResult>
+            GetBusinessUnitById(int id)
+        {
+            return Ok(
+                await _companyAndRegionService
+                    .GetBusinessUnitById(id)
+            );
+        }
+
         #endregion
 
     }

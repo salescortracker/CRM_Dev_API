@@ -28,4 +28,10 @@ public partial class Designation
     public int? UpdatedBy { get; set; }
 
     public int? UserId { get; set; }
+
+    public int? DepartmentId { get; set; }
+
+    public virtual ICollection<CompanyAdministrator> CompanyAdministrators { get; set; } = new List<CompanyAdministrator>();
+
+    public virtual Department? Department { get; set; }
 }

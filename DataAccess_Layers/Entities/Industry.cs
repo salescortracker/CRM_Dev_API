@@ -31,5 +31,7 @@ public partial class Industry
 
     public virtual ICollection<CompanyInformation> CompanyInformations { get; set; } = new List<CompanyInformation>();
 
+    public virtual ICollection<CompanyProfile> CompanyProfiles { get; set; } = new List<CompanyProfile>();
+
     public virtual ICollection<LeadInformation> LeadInformations { get; set; } = new List<LeadInformation>();
 }

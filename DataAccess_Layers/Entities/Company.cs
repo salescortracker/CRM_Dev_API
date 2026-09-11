@@ -43,5 +43,13 @@ public partial class Company
 
     public string? CompanyLogo { get; set; }
 
+    public virtual ICollection<Branch1> Branch1s { get; set; } = new List<Branch1>();
+
+    public virtual ICollection<BusinessUnit> BusinessUnits { get; set; } = new List<BusinessUnit>();
+
+    public virtual ICollection<CompanyAdministrator> CompanyAdministrators { get; set; } = new List<CompanyAdministrator>();
+
+    public virtual ICollection<CompanyProfile> CompanyProfiles { get; set; } = new List<CompanyProfile>();
+
     public virtual ICollection<Region> Regions { get; set; } = new List<Region>();
 }

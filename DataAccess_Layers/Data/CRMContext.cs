@@ -40,6 +40,12 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<Branch> Branches { get; set; }
 
+    public virtual DbSet<Branch1> Branches1 { get; set; }
+
+    public virtual DbSet<BusinessHour> BusinessHours { get; set; }
+
+    public virtual DbSet<BusinessUnit> BusinessUnits { get; set; }
+
     public virtual DbSet<CallOutcome> CallOutcomes { get; set; }
 
     public virtual DbSet<CallPurpose> CallPurposes { get; set; }
@@ -74,7 +80,11 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<Company> Companies { get; set; }
 
+    public virtual DbSet<CompanyAdministrator> CompanyAdministrators { get; set; }
+
     public virtual DbSet<CompanyInformation> CompanyInformations { get; set; }
+
+    public virtual DbSet<CompanyProfile> CompanyProfiles { get; set; }
 
     public virtual DbSet<CompanyStatusMaster> CompanyStatusMasters { get; set; }
 
@@ -145,6 +155,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<FiscalType> FiscalTypes { get; set; }
 
     public virtual DbSet<GoLiveChecklist> GoLiveChecklists { get; set; }
+
+    public virtual DbSet<HolidayCalendar> HolidayCalendars { get; set; }
 
     public virtual DbSet<Industry> Industries { get; set; }
 
@@ -629,6 +641,137 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.OrganizationId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Masters_Branches_Organizations");
+        });
+
+        modelBuilder.Entity<Branch1>(entity =>
+        {
+            entity.HasKey(e => e.BranchId).HasName("PK_Security_Branch");
+
+            entity.ToTable("Branch", "Security");
+
+            entity.HasIndex(e => e.BranchCode, "UQ_Security_Branch_Code").IsUnique();
+
+            entity.Property(e => e.BranchId).HasColumnName("BranchID");
+            entity.Property(e => e.Address).HasMaxLength(500);
+            entity.Property(e => e.BranchCode).HasMaxLength(50);
+            entity.Property(e => e.BranchManager).HasMaxLength(150);
+            entity.Property(e => e.BranchName).HasMaxLength(150);
+            entity.Property(e => e.City).HasMaxLength(100);
+            entity.Property(e => e.ClosingTime).HasPrecision(0);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.Country).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Email).HasMaxLength(150);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.OpeningTime).HasPrecision(0);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(30);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.Remarks).HasMaxLength(500);
+            entity.Property(e => e.State).HasMaxLength(100);
+            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.ZipCode).HasMaxLength(20);
+
+            entity.HasOne(d => d.Company).WithMany(p => p.Branch1s)
+                .HasForeignKey(d => d.CompanyId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Security_Branch_Company");
+
+            entity.HasOne(d => d.Organization).WithMany(p => p.Branch1s)
+                .HasForeignKey(d => d.OrganizationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Security_Branch_Organization");
+
+            entity.HasOne(d => d.Region).WithMany(p => p.Branch1s)
+                .HasForeignKey(d => d.RegionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Security_Branch_Region");
+        });
+
+        modelBuilder.Entity<BusinessHour>(entity =>
+        {
+            entity.HasKey(e => e.BusinessHoursId).HasName("PK_Master_BusinessHours");
+
+            entity.ToTable("BusinessHours", "Master");
+
+            entity.HasIndex(e => new { e.BusinessHoursName, e.BranchId }, "UQ_Master_BusinessHours_Name_Branch").IsUnique();
+
+            entity.Property(e => e.BusinessHoursId).HasColumnName("BusinessHoursID");
+            entity.Property(e => e.Active).HasDefaultValue(true);
+            entity.Property(e => e.BranchId).HasColumnName("BranchID");
+            entity.Property(e => e.BreakEnd).HasPrecision(0);
+            entity.Property(e => e.BreakStart).HasPrecision(0);
+            entity.Property(e => e.BusinessHoursName).HasMaxLength(150);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.EndTime).HasPrecision(0);
+            entity.Property(e => e.HalfDayThresholdHours).HasColumnType("decimal(5, 2)");
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.StartTime).HasPrecision(0);
+            entity.Property(e => e.TotalWorkingHours).HasColumnType("decimal(5, 2)");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.Weekend).HasMaxLength(100);
+            entity.Property(e => e.WorkingDays).HasMaxLength(100);
+
+            entity.HasOne(d => d.Branch).WithMany(p => p.BusinessHours)
+                .HasForeignKey(d => d.BranchId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_BusinessHours_Branch");
+        });
+
+        modelBuilder.Entity<BusinessUnit>(entity =>
+        {
+            entity.HasKey(e => e.BusinessUnitId).HasName("PK_Master_BusinessUnits");
+
+            entity.ToTable("BusinessUnits", "Master");
+
+            entity.HasIndex(e => e.BusinessUnitCode, "UQ_Master_BusinessUnits_Code").IsUnique();
+
+            entity.Property(e => e.BusinessUnitId).HasColumnName("BusinessUnitID");
+            entity.Property(e => e.AnnualBudget).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.BranchId).HasColumnName("BranchID");
+            entity.Property(e => e.BusinessUnitCode).HasMaxLength(50);
+            entity.Property(e => e.BusinessUnitHead).HasMaxLength(150);
+            entity.Property(e => e.BusinessUnitName).HasMaxLength(150);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.ContactNumber).HasMaxLength(30);
+            entity.Property(e => e.CostCenterCode).HasMaxLength(50);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.Email).HasMaxLength(150);
+            entity.Property(e => e.ExtensionNumber).HasMaxLength(20);
+            entity.Property(e => e.MobileNumber).HasMaxLength(30);
+            entity.Property(e => e.OrganizationId).HasColumnName("OrganizationID");
+            entity.Property(e => e.ParentBusinessUnit).HasMaxLength(500);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.Remarks).HasMaxLength(500);
+            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.UnitHead).HasMaxLength(150);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Branch).WithMany(p => p.BusinessUnits)
+                .HasForeignKey(d => d.BranchId)
+                .HasConstraintName("FK_BusinessUnits_Branch");
+
+            entity.HasOne(d => d.Company).WithMany(p => p.BusinessUnits)
+                .HasForeignKey(d => d.CompanyId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_BusinessUnits_Company");
+
+            entity.HasOne(d => d.Organization).WithMany(p => p.BusinessUnits)
+                .HasForeignKey(d => d.OrganizationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_BusinessUnits_Organization");
+
+            entity.HasOne(d => d.Region).WithMany(p => p.BusinessUnits)
+                .HasForeignKey(d => d.RegionId)
+                .HasConstraintName("FK_BusinessUnits_Region");
         });
 
         modelBuilder.Entity<CallOutcome>(entity =>
@@ -1119,6 +1262,63 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.UserId).HasColumnName("userId");
         });
 
+        modelBuilder.Entity<CompanyAdministrator>(entity =>
+        {
+            entity.HasKey(e => e.AdministratorId).HasName("PK_Security_CompanyAdministrators");
+
+            entity.ToTable("CompanyAdministrators", "Security");
+
+            entity.HasIndex(e => e.Email, "UQ_CompanyAdministrators_Email").IsUnique();
+
+            entity.HasIndex(e => e.EmployeeCode, "UQ_CompanyAdministrators_EmployeeCode").IsUnique();
+
+            entity.HasIndex(e => e.Username, "UQ_CompanyAdministrators_Username").IsUnique();
+
+            entity.Property(e => e.AdministratorId).HasColumnName("AdministratorID");
+            entity.Property(e => e.BranchId).HasColumnName("BranchID");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
+            entity.Property(e => e.DesignationId).HasColumnName("DesignationID");
+            entity.Property(e => e.Email).HasMaxLength(150);
+            entity.Property(e => e.EmployeeCode).HasMaxLength(50);
+            entity.Property(e => e.FirstName).HasMaxLength(100);
+            entity.Property(e => e.LastName).HasMaxLength(100);
+            entity.Property(e => e.MobileNumber).HasMaxLength(30);
+            entity.Property(e => e.PasswordHash).HasMaxLength(500);
+            entity.Property(e => e.ProfileImagePath).HasMaxLength(500);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.Remarks).HasMaxLength(500);
+            entity.Property(e => e.ReportingManager).HasMaxLength(500);
+            entity.Property(e => e.RoleName).HasMaxLength(100);
+            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.Username).HasMaxLength(100);
+
+            entity.HasOne(d => d.Branch).WithMany(p => p.CompanyAdministrators)
+                .HasForeignKey(d => d.BranchId)
+                .HasConstraintName("FK_CompanyAdministrators_Branch");
+
+            entity.HasOne(d => d.Company).WithMany(p => p.CompanyAdministrators)
+                .HasForeignKey(d => d.CompanyId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CompanyAdministrators_Company");
+
+            entity.HasOne(d => d.Department).WithMany(p => p.CompanyAdministrators)
+                .HasForeignKey(d => d.DepartmentId)
+                .HasConstraintName("FK_CompanyAdministrators_Department");
+
+            entity.HasOne(d => d.Designation).WithMany(p => p.CompanyAdministrators)
+                .HasForeignKey(d => d.DesignationId)
+                .HasConstraintName("FK_CompanyAdministrators_Designation");
+
+            entity.HasOne(d => d.Region).WithMany(p => p.CompanyAdministrators)
+                .HasForeignKey(d => d.RegionId)
+                .HasConstraintName("FK_CompanyAdministrators_Region");
+        });
+
         modelBuilder.Entity<CompanyInformation>(entity =>
         {
             entity.ToTable("CompanyInformation", "CRM");
@@ -1186,6 +1386,75 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.StateId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CompanyInformation_State");
+        });
+
+        modelBuilder.Entity<CompanyProfile>(entity =>
+        {
+            entity.HasKey(e => e.CompanyProfileId).HasName("PK_Security_CompanyProfile");
+
+            entity.ToTable("CompanyProfile", "Security");
+
+            entity.HasIndex(e => e.CompanyCode, "UQ_Security_CompanyProfile_Code").IsUnique();
+
+            entity.Property(e => e.CompanyProfileId).HasColumnName("CompanyProfileID");
+            entity.Property(e => e.Active).HasDefaultValue(true);
+            entity.Property(e => e.AddressLine1).HasMaxLength(1000);
+            entity.Property(e => e.AddressLine2).HasMaxLength(1000);
+            entity.Property(e => e.City).HasMaxLength(100);
+            entity.Property(e => e.CompanyCode).HasMaxLength(50);
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CompanyLogoPath).HasMaxLength(500);
+            entity.Property(e => e.CompanyName).HasMaxLength(200);
+            entity.Property(e => e.CompanyTypeId).HasColumnName("CompanyTypeID");
+            entity.Property(e => e.CountryId).HasColumnName("CountryID");
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.CurrencyId).HasColumnName("CurrencyID");
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.Email).HasMaxLength(150);
+            entity.Property(e => e.FinancialYear).HasMaxLength(500);
+            entity.Property(e => e.Gstnumber)
+                .HasMaxLength(50)
+                .HasColumnName("GSTNumber");
+            entity.Property(e => e.IndustryId).HasColumnName("IndustryID");
+            entity.Property(e => e.LegalName).HasMaxLength(250);
+            entity.Property(e => e.Mobile).HasMaxLength(30);
+            entity.Property(e => e.Pannumber)
+                .HasMaxLength(50)
+                .HasColumnName("PANNumber");
+            entity.Property(e => e.Phone).HasMaxLength(30);
+            entity.Property(e => e.Pincode).HasMaxLength(20);
+            entity.Property(e => e.RegionId).HasColumnName("RegionID");
+            entity.Property(e => e.RegistrationNumber).HasMaxLength(100);
+            entity.Property(e => e.StateId).HasColumnName("StateID");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.Website).HasMaxLength(250);
+
+            entity.HasOne(d => d.Company).WithMany(p => p.CompanyProfiles)
+                .HasForeignKey(d => d.CompanyId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CompanyProfile_Company");
+
+            entity.HasOne(d => d.CompanyType).WithMany(p => p.CompanyProfiles)
+                .HasForeignKey(d => d.CompanyTypeId)
+                .HasConstraintName("FK_CompanyProfile_CompanyType");
+
+            entity.HasOne(d => d.Country).WithMany(p => p.CompanyProfiles)
+                .HasForeignKey(d => d.CountryId)
+                .HasConstraintName("FK_CompanyProfile_Country");
+
+            entity.HasOne(d => d.Currency).WithMany(p => p.CompanyProfiles)
+                .HasForeignKey(d => d.CurrencyId)
+                .HasConstraintName("FK_CompanyProfile_Currency");
+
+            entity.HasOne(d => d.Industry).WithMany(p => p.CompanyProfiles)
+                .HasForeignKey(d => d.IndustryId)
+                .HasConstraintName("FK_CompanyProfile_Industry");
+
+            entity.HasOne(d => d.State).WithMany(p => p.CompanyProfiles)
+                .HasForeignKey(d => d.StateId)
+                .HasConstraintName("FK_CompanyProfile_State");
         });
 
         modelBuilder.Entity<CompanyStatusMaster>(entity =>
@@ -1966,6 +2235,7 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
             entity.Property(e => e.Description)
                 .HasMaxLength(500)
                 .IsUnicode(false);
@@ -1978,6 +2248,10 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.RegionId).HasColumnName("RegionID");
             entity.Property(e => e.Status).HasDefaultValue(true);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Department).WithMany(p => p.Designations)
+                .HasForeignKey(d => d.DepartmentId)
+                .HasConstraintName("FK_Designations_Departments");
         });
 
         modelBuilder.Entity<DiscountType>(entity =>
@@ -2257,6 +2531,51 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CRM_GoLiveChecklists_User");
+        });
+
+        modelBuilder.Entity<HolidayCalendar>(entity =>
+        {
+            entity.HasKey(e => e.HolidayCalendarId).HasName("PK_Master_HolidayCalendar");
+
+            entity.ToTable("HolidayCalendar", "Admin");
+
+            entity.HasIndex(e => new { e.HolidayName, e.HolidayDate, e.BranchId }, "UQ_Master_HolidayCalendar_Name_Date_Branch").IsUnique();
+
+            entity.Property(e => e.HolidayCalendarId).HasColumnName("HolidayCalendarID");
+            entity.Property(e => e.ApplicableFor).HasMaxLength(200);
+            entity.Property(e => e.BranchId).HasColumnName("BranchID");
+            entity.Property(e => e.BusinessUnitId).HasColumnName("BusinessUnitID");
+            entity.Property(e => e.CountryId).HasColumnName("CountryID");
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.HolidayCategory).HasMaxLength(100);
+            entity.Property(e => e.HolidayName).HasMaxLength(150);
+            entity.Property(e => e.HolidayType).HasMaxLength(100);
+            entity.Property(e => e.StateId).HasColumnName("StateID");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Branch).WithMany(p => p.HolidayCalendars)
+                .HasForeignKey(d => d.BranchId)
+                .HasConstraintName("FK_HolidayCalendar_Branch");
+
+            entity.HasOne(d => d.BusinessUnit).WithMany(p => p.HolidayCalendars)
+                .HasForeignKey(d => d.BusinessUnitId)
+                .HasConstraintName("FK_HolidayCalendar_BusinessUnit");
+
+            entity.HasOne(d => d.Country).WithMany(p => p.HolidayCalendars)
+                .HasForeignKey(d => d.CountryId)
+                .HasConstraintName("FK_HolidayCalendar_Country");
+
+            entity.HasOne(d => d.Department).WithMany(p => p.HolidayCalendars)
+                .HasForeignKey(d => d.DepartmentId)
+                .HasConstraintName("FK_HolidayCalendar_Department");
+
+            entity.HasOne(d => d.State).WithMany(p => p.HolidayCalendars)
+                .HasForeignKey(d => d.StateId)
+                .HasConstraintName("FK_HolidayCalendar_State");
         });
 
         modelBuilder.Entity<Industry>(entity =>

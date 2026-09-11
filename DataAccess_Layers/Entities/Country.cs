@@ -29,7 +29,11 @@ public partial class Country
 
     public virtual ICollection<CompanyInformation> CompanyInformations { get; set; } = new List<CompanyInformation>();
 
+    public virtual ICollection<CompanyProfile> CompanyProfiles { get; set; } = new List<CompanyProfile>();
+
     public virtual ICollection<ContactInformation> ContactInformations { get; set; } = new List<ContactInformation>();
+
+    public virtual ICollection<HolidayCalendar> HolidayCalendars { get; set; } = new List<HolidayCalendar>();
 
     public virtual ICollection<LeadInformation> LeadInformations { get; set; } = new List<LeadInformation>();
 }
