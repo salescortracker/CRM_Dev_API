@@ -1,4 +1,5 @@
 ﻿using Business_Layer.DTOs.MasterDTO_s;
+using Business_Layer.DTOs.SuperAdmin;
 using Business_Layer.Interfaces.AuditLog;
 using Business_Layer.Interfaces.CommonInterfaces;
 using Business_Layer.Interfaces.MasterIInterface;
@@ -31,148 +32,197 @@ namespace BusinessLayer.Services
             _currentUserService = currentUserService;
         }
 
-        #region Department CRUD 
+        #region Department
 
         #region CREATE
 
-        public async Task<ApiResponse<string>>
-            CreateDepartment(
-            DepartmentCreateDto dto)
+        public async Task<ApiResponse<string>> CreateDepartment(
+            DepartmentDto dto)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(
-                    dto.DepartmentName))
+                // Validate Department Name
+                if (string.IsNullOrWhiteSpace(dto.DepartmentName))
+                    throw new CustomException(
+                        "Department Name is required.");
+
+                // Validate Department Code
+                if (string.IsNullOrWhiteSpace(dto.DepartmentCode))
+                    throw new CustomException(
+                        "Department Code is required.");
+
+                // Clean values
+                string departmentName = dto.DepartmentName.Trim();
+                string departmentCode = dto.DepartmentCode.Trim().ToUpper();
+
+                // Duplicate Department Name
+                var duplicateName =
+                    await _unitOfWork.Repository<Department>()
+                        .FindAsync(x =>
+                            x.DepartmentName.ToLower() ==
+                            departmentName.ToLower());
+
+                if (duplicateName.Any())
+                    throw new CustomException(
+                        "Department Name already exists.");
+
+                // Duplicate Department Code
+                var duplicateCode =
+                    await _unitOfWork.Repository<Department>()
+                        .FindAsync(x =>
+                            x.DepartmentCode.ToLower() ==
+                            departmentCode.ToLower());
+
+                if (duplicateCode.Any())
+                    throw new CustomException(
+                        "Department Code already exists.");
+
+                // Create Entity
+                Department department = new Department
                 {
-                    throw new CustomException(AppConstants.DepartmentNameRequired);
-                }
+                    DepartmentName = departmentName,
+                    DepartmentCode = departmentCode,
+                    Description = string.IsNullOrWhiteSpace(dto.Description)
+                        ? null
+                        : dto.Description.Trim(),
 
-                if (string.IsNullOrWhiteSpace(
-                    dto.DepartmentCode))
-                {
-                    throw new CustomException(AppConstants.DepartmentCodeRequired);
-                }
+                    Status = dto.Status,
 
-                var existingDepartment = await _unitOfWork.Repository<Department>()
-                    .FindAsync(x =>
-                        x.DepartmentCode ==
-                        dto.DepartmentCode);
+                    CreatedBy = _currentUserService.UserId,
+                    CreatedDate = DateTime.Now,
 
-                if (existingDepartment.Any())
-                {
-                    throw new CustomException(AppConstants.DepartmentCodeExists);
-                }
+                    UserId = _currentUserService.UserId
 
-                Department department = new Department();
+                    // CompanyId / RegionId can be assigned
+                    // if you are getting them from current user/session.
+                };
 
-                department.DepartmentName = dto.DepartmentName;
-
-                department.DepartmentCode = dto.DepartmentCode;
-
-                department.Description = dto.Description;
-
-                department.CompanyId = dto.CompanyId;
-
-                department.RegionId = dto.RegionId;
-
-                department.UserId = _currentUserService.UserId;
-
-
-                department.CreatedDate = DateTime.Now;
-
-                department.Status = true;
-
-
-                await _unitOfWork.Repository<Department>().AddAsync(department);
+                await _unitOfWork.Repository<Department>()
+                    .AddAsync(department);
 
                 await _unitOfWork.CompleteAsync();
 
+                // Audit
                 await _auditService.LogAsync(
-                    "Departments",
+                    "Department",
                     "INSERT",
                     department.DepartmentId,
                     "",
-                    JsonConvert.SerializeObject(
-                        department),
+                    JsonConvert.SerializeObject(department),
                     _currentUserService.UserId);
-
-                Log.Information(
-                    "Department Created : {DepartmentCode}",
-                    dto.DepartmentCode);
 
                 return new ApiResponse<string>
                 {
                     Success = true,
-                    Message = AppConstants.RecordSaved, Data = department.DepartmentCode
+                    Message = "Department Created Successfully",
+                    Data = department.DepartmentName
                 };
             }
             catch (Exception ex)
             {
-                Log.Error(ex,AppConstants.ExceptionWhileCreatingDepartment);
+                Log.Error(ex,
+                    "Error while creating department");
 
                 throw;
             }
         }
 
         #endregion
-
         #region UPDATE
 
-        public async Task<ApiResponse<string>>
-            UpdateDepartment(
-            DepartmentUpdateDto dto)
+        public async Task<ApiResponse<string>> UpdateDepartment(
+            DepartmentDto dto)
         {
             try
             {
+                // Validate Department Name
+                if (string.IsNullOrWhiteSpace(dto.DepartmentName))
+                    throw new CustomException(
+                        "Department Name is required.");
+
+                // Validate Department Code
+                if (string.IsNullOrWhiteSpace(dto.DepartmentCode))
+                    throw new CustomException(
+                        "Department Code is required.");
+
+                // Get existing record
                 var department =
-                (
-                await _unitOfWork
-                .Repository<Department>()
-                .FindAsync(x =>
-                    x.DepartmentId == dto.DepartmentId &&
-                    x.UserId == _currentUserService.UserId)
-                ).FirstOrDefault();
+                    (await _unitOfWork.Repository<Department>()
+                        .FindAsync(x =>
+                            x.DepartmentId == dto.DepartmentId))
+                    .FirstOrDefault();
 
                 if (department == null)
-                {
-                    throw new CustomException(AppConstants.DepartmentNotFound);
-                }
+                    throw new CustomException(
+                        "Department not found.");
 
-                string oldValues = JsonConvert.SerializeObject(department);
+                string departmentName = dto.DepartmentName.Trim();
+                string departmentCode = dto.DepartmentCode.Trim().ToUpper();
 
-                department.DepartmentName = dto.DepartmentName;
+                // Duplicate Department Name
+                var duplicateName =
+                    await _unitOfWork.Repository<Department>()
+                        .FindAsync(x =>
+                            x.DepartmentId != dto.DepartmentId &&
+                            x.DepartmentName.ToLower() ==
+                            departmentName.ToLower());
 
-                department.DepartmentCode = dto.DepartmentCode;
+                if (duplicateName.Any())
+                    throw new CustomException(
+                        "Department Name already exists.");
 
-                department.Description = dto.Description;
+                // Duplicate Department Code
+                var duplicateCode =
+                    await _unitOfWork.Repository<Department>()
+                        .FindAsync(x =>
+                            x.DepartmentId != dto.DepartmentId &&
+                            x.DepartmentCode.ToLower() ==
+                            departmentCode.ToLower());
+
+                if (duplicateCode.Any())
+                    throw new CustomException(
+                        "Department Code already exists.");
+
+                // Old Values for Audit
+                string oldValues =
+                    JsonConvert.SerializeObject(department);
+
+                // Update
+                department.DepartmentName = departmentName;
+                department.DepartmentCode = departmentCode;
+
+                department.Description =
+                    string.IsNullOrWhiteSpace(dto.Description)
+                        ? null
+                        : dto.Description.Trim();
 
                 department.Status = dto.Status;
 
-                department.UserId = _currentUserService.UserId;
+                department.UpdatedBy =
+                    _currentUserService.UserId;
 
-                department.UpdatedDate = DateTime.Now;
+                department.UpdatedDate =
+                    DateTime.Now;
 
-                _unitOfWork.Repository<Department>().Update(department);
+                _unitOfWork.Repository<Department>()
+                    .Update(department);
 
                 await _unitOfWork.CompleteAsync();
 
-                string newValues = JsonConvert.SerializeObject(department);
-
-                await _auditService.LogAsync("Departments","UPDATE",
+                // Audit
+                await _auditService.LogAsync(
+                    "Department",
+                    "UPDATE",
                     department.DepartmentId,
                     oldValues,
-                    newValues,
+                    JsonConvert.SerializeObject(department),
                     _currentUserService.UserId);
-
-                Log.Information(
-                    "Department Updated : {DepartmentId}",
-                    department.DepartmentId);
 
                 return new ApiResponse<string>
                 {
                     Success = true,
-                    Message = AppConstants.RecordUpdated,
-                    Data = department.DepartmentCode
+                    Message = "Department Updated Successfully",
+                    Data = department.DepartmentName
                 };
             }
             catch (Exception ex)
@@ -185,87 +235,107 @@ namespace BusinessLayer.Services
         }
 
         #endregion
-
         #region DELETE
 
-        public async Task<ApiResponse<string>>
-            DeleteDepartment(
-            int departmentId)
+        public async Task<ApiResponse<string>> DeleteDepartment(int id)
         {
             try
             {
-                var department =(await _unitOfWork.Repository<Department>().FindAsync(x =>
-                                       x.DepartmentId == departmentId &&
-                                       x.UserId == _currentUserService.UserId)).FirstOrDefault();
+                // Get existing department
+                var department =
+                    (await _unitOfWork.Repository<Department>()
+                        .FindAsync(x =>
+                            x.DepartmentId == id))
+                    .FirstOrDefault();
 
                 if (department == null)
-                {
-                    throw new CustomException(AppConstants.DepartmentNotFound);
-                }
+                    throw new CustomException(
+                        "Department not found.");
 
-                string oldValues = JsonConvert.SerializeObject(department);
+                // Old Values for Audit
+                string oldValues =
+                    JsonConvert.SerializeObject(department);
 
-                // Soft Delete
+                // Soft Delete / Deactivate
+                department.Status = false;
 
-                department.UserId = _currentUserService.UserId;
+                department.UpdatedBy =
+                    _currentUserService.UserId;
 
-                department.UpdatedDate = DateTime.Now;
+                department.UpdatedDate =
+                    DateTime.Now;
 
-                _unitOfWork.Repository<Department>().Update(department);
+                _unitOfWork.Repository<Department>()
+                    .Update(department);
 
                 await _unitOfWork.CompleteAsync();
 
-                await _auditService.LogAsync("Departments","DELETE",department.DepartmentId, oldValues, "", _currentUserService.UserId);
-
-                Log.Information("Department Deleted : {DepartmentId}", department.DepartmentId);
+                // Audit
+                await _auditService.LogAsync(
+                    "Department",
+                    "DELETE",
+                    department.DepartmentId,
+                    oldValues,
+                    JsonConvert.SerializeObject(department),
+                    _currentUserService.UserId);
 
                 return new ApiResponse<string>
                 {
                     Success = true,
-                    Message = AppConstants.RecordDeleted,
-                    Data = department.DepartmentCode
+                    Message = "Department Deleted Successfully",
+                    Data = department.DepartmentName
                 };
             }
             catch (Exception ex)
             {
-                Log.Error(ex,AppConstants.ErrorWhileDeleting);
+                Log.Error(ex,
+                    "Error while deleting department");
 
                 throw;
             }
         }
 
         #endregion
-
         #region GET ALL
 
-        public async Task<ApiResponse<List<DepartmentResponseDto>>> GetDepartments()
+        public async Task<ApiResponse<List<DepartmentDto>>>
+            GetDepartments()
         {
             try
             {
-                var departments = await _unitOfWork.Repository<Department>().GetAllAsync();
-
-                var result = departments.Where(x => x.UserId == _currentUserService.UserId && x.Status)
-                    .Select(x =>
-                        new DepartmentResponseDto
-                        {
-                            DepartmentId = x.DepartmentId,
-
-                            DepartmentName = x.DepartmentName,
-
-                            DepartmentCode = x.DepartmentCode,
-
-                            Description = x.Description,
-
-                            Status = x.Status
-                        })
+                var departments =
+                    (await _unitOfWork.Repository<Department>()
+                        .FindAsync(x =>
+                            x.Status &&
+                            x.CreatedBy == _currentUserService.UserId))
+                    .OrderByDescending(x => x.DepartmentId)
                     .ToList();
 
-                return new ApiResponse<List<DepartmentResponseDto>>
-                       {
-                             Success = true,
-                             Message = "Success",
-                              Data = result
-                       };
+                var result = departments.Select(x =>
+                    new DepartmentDto
+                    {
+                        DepartmentId = x.DepartmentId,
+
+                        DepartmentName =
+                            x.DepartmentName,
+
+                        DepartmentCode =
+                            x.DepartmentCode,
+
+                        Description =
+                            x.Description ?? string.Empty,
+
+                        Status =
+                            x.Status
+
+                    }).ToList();
+
+                return new ApiResponse<List<DepartmentDto>>
+                {
+                    Success = true,
+                    Message = "Success",
+                    Data = result
+                };
             }
             catch (Exception ex)
             {
@@ -277,46 +347,52 @@ namespace BusinessLayer.Services
         }
 
         #endregion
-
         #region GET BY ID
 
-        public async Task<ApiResponse<DepartmentResponseDto>> GetDepartmentById( int departmentId)
+        public async Task<ApiResponse<DepartmentDto>>
+            GetDepartmentById(int id)
         {
             try
             {
-                var department = (await _unitOfWork.Repository<Department>().FindAsync(x => 
-                                  x.DepartmentId == departmentId &&
-                                  x.UserId == _currentUserService.UserId)).FirstOrDefault();
+                var department =
+                    (await _unitOfWork.Repository<Department>()
+                        .FindAsync(x =>
+                            x.DepartmentId == id))
+                    .FirstOrDefault();
 
                 if (department == null)
+                    throw new CustomException(
+                        "Department not found.");
+
+                var result = new DepartmentDto
                 {
-                    throw new CustomException(AppConstants.DepartmentNotFound);
-                }
+                    DepartmentId =
+                        department.DepartmentId,
 
-                DepartmentResponseDto dto = 
-                    new DepartmentResponseDto
-                    {
-                        DepartmentId = department.DepartmentId,
+                    DepartmentName =
+                        department.DepartmentName,
 
-                        DepartmentName = department.DepartmentName,
+                    DepartmentCode =
+                        department.DepartmentCode,
 
-                        DepartmentCode = department.DepartmentCode,
+                    Description =
+                        department.Description ?? string.Empty,
 
-                        Description = department.Description,
+                    Status =
+                        department.Status
+                };
 
-                        Status =  department.Status
-                    };
-
-             return new ApiResponse< DepartmentResponseDto>
-                    {
-                           Success = true,
-                           Message = "Success",
-                           Data = dto
-                    };
+                return new ApiResponse<DepartmentDto>
+                {
+                    Success = true,
+                    Message = "Success",
+                    Data = result
+                };
             }
             catch (Exception ex)
             {
-                Log.Error(ex,AppConstants.NoRecordsFound);
+                Log.Error(ex,
+                    "Error while getting department by id");
 
                 throw;
             }
@@ -325,6 +401,510 @@ namespace BusinessLayer.Services
         #endregion
 
         #endregion
+        #region Designation
 
+        #region CREATE
+
+        public async Task<ApiResponse<string>> CreateDesignation(
+    DesignationDto dto)
+        {
+            try
+            {
+                // Validate Designation Name
+                if (string.IsNullOrWhiteSpace(dto.DesignationName))
+                    throw new CustomException(
+                        "Designation Name is required.");
+
+                // Validate Designation Code
+                if (string.IsNullOrWhiteSpace(dto.DesignationCode))
+                    throw new CustomException(
+                        "Designation Code is required.");
+
+                // Validate Department
+                if (!dto.DepartmentId.HasValue || dto.DepartmentId <= 0)
+                    throw new CustomException(
+                        "Department is required.");
+
+                // Clean values
+                string designationName =
+                    dto.DesignationName.Trim();
+
+                string designationCode =
+                    dto.DesignationCode.Trim().ToUpper();
+
+                // Check Department exists
+                var department =
+                    (await _unitOfWork.Repository<Department>()
+                        .FindAsync(x =>
+                            x.DepartmentId == dto.DepartmentId.Value))
+                        .FirstOrDefault();
+
+                if (department == null)
+                    throw new CustomException(
+                        "Selected Department not found.");
+
+                // Duplicate Designation Name
+                var duplicateName =
+                    await _unitOfWork.Repository<Designation>()
+                        .FindAsync(x =>
+                            x.DesignationName.ToLower() ==
+                            designationName.ToLower());
+
+                if (duplicateName.Any())
+                    throw new CustomException(
+                        "Designation Name already exists.");
+
+                // Duplicate Designation Code
+                var duplicateCode =
+                    await _unitOfWork.Repository<Designation>()
+                        .FindAsync(x =>
+                            x.DesignationCode.ToLower() ==
+                            designationCode.ToLower());
+
+                if (duplicateCode.Any())
+                    throw new CustomException(
+                        "Designation Code already exists.");
+
+                // Create Entity
+                Designation designation = new Designation
+                {
+                    DesignationName = designationName,
+
+                    DesignationCode = designationCode,
+
+                    Description =
+                        string.IsNullOrWhiteSpace(dto.Description)
+                            ? null
+                            : dto.Description.Trim(),
+
+                    DepartmentId = dto.DepartmentId,
+
+                    Status = dto.Status,
+
+                    CompanyId = dto.CompanyId,
+
+                    RegionId = dto.RegionId,
+
+                    CreatedBy =
+                        _currentUserService.UserId,
+
+                    CreatedDate = DateTime.Now,
+
+                    UserId =
+                        _currentUserService.UserId
+                };
+
+                await _unitOfWork.Repository<Designation>()
+                    .AddAsync(designation);
+
+                await _unitOfWork.CompleteAsync();
+
+                // Audit
+                await _auditService.LogAsync(
+                    "Designation",
+                    "INSERT",
+                    designation.DesignationId,
+                    "",
+                    JsonConvert.SerializeObject(designation, new JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    }),
+                    _currentUserService.UserId);
+
+                return new ApiResponse<string>
+                {
+                    Success = true,
+                    Message = "Designation Created Successfully",
+                    Data = designation.DesignationName
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.Error(
+                    ex,
+                    "Error while creating designation");
+
+                throw;
+            }
+        }
+
+        #endregion
+
+
+        #region UPDATE
+
+        public async Task<ApiResponse<string>> UpdateDesignation(
+            DesignationDto dto)
+        {
+            try
+            {
+                // Validate Designation Name
+                if (string.IsNullOrWhiteSpace(dto.DesignationName))
+                    throw new CustomException(
+                        "Designation Name is required.");
+
+                // Validate Designation Code
+                if (string.IsNullOrWhiteSpace(dto.DesignationCode))
+                    throw new CustomException(
+                        "Designation Code is required.");
+
+                // Validate Department
+                if (!dto.DepartmentId.HasValue || dto.DepartmentId <= 0)
+                    throw new CustomException(
+                        "Department is required.");
+
+                // Get existing designation
+                var designation =
+                    (await _unitOfWork.Repository<Designation>()
+                        .FindAsync(x =>
+                            x.DesignationId == dto.DesignationId))
+                        .FirstOrDefault();
+
+                if (designation == null)
+                    throw new CustomException(
+                        "Designation not found.");
+
+                // Clean values
+                string designationName =
+                    dto.DesignationName.Trim();
+
+                string designationCode =
+                    dto.DesignationCode.Trim().ToUpper();
+
+                // Check Department exists
+                var department =
+                    (await _unitOfWork.Repository<Department>()
+                        .FindAsync(x =>
+                            x.DepartmentId == dto.DepartmentId.Value))
+                        .FirstOrDefault();
+
+                if (department == null)
+                    throw new CustomException(
+                        "Selected Department not found.");
+
+                // Duplicate Designation Name
+                var duplicateName =
+                    await _unitOfWork.Repository<Designation>()
+                        .FindAsync(x =>
+                            x.DesignationId != dto.DesignationId &&
+                            x.DesignationName.ToLower() ==
+                            designationName.ToLower());
+
+                if (duplicateName.Any())
+                    throw new CustomException(
+                        "Designation Name already exists.");
+
+                // Duplicate Designation Code
+                var duplicateCode =
+                    await _unitOfWork.Repository<Designation>()
+                        .FindAsync(x =>
+                            x.DesignationId != dto.DesignationId &&
+                            x.DesignationCode.ToLower() ==
+                            designationCode.ToLower());
+
+                if (duplicateCode.Any())
+                    throw new CustomException(
+                        "Designation Code already exists.");
+
+                // Old values for audit
+                string oldValues =
+                    JsonConvert.SerializeObject(designation, new JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+
+                // Update
+                designation.DesignationName =
+                    designationName;
+
+                designation.DesignationCode =
+                    designationCode;
+
+                designation.Description =
+                    string.IsNullOrWhiteSpace(dto.Description)
+                        ? null
+                        : dto.Description.Trim();
+
+                designation.DepartmentId =
+                    dto.DepartmentId;
+
+                designation.Status =
+                    dto.Status;
+
+                designation.CompanyId =
+                    dto.CompanyId;
+
+                designation.RegionId =
+                    dto.RegionId;
+
+                designation.UpdatedBy =
+                    _currentUserService.UserId;
+
+                designation.UpdatedDate =
+                    DateTime.Now;
+
+                _unitOfWork.Repository<Designation>()
+                    .Update(designation);
+
+                await _unitOfWork.CompleteAsync();
+
+                // Audit
+                await _auditService.LogAsync(
+                    "Designation",
+                    "UPDATE",
+                    designation.DesignationId,
+                    oldValues,
+                    JsonConvert.SerializeObject(designation, new JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    }),
+                    _currentUserService.UserId);
+
+                return new ApiResponse<string>
+                {
+                    Success = true,
+                    Message = "Designation Updated Successfully",
+                    Data = designation.DesignationName
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.Error(
+                    ex,
+                    "Error while updating designation");
+
+                throw;
+            }
+        }
+
+        #endregion
+
+
+        #region DELETE
+
+        public async Task<ApiResponse<string>> DeleteDesignation(
+            int id)
+        {
+            try
+            {
+                // Get existing designation
+                var designation =
+                    (await _unitOfWork.Repository<Designation>()
+                        .FindAsync(x =>
+                            x.DesignationId == id))
+                        .FirstOrDefault();
+
+                if (designation == null)
+                    throw new CustomException(
+                        "Designation not found.");
+
+                // Old values for audit
+                string oldValues =
+                    JsonConvert.SerializeObject(designation, new JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    });
+
+                // Soft Delete / Deactivate
+                designation.Status = false;
+
+                designation.UpdatedBy =
+                    _currentUserService.UserId;
+
+                designation.UpdatedDate =
+                    DateTime.Now;
+
+                _unitOfWork.Repository<Designation>()
+                    .Update(designation);
+
+                await _unitOfWork.CompleteAsync();
+
+                // Audit
+                await _auditService.LogAsync(
+                    "Designation",
+                    "DELETE",
+                    designation.DesignationId,
+                    oldValues,
+                    JsonConvert.SerializeObject(designation, new JsonSerializerSettings
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                    }),
+                    _currentUserService.UserId);
+
+                return new ApiResponse<string>
+                {
+                    Success = true,
+                    Message = "Designation Deleted Successfully",
+                    Data = designation.DesignationName
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.Error(
+                    ex,
+                    "Error while deleting designation");
+
+                throw;
+            }
+        }
+
+        #endregion
+
+
+        #region GET ALL
+
+        public async Task<ApiResponse<List<DesignationDto>>>
+            GetDesignations()
+        {
+            try
+            {
+                // Get all designations
+                var designations =
+                    (await _unitOfWork.Repository<Designation>()
+                        .FindAsync(x =>
+                            x.CreatedBy == _currentUserService.UserId))
+                    .OrderByDescending(x =>
+                        x.DesignationId)
+                    .ToList();
+
+                // Get all departments
+                var departments =
+                    (await _unitOfWork.Repository<Department>()
+                        .FindAsync(x => true))
+                    .ToList();
+
+                // Map result
+                var result = designations.Select(x =>
+                {
+                    var department =
+                        departments.FirstOrDefault(d =>
+                            d.DepartmentId == x.DepartmentId);
+
+                    return new DesignationDto
+                    {
+                        DesignationId =
+                            x.DesignationId,
+
+                        CompanyId =
+                            x.CompanyId,
+
+                        RegionId =
+                            x.RegionId,
+
+                        DepartmentId =
+                            x.DepartmentId,
+
+                        DepartmentName =
+                            department?.DepartmentName,
+
+                        DesignationName =
+                            x.DesignationName,
+
+                        DesignationCode =
+                            x.DesignationCode,
+
+                        Description =
+                            x.Description ?? string.Empty,
+
+                        Status =
+                            x.Status
+                    };
+                }).ToList();
+
+                return new ApiResponse<List<DesignationDto>>
+                {
+                    Success = true,
+                    Message = "Success",
+                    Data = result
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.Error(
+                    ex,
+                    "Error while getting designations");
+
+                throw;
+            }
+        }
+
+        #endregion
+
+
+        #region GET BY ID
+
+        public async Task<ApiResponse<DesignationDto>>
+            GetDesignationById(int id)
+        {
+            try
+            {
+                // Get designation
+                var designation =
+                    (await _unitOfWork.Repository<Designation>()
+                        .FindAsync(x =>
+                            x.DesignationId == id))
+                    .FirstOrDefault();
+
+                if (designation == null)
+                    throw new CustomException(
+                        "Designation not found.");
+
+                // Get department
+                var department =
+                    (await _unitOfWork.Repository<Department>()
+                        .FindAsync(x =>
+                            x.DepartmentId ==
+                            designation.DepartmentId))
+                    .FirstOrDefault();
+
+                var result = new DesignationDto
+                {
+                    DesignationId =
+                        designation.DesignationId,
+
+                    CompanyId =
+                        designation.CompanyId,
+
+                    RegionId =
+                        designation.RegionId,
+
+                    DepartmentId =
+                        designation.DepartmentId,
+
+                    DepartmentName =
+                        department?.DepartmentName,
+
+                    DesignationName =
+                        designation.DesignationName,
+
+                    DesignationCode =
+                        designation.DesignationCode,
+
+                    Description =
+                        designation.Description ?? string.Empty,
+
+                    Status =
+                        designation.Status
+                };
+
+                return new ApiResponse<DesignationDto>
+                {
+                    Success = true,
+                    Message = "Success",
+                    Data = result
+                };
+            }
+            catch (Exception ex)
+            {
+                Log.Error(
+                    ex,
+                    "Error while getting designation by id");
+
+                throw;
+            }
+        }
+
+        #endregion
+        #endregion
     }
 }

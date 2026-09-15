@@ -1,4 +1,5 @@
 ﻿using Business_Layer.DTOs.MasterDTO_s;
+using Business_Layer.DTOs.SuperAdmin;
 using Shared.CommonModels;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,31 @@ namespace Business_Layer.Interfaces.MasterIInterface
 {
     public interface IDepartmentService
     {
-        Task<ApiResponse<string>> CreateDepartment(DepartmentCreateDto dto);
+        #region Department
 
-        Task<ApiResponse<string>>UpdateDepartment(DepartmentUpdateDto dto);
+        Task<ApiResponse<string>> CreateDepartment(DepartmentDto dto);
+
+        Task<ApiResponse<string>> UpdateDepartment(DepartmentDto dto);
 
         Task<ApiResponse<string>> DeleteDepartment(int id);
 
-        Task<ApiResponse<List<DepartmentResponseDto>>> GetDepartments();
+        Task<ApiResponse<List<DepartmentDto>>> GetDepartments();
 
-        Task<ApiResponse<DepartmentResponseDto>> GetDepartmentById(int id);
+        Task<ApiResponse<DepartmentDto>> GetDepartmentById(int id);
+
+        #endregion
+        #region Designation
+
+        Task<ApiResponse<string>> CreateDesignation(DesignationDto dto);
+
+        Task<ApiResponse<string>> UpdateDesignation(DesignationDto dto);
+
+        Task<ApiResponse<string>> DeleteDesignation(int id);
+
+        Task<ApiResponse<List<DesignationDto>>> GetDesignations();
+
+        Task<ApiResponse<DesignationDto>> GetDesignationById(int id);
+
+        #endregion
     }
 }

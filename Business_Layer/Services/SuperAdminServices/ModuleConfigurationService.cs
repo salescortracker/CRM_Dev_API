@@ -312,7 +312,9 @@ namespace Business_Layer.Services.SuperAdminServices
             {
                 var leadSettings =
                     (await _unitOfWork.Repository<LeadSetting>()
-                        .FindAsync(x => !x.IsDeleted))
+                        .FindAsync(x =>
+                            !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId))
                     .OrderByDescending(x => x.LeadSettingId)
                     .ToList();
 
@@ -803,7 +805,9 @@ namespace Business_Layer.Services.SuperAdminServices
             {
                 var pipelineSettings =
                     (await _unitOfWork.Repository<PipelineSetting>()
-                        .FindAsync(x => !x.IsDeleted))
+                        .FindAsync(x =>
+                            !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId))
                     .OrderByDescending(
                         x => x.PipelineSettingId)
                     .ToList();
@@ -1329,7 +1333,9 @@ namespace Business_Layer.Services.SuperAdminServices
             {
                 var opportunityStages =
                     (await _unitOfWork.Repository<OpportunityStage1>()
-                        .FindAsync(x => !x.IsDeleted))
+                        .FindAsync(x =>
+                            !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId))
                     .OrderBy(x => x.StageOrder)
                     .ToList();
 
@@ -1696,7 +1702,9 @@ namespace Business_Layer.Services.SuperAdminServices
         {
             var entities = (await _unitOfWork
                 .Repository<CrmmoduleConfigurationActivityType>()
-                .FindAsync(x => !x.IsDeleted))
+                .FindAsync(x =>
+                    !x.IsDeleted &&
+                    x.CreatedBy == _currentUserService.UserId))
                 .OrderByDescending(x => x.ActivityTypeId)
                 .ToList();
 
@@ -1968,7 +1976,9 @@ namespace Business_Layer.Services.SuperAdminServices
         {
             var entities = (await _unitOfWork
                 .Repository<CrmmoduleConfigurationSource>()
-                .FindAsync(x => !x.IsDeleted))
+                .FindAsync(x =>
+                    !x.IsDeleted &&
+                    x.CreatedBy == _currentUserService.UserId))
                 .OrderByDescending(x => x.SourceId)
                 .ToList();
 
@@ -2236,7 +2246,8 @@ namespace Business_Layer.Services.SuperAdminServices
         {
             var entities = (await _unitOfWork
                 .Repository<CrmmoduleConfigurationIndustry>()
-                .FindAsync(x => !x.IsDeleted))
+                .FindAsync(x => !x.IsDeleted &&
+                    x.CreatedBy == _currentUserService.UserId))
                 .OrderByDescending(x => x.IndustryId)
                 .ToList();
 
@@ -2528,7 +2539,8 @@ namespace Business_Layer.Services.SuperAdminServices
         {
             var entities = (await _unitOfWork
                 .Repository<CrmmoduleConfigurationTerritory>()
-                .FindAsync(x => !x.IsDeleted))
+                .FindAsync(x => !x.IsDeleted &&
+                    x.CreatedBy == _currentUserService.UserId))
                 .OrderByDescending(x => x.TerritoryId)
                 .ToList();
 
@@ -2814,7 +2826,8 @@ namespace Business_Layer.Services.SuperAdminServices
         {
             var entities = (await _unitOfWork
                 .Repository<CrmmoduleConfigurationSalesTarget>()
-                .FindAsync(x => !x.IsDeleted))
+                .FindAsync(x => !x.IsDeleted &&
+                    x.CreatedBy == _currentUserService.UserId))
                 .OrderByDescending(x => x.SalesTargetId)
                 .ToList();
 
@@ -3105,7 +3118,8 @@ namespace Business_Layer.Services.SuperAdminServices
         {
             var entities = (await _unitOfWork
                 .Repository<CrmmoduleConfigurationNumberSeries>()
-                .FindAsync(x => !x.IsDeleted))
+                .FindAsync(x => !x.IsDeleted &&
+                    x.CreatedBy == _currentUserService.UserId))
                 .OrderByDescending(x => x.NumberSeriesId)
                 .ToList();
 
@@ -3424,7 +3438,8 @@ namespace Business_Layer.Services.SuperAdminServices
         {
             var entities = (await _unitOfWork
                 .Repository<CrmmoduleConfigurationCustomField>()
-                .FindAsync(x => !x.IsDeleted))
+                .FindAsync(x => !x.IsDeleted &&
+                    x.CreatedBy == _currentUserService.UserId))
                 .OrderBy(x => x.ModuleName)
                 .ThenBy(x => x.FieldOrder)
                 .ToList();

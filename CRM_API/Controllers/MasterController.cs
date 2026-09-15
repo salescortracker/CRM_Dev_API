@@ -1,4 +1,5 @@
 using Business_Layer.DTOs.MasterDTO_s;
+using Business_Layer.DTOs.SuperAdmin;
 using Business_Layer.Interfaces.MasterIInterface;
 using Business_Layer.Services.MasterServices;
 using Microsoft.AspNetCore.Http;
@@ -38,28 +39,28 @@ namespace CRM_API.Controllers
         private readonly ICallTypeService _callTypeService;
         private readonly ICallPurposeService _callPurposeService;
         private readonly ICallOutcomeService _callOutcomeService;
-
+        private readonly IDepartmentService _departmentService;
 
 
 
         public MasterController(ICompanyAndRegionService service, ICountryService countryService, Istateservices stateservices, ICurrencyService currencyService, IPriorityService priorityService, ILeadStatusService leadStatusService, ILeadSourceService leadSourceService, IBillingCycleService billingCycleService, ILicenseService licenseService, IBackupFrequencyService backupFrequencyService, IRetentionPeriodService retentionPeriodService, IPaymentMethodService paymentMethodService, IFiscalTypeService fiscalTypeService, IDiscountTypeService discountTypeService, IIndustryService industryService
-            ,IEmailDataService emailDataService, ILeadTypeService leadTypeService, IEmailTypeService emailTypeService, ICompanyTypeService companyTypeService, IContactTypeService contactTypeService, IRelationshipService relationshipService, IActivityTypeService activityTypeService, IEmailCategoryService emailCategoryService, IMeetingPurposeService meetingPurposeService, ICallTypeService callTypeService, ICallPurposeService callPurposeService, ICallOutcomeService callOutcomeService, ICampaignTypeService campaignTypeService)
+            ,IEmailDataService emailDataService, ILeadTypeService leadTypeService, IEmailTypeService emailTypeService, ICompanyTypeService companyTypeService, IContactTypeService contactTypeService, IRelationshipService relationshipService, IActivityTypeService activityTypeService, IEmailCategoryService emailCategoryService, IMeetingPurposeService meetingPurposeService, ICallTypeService callTypeService, ICallPurposeService callPurposeService, ICallOutcomeService callOutcomeService, ICampaignTypeService campaignTypeService, IDepartmentService departmentService)
         {
             _service = service;
             _countryService = countryService;
             _stateservices = stateservices;
-          _currencyService = currencyService;
-      _priorityService = priorityService;
-      _leadStatusService = leadStatusService;
-      _leadSourceService = leadSourceService;
-      _billingCycleService = billingCycleService;
-      _licenseService = licenseService;
-      _backupFrequencyService = backupFrequencyService;
-      _retentionPeriodService = retentionPeriodService;
-      _paymentMethodService = paymentMethodService;
-      _fiscalTypeService = fiscalTypeService;
-      _discountTypeService = discountTypeService;
-      _industryService = industryService;
+            _currencyService = currencyService;
+            _priorityService = priorityService;
+            _leadStatusService = leadStatusService;
+            _leadSourceService = leadSourceService;
+            _billingCycleService = billingCycleService;
+            _licenseService = licenseService;
+            _backupFrequencyService = backupFrequencyService;
+            _retentionPeriodService = retentionPeriodService;
+            _paymentMethodService = paymentMethodService;
+            _fiscalTypeService = fiscalTypeService;
+            _discountTypeService = discountTypeService;
+            _industryService = industryService;
             _leadTypeService = leadTypeService;
             _emailTypeService = emailTypeService;
             _emailDataService = emailDataService;
@@ -73,7 +74,7 @@ namespace CRM_API.Controllers
             _callTypeService = callTypeService;
             _callPurposeService = callPurposeService;
             _callOutcomeService = callOutcomeService;
-
+            _departmentService = departmentService;
         }
 
         [HttpPost("createcompany")]
@@ -138,7 +139,118 @@ namespace CRM_API.Controllers
         }
 
         #endregion
+        #region Department CRUD
 
+        [HttpPost("createdepartment")]
+        public async Task<IActionResult> CreateDepartment(
+            DepartmentDto dto)
+        {
+            return Ok(
+                await _departmentService
+                    .CreateDepartment(dto)
+            );
+        }
+
+
+        [HttpPost("updatedepartment")]
+        public async Task<IActionResult> UpdateDepartment(
+            DepartmentDto dto)
+        {
+            return Ok(
+                await _departmentService
+                    .UpdateDepartment(dto)
+            );
+        }
+
+
+        [HttpPost("deletedepartment/{id}")]
+        public async Task<IActionResult> DeleteDepartment(
+            int id)
+        {
+            return Ok(
+                await _departmentService
+                    .DeleteDepartment(id)
+            );
+        }
+
+
+        [HttpGet("getalldepartment")]
+        public async Task<IActionResult> GetDepartments()
+        {
+            return Ok(
+                await _departmentService
+                    .GetDepartments()
+            );
+        }
+
+
+        [HttpGet("getbydepartment/{id}")]
+        public async Task<IActionResult> GetDepartmentById(
+            int id)
+        {
+            return Ok(
+                await _departmentService
+                    .GetDepartmentById(id)
+            );
+        }
+
+        #endregion
+        #region Designation
+
+        [HttpPost("createdesignation")]
+        public async Task<IActionResult> CreateDesignation(
+            DesignationDto dto)
+        {
+            return Ok(
+                await _departmentService
+                    .CreateDesignation(dto)
+            );
+        }
+
+
+        [HttpPost("updatedesignation")]
+        public async Task<IActionResult> UpdateDesignation(
+            DesignationDto dto)
+        {
+            return Ok(
+                await _departmentService
+                    .UpdateDesignation(dto)
+            );
+        }
+
+
+        [HttpPost("deletedesignation/{id}")]
+        public async Task<IActionResult> DeleteDesignation(
+            int id)
+        {
+            return Ok(
+                await _departmentService
+                    .DeleteDesignation(id)
+            );
+        }
+
+
+        [HttpGet("getalldesignation")]
+        public async Task<IActionResult> GetDesignations()
+        {
+            return Ok(
+                await _departmentService
+                    .GetDesignations()
+            );
+        }
+
+
+        [HttpGet("getbydesignation/{id}")]
+        public async Task<IActionResult> GetDesignationById(
+            int id)
+        {
+            return Ok(
+                await _departmentService
+                    .GetDesignationById(id)
+            );
+        }
+
+        #endregion
         #region COUNTRY
 
         [HttpPost("createcountry")]
