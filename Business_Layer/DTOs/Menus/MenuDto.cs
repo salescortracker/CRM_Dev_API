@@ -34,5 +34,9 @@ namespace Business_Layer.DTOs.Menus
         public bool CanDelete { get; set; }
 
         public bool CanApprove { get; set; }
+
+        public bool CanReject { get; set; }
+
+        public bool CanDownload { get; set; }
     }
 }
