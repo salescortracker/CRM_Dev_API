@@ -145,6 +145,8 @@ builder.Services.AddScoped<IModuleConfigurationService, ModuleConfigurationServi
 builder.Services.AddScoped<ICompanyProfileService, CompanyProfileService>();
 builder.Services.AddScoped<IBusinessHourService, BusinessHourService>();
 builder.Services.AddScoped<IHolidayCalendarService, HolidayCalendarService>();
+builder.Services.AddScoped<ICustomerSupportTicketService, CustomerSupportTicketService>();
+builder.Services.AddScoped<IProjectManagementService, ProjectManagementService>();
 
 // ======================================================
 // COMMON UserId  (ADD THIS HERE)

@@ -32,4 +32,10 @@ public partial class Role
     public int? UpdatedBy { get; set; }
 
     public int? UserId { get; set; }
+
+    public bool IsDefault { get; set; }
+
+    public int UserCount { get; set; }
+
+    public virtual ICollection<RoleMenuPermission> RoleMenuPermissions { get; set; } = new List<RoleMenuPermission>();
 }

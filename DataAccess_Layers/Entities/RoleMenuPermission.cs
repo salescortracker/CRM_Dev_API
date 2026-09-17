@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DataAccess_Layers.Entities;
 
@@ -19,4 +20,8 @@ public partial class RoleMenuPermission
     public int? ModifiedBy { get; set; }
 
     public DateTime? ModifiedDate { get; set; }
+
+    public virtual MenuMaster Menu { get; set; } = null!;
+
+    public virtual Role Role { get; set; } = null!;
 }

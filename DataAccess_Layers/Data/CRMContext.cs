@@ -124,6 +124,8 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<CustomerContact> CustomerContacts { get; set; }
 
+    public virtual DbSet<CustomerSupportTicket> CustomerSupportTickets { get; set; }
+
     public virtual DbSet<CustomerTenant> CustomerTenants { get; set; }
 
     public virtual DbSet<DataMigrationRequest> DataMigrationRequests { get; set; }
@@ -151,6 +153,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<EmailsTemplate> EmailsTemplates { get; set; }
 
     public virtual DbSet<EscalationRule> EscalationRules { get; set; }
+
+    public virtual DbSet<Faqmanagement> Faqmanagements { get; set; }
 
     public virtual DbSet<FiscalType> FiscalTypes { get; set; }
 
@@ -182,6 +186,8 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<InvoiceItem> InvoiceItems { get; set; }
 
+    public virtual DbSet<KnowledgeBase> KnowledgeBases { get; set; }
+
     public virtual DbSet<Lead> Leads { get; set; }
 
     public virtual DbSet<LeadActivity> LeadActivities { get; set; }
@@ -209,6 +215,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<LeadType> LeadTypes { get; set; }
 
     public virtual DbSet<License> Licenses { get; set; }
+
+    public virtual DbSet<LicenseManagement> LicenseManagements { get; set; }
 
     public virtual DbSet<MarketingList> MarketingLists { get; set; }
 
@@ -240,6 +248,8 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<OrganizationSetting> OrganizationSettings { get; set; }
 
+    public virtual DbSet<PasswordPolicy> PasswordPolicies { get; set; }
+
     public virtual DbSet<Payment> Payments { get; set; }
 
     public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
@@ -264,6 +274,14 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+    public virtual DbSet<ProjectDocument> ProjectDocuments { get; set; }
+
+    public virtual DbSet<ProjectManagement> ProjectManagements { get; set; }
+
+    public virtual DbSet<ProjectMilestone> ProjectMilestones { get; set; }
+
+    public virtual DbSet<ProjectTask> ProjectTasks { get; set; }
+
     public virtual DbSet<Quotation> Quotations { get; set; }
 
     public virtual DbSet<QuotationApproval> QuotationApprovals { get; set; }
@@ -283,6 +301,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<Role1> Roles1 { get; set; }
+
+    public virtual DbSet<RoleMenuPermission> RoleMenuPermissions { get; set; }
 
     public virtual DbSet<RolePermission> RolePermissions { get; set; }
 
@@ -334,7 +354,11 @@ public partial class CRMContext : DbContext
 
     public virtual DbSet<TicketAttachment> TicketAttachments { get; set; }
 
+    public virtual DbSet<TicketCategory> TicketCategories { get; set; }
+
     public virtual DbSet<TicketComment> TicketComments { get; set; }
+
+    public virtual DbSet<TimesheetManagement> TimesheetManagements { get; set; }
 
     public virtual DbSet<TrainingSession> TrainingSessions { get; set; }
 
@@ -349,6 +373,8 @@ public partial class CRMContext : DbContext
     public virtual DbSet<TwilioWebhookLog> TwilioWebhookLogs { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<UserGroup> UserGroups { get; set; }
 
     public virtual DbSet<UserLogin> UserLogins { get; set; }
 
@@ -2033,6 +2059,47 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_CRM_CustomerContacts_Customers");
         });
 
+        modelBuilder.Entity<CustomerSupportTicket>(entity =>
+        {
+            entity.HasKey(e => e.TicketId).HasName("PK__Customer__712CC627AEC5FAC6");
+
+            entity.ToTable("Customer Support Tickets", "Admin");
+
+            entity.HasIndex(e => e.TicketNumber, "UQ__Customer__350155B3AD1537A8").IsUnique();
+
+            entity.Property(e => e.TicketId).HasColumnName("TicketID");
+            entity.Property(e => e.AssignedTo)
+                .HasMaxLength(200)
+                .HasColumnName("Assigned To");
+            entity.Property(e => e.Category).HasMaxLength(100);
+            entity.Property(e => e.ContactPerson)
+                .HasMaxLength(200)
+                .HasColumnName("Contact Person");
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnName("Created Date");
+            entity.Property(e => e.CustomerName)
+                .HasMaxLength(200)
+                .HasColumnName("Customer Name");
+            entity.Property(e => e.DueDate).HasColumnName("Due Date");
+            entity.Property(e => e.Email).HasMaxLength(255);
+            entity.Property(e => e.MobileNumber)
+                .HasMaxLength(20)
+                .HasColumnName("Mobile Number");
+            entity.Property(e => e.ModifiedDate).HasColumnName("Modified Date");
+            entity.Property(e => e.Priority).HasMaxLength(50);
+            entity.Property(e => e.RelatedModule)
+                .HasMaxLength(100)
+                .HasColumnName("Related Module");
+            entity.Property(e => e.ResolutionNotes).HasColumnName("Resolution Notes");
+            entity.Property(e => e.Source).HasMaxLength(100);
+            entity.Property(e => e.Status).HasMaxLength(50);
+            entity.Property(e => e.Subject).HasMaxLength(500);
+            entity.Property(e => e.TicketNumber)
+                .HasMaxLength(50)
+                .HasColumnName("Ticket Number");
+        });
+
         modelBuilder.Entity<CustomerTenant>(entity =>
         {
             entity.HasKey(e => e.CustomerTenantId).HasName("PK_CRM_CustomerTenants");
@@ -2454,6 +2521,36 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.NotificationMethod).HasMaxLength(50);
             entity.Property(e => e.RegionId).HasColumnName("RegionID");
             entity.Property(e => e.RuleName).HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<Faqmanagement>(entity =>
+        {
+            entity.HasKey(e => e.Faqid);
+
+            entity.ToTable("FAQManagement", "Admin");
+
+            entity.HasIndex(e => e.Faqcode, "UQ_FAQManagement_FAQCode").IsUnique();
+
+            entity.Property(e => e.Faqid).HasColumnName("FAQID");
+            entity.Property(e => e.Category).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Faqcode)
+                .HasMaxLength(50)
+                .HasColumnName("FAQCode");
+            entity.Property(e => e.Faqtitle)
+                .HasMaxLength(250)
+                .HasColumnName("FAQTitle");
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.Question).HasMaxLength(1000);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasDefaultValue("Draft");
+            entity.Property(e => e.Visibility)
+                .HasMaxLength(20)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<FiscalType>(entity =>
@@ -2957,6 +3054,38 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_CRM_InvoiceItems_User");
         });
 
+        modelBuilder.Entity<KnowledgeBase>(entity =>
+        {
+            entity.HasKey(e => e.ArticleId);
+
+            entity.ToTable("KnowledgeBase", "Admin");
+
+            entity.Property(e => e.ArticleId).HasColumnName("ArticleID");
+            entity.Property(e => e.ArticleTitle).HasMaxLength(250);
+            entity.Property(e => e.Attachment).HasMaxLength(500);
+            entity.Property(e => e.Author).HasMaxLength(150);
+            entity.Property(e => e.Category).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.Keywords).HasMaxLength(500);
+            entity.Property(e => e.LastUpdated).HasColumnType("datetime");
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasDefaultValue("Draft");
+            entity.Property(e => e.Summary).HasMaxLength(1000);
+            entity.Property(e => e.UploadType)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Version).HasMaxLength(20);
+            entity.Property(e => e.Visibility)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<Lead>(entity =>
         {
             entity.HasKey(e => e.LeadId).HasName("PK_CRM_Leads");
@@ -3452,6 +3581,41 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.RegionId).HasColumnName("RegionID");
         });
 
+        modelBuilder.Entity<LicenseManagement>(entity =>
+        {
+            entity.ToTable("LicenseManagement", "Admin");
+
+            entity.HasIndex(e => e.LicenseCode, "UQ_LicenseManagement_LicenseCode").IsUnique();
+
+            entity.Property(e => e.LicenseManagementId).HasColumnName("LicenseManagementID");
+            entity.Property(e => e.ActiveLicense).HasDefaultValue(true);
+            entity.Property(e => e.Apiaccess).HasColumnName("APIAccess");
+            entity.Property(e => e.ApicallsPerMonth).HasColumnName("APICallsPerMonth");
+            entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Crmmodule).HasColumnName("CRMModule");
+            entity.Property(e => e.LicenseCode).HasMaxLength(100);
+            entity.Property(e => e.LicenseName).HasMaxLength(200);
+            entity.Property(e => e.LicenseTypeId).HasColumnName("LicenseTypeID");
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.StorageLimitGb)
+                .HasColumnType("decimal(18, 2)")
+                .HasColumnName("StorageLimitGB");
+            entity.Property(e => e.SupportLevel).HasMaxLength(100);
+
+            entity.HasOne(d => d.Company).WithMany(p => p.LicenseManagements)
+                .HasForeignKey(d => d.CompanyId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_LicenseManagement_Company");
+
+            entity.HasOne(d => d.LicenseType).WithMany(p => p.LicenseManagements)
+                .HasForeignKey(d => d.LicenseTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_LicenseManagement_LicenseType");
+        });
+
         modelBuilder.Entity<MarketingList>(entity =>
         {
             entity.ToTable("MarketingList", "Marketing");
@@ -3504,10 +3668,6 @@ public partial class CRMContext : DbContext
             entity.Property(e => e.Icon).HasMaxLength(100);
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.MenuName).HasMaxLength(100);
-            entity.Property(e => e.MenuType)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasDefaultValue("Common");
             entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
             entity.Property(e => e.ParentMenuId).HasColumnName("ParentMenuID");
             entity.Property(e => e.Url).HasMaxLength(255);
@@ -4033,6 +4193,27 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_Masters_OrganizationSettings_Organizations");
         });
 
+        modelBuilder.Entity<PasswordPolicy>(entity =>
+        {
+            entity.ToTable("PasswordPolicies", "Admin");
+
+            entity.HasIndex(e => e.PolicyName, "UQ_PasswordPolicies_PolicyName").IsUnique();
+
+            entity.Property(e => e.PasswordPolicyId).HasColumnName("PasswordPolicyID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Mfarequirement).HasColumnName("MFARequirement");
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.PolicyActive).HasDefaultValue(true);
+            entity.Property(e => e.PolicyName).HasMaxLength(200);
+            entity.Property(e => e.PreventUsernameInPassword).HasDefaultValue(true);
+            entity.Property(e => e.RequireLowercaseLetter).HasDefaultValue(true);
+            entity.Property(e => e.RequireNumber).HasDefaultValue(true);
+            entity.Property(e => e.RequireSpecialCharacter).HasDefaultValue(true);
+            entity.Property(e => e.RequireUppercaseLetter).HasDefaultValue(true);
+        });
+
         modelBuilder.Entity<Payment>(entity =>
         {
             entity.HasKey(e => e.PaymentId).HasName("PK_CRM_Payments");
@@ -4447,6 +4628,132 @@ public partial class CRMContext : DbContext
             entity.HasOne(d => d.Organization).WithMany(p => p.Products)
                 .HasForeignKey(d => d.OrganizationId)
                 .HasConstraintName("FK_CRM_Products_Organizations");
+        });
+
+        modelBuilder.Entity<ProjectDocument>(entity =>
+        {
+            entity.HasKey(e => e.DocumentId);
+
+            entity.ToTable("ProjectDocuments", "Admin");
+
+            entity.Property(e => e.DocumentId).HasColumnName("DocumentID");
+            entity.Property(e => e.Category).HasMaxLength(150);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DocumentName).HasMaxLength(250);
+            entity.Property(e => e.FileSizeKb)
+                .HasColumnType("decimal(18, 2)")
+                .HasColumnName("FileSizeKB");
+            entity.Property(e => e.FileType).HasMaxLength(100);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.ProjectId).HasColumnName("ProjectID");
+            entity.Property(e => e.Status)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .HasDefaultValue("Active");
+            entity.Property(e => e.UploadDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.UploadFile).HasMaxLength(500);
+            entity.Property(e => e.Version).HasMaxLength(50);
+
+            entity.HasOne(d => d.Project).WithMany(p => p.ProjectDocuments)
+                .HasForeignKey(d => d.ProjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ProjectDocuments_Project");
+        });
+
+        modelBuilder.Entity<ProjectManagement>(entity =>
+        {
+            entity.HasKey(e => e.ProjectId);
+
+            entity.ToTable("ProjectManagement", "Admin");
+
+            entity.HasIndex(e => e.ProjectCode, "UQ_ProjectManagement_ProjectCode").IsUnique();
+
+            entity.Property(e => e.ProjectId).HasColumnName("ProjectID");
+            entity.Property(e => e.Budget).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.CompletionPercentage).HasColumnType("decimal(5, 2)");
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Customer).HasMaxLength(200);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.Priority)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.ProjectCode).HasMaxLength(50);
+            entity.Property(e => e.ProjectName).HasMaxLength(200);
+            entity.Property(e => e.ProjectType).HasMaxLength(100);
+            entity.Property(e => e.Status)
+                .HasMaxLength(30)
+                .IsUnicode(false);
+            entity.Property(e => e.TeamMembers).HasMaxLength(1000);
+        });
+
+        modelBuilder.Entity<ProjectMilestone>(entity =>
+        {
+            entity.HasKey(e => e.MilestoneId);
+
+            entity.ToTable("ProjectMilestones", "Admin");
+
+            entity.Property(e => e.MilestoneId).HasColumnName("MilestoneID");
+            entity.Property(e => e.ActualHours).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.CompletionPercentage).HasColumnType("decimal(5, 2)");
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.EstimatedHours).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.MilestoneName).HasMaxLength(200);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.Priority)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.Project).HasMaxLength(200);
+            entity.Property(e => e.Status)
+                .HasMaxLength(30)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<ProjectTask>(entity =>
+        {
+            entity.HasKey(e => e.TaskId);
+
+            entity.ToTable("ProjectTasks", "Admin");
+
+            entity.Property(e => e.TaskId).HasColumnName("TaskID");
+            entity.Property(e => e.ActualHours).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.AssignedTo).HasMaxLength(200);
+            entity.Property(e => e.CompletionPercentage).HasColumnType("decimal(5, 2)");
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.EstimatedHours).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.MilestoneId).HasColumnName("MilestoneID");
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.PriorityId).HasColumnName("PriorityID");
+            entity.Property(e => e.ProjectId).HasColumnName("ProjectID");
+            entity.Property(e => e.Status)
+                .HasMaxLength(30)
+                .IsUnicode(false)
+                .HasDefaultValue("Not Started");
+            entity.Property(e => e.Tags).HasMaxLength(500);
+            entity.Property(e => e.TaskName).HasMaxLength(200);
+
+            entity.HasOne(d => d.Milestone).WithMany(p => p.ProjectTasks)
+                .HasForeignKey(d => d.MilestoneId)
+                .HasConstraintName("FK_ProjectTasks_Milestone");
+
+            entity.HasOne(d => d.Priority).WithMany(p => p.ProjectTasks)
+                .HasForeignKey(d => d.PriorityId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ProjectTasks_Priority");
+
+            entity.HasOne(d => d.Project).WithMany(p => p.ProjectTasks)
+                .HasForeignKey(d => d.ProjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ProjectTasks_Project");
         });
 
         modelBuilder.Entity<Quotation>(entity =>
@@ -4911,6 +5218,27 @@ public partial class CRMContext : DbContext
             entity.HasOne(d => d.Organization).WithMany(p => p.Role1s)
                 .HasForeignKey(d => d.OrganizationId)
                 .HasConstraintName("FK_Security_Roles_Organizations");
+        });
+
+        modelBuilder.Entity<RoleMenuPermission>(entity =>
+        {
+            entity.ToTable("RoleMenuPermissions", "Master");
+
+            entity.HasIndex(e => new { e.RoleId, e.MenuId }, "UQ_RoleMenuPermissions_Role_Menu").IsUnique();
+
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Menu).WithMany(p => p.RoleMenuPermissions)
+                .HasForeignKey(d => d.MenuId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RoleMenuPermissions_MenuMaster");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.RoleMenuPermissions)
+                .HasForeignKey(d => d.RoleId)
+                .HasConstraintName("FK_RoleMenuPermissions_Roles");
         });
 
         modelBuilder.Entity<RolePermission>(entity =>
@@ -6146,6 +6474,41 @@ public partial class CRMContext : DbContext
                 .HasConstraintName("FK_CRM_TicketAttachments_User");
         });
 
+        modelBuilder.Entity<TicketCategory>(entity =>
+        {
+            entity.HasKey(e => e.CategoryId).HasName("PK__Ticket C__19093A2B04A55E17");
+
+            entity.ToTable("Ticket Categories", "Admin");
+
+            entity.HasIndex(e => e.CategoryCode, "UQ__Ticket C__4F30E3CB6CBF354D").IsUnique();
+
+            entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
+            entity.Property(e => e.AssignedTeam)
+                .HasMaxLength(200)
+                .HasColumnName("Assigned Team");
+            entity.Property(e => e.CategoryCode)
+                .HasMaxLength(50)
+                .HasColumnName("Category Code");
+            entity.Property(e => e.CategoryName)
+                .HasMaxLength(200)
+                .HasColumnName("Category Name");
+            entity.Property(e => e.CategoryType)
+                .HasMaxLength(100)
+                .HasColumnName("Category Type");
+            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.ParentCategory)
+                .HasMaxLength(200)
+                .HasColumnName("Parent Category");
+            entity.Property(e => e.Priority).HasMaxLength(50);
+            entity.Property(e => e.SlaHours)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("SLA Hours");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Active");
+        });
+
         modelBuilder.Entity<TicketComment>(entity =>
         {
             entity.HasKey(e => e.TicketCommentId).HasName("PK_CRM_TicketComments");
@@ -6193,6 +6556,40 @@ public partial class CRMContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CRM_TicketComments_User");
+        });
+
+        modelBuilder.Entity<TimesheetManagement>(entity =>
+        {
+            entity.HasKey(e => e.TimesheetId);
+
+            entity.ToTable("TimesheetManagement", "Admin");
+
+            entity.Property(e => e.TimesheetId).HasColumnName("TimesheetID");
+            entity.Property(e => e.BillingType)
+                .HasMaxLength(30)
+                .IsUnicode(false);
+            entity.Property(e => e.CreatedDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+            entity.Property(e => e.EndTime).HasPrecision(0);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.ProjectId).HasColumnName("ProjectID");
+            entity.Property(e => e.StartTime).HasPrecision(0);
+            entity.Property(e => e.Status)
+                .HasMaxLength(30)
+                .IsUnicode(false);
+            entity.Property(e => e.TaskId).HasColumnName("TaskID");
+            entity.Property(e => e.TotalHours).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.Project).WithMany(p => p.TimesheetManagements)
+                .HasForeignKey(d => d.ProjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_TimesheetManagement_Project");
+
+            entity.HasOne(d => d.Task).WithMany(p => p.TimesheetManagements)
+                .HasForeignKey(d => d.TaskId)
+                .HasConstraintName("FK_TimesheetManagement_Task");
         });
 
         modelBuilder.Entity<TrainingSession>(entity =>
@@ -6627,6 +7024,37 @@ public partial class CRMContext : DbContext
             entity.HasOne(d => d.Team).WithMany(p => p.Users)
                 .HasForeignKey(d => d.TeamId)
                 .HasConstraintName("FK_Security_Users_Teams");
+        });
+
+        modelBuilder.Entity<UserGroup>(entity =>
+        {
+            entity.ToTable("UserGroups", "Admin");
+
+            entity.HasIndex(e => e.GroupCode, "UQ_UserGroups_GroupCode").IsUnique();
+
+            entity.Property(e => e.UserGroupId).HasColumnName("UserGroupID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DefaultRole).HasMaxLength(100);
+            entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.GroupCode).HasMaxLength(50);
+            entity.Property(e => e.GroupName).HasMaxLength(200);
+            entity.Property(e => e.GroupType).HasMaxLength(100);
+            entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+            entity.Property(e => e.PriorityId).HasColumnName("PriorityID");
+            entity.Property(e => e.ReportingManager).HasMaxLength(200);
+            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.Team).HasMaxLength(200);
+
+            entity.HasOne(d => d.Department).WithMany(p => p.UserGroups)
+                .HasForeignKey(d => d.DepartmentId)
+                .HasConstraintName("FK_UserGroups_Department");
+
+            entity.HasOne(d => d.Priority).WithMany(p => p.UserGroups)
+                .HasForeignKey(d => d.PriorityId)
+                .HasConstraintName("FK_UserGroups_Priority");
         });
 
         modelBuilder.Entity<UserLogin>(entity =>

@@ -34,4 +34,6 @@ public partial class Department
     public virtual ICollection<Designation> Designations { get; set; } = new List<Designation>();
 
     public virtual ICollection<HolidayCalendar> HolidayCalendars { get; set; } = new List<HolidayCalendar>();
+
+    public virtual ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
 }

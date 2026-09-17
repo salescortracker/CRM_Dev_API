@@ -17,8 +17,6 @@ public partial class MenuMaster
 
     public int? OrderNo { get; set; }
 
-    public string MenuType { get; set; } = null!;
-
     public bool IsActive { get; set; }
 
     public int? CreatedBy { get; set; }
@@ -40,4 +38,10 @@ public partial class MenuMaster
     public bool CanApprove { get; set; }
 
     public int? UserId { get; set; }
+
+    public bool CanReject { get; set; }
+
+    public bool CanDownload { get; set; }
+
+    public virtual ICollection<RoleMenuPermission> RoleMenuPermissions { get; set; } = new List<RoleMenuPermission>();
 }

@@ -62,7 +62,7 @@ namespace Business_Layer.Services.MenuServices
                     Url = dto.Url,
                     Icon = dto.Icon,
                     OrderNo = dto.OrderNo,
-                    MenuType = dto.MenuType,
+                    //MenuType = dto.MenuType,
                     IsActive = dto.IsActive,
                     CreatedBy = _currentUserService.UserId,
                     CreatedDate = DateTime.Now,
@@ -127,7 +127,7 @@ namespace Business_Layer.Services.MenuServices
                 menu.Url = dto.Url;
                 menu.Icon = dto.Icon;
                 menu.OrderNo = dto.OrderNo;
-                menu.MenuType = dto.MenuType;
+                /*menu.MenuType = dto.MenuType;*/
                 menu.IsActive = dto.IsActive;
                 menu.ModifiedBy = _currentUserService.UserId;
                 menu.ModifiedAt = DateTime.Now;
@@ -236,7 +236,7 @@ namespace Business_Layer.Services.MenuServices
                     Url = x.Url,
                     Icon = x.Icon,
                     OrderNo = x.OrderNo,
-                    MenuType = x.MenuType,
+                    /*MenuType = x.MenuType,*/
                     IsActive = x.IsActive,
                     CanView = x.CanView,
                     CanAdd = x.CanAdd,
@@ -284,7 +284,7 @@ namespace Business_Layer.Services.MenuServices
                     Url = menu.Url,
                     Icon = menu.Icon,
                     OrderNo = menu.OrderNo,
-                    MenuType = menu.MenuType,
+                   /* MenuType = menu.MenuType,*/
                     IsActive = menu.IsActive,
                     CanView = menu.CanView,
                     CanAdd = menu.CanAdd,

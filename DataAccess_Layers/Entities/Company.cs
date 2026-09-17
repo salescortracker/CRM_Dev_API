@@ -51,5 +51,7 @@ public partial class Company
 
     public virtual ICollection<CompanyProfile> CompanyProfiles { get; set; } = new List<CompanyProfile>();
 
+    public virtual ICollection<LicenseManagement> LicenseManagements { get; set; } = new List<LicenseManagement>();
+
     public virtual ICollection<Region> Regions { get; set; } = new List<Region>();
 }

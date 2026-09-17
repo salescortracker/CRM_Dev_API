@@ -28,4 +28,8 @@ public partial class Priority
     public int? ModifiedBy { get; set; }
 
     public DateTime? ModifiedAt { get; set; }
+
+    public virtual ICollection<ProjectTask> ProjectTasks { get; set; } = new List<ProjectTask>();
+
+    public virtual ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
 }

@@ -28,4 +28,6 @@ public partial class License
     public int? ModifiedBy { get; set; }
 
     public DateTime? ModifiedAt { get; set; }
+
+    public virtual ICollection<LicenseManagement> LicenseManagements { get; set; } = new List<LicenseManagement>();
 }
