@@ -2,13 +2,18 @@
 using Business_Layer.DTOs.SuperAdmin;
 using Business_Layer.Interfaces.AuditLog;
 using Business_Layer.Interfaces.CommonInterfaces;
+using Business_Layer.Interfaces.EmailService;
+using Microsoft.Extensions.Configuration;
 using Business_Layer.Interfaces.MasterIInterface;
+using Business_Layer.Models;
 using DataAccess_Layers.Entities;
 using DataAccess_Layers.Repositories;
 using Newtonsoft.Json;
 using Serilog;
 using Shared.CommonModels;
 using Shared.Exceptions;
+using Shared.Helpers;
+using System.Security.Cryptography;
 
 namespace Business_Layer.Services.MasterServices
 {
@@ -17,15 +22,24 @@ namespace Business_Layer.Services.MasterServices
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAuditService _auditService;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IEmailService _emailService;
+        private readonly IEmailTemplateService _templateService;
+        private readonly IConfiguration _config;
 
         public CompanyAndRegionService(
             IUnitOfWork unitOfWork,
             IAuditService auditService,
-            ICurrentUserService currentUserService)
+            ICurrentUserService currentUserService,
+            IEmailService emailService,
+            IEmailTemplateService templateService,
+            IConfiguration config)
         {
             _unitOfWork = unitOfWork;
             _auditService = auditService;
             _currentUserService = currentUserService;
+            _emailService = emailService;
+            _templateService = templateService;
+            _config = config;
         }
         #region Company CRUD Operations
         #region CREATE
@@ -62,8 +76,6 @@ namespace Business_Layer.Services.MasterServices
                     IsActive = dto.IsActive,
                     IsDefault = dto.IsDefault,
                     PlanId = dto.PlanId,
-                    PlanStartDate = dto.PlanStartDate,
-                    ExpiryDate = dto.ExpiryDate,
                     CompanyEmail = dto.CompanyEmail,
                     CompanyContact = dto.CompanyContact,
                     CompanyAddress = dto.CompanyAddress,
@@ -133,8 +145,6 @@ namespace Business_Layer.Services.MasterServices
                 company.IsActive = dto.IsActive;
                 company.IsDefault = dto.IsDefault;
                 company.PlanId = dto.PlanId;
-                company.PlanStartDate = dto.PlanStartDate;
-                company.ExpiryDate = dto.ExpiryDate;
                 company.CompanyEmail = dto.CompanyEmail;
                 company.CompanyContact = dto.CompanyContact;
                 company.CompanyAddress = dto.CompanyAddress;
@@ -225,6 +235,7 @@ namespace Business_Layer.Services.MasterServices
         {
             var companies = (await _unitOfWork.Repository<Company>()
         .GetAllAsync())
+        .Where(x => x.CreatedBy == _currentUserService.UserId)
         .OrderByDescending(x => x.CompanyId)
         .ToList();
 
@@ -238,8 +249,6 @@ namespace Business_Layer.Services.MasterServices
                 IsActive = x.IsActive,
                 IsDefault = x.IsDefault,
                 PlanId = x.PlanId,
-                PlanStartDate = x.PlanStartDate,
-                ExpiryDate = x.ExpiryDate,
                 CompanyEmail = x.CompanyEmail,
                 CompanyContact = x.CompanyContact,
                 CompanyAddress = x.CompanyAddress,
@@ -281,8 +290,6 @@ namespace Business_Layer.Services.MasterServices
                     IsActive = company.IsActive,
                     IsDefault = company.IsDefault,
                     PlanId = company.PlanId,
-                    PlanStartDate = company.PlanStartDate,
-                    ExpiryDate = company.ExpiryDate,
                     CompanyEmail = company.CompanyEmail,
                     CompanyContact = company.CompanyContact,
                     CompanyAddress = company.CompanyAddress,
@@ -455,6 +462,7 @@ namespace Business_Layer.Services.MasterServices
             var result = (from r in regions
                           join c in companies
                           on r.CompanyId equals c.CompanyId
+                          where r.CreatedBy == _currentUserService.UserId
                           select new RegionDto
                           {
                               RegionId = r.RegionId,
@@ -567,7 +575,7 @@ namespace Business_Layer.Services.MasterServices
 
                 // Duplicate Branch Name
                 var duplicateName =
-                    await _unitOfWork.Repository<Branch1>()
+                    await _unitOfWork.Repository<BranchDatum>()
                         .FindAsync(x =>
                             x.CompanyId == dto.CompanyId &&
                             x.RegionId == dto.RegionId &&
@@ -580,7 +588,7 @@ namespace Business_Layer.Services.MasterServices
 
                 // Duplicate Branch Code
                 var duplicateCode =
-                    await _unitOfWork.Repository<Branch1>()
+                    await _unitOfWork.Repository<BranchDatum>()
                         .FindAsync(x =>
                             x.CompanyId == dto.CompanyId &&
                             x.RegionId == dto.RegionId &&
@@ -596,7 +604,7 @@ namespace Business_Layer.Services.MasterServices
                 if (dto.HeadOffice)
                 {
                     var existingHeadOffice =
-                        await _unitOfWork.Repository<Branch1>()
+                        await _unitOfWork.Repository<BranchDatum>()
                             .FindAsync(x =>
                                 x.CompanyId == dto.CompanyId &&
                                 x.HeadOffice);
@@ -607,7 +615,7 @@ namespace Business_Layer.Services.MasterServices
                 }
 
                 // Create Entity
-                Branch1 branch = new Branch1
+                BranchDatum branch = new BranchDatum
                 {
                     OrganizationId = dto.OrganizationId,
                     CompanyId = dto.CompanyId,
@@ -638,18 +646,22 @@ namespace Business_Layer.Services.MasterServices
                     CreatedDate = DateTime.Now
                 };
 
-                await _unitOfWork.Repository<Branch1>()
+                await _unitOfWork.Repository<BranchDatum>()
                     .AddAsync(branch);
 
                 await _unitOfWork.CompleteAsync();
 
                 // Audit
                 await _auditService.LogAsync(
-                    "Branch1",
+                    "BranchDatum",
                     "INSERT",
                     branch.BranchId,
                     "",
-                    JsonConvert.SerializeObject(branch),
+                    JsonConvert.SerializeObject(branch,
+                        new JsonSerializerSettings
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        }),
                     _currentUserService.UserId);
 
                 return new ApiResponse<string>
@@ -685,7 +697,7 @@ namespace Business_Layer.Services.MasterServices
 
                 // Get Existing Branch
                 var branch =
-                    (await _unitOfWork.Repository<Branch1>()
+                    (await _unitOfWork.Repository<BranchDatum>()
                         .FindAsync(x =>
                             x.BranchId == dto.BranchId))
                     .FirstOrDefault();
@@ -737,7 +749,7 @@ namespace Business_Layer.Services.MasterServices
 
                 // Duplicate Branch Name
                 var duplicateName =
-                    await _unitOfWork.Repository<Branch1>()
+                    await _unitOfWork.Repository<BranchDatum>()
                         .FindAsync(x =>
                             x.BranchId != dto.BranchId &&
                             x.CompanyId == dto.CompanyId &&
@@ -751,7 +763,7 @@ namespace Business_Layer.Services.MasterServices
 
                 // Duplicate Branch Code
                 var duplicateCode =
-                    await _unitOfWork.Repository<Branch1>()
+                    await _unitOfWork.Repository<BranchDatum>()
                         .FindAsync(x =>
                             x.BranchId != dto.BranchId &&
                             x.CompanyId == dto.CompanyId &&
@@ -767,7 +779,7 @@ namespace Business_Layer.Services.MasterServices
                 if (dto.HeadOffice)
                 {
                     var existingHeadOffice =
-                        await _unitOfWork.Repository<Branch1>()
+                        await _unitOfWork.Repository<BranchDatum>()
                             .FindAsync(x =>
                                 x.BranchId != dto.BranchId &&
                                 x.CompanyId == dto.CompanyId &&
@@ -780,7 +792,11 @@ namespace Business_Layer.Services.MasterServices
 
                 // Old Values For Audit
                 string oldValues =
-                    JsonConvert.SerializeObject(branch);
+                    JsonConvert.SerializeObject(branch,
+                        new JsonSerializerSettings
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        });
 
                 // Update Entity
                 branch.OrganizationId = dto.OrganizationId;
@@ -814,18 +830,22 @@ namespace Business_Layer.Services.MasterServices
                 branch.ModifiedAt =
                     DateTime.Now;
 
-                _unitOfWork.Repository<Branch1>()
+                _unitOfWork.Repository<BranchDatum>()
                     .Update(branch);
 
                 await _unitOfWork.CompleteAsync();
 
                 // Audit
                 await _auditService.LogAsync(
-                    "Branch1",
+                    "BranchDatum",
                     "UPDATE",
                     branch.BranchId,
                     oldValues,
-                    JsonConvert.SerializeObject(branch),
+                    JsonConvert.SerializeObject(branch,
+                        new JsonSerializerSettings
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        }),
                     _currentUserService.UserId);
 
                 return new ApiResponse<string>
@@ -853,7 +873,7 @@ namespace Business_Layer.Services.MasterServices
             {
                 // Get Existing Branch
                 var branch =
-                    (await _unitOfWork.Repository<Branch1>()
+                    (await _unitOfWork.Repository<BranchDatum>()
                         .FindAsync(x =>
                             x.BranchId == id))
                     .FirstOrDefault();
@@ -863,17 +883,21 @@ namespace Business_Layer.Services.MasterServices
 
                 // Old Values For Audit
                 string oldValues =
-                    JsonConvert.SerializeObject(branch);
+                    JsonConvert.SerializeObject(branch,
+                        new JsonSerializerSettings
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        });
 
                 // Delete
-                _unitOfWork.Repository<Branch1>()
+                _unitOfWork.Repository<BranchDatum>()
                     .Remove(branch);
 
                 await _unitOfWork.CompleteAsync();
 
                 // Audit
                 await _auditService.LogAsync(
-                    "Branch1",
+                    "BranchDatum",
                     "DELETE",
                     branch.BranchId,
                     oldValues,
@@ -904,8 +928,9 @@ namespace Business_Layer.Services.MasterServices
             try
             {
                 var branches =
-                    (await _unitOfWork.Repository<Branch1>()
-                        .FindAsync(x => true))
+                    (await _unitOfWork.Repository<BranchDatum>()
+                        .FindAsync(x =>
+                            x.CreatedBy == _currentUserService.UserId))
                     .OrderByDescending(x => x.BranchId)
                     .ToList();
 
@@ -967,7 +992,7 @@ namespace Business_Layer.Services.MasterServices
             try
             {
                 var branch =
-                    (await _unitOfWork.Repository<Branch1>()
+                    (await _unitOfWork.Repository<BranchDatum>()
                         .FindAsync(x =>
                             x.BranchId == id))
                     .FirstOrDefault();
@@ -1050,10 +1075,8 @@ namespace Business_Layer.Services.MasterServices
                     throw new CustomException(
                         "Employee Code is required.");
 
-                // Validate Username
-                if (string.IsNullOrWhiteSpace(dto.Username))
-                    throw new CustomException(
-                        "Username is required.");
+                // Username is generated automatically (see below), so it
+                // is not taken from the request.
 
                 // Validate First Name
                 if (string.IsNullOrWhiteSpace(dto.FirstName))
@@ -1082,18 +1105,6 @@ namespace Business_Layer.Services.MasterServices
                     throw new CustomException(
                         "Employee Code already exists.");
 
-                // Username Duplicate
-                var duplicateUsername =
-                    await _unitOfWork.Repository<CompanyAdministrator>()
-                        .FindAsync(x =>
-                            x.CompanyId == dto.CompanyId &&
-                            x.Username.ToLower() ==
-                            dto.Username.Trim().ToLower());
-
-                if (duplicateUsername.Any())
-                    throw new CustomException(
-                        "Username already exists.");
-
                 // Email Duplicate
                 var duplicateEmail =
                     await _unitOfWork.Repository<CompanyAdministrator>()
@@ -1107,13 +1118,17 @@ namespace Business_Layer.Services.MasterServices
                         "Email already exists.");
 
                 // Validate Department
+                // Departments/Designations are created without a Company
+                // (CompanyId = 0), so accept those as well as ones that
+                // belong to the selected company.
                 if (dto.DepartmentId.HasValue)
                 {
                     var department =
                         (await _unitOfWork.Repository<Department>()
                             .FindAsync(x =>
                                 x.DepartmentId == dto.DepartmentId.Value &&
-                                x.CompanyId == dto.CompanyId))
+                                (x.CompanyId == dto.CompanyId ||
+                                 x.CompanyId == 0)))
                         .FirstOrDefault();
 
                     if (department == null)
@@ -1128,7 +1143,8 @@ namespace Business_Layer.Services.MasterServices
                         (await _unitOfWork.Repository<Designation>()
                             .FindAsync(x =>
                                 x.DesignationId == dto.DesignationId.Value &&
-                                x.CompanyId == dto.CompanyId))
+                                (x.CompanyId == dto.CompanyId ||
+                                 x.CompanyId == 0)))
                         .FirstOrDefault();
 
                     if (designation == null)
@@ -1174,6 +1190,62 @@ namespace Business_Layer.Services.MasterServices
                     }
                 }
 
+                // Login account (dbo.UserLogin) - UserName and Email are
+                // unique across all companies in that table.
+                string loginEmail = dto.Email.Trim();
+                string loginMobile = dto.MobileNumber.Trim();
+                string loginFullName =
+                    $"{dto.FirstName.Trim()} {dto.LastName?.Trim()}".Trim();
+
+                if (loginEmail.Length > 150)
+                    throw new CustomException(
+                        "Email cannot exceed 150 characters.");
+
+                if (loginMobile.Length > 15)
+                    throw new CustomException(
+                        "Mobile Number cannot exceed 15 characters.");
+
+                if (loginFullName.Length > 150)
+                    throw new CustomException(
+                        "Full Name cannot exceed 150 characters.");
+
+                var existingLogin =
+                    await _unitOfWork.Repository<UserLogin>()
+                        .FindAsync(x =>
+                            x.Email.ToLower() ==
+                            loginEmail.ToLower());
+
+                if (existingLogin.Any())
+                    throw new CustomException(
+                        "A login with this Email already exists.");
+
+                // Username and password are generated, never typed or
+                // hard-coded. Only the BCrypt hash is stored; the plain
+                // password is used once, in the welcome email.
+                string loginUserName =
+                    await GenerateUniqueUserName(dto.FirstName);
+
+                string plainPassword = GeneratePassword();
+
+                UserLogin userLogin = new UserLogin
+                {
+                    FullName = loginFullName,
+                    UserName = loginUserName,
+                    Email = loginEmail,
+                    MobileNumber = loginMobile,
+                    PasswordHash =
+                        PasswordHelper.HashPassword(plainPassword),
+                    Role =
+                        string.IsNullOrWhiteSpace(dto.RoleName)
+                            ? "User"
+                            : dto.RoleName.Trim(),
+                    IsActive = dto.Status,
+                    IsLocked = false,
+                    FailedLoginAttempts = 0,
+                    CreatedBy = _currentUserService.UserId,
+                    CreatedDate = DateTime.Now
+                };
+
                 // Create Entity
                 CompanyAdministrator administrator =
                     new CompanyAdministrator
@@ -1186,7 +1258,7 @@ namespace Business_Layer.Services.MasterServices
                         BranchId = dto.BranchId,
 
                         EmployeeCode = dto.EmployeeCode.Trim(),
-                        Username = dto.Username.Trim(),
+                        Username = loginUserName,
 
                         FirstName = dto.FirstName.Trim(),
                         LastName = dto.LastName?.Trim(),
@@ -1210,13 +1282,25 @@ namespace Business_Layer.Services.MasterServices
 
                         Remarks = dto.Remarks?.Trim(),
 
+                        // Encrypted (not hashed) so the Edit form can show
+                        // it. Login uses UserLogin.PasswordHash instead.
+                        PasswordHash =
+                            PasswordProtector.Protect(
+                                plainPassword,
+                                _config["PasswordEncryption:Key"]!),
+
                         CreatedBy = _currentUserService.UserId,
                         CreatedDate = DateTime.Now
                     };
 
+                await _unitOfWork.Repository<UserLogin>()
+                    .AddAsync(userLogin);
+
                 await _unitOfWork.Repository<CompanyAdministrator>()
                     .AddAsync(administrator);
 
+                // Single save: the administrator and its login row are
+                // committed together or not at all.
                 await _unitOfWork.CompleteAsync();
 
                 // Audit
@@ -1225,8 +1309,79 @@ namespace Business_Layer.Services.MasterServices
                     "INSERT",
                     administrator.AdministratorId,
                     "",
-                    JsonConvert.SerializeObject(administrator),
+                    JsonConvert.SerializeObject(
+                        administrator,
+                        new JsonSerializerSettings
+                        {
+                            ReferenceLoopHandling =
+                                ReferenceLoopHandling.Ignore
+                        }),
                     _currentUserService.UserId);
+
+                // JWT for the new user, built with the existing JwtHelper
+                // and the JwtSettings configuration. Best-effort - the
+                // user is already created.
+                try
+                {
+                    string token =
+                        JwtHelper.GenerateToken(
+                            userLogin.UserId,
+                            userLogin.UserName,
+                            userLogin.Role,
+                            _config["JwtSettings:SecretKey"]!,
+                            _config["JwtSettings:Issuer"]!,
+                            _config["JwtSettings:Audience"]!,
+                            int.Parse(
+                                _config["JwtSettings:ExpiryMinutes"]!));
+
+                    // The token is intentionally neither returned nor
+                    // logged: it would let the caller act as the new user.
+                    Log.Information(
+                        "JWT generated for new user {UserId} ({UserName}), {Length} chars",
+                        userLogin.UserId,
+                        userLogin.UserName,
+                        token.Length);
+                }
+                catch (Exception jwtEx)
+                {
+                    Log.Error(
+                        jwtEx,
+                        "User created but JWT generation failed for {UserName}",
+                        userLogin.UserName);
+                }
+
+                // Welcome email with the login details (best-effort - user
+                // is already created even if the email fails to send).
+                try
+                {
+                    string? loginUrl = _config["loginURL:loginURL"];
+
+                    if (string.IsNullOrWhiteSpace(loginUrl))
+                        throw new InvalidOperationException(
+                            "loginURL:loginURL is not configured in appsettings.");
+
+                    await _emailService.SendEmailAsync(
+                        new EmailRequest
+                        {
+                            To = administrator.Email,
+
+                            Subject = "Welcome to CRM - Your Login Details",
+
+                            HtmlBody =
+                                _templateService.WelcomeUserTemplate(
+                                    loginFullName,
+                                    loginUrl,
+                                    userLogin.UserName,
+                                    plainPassword)
+                        });
+                }
+                catch (Exception emailEx)
+                {
+                    Log.Error(
+                        emailEx,
+                        "Company Administrator created but welcome email failed to send to {Email}",
+                        administrator.Email);
+                }
 
                 return new ApiResponse<string>
                 {
@@ -1243,6 +1398,83 @@ namespace Business_Layer.Services.MasterServices
 
                 throw;
             }
+        }
+
+        // Username format: <first name>@<3 digits>, e.g. karishma@123.
+        // Re-rolls the digits until the name is unused in UserLogin.
+        private async Task<string> GenerateUniqueUserName(string firstName)
+        {
+            string baseName =
+                new string(firstName
+                    .Where(char.IsLetterOrDigit)
+                    .ToArray())
+                .ToLowerInvariant();
+
+            if (baseName.Length == 0)
+                baseName = "user";
+
+            if (baseName.Length > 50)
+                baseName = baseName.Substring(0, 50);
+
+            string prefix = baseName + "@";
+
+            var taken =
+                (await _unitOfWork.Repository<UserLogin>()
+                    .FindAsync(x => x.UserName.StartsWith(prefix)))
+                .Select(x => x.UserName.ToLower())
+                .ToHashSet();
+
+            // 900 three-digit values; widen to four digits if exhausted.
+            for (int attempt = 0; attempt < 50; attempt++)
+            {
+                string candidate =
+                    prefix + RandomNumberGenerator.GetInt32(100, 1000);
+
+                if (!taken.Contains(candidate))
+                    return candidate;
+            }
+
+            for (int attempt = 0; attempt < 100; attempt++)
+            {
+                string candidate =
+                    prefix + RandomNumberGenerator.GetInt32(1000, 10000);
+
+                if (!taken.Contains(candidate))
+                    return candidate;
+            }
+
+            throw new CustomException(
+                "Unable to generate a unique username. Please try again.");
+        }
+
+        // 12 characters with at least one upper, lower, digit and symbol.
+        private static string GeneratePassword()
+        {
+            const string upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+            const string lower = "abcdefghijkmnopqrstuvwxyz";
+            const string digits = "23456789";
+            const string symbols = "@#$%&*!?";
+            const string all = upper + lower + digits + symbols;
+
+            var chars = new List<char>
+            {
+                upper[RandomNumberGenerator.GetInt32(upper.Length)],
+                lower[RandomNumberGenerator.GetInt32(lower.Length)],
+                digits[RandomNumberGenerator.GetInt32(digits.Length)],
+                symbols[RandomNumberGenerator.GetInt32(symbols.Length)]
+            };
+
+            while (chars.Count < 12)
+                chars.Add(all[RandomNumberGenerator.GetInt32(all.Length)]);
+
+            // Shuffle so the required characters are not always first.
+            for (int i = chars.Count - 1; i > 0; i--)
+            {
+                int j = RandomNumberGenerator.GetInt32(i + 1);
+                (chars[i], chars[j]) = (chars[j], chars[i]);
+            }
+
+            return new string(chars.ToArray());
         }
 
         #endregion
@@ -1345,7 +1577,8 @@ namespace Business_Layer.Services.MasterServices
                             .FindAsync(x =>
                                 x.DepartmentId ==
                                 dto.DepartmentId.Value &&
-                                x.CompanyId == dto.CompanyId))
+                                (x.CompanyId == dto.CompanyId ||
+                                 x.CompanyId == 0)))
                         .FirstOrDefault();
 
                     if (department == null)
@@ -1361,7 +1594,8 @@ namespace Business_Layer.Services.MasterServices
                             .FindAsync(x =>
                                 x.DesignationId ==
                                 dto.DesignationId.Value &&
-                                x.CompanyId == dto.CompanyId))
+                                (x.CompanyId == dto.CompanyId ||
+                                 x.CompanyId == 0)))
                         .FirstOrDefault();
 
                     if (designation == null)
@@ -1579,8 +1813,20 @@ namespace Business_Layer.Services.MasterServices
                 var administrators =
                     (await _unitOfWork.Repository<CompanyAdministrator>()
                         .GetAllAsync())
+                    .Where(x =>
+                        x.CreatedBy == _currentUserService.UserId)
                     .OrderByDescending(x =>
                         x.AdministratorId)
+                    .ToList();
+
+                var departments =
+                    (await _unitOfWork.Repository<Department>()
+                        .GetAllAsync())
+                    .ToList();
+
+                var designations =
+                    (await _unitOfWork.Repository<Designation>()
+                        .GetAllAsync())
                     .ToList();
 
                 var result =
@@ -1596,8 +1842,18 @@ namespace Business_Layer.Services.MasterServices
                             DepartmentId =
                                 x.DepartmentId,
 
+                            DepartmentName =
+                                departments.FirstOrDefault(d =>
+                                    d.DepartmentId == x.DepartmentId)
+                                    ?.DepartmentName,
+
                             DesignationId =
                                 x.DesignationId,
+
+                            DesignationName =
+                                designations.FirstOrDefault(d =>
+                                    d.DesignationId == x.DesignationId)
+                                    ?.DesignationName,
 
                             RegionId =
                                 x.RegionId,
@@ -1686,6 +1942,20 @@ namespace Business_Layer.Services.MasterServices
                     throw new CustomException(
                         "Company Administrator not found.");
 
+                var department = administrator.DepartmentId.HasValue
+                    ? (await _unitOfWork.Repository<Department>()
+                        .FindAsync(d =>
+                            d.DepartmentId == administrator.DepartmentId.Value))
+                        .FirstOrDefault()
+                    : null;
+
+                var designation = administrator.DesignationId.HasValue
+                    ? (await _unitOfWork.Repository<Designation>()
+                        .FindAsync(d =>
+                            d.DesignationId == administrator.DesignationId.Value))
+                        .FirstOrDefault()
+                    : null;
+
                 var result =
                     new CompanyAdministratorDto
                     {
@@ -1698,8 +1968,14 @@ namespace Business_Layer.Services.MasterServices
                         DepartmentId =
                             administrator.DepartmentId,
 
+                        DepartmentName =
+                            department?.DepartmentName,
+
                         DesignationId =
                             administrator.DesignationId,
+
+                        DesignationName =
+                            designation?.DesignationName,
 
                         RegionId =
                             administrator.RegionId,
@@ -1747,7 +2023,14 @@ namespace Business_Layer.Services.MasterServices
                             administrator.TwoFactorAuthentication,
 
                         Remarks =
-                            administrator.Remarks
+                            administrator.Remarks,
+
+                        // Null for users created before passwords were
+                        // stored, or if the value cannot be decrypted.
+                        Password =
+                            PasswordProtector.Unprotect(
+                                administrator.PasswordHash,
+                                _config["PasswordEncryption:Key"]!)
                     };
 
                 return new ApiResponse<CompanyAdministratorDto>
@@ -1830,7 +2113,7 @@ namespace Business_Layer.Services.MasterServices
                 if (dto.BranchId.HasValue)
                 {
                     var branch =
-                        (await _unitOfWork.Repository<Branch1>()
+                        (await _unitOfWork.Repository<BranchDatum>()
                             .FindAsync(x =>
                                 x.BranchId == dto.BranchId.Value &&
                                 x.CompanyId == dto.CompanyId))
@@ -2083,7 +2366,7 @@ namespace Business_Layer.Services.MasterServices
                 if (dto.BranchId.HasValue)
                 {
                     var branch =
-                        (await _unitOfWork.Repository<Branch1>()
+                        (await _unitOfWork.Repository<BranchDatum>()
                             .FindAsync(x =>
                                 x.BranchId ==
                                 dto.BranchId.Value &&
@@ -2352,6 +2635,8 @@ namespace Business_Layer.Services.MasterServices
                 var businessUnits =
                     (await _unitOfWork.Repository<BusinessUnit>()
                         .GetAllAsync())
+                    .Where(x =>
+                        x.CreatedBy == _currentUserService.UserId)
                     .OrderByDescending(x =>
                         x.BusinessUnitId)
                     .ToList();

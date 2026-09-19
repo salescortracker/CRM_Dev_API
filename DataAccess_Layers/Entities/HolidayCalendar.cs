@@ -41,7 +41,7 @@ public partial class HolidayCalendar
 
     public DateTime? UpdatedDate { get; set; }
 
-    public virtual Branch1? Branch { get; set; }
+    public virtual BranchDatum? Branch { get; set; }
 
     public virtual BusinessUnit? BusinessUnit { get; set; }
 

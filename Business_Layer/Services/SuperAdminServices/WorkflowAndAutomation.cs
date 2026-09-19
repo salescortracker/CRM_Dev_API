@@ -496,7 +496,8 @@ namespace Business_Layer.Services.SuperAdminServices
 
                 var result =
                     workflowRules
-                        .Where(x => !x.IsDeleted)
+                        .Where(x => !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId)
                         .OrderBy(x => x.ExecutionOrder ?? int.MaxValue)
                         .ThenByDescending(x => x.WorkflowRuleId)
                         .Select(x => new WorkflowRuleDto
@@ -1120,7 +1121,8 @@ namespace Business_Layer.Services.SuperAdminServices
                      from w in workflowGroup
                          .DefaultIfEmpty()
 
-                     where !c.IsDeleted
+                     where !c.IsDeleted &&
+                         c.CreatedBy == _currentUserService.UserId
 
                      select new WorkflowRuleConditionDto
                      {
@@ -1804,7 +1806,8 @@ namespace Business_Layer.Services.SuperAdminServices
 
                  from rule in ruleGroup.DefaultIfEmpty()
 
-                 where !action.IsDeleted
+                 where !action.IsDeleted &&
+                     action.CreatedBy == _currentUserService.UserId
 
                  select new WorkflowRuleActionDto
                  {
@@ -2323,7 +2326,8 @@ namespace Business_Layer.Services.SuperAdminServices
 
             var result =
                 workflows
-                    .Where(x => !x.IsDeleted)
+                    .Where(x => !x.IsDeleted &&
+                        x.CreatedBy == _currentUserService.UserId)
                     .OrderByDescending(x =>
                         x.ApprovalWorkflowId)
                     .Select(x =>
@@ -2934,7 +2938,8 @@ namespace Business_Layer.Services.SuperAdminServices
                  from w in workflowGroup
                      .DefaultIfEmpty()
 
-                 where !l.IsDeleted
+                 where !l.IsDeleted &&
+                     l.CreatedBy == _currentUserService.UserId
 
                  select new ApprovalWorkflowLevelDto
                  {
@@ -3523,7 +3528,8 @@ namespace Business_Layer.Services.SuperAdminServices
 
             var result =
                 rules
-                    .Where(x => !x.IsDeleted)
+                    .Where(x => !x.IsDeleted &&
+                        x.CreatedBy == _currentUserService.UserId)
                     .OrderByDescending(x =>
                         x.AutoAssignmentRuleId)
                     .Select(x =>
@@ -4122,7 +4128,8 @@ namespace Business_Layer.Services.SuperAdminServices
 
                 var result =
                     conditions
-                        .Where(x => !x.IsDeleted)
+                        .Where(x => !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId)
                         .OrderBy(x =>
                             x.AutoAssignmentRuleId)
                         .ThenBy(x =>
@@ -4745,7 +4752,8 @@ namespace Business_Layer.Services.SuperAdminServices
 
                 var result =
                     rules
-                        .Where(x => !x.IsDeleted)
+                        .Where(x => !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId)
                         .OrderByDescending(x =>
                             x.EscalationRuleId)
                         .Select(x =>
@@ -5403,7 +5411,8 @@ namespace Business_Layer.Services.SuperAdminServices
 
                 var result =
                     rules
-                        .Where(x => !x.IsDeleted)
+                        .Where(x => !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId)
                         .OrderByDescending(x =>
                             x.SlaruleId)
                         .Select(x =>
@@ -6047,7 +6056,8 @@ namespace Business_Layer.Services.SuperAdminServices
 
                 var result =
                     automations
-                        .Where(x => !x.IsDeleted)
+                        .Where(x => !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId)
                         .OrderByDescending(x =>
                             x.EmailAutomationId)
                         .Select(x =>
@@ -6647,7 +6657,8 @@ namespace Business_Layer.Services.SuperAdminServices
 
                 var result =
                     recipients
-                        .Where(x => !x.IsDeleted)
+                        .Where(x => !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId)
                         .OrderByDescending(x =>
                             x.EmailAutomationRecipientId)
                         .Select(x =>
@@ -7314,7 +7325,8 @@ namespace Business_Layer.Services.SuperAdminServices
 
                 var result =
                     jobs
-                        .Where(x => !x.IsDeleted)
+                        .Where(x => !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId)
                         .OrderByDescending(x =>
                             x.ScheduledJobId)
                         .Select(x =>

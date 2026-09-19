@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -121,6 +122,192 @@ color:gray'>
 If you didn't request this,
 
 please ignore this email.
+
+</p>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td
+style='background:#f4f6f9;
+text-align:center;
+padding:18px;
+font-size:12px;
+color:gray;'>
+
+© 2026 CRM Application
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>
+
+";
+        }
+
+        public string WelcomeUserTemplate(
+            string fullName,
+            string loginUrl,
+            string userName,
+            string password)
+        {
+            // Values end up inside HTML, so encode them.
+            string name = WebUtility.HtmlEncode(fullName);
+            string url = WebUtility.HtmlEncode(loginUrl);
+            string user = WebUtility.HtmlEncode(userName);
+            string pass = WebUtility.HtmlEncode(password);
+
+            return $@"
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset='UTF-8'>
+
+<title>Welcome to CRM</title>
+
+</head>
+
+<body style='margin:0;
+padding:0;
+background:#f4f6f9;
+font-family:Segoe UI'>
+
+<table width='100%'>
+
+<tr>
+
+<td align='center'>
+
+<table
+style='width:600px;
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 0 10px rgba(0,0,0,.15)'>
+
+<tr>
+
+<td
+style='background:#0d6efd;
+padding:25px;
+text-align:center;
+color:white;
+font-size:28px;
+font-weight:bold;'>
+
+CRM Application
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style='padding:40px;'>
+
+<h2>Welcome, {name}!</h2>
+
+<p>
+
+Your CRM account has been created successfully.
+
+Please use the login details below to sign in.
+
+</p>
+
+<table
+style='width:100%;
+margin:25px 0;
+background:#f4f6f9;
+border-radius:8px;
+padding:15px;'>
+
+<tr>
+
+<td style='padding:8px 15px;color:gray;width:130px;'>Login URL</td>
+
+<td style='padding:8px 15px;'>
+
+<a href='{url}' target='_blank'
+style='color:#0d6efd;'>{url}</a>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style='padding:8px 15px;color:gray;'>Username</td>
+
+<td style='padding:8px 15px;font-weight:bold;'>{user}</td>
+
+</tr>
+
+<tr>
+
+<td style='padding:8px 15px;color:gray;'>Password</td>
+
+<td style='padding:8px 15px;font-weight:bold;'>{pass}</td>
+
+</tr>
+
+</table>
+
+<div
+style='margin:35px 0;
+text-align:center;'>
+
+<a href='{url}'
+target='_blank'
+rel='noopener noreferrer'
+style='background:#0d6efd;
+color:white;
+padding:14px 34px;
+font-size:16px;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+display:inline-block;'>
+
+Go to CRM Portal
+
+</a>
+
+</div>
+
+<p>
+
+For your security, please change your password after your first login.
+
+</p>
+
+<hr/>
+
+<p
+style='font-size:13px;
+color:gray'>
+
+If you were not expecting this email,
+
+please contact your administrator.
 
 </p>
 

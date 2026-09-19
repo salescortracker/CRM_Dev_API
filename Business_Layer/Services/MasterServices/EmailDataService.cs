@@ -195,7 +195,7 @@ namespace Business_Layer.Services.MasterServices
                     .GetAllAsync();
 
                 var result = emailTemplates
-                    .Where(x => !x.IsDeleted)
+                    .Where(x => !x.IsDeleted && x.CreatedBy == _currentUserService.UserId)
                     .Select(x => new EmailsTemplateDto
                     {
                         EmailsTemplatesId = x.EmailsTemplatesId,

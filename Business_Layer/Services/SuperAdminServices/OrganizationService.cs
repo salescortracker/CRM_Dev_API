@@ -312,6 +312,7 @@ namespace Business_Layer.Services.SuperAdminServices
         {
             var organizations = (await _unitOfWork.Repository<OrganizationDatum>()
                 .GetAllAsync())
+                .Where(x => x.CreatedBy == _currentUserService.UserId)
                 .OrderByDescending(x => x.CreatedAt)
                 .ToList();
 

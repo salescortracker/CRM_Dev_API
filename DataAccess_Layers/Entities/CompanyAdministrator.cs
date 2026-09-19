@@ -55,7 +55,7 @@ public partial class CompanyAdministrator
 
     public DateTime? UpdatedDate { get; set; }
 
-    public virtual Branch1? Branch { get; set; }
+    public virtual BranchDatum? Branch { get; set; }
 
     public virtual Company Company { get; set; } = null!;
 
@@ -64,4 +64,8 @@ public partial class CompanyAdministrator
     public virtual Designation? Designation { get; set; }
 
     public virtual Region? Region { get; set; }
+
+    public virtual ICollection<TeamMember> TeamMembers { get; set; } = new List<TeamMember>();
+
+    public virtual ICollection<WorkTeam> WorkTeams { get; set; } = new List<WorkTeam>();
 }

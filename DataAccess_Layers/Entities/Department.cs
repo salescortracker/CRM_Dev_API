@@ -29,6 +29,8 @@ public partial class Department
 
     public int? UserId { get; set; }
 
+    public virtual ICollection<AccessPolicy> AccessPolicies { get; set; } = new List<AccessPolicy>();
+
     public virtual ICollection<CompanyAdministrator> CompanyAdministrators { get; set; } = new List<CompanyAdministrator>();
 
     public virtual ICollection<Designation> Designations { get; set; } = new List<Designation>();
@@ -36,4 +38,6 @@ public partial class Department
     public virtual ICollection<HolidayCalendar> HolidayCalendars { get; set; } = new List<HolidayCalendar>();
 
     public virtual ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
+
+    public virtual ICollection<WorkTeam> WorkTeams { get; set; } = new List<WorkTeam>();
 }

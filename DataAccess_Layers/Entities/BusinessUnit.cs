@@ -57,7 +57,7 @@ public partial class BusinessUnit
 
     public DateTime? UpdatedDate { get; set; }
 
-    public virtual Branch1? Branch { get; set; }
+    public virtual BranchDatum? Branch { get; set; }
 
     public virtual Company Company { get; set; } = null!;
 

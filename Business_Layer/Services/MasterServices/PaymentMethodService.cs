@@ -188,22 +188,43 @@ namespace Business_Layer.Services.MasterServices
     {
       try
       {
+        var companies = await _unitOfWork.Repository<Company>()
+            .GetAllAsync();
+
+        var regions = await _unitOfWork.Repository<Region>()
+            .GetAllAsync();
+
         var paymentMethods = await _unitOfWork.Repository<PaymentMethod>()
             .GetAllAsync();
 
-        var result = paymentMethods
-            .Where(x => !x.IsDeleted)
-            .Select(x => new PaymentMethodDto
+        var result = (
+            from x in paymentMethods
+
+            join c in companies
+                on x.CompanyId equals c.CompanyId
+
+            join r in regions
+                on x.RegionId equals r.RegionId
+
+            where !x.IsDeleted && x.CreatedBy == _currentUserService.UserId
+
+            select new PaymentMethodDto
             {
               PaymentMethodId = x.PaymentMethodId,
+
               CompanyId = x.CompanyId,
+              CompanyName = c.CompanyName,
+
               RegionId = x.RegionId,
+              RegionName = r.RegionName,
+
               PaymentMethodName = x.PaymentMethodName,
               PaymentMethodCode = x.PaymentMethodCode,
               Description = x.Description,
               IsActive = x.IsActive
-            })
-            .ToList();
+            }
+        )
+        .ToList();
 
         return new ApiResponse<List<PaymentMethodDto>>
         {

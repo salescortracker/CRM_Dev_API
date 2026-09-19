@@ -192,7 +192,7 @@ namespace Business_Layer.Services.MasterServices
             .GetAllAsync();
 
         var result = backupFrequencies
-            .Where(x => !x.IsDeleted)
+            .Where(x => !x.IsDeleted && x.CreatedBy == _currentUserService.UserId)
             .Select(x => new BackupFrequencyDto
             {
               BackupFrequencyId = x.BackupFrequencyId,

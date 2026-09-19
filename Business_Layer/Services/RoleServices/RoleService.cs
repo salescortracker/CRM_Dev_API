@@ -1,4 +1,4 @@
-using Business_Layer.DTOs.Roles;
+﻿using Business_Layer.DTOs.Roles;
 using Business_Layer.Interfaces.AuditLog;
 using Business_Layer.Interfaces.CommonInterfaces;
 using Business_Layer.Interfaces.Services;
@@ -44,11 +44,14 @@ namespace Business_Layer.Services.RoleServices
 
                 var existingRole =
                     await _unitOfWork.Repository<Role>()
-                    .FindAsync(x => x.RoleName.ToLower() == dto.RoleName.Trim().ToLower());
+                    .FindAsync(x =>
+                        x.RoleName.ToLower() == dto.RoleName.Trim().ToLower() &&
+                        x.CompanyId == dto.CompanyId &&
+                        x.RegionId == dto.RegionId);
 
                 if (existingRole.Any())
                 {
-                    throw new CustomException("Role Name already exists.");
+                    throw new CustomException("Role Name already exists for the selected Company and Region.");
                 }
 
                 string roleCode =
@@ -64,8 +67,8 @@ namespace Business_Layer.Services.RoleServices
                     HierarchyLevel = MapHierarchyLevel(dto.AccessLevel),
                     Description = string.IsNullOrWhiteSpace(dto.Description) ? null : dto.Description.Trim(),
                     Status = dto.Status,
-                    IsDefault = dto.IsDefault,
-                    UserCount = dto.UserCount,
+                    //IsDefault = dto.IsDefault,
+                    //UserCount = dto.UserCount,
                     CreatedBy = _currentUserService.UserId,
                     CreatedDate = DateTime.Now,
                     UserId = _currentUserService.UserId
@@ -83,7 +86,7 @@ namespace Business_Layer.Services.RoleServices
                     "INSERT",
                     role.RoleId,
                     "",
-                    JsonConvert.SerializeObject(role),
+                    SerializeForAudit(role),
                     _currentUserService.UserId);
 
                 return new ApiResponse<string>
@@ -125,15 +128,17 @@ namespace Business_Layer.Services.RoleServices
                     await _unitOfWork.Repository<Role>()
                     .FindAsync(x =>
                         x.RoleId != dto.RoleId &&
-                        x.RoleName.ToLower() == dto.RoleName.Trim().ToLower());
+                        x.RoleName.ToLower() == dto.RoleName.Trim().ToLower() &&
+                        x.CompanyId == dto.CompanyId &&
+                        x.RegionId == dto.RegionId);
 
                 if (duplicateName.Any())
                 {
-                    throw new CustomException("Role Name already exists.");
+                    throw new CustomException("Role Name already exists for the selected Company and Region.");
                 }
 
                 string oldValues =
-                    JsonConvert.SerializeObject(role);
+                    SerializeForAudit(role);
 
                 role.CompanyId = dto.CompanyId;
                 role.RegionId = dto.RegionId;
@@ -142,8 +147,8 @@ namespace Business_Layer.Services.RoleServices
                 role.HierarchyLevel = MapHierarchyLevel(dto.AccessLevel);
                 role.Description = string.IsNullOrWhiteSpace(dto.Description) ? null : dto.Description.Trim();
                 role.Status = dto.Status;
-                role.IsDefault = dto.IsDefault;
-                role.UserCount = dto.UserCount;
+                //role.IsDefault = dto.IsDefault;
+                //role.UserCount = dto.UserCount;
                 role.UpdatedBy = _currentUserService.UserId;
                 role.UpdatedDate = DateTime.Now;
 
@@ -155,7 +160,7 @@ namespace Business_Layer.Services.RoleServices
                 await SyncRolePermissions(role.RoleId, dto.Permissions);
 
                 string newValues =
-                    JsonConvert.SerializeObject(role);
+                    SerializeForAudit(role);
 
                 await _auditService.LogAsync(
                     "Role",
@@ -199,7 +204,7 @@ namespace Business_Layer.Services.RoleServices
                 }
 
                 string oldValues =
-                    JsonConvert.SerializeObject(role);
+                    SerializeForAudit(role);
 
                 role.Status = false;
                 role.UpdatedBy = _currentUserService.UserId;
@@ -215,7 +220,7 @@ namespace Business_Layer.Services.RoleServices
                     "DELETE",
                     role.RoleId,
                     oldValues,
-                    JsonConvert.SerializeObject(role),
+                    SerializeForAudit(role),
                     _currentUserService.UserId);
 
                 return new ApiResponse<string>
@@ -314,6 +319,18 @@ namespace Business_Layer.Services.RoleServices
 
         #region HELPERS
 
+        // Role <-> RoleMenuPermission navigations reference each other, so the
+        // audit snapshot must ignore reference loops.
+        private static string SerializeForAudit(Role role)
+        {
+            return JsonConvert.SerializeObject(
+                role,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+        }
+
         private static void ValidateRole(RoleDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.RoleName))
@@ -343,8 +360,8 @@ namespace Business_Layer.Services.RoleServices
                 AccessLevel = role.RoleType,
                 Description = role.Description,
                 Status = role.Status,
-                IsDefault = role.IsDefault,
-                UserCount = role.UserCount,
+                //IsDefault = role.IsDefault,
+                //UserCount = role.UserCount,
                 Permissions = permissions
                     .Where(x => x.RoleId == role.RoleId)
                     .ToDictionary(x => x.MenuId, x => x.IsAllowed)

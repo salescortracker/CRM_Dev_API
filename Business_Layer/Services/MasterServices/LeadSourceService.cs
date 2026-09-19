@@ -190,22 +190,43 @@ namespace Business_Layer.Services.MasterServices
     {
       try
       {
+        var companies = await _unitOfWork.Repository<Company>()
+            .GetAllAsync();
+
+        var regions = await _unitOfWork.Repository<Region>()
+            .GetAllAsync();
+
         var leadSources = await _unitOfWork.Repository<LeadSourceDatum>()
             .GetAllAsync();
 
-        var result = leadSources
-            .Where(x => !x.IsDeleted)
-            .Select(x => new LeadSourceDto
+        var result = (
+            from x in leadSources
+
+            join c in companies
+                on x.CompanyId equals c.CompanyId
+
+            join r in regions
+                on x.RegionId equals r.RegionId
+
+            where !x.IsDeleted && x.CreatedBy == _currentUserService.UserId
+
+            select new LeadSourceDto
             {
               LeadSourceId = x.LeadSourceId,
+
               CompanyId = x.CompanyId,
+              CompanyName = c.CompanyName,
+
               RegionId = x.RegionId,
+              RegionName = r.RegionName,
+
               LeadSourceName = x.LeadSourceName,
               LeadSourceCode = x.LeadSourceCode,
               Description = x.Description,
               IsActive = x.IsActive
-            })
-            .ToList();
+            }
+        )
+        .ToList();
 
         return new ApiResponse<List<LeadSourceDto>>
         {

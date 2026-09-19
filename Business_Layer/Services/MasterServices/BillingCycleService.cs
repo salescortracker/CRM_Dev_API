@@ -191,22 +191,43 @@ namespace Business_Layer.Services.MasterServices
     {
       try
       {
+        var companies = await _unitOfWork.Repository<Company>()
+            .GetAllAsync();
+
+        var regions = await _unitOfWork.Repository<Region>()
+            .GetAllAsync();
+
         var billingCycles = await _unitOfWork.Repository<BillingCycle>()
             .GetAllAsync();
 
-        var result = billingCycles
-            .Where(x => !x.IsDeleted)
-            .Select(x => new BillingCycleDto
+        var result = (
+            from x in billingCycles
+
+            join c in companies
+                on x.CompanyId equals c.CompanyId
+
+            join r in regions
+                on x.RegionId equals r.RegionId
+
+            where !x.IsDeleted && x.CreatedBy == _currentUserService.UserId
+
+            select new BillingCycleDto
             {
               BillingCycleId = x.BillingCycleId,
+
               CompanyId = x.CompanyId,
+              CompanyName = c.CompanyName,
+
               RegionId = x.RegionId,
+              RegionName = r.RegionName,
+
               BillingCycleName = x.BillingCycleName,
               BillingCycleCode = x.BillingCycleCode,
               Description = x.Description,
               IsActive = x.IsActive
-            })
-            .ToList();
+            }
+        )
+        .ToList();
 
         return new ApiResponse<List<BillingCycleDto>>
         {

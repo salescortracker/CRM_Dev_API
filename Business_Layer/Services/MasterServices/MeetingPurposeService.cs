@@ -185,22 +185,43 @@ namespace Business_Layer.Services.MasterServices
         {
             try
             {
+                var companies = await _unitOfWork.Repository<Company>()
+                    .GetAllAsync();
+
+                var regions = await _unitOfWork.Repository<Region>()
+                    .GetAllAsync();
+
                 var meetingPurposes = await _unitOfWork.Repository<MeetingPurpose>()
                     .GetAllAsync();
 
-                var result = meetingPurposes
-                    .Where(x => !x.IsDeleted)
-                    .Select(x => new MeetingPurposeDto
+                var result = (
+                    from x in meetingPurposes
+
+                    join c in companies
+                        on x.CompanyId equals c.CompanyId
+
+                    join r in regions
+                        on x.RegionId equals r.RegionId
+
+                    where !x.IsDeleted && x.CreatedBy == _currentUserService.UserId
+
+                    select new MeetingPurposeDto
                     {
                         MeetingPurposeId = x.MeetingPurposeId,
+
                         CompanyId = x.CompanyId,
+                        CompanyName = c.CompanyName,
+
                         RegionId = x.RegionId,
+                        RegionName = r.RegionName,
+
                         MeetingPurposeName = x.MeetingPurposeName,
                         MeetingPurposeCode = x.MeetingPurposeCode,
                         Description = x.Description,
                         IsActive = x.IsActive
-                    })
-                    .ToList();
+                    }
+                )
+                .ToList();
 
                 return new ApiResponse<List<MeetingPurposeDto>>
                 {

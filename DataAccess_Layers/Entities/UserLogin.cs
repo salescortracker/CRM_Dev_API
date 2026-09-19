@@ -46,4 +46,6 @@ public partial class UserLogin
     public DateTime? OtpExpiry { get; set; }
 
     public bool IsOtpVerified { get; set; }
+
+    public virtual ICollection<LoginHistory> LoginHistories { get; set; } = new List<LoginHistory>();
 }

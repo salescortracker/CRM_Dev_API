@@ -27,9 +27,16 @@ namespace CRM_API.Controllers
         private readonly IMarketingService _marketingService;
         private readonly IModuleConfigurationService _moduleConfigurationService;
         private readonly ICompanyAndRegionService _companyAndRegionService;
+        private readonly ICompanySubscriptionService _companySubscriptionService;
+        private readonly IPaymentTrackingService _paymentTrackingService;
+        private readonly IBillingService _billingService;
+        private readonly IInvoiceMasterService _invoiceMasterService;
+        private readonly ICouponService _couponService;
 
         public SuperAdminController(IPlanService planService, IOrganizationService organizationService, IWebHostEnvironment env, IWorkflowAndAutomation workflowAndAutomation, ICommunicationService communicationService
-            , IMarketingService marketingService, IModuleConfigurationService moduleConfigurationService, ICompanyAndRegionService companyAndRegionService)
+            , IMarketingService marketingService, IModuleConfigurationService moduleConfigurationService, ICompanyAndRegionService companyAndRegionService
+            , ICompanySubscriptionService companySubscriptionService, IPaymentTrackingService paymentTrackingService, IBillingService billingService
+            , IInvoiceMasterService invoiceMasterService, ICouponService couponService)
         {
             _planService = planService;
             _organizationService = organizationService;
@@ -39,6 +46,11 @@ namespace CRM_API.Controllers
             _marketingService = marketingService;
             _moduleConfigurationService = moduleConfigurationService;
             _companyAndRegionService = companyAndRegionService;
+            _companySubscriptionService = companySubscriptionService;
+            _paymentTrackingService = paymentTrackingService;
+            _billingService = billingService;
+            _invoiceMasterService = invoiceMasterService;
+            _couponService = couponService;
         }
 
         #region SUBSCRIPTION PLAN
@@ -143,6 +155,182 @@ namespace CRM_API.Controllers
         {
             return Ok(await _organizationService.GetOrganizationById(id));
         }
+        #endregion
+
+        #region COMPANY SUBSCRIPTION
+
+        [HttpPost("createcompanysubscription")]
+        public async Task<IActionResult> CreateCompanySubscription(CompanySubscriptionDto dto)
+        {
+            return Ok(await _companySubscriptionService.CreateCompanySubscription(dto));
+        }
+
+        [HttpPost("updatecompanysubscription")]
+        public async Task<IActionResult> UpdateCompanySubscription(CompanySubscriptionDto dto)
+        {
+            return Ok(await _companySubscriptionService.UpdateCompanySubscription(dto));
+        }
+
+        [HttpPost("deletecompanysubscription/{id}")]
+        public async Task<IActionResult> DeleteCompanySubscription(int id)
+        {
+            return Ok(await _companySubscriptionService.DeleteCompanySubscription(id));
+        }
+
+        [HttpGet("getallcompanysubscription")]
+        public async Task<IActionResult> GetCompanySubscriptions()
+        {
+            return Ok(await _companySubscriptionService.GetCompanySubscriptions());
+        }
+
+        [HttpGet("getbyidcompanysubscription/{id}")]
+        public async Task<IActionResult> GetCompanySubscriptionById(int id)
+        {
+            return Ok(await _companySubscriptionService.GetCompanySubscriptionById(id));
+        }
+
+        #endregion
+
+        #region PAYMENT TRACKING
+
+        [HttpPost("createpaymenttracking")]
+        public async Task<IActionResult> CreatePaymentTracking(PaymentTrackingDto dto)
+        {
+            return Ok(await _paymentTrackingService.CreatePaymentTracking(dto));
+        }
+
+        [HttpPost("updatepaymenttracking")]
+        public async Task<IActionResult> UpdatePaymentTracking(PaymentTrackingDto dto)
+        {
+            return Ok(await _paymentTrackingService.UpdatePaymentTracking(dto));
+        }
+
+        [HttpPost("deletepaymenttracking/{id}")]
+        public async Task<IActionResult> DeletePaymentTracking(int id)
+        {
+            return Ok(await _paymentTrackingService.DeletePaymentTracking(id));
+        }
+
+        [HttpGet("getallpaymenttracking")]
+        public async Task<IActionResult> GetPaymentTrackings()
+        {
+            return Ok(await _paymentTrackingService.GetPaymentTrackings());
+        }
+
+        [HttpGet("getbyidpaymenttracking/{id}")]
+        public async Task<IActionResult> GetPaymentTrackingById(int id)
+        {
+            return Ok(await _paymentTrackingService.GetPaymentTrackingById(id));
+        }
+
+        [HttpPost("refundpaymenttracking/{id}")]
+        public async Task<IActionResult> RefundPaymentTracking(int id, [FromBody] RefundRequestDto dto)
+        {
+            return Ok(await _paymentTrackingService.RefundPaymentTracking(id, dto.RefundAmount, dto.RefundReason));
+        }
+
+        #endregion
+
+        #region BILLING
+
+        [HttpPost("createbilling")]
+        public async Task<IActionResult> CreateBilling(BillingDto dto)
+        {
+            return Ok(await _billingService.CreateBilling(dto));
+        }
+
+        [HttpPost("updatebilling")]
+        public async Task<IActionResult> UpdateBilling(BillingDto dto)
+        {
+            return Ok(await _billingService.UpdateBilling(dto));
+        }
+
+        [HttpPost("deletebilling/{id}")]
+        public async Task<IActionResult> DeleteBilling(int id)
+        {
+            return Ok(await _billingService.DeleteBilling(id));
+        }
+
+        [HttpGet("getallbilling")]
+        public async Task<IActionResult> GetBillings()
+        {
+            return Ok(await _billingService.GetBillings());
+        }
+
+        [HttpGet("getbyidbilling/{id}")]
+        public async Task<IActionResult> GetBillingById(int id)
+        {
+            return Ok(await _billingService.GetBillingById(id));
+        }
+
+        #endregion
+
+        #region INVOICE
+
+        [HttpPost("createinvoice")]
+        public async Task<IActionResult> CreateInvoice(InvoiceMasterDto dto)
+        {
+            return Ok(await _invoiceMasterService.CreateInvoice(dto));
+        }
+
+        [HttpPost("updateinvoice")]
+        public async Task<IActionResult> UpdateInvoice(InvoiceMasterDto dto)
+        {
+            return Ok(await _invoiceMasterService.UpdateInvoice(dto));
+        }
+
+        [HttpPost("deleteinvoice/{id}")]
+        public async Task<IActionResult> DeleteInvoice(int id)
+        {
+            return Ok(await _invoiceMasterService.DeleteInvoice(id));
+        }
+
+        [HttpGet("getallinvoice")]
+        public async Task<IActionResult> GetInvoices()
+        {
+            return Ok(await _invoiceMasterService.GetInvoices());
+        }
+
+        [HttpGet("getbyidinvoice/{id}")]
+        public async Task<IActionResult> GetInvoiceById(int id)
+        {
+            return Ok(await _invoiceMasterService.GetInvoiceById(id));
+        }
+
+        #endregion
+
+        #region COUPON
+
+        [HttpPost("createcoupon")]
+        public async Task<IActionResult> CreateCoupon(CouponDto dto)
+        {
+            return Ok(await _couponService.CreateCoupon(dto));
+        }
+
+        [HttpPost("updatecoupon")]
+        public async Task<IActionResult> UpdateCoupon(CouponDto dto)
+        {
+            return Ok(await _couponService.UpdateCoupon(dto));
+        }
+
+        [HttpPost("deletecoupon/{id}")]
+        public async Task<IActionResult> DeleteCoupon(int id)
+        {
+            return Ok(await _couponService.DeleteCoupon(id));
+        }
+
+        [HttpGet("getallcoupon")]
+        public async Task<IActionResult> GetCoupons()
+        {
+            return Ok(await _couponService.GetCoupons());
+        }
+
+        [HttpGet("getbyidcoupon/{id}")]
+        public async Task<IActionResult> GetCouponById(int id)
+        {
+            return Ok(await _couponService.GetCouponById(id));
+        }
+
         #endregion
 
         #region WORKFLOW RULES

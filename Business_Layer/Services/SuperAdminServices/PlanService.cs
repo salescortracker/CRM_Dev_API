@@ -44,8 +44,8 @@ namespace Business_Layer.Services.SuperAdminServices
                 var existing = await _unitOfWork.Repository<SubscriptionPlanMaster>()
                     .FindAsync(x => x.PlanName.ToLower() == dto.PlanName.ToLower());
 
-                if (existing.Any())
-                    throw new CustomException("Plan already exists.");
+                //if (existing.Any())
+                //    throw new CustomException("Plan already exists.");
 
                 SubscriptionPlanMaster plan = new SubscriptionPlanMaster
                 {
@@ -213,6 +213,7 @@ namespace Business_Layer.Services.SuperAdminServices
         {
             var plans = (await _unitOfWork.Repository<SubscriptionPlanMaster>()
                 .GetAllAsync())
+                .Where(x => x.CreatedBy == _currentUserService.UserId)
                 .OrderByDescending(x => x.PlanId)
                 .ToList();
 

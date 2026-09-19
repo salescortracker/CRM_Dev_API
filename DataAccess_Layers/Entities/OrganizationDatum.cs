@@ -85,9 +85,17 @@ public partial class OrganizationDatum
 
     public DateTime? ModifiedAt { get; set; }
 
-    public virtual ICollection<Branch1> Branch1s { get; set; } = new List<Branch1>();
+    public virtual ICollection<Billing> Billings { get; set; } = new List<Billing>();
+
+    public virtual ICollection<BranchDatum> BranchData { get; set; } = new List<BranchDatum>();
 
     public virtual ICollection<BusinessUnit> BusinessUnits { get; set; } = new List<BusinessUnit>();
+
+    public virtual ICollection<CompanySubscription> CompanySubscriptions { get; set; } = new List<CompanySubscription>();
+
+    public virtual ICollection<InvoiceMaster> InvoiceMasters { get; set; } = new List<InvoiceMaster>();
+
+    public virtual ICollection<PaymentTracking> PaymentTrackings { get; set; } = new List<PaymentTracking>();
 
     public virtual SubscriptionPlanMaster? Plan { get; set; }
 }

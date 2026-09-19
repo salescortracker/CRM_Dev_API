@@ -202,6 +202,7 @@ namespace Business_Layer.Services.Adminservices
                     .GetAllAsync();
 
                 var result = campaigns
+                    .Where(x => x.CreatedBy == _currentUserService.UserId)
                     .Select(x => new CampaignDto
                     {
                         CampaignId = x.CampaignId,
@@ -461,6 +462,7 @@ namespace Business_Layer.Services.Adminservices
                     .GetAllAsync();
 
                 var result = emailCampaigns
+                    .Where(x => x.CreatedBy == _currentUserService.UserId)
                     .Select(x => new EmailCampaignDto
                     {
                         EmailCampaignId = x.EmailCampaignId,
@@ -727,6 +729,7 @@ namespace Business_Layer.Services.Adminservices
                     .GetAllAsync();
 
                 var result = smsCampaigns
+                    .Where(x => x.CreatedBy == _currentUserService.UserId)
                     .Select(x => new SmsCampaignDto
                     {
                         SmscampaignId = x.SmscampaignId,
@@ -992,6 +995,7 @@ namespace Business_Layer.Services.Adminservices
                     .GetAllAsync();
 
                 var result = whatsappCampaigns
+                    .Where(x => x.CreatedBy == _currentUserService.UserId)
                     .Select(x => new WhatsAppCampaignDto
                     {
                         WhatsAppCampaignId = x.WhatsAppCampaignId,
@@ -1249,6 +1253,7 @@ namespace Business_Layer.Services.Adminservices
                     .GetAllAsync();
 
                 var result = marketingLists
+                    .Where(x => x.CreatedBy == _currentUserService.UserId)
                     .Select(x => new MarketingListDto
                     {
                         MarketingListId = x.MarketingListId,

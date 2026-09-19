@@ -49,5 +49,5 @@ public partial class BusinessHour
 
     public DateTime? UpdatedDate { get; set; }
 
-    public virtual Branch1 Branch { get; set; } = null!;
+    public virtual BranchDatum Branch { get; set; } = null!;
 }

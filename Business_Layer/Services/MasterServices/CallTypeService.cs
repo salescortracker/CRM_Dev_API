@@ -230,7 +230,7 @@ namespace Business_Layer.Services.MasterServices
                 join r in regions
                     on ct.RegionId equals r.RegionId
 
-                where !ct.IsDeleted
+                where !ct.IsDeleted && ct.CreatedBy == _currentUserService.UserId
 
                 select new CallTypeDto
                 {

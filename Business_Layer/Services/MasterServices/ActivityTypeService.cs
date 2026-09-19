@@ -189,7 +189,7 @@ namespace Business_Layer.Services.MasterServices
                     .GetAllAsync();
 
                 var result = activityTypes
-                    .Where(x => !x.IsDeleted)
+                    .Where(x => !x.IsDeleted && x.CreatedBy == _currentUserService.UserId)
                     .Select(x => new ActivityTypeDto
                     {
                         ActivityTypeId = x.ActivityTypeId,

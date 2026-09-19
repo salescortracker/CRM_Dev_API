@@ -191,7 +191,7 @@ namespace Business_Layer.Services.MasterServices
             var result = (from ct in countries
                           join c in companies on ct.CompanyId equals c.CompanyId
                           join r in regions on ct.RegionId equals r.RegionId
-                          where !ct.IsDeleted
+                          where !ct.IsDeleted && ct.CreatedBy == _currentUserService.UserId
                           select new CountryDto
                           {
                               CountryId = ct.CountryId,

@@ -234,7 +234,7 @@ namespace Business_Layer.Services.MasterServices
                 join r in regions
                     on cp.RegionId equals r.RegionId
 
-                where !cp.IsDeleted
+                where !cp.IsDeleted && cp.CreatedBy == _currentUserService.UserId
 
                 select new CallPurposeDto
                 {

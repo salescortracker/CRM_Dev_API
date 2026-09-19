@@ -24,10 +24,6 @@ namespace Business_Layer.DTOs.MasterDTO_s
 
         public int? PlanId { get; set; }
 
-        public DateTime? PlanStartDate { get; set; }
-
-        public DateTime? ExpiryDate { get; set; }
-
         public string? CompanyEmail { get; set; }
 
         public string? CompanyContact { get; set; }

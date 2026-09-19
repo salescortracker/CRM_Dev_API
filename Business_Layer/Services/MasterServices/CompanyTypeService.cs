@@ -187,22 +187,43 @@ namespace Business_Layer.Services.MasterServices
         {
             try
             {
+                var companies = await _unitOfWork.Repository<Company>()
+                    .GetAllAsync();
+
+                var regions = await _unitOfWork.Repository<Region>()
+                    .GetAllAsync();
+
                 var companyTypes = await _unitOfWork.Repository<CompanyType>()
                     .GetAllAsync();
 
-                var result = companyTypes
-                    .Where(x => !x.IsDeleted)
-                    .Select(x => new CompanyTypeDto
+                var result = (
+                    from x in companyTypes
+
+                    join c in companies
+                        on x.CompanyId equals c.CompanyId
+
+                    join r in regions
+                        on x.RegionId equals r.RegionId
+
+                    where !x.IsDeleted && x.CreatedBy == _currentUserService.UserId
+
+                    select new CompanyTypeDto
                     {
                         CompanyTypeId = x.CompanyTypeId,
+
                         CompanyId = x.CompanyId,
+                        CompanyName = c.CompanyName,
+
                         RegionId = x.RegionId,
+                        RegionName = r.RegionName,
+
                         CompanyTypeName = x.CompanyTypeName,
                         CompanyTypeCode = x.CompanyTypeCode,
                         Description = x.Description,
                         IsActive = x.IsActive
-                    })
-                    .ToList();
+                    }
+                )
+                .ToList();
 
                 return new ApiResponse<List<CompanyTypeDto>>
                 {

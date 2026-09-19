@@ -410,7 +410,9 @@ namespace Business_Layer.Services.Adminservices
                     var projects =
                         await _unitOfWork
                             .Repository<ProjectManagement>()
-                            .FindAsync(x => !x.IsDeleted);
+                            .FindAsync(x =>
+                                !x.IsDeleted &&
+                                x.CreatedBy == _currentUserService.UserId);
 
                     var result = projects
                         .Select(x => new ProjectManagementDto
@@ -894,7 +896,9 @@ namespace Business_Layer.Services.Adminservices
                 var milestones =
                     await _unitOfWork
                         .Repository<ProjectMilestone>()
-                        .FindAsync(x => !x.IsDeleted);
+                        .FindAsync(x =>
+                            !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId);
 
                 var result = milestones
                     .Select(x => new ProjectMilestoneDto
@@ -1465,7 +1469,9 @@ namespace Business_Layer.Services.Adminservices
                 var tasks =
                     await _unitOfWork
                         .Repository<ProjectTask>()
-                        .FindAsync(x => !x.IsDeleted);
+                        .FindAsync(x =>
+                            !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId);
 
                 var result = tasks
                     .Select(x => new ProjectTaskDto
@@ -1943,7 +1949,9 @@ namespace Business_Layer.Services.Adminservices
                 var documents =
                     await _unitOfWork
                         .Repository<ProjectDocument>()
-                        .FindAsync(x => !x.IsDeleted);
+                        .FindAsync(x =>
+                            !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId);
 
                 var result =
                     documents
@@ -2513,7 +2521,9 @@ namespace Business_Layer.Services.Adminservices
                 var timesheets =
                     await _unitOfWork
                         .Repository<TimesheetManagement>()
-                        .FindAsync(x => !x.IsDeleted);
+                        .FindAsync(x =>
+                            !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId);
 
                 var result = timesheets
                     .Select(x => new TimesheetManagementDto

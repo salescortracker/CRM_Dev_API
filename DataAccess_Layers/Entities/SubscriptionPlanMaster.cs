@@ -39,5 +39,15 @@ public partial class SubscriptionPlanMaster
 
     public string? Features { get; set; }
 
+    public virtual ICollection<Billing> Billings { get; set; } = new List<Billing>();
+
+    public virtual ICollection<CompanySubscription> CompanySubscriptions { get; set; } = new List<CompanySubscription>();
+
+    public virtual ICollection<Coupon> Coupons { get; set; } = new List<Coupon>();
+
+    public virtual ICollection<InvoiceMaster> InvoiceMasters { get; set; } = new List<InvoiceMaster>();
+
     public virtual ICollection<OrganizationDatum> OrganizationData { get; set; } = new List<OrganizationDatum>();
+
+    public virtual ICollection<PaymentTracking> PaymentTrackings { get; set; } = new List<PaymentTracking>();
 }

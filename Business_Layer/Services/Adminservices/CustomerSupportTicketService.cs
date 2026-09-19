@@ -730,7 +730,9 @@ namespace Business_Layer.Services.Adminservices
                 var categories =
                     await _unitOfWork
                         .Repository<TicketCategory>()
-                        .FindAsync(x => !x.IsDeleted);
+                        .FindAsync(x =>
+                            !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId);
 
                 var result = categories
                     .Select(x => new TicketCategoryDto
@@ -1159,7 +1161,9 @@ namespace Business_Layer.Services.Adminservices
                 var articles =
                     await _unitOfWork
                         .Repository<KnowledgeBase>()
-                        .FindAsync(x => !x.IsDeleted);
+                        .FindAsync(x =>
+                            !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId);
 
                 var result = articles
                     .Select(x => new KnowledgeBaseDto
@@ -1664,7 +1668,9 @@ namespace Business_Layer.Services.Adminservices
                 var faqs =
                     await _unitOfWork
                         .Repository<Faqmanagement>()
-                        .FindAsync(x => !x.IsDeleted);
+                        .FindAsync(x =>
+                            !x.IsDeleted &&
+                            x.CreatedBy == _currentUserService.UserId);
 
                 var result = faqs
                     .Select(x => new FaqManagementDto

@@ -35,11 +35,15 @@ public partial class Region
 
     public string? Address { get; set; }
 
-    public virtual ICollection<Branch1> Branch1s { get; set; } = new List<Branch1>();
+    public virtual ICollection<AccessPolicy> AccessPolicies { get; set; } = new List<AccessPolicy>();
+
+    public virtual ICollection<BranchDatum> BranchData { get; set; } = new List<BranchDatum>();
 
     public virtual ICollection<BusinessUnit> BusinessUnits { get; set; } = new List<BusinessUnit>();
 
     public virtual Company Company { get; set; } = null!;
 
     public virtual ICollection<CompanyAdministrator> CompanyAdministrators { get; set; } = new List<CompanyAdministrator>();
+
+    public virtual ICollection<WorkTeam> WorkTeams { get; set; } = new List<WorkTeam>();
 }

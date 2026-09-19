@@ -6,6 +6,7 @@ using Business_Layer.Models;
 using Business_Layer.Models.ForgotEmailClasses;
 using DataAccess_Layers.Entities;
 using DataAccess_Layers.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Shared.Constants;
 using Shared.Exceptions;
@@ -26,18 +27,52 @@ namespace Business_Layer.Services.Auth
         private readonly IEmailService _emailService;
         private readonly IEmailTemplateService _templateService;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthService(IUnitOfWork uow, 
-            IConfiguration config, 
-            IEmailService emailService, 
-            IEmailTemplateService templateService, 
-            ICurrentUserService currentUserService)
+        public AuthService(IUnitOfWork uow,
+            IConfiguration config,
+            IEmailService emailService,
+            IEmailTemplateService templateService,
+            ICurrentUserService currentUserService,
+            IHttpContextAccessor httpContextAccessor)
         {
             _uow = uow;
             _config = config;
             _emailService = emailService;
             _templateService = templateService;
             _currentUserService = currentUserService;
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        // Records a login attempt (success/failed/locked) for the Login History screen.
+        // Best-effort: never lets logging failures break the actual login flow.
+        private async Task RecordLoginHistory(string userName, UserLogin? user, string status)
+        {
+            try
+            {
+                var httpContext = _httpContextAccessor.HttpContext;
+
+                var history = new LoginHistory
+                {
+                    UserId = user?.UserId,
+                    UserName = userName,
+                    Email = user?.Email,
+                    LoginType = "Web",
+                    Device = httpContext?.Request.Headers["User-Agent"].ToString(),
+                    IpAddress = httpContext?.Connection.RemoteIpAddress?.ToString(),
+                    Status = status,
+                    LoginTime = DateTime.Now,
+                    CreatedDate = DateTime.Now
+                };
+
+                await _uow.Repository<LoginHistory>().AddAsync(history);
+
+                await _uow.CompleteAsync();
+            }
+            catch (Exception ex)
+            {
+                Serilog.Log.Error(ex, "Error while recording login history for {UserName}", userName);
+            }
         }
 
         #region Signup
@@ -82,7 +117,11 @@ namespace Business_Layer.Services.Auth
                        .FirstOrDefault();
 
             if (user == null)
+            {
+                await RecordLoginHistory(request.UserName, null, "Failed");
+
                 throw new CustomException(AppConstants.InvalidUserName);
+            }
 
             // SAFE CHECK
             if (string.IsNullOrEmpty(user.PasswordHash))
@@ -98,17 +137,25 @@ namespace Business_Layer.Services.Auth
                 repo.Update(user);
                 await _uow.CompleteAsync();
 
+                await RecordLoginHistory(request.UserName, user, user.IsLocked ? "Locked" : "Failed");
+
                 throw new CustomException(AppConstants.InvalidPassword);
             }
 
             if (user.IsLocked)
+            {
+                await RecordLoginHistory(request.UserName, user, "Locked");
+
                 throw new CustomException(AppConstants.AccountLocked, 403);
+            }
 
             user.LastLoginDate = DateTime.UtcNow;
             user.FailedLoginAttempts = 0;
 
             repo.Update(user);
             await _uow.CompleteAsync();
+
+            await RecordLoginHistory(request.UserName, user, "Success");
 
             var token = JwtHelper.GenerateToken(
                user.UserId,

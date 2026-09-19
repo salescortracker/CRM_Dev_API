@@ -43,7 +43,9 @@ public partial class Company
 
     public string? CompanyLogo { get; set; }
 
-    public virtual ICollection<Branch1> Branch1s { get; set; } = new List<Branch1>();
+    public virtual ICollection<AccessPolicy> AccessPolicies { get; set; } = new List<AccessPolicy>();
+
+    public virtual ICollection<BranchDatum> BranchData { get; set; } = new List<BranchDatum>();
 
     public virtual ICollection<BusinessUnit> BusinessUnits { get; set; } = new List<BusinessUnit>();
 
@@ -54,4 +56,6 @@ public partial class Company
     public virtual ICollection<LicenseManagement> LicenseManagements { get; set; } = new List<LicenseManagement>();
 
     public virtual ICollection<Region> Regions { get; set; } = new List<Region>();
+
+    public virtual ICollection<WorkTeam> WorkTeams { get; set; } = new List<WorkTeam>();
 }

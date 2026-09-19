@@ -188,22 +188,43 @@ namespace Business_Layer.Services.MasterServices
     {
       try
       {
+        var companies = await _unitOfWork.Repository<Company>()
+            .GetAllAsync();
+
+        var regions = await _unitOfWork.Repository<Region>()
+            .GetAllAsync();
+
         var currencies = await _unitOfWork.Repository<Currency>()
             .GetAllAsync();
 
-        var result = currencies
-            .Where(x => !x.IsDeleted)
-            .Select(x => new CurrencyDto
+        var result = (
+            from x in currencies
+
+            join c in companies
+                on x.CompanyId equals c.CompanyId
+
+            join r in regions
+                on x.RegionId equals r.RegionId
+
+            where !x.IsDeleted && x.CreatedBy == _currentUserService.UserId
+
+            select new CurrencyDto
             {
               CurrencyId = x.CurrencyId,
+
               CompanyId = x.CompanyId,
+              CompanyName = c.CompanyName,
+
               RegionId = x.RegionId,
+              RegionName = r.RegionName,
+
               CurrencyName = x.CurrencyName,
               CurrencyCode = x.CurrencyCode,
               Description = x.Description,
               IsActive = x.IsActive
-            })
-            .ToList();
+            }
+        )
+        .ToList();
 
         return new ApiResponse<List<CurrencyDto>>
         {

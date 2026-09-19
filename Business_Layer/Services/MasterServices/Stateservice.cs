@@ -197,7 +197,7 @@ namespace Business_Layer.Services.MasterServices
                           join c in companies on s.CompanyId equals c.CompanyId
                           join r in regions on s.RegionId equals r.RegionId
                           join co in countries on s.CountryId equals co.CountryId
-                          where !s.IsDeleted
+                          where !s.IsDeleted && s.CreatedBy == _currentUserService.UserId
                           select new StateDto
                           {
                               StateId = s.StateId,

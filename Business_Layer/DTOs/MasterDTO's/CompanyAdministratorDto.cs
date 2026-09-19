@@ -14,7 +14,11 @@ namespace Business_Layer.DTOs.MasterDTO_s
 
         public int? DepartmentId { get; set; }
 
+        public string? DepartmentName { get; set; }
+
         public int? DesignationId { get; set; }
+
+        public string? DesignationName { get; set; }
 
         public int? RegionId { get; set; }
 
@@ -47,5 +51,9 @@ namespace Business_Layer.DTOs.MasterDTO_s
         public byte TwoFactorAuthentication { get; set; }
 
         public string? Remarks { get; set; }
+
+        // Read-only: filled by get-by-id so the Edit form can show it.
+        // Never read from the request.
+        public string? Password { get; set; }
     }
 }

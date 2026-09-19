@@ -189,7 +189,7 @@ namespace Business_Layer.Services.MasterServices
                     .GetAllAsync();
 
                 var result = campaignTypes
-                    .Where(x => !x.IsDeleted)
+                    .Where(x => !x.IsDeleted && x.CreatedBy == _currentUserService.UserId)
                     .Select(x => new CampaignTypeDto
                     {
                         CampaignTypeId = x.CampaignTypeId,

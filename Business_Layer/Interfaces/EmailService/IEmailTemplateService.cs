@@ -11,5 +11,11 @@ namespace Business_Layer.Interfaces.EmailService
         string ForgotPasswordOtpTemplate(
             string employeeName,
             string otp);
+
+        string WelcomeUserTemplate(
+            string fullName,
+            string loginUrl,
+            string userName,
+            string password);
     }
 }
